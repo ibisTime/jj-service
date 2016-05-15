@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.ISYSMenuDAO">
+	<resultMap id="sysMenu_DB_Result" type="sysMenu">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+		<result column="url" property="url" />
+		<result column="order_no" property="orderNo" />
+		
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />		
+		<result column="remark" property="remark" />
+		<result column="parent_code" property="parentCode" />
+		<result column="kind" property="kind" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">			
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="url != null and url != '' ">
+				AND t.url = #{url}
+			</if>
+			<if test="parentCode != null and parentCode != '' ">
+				AND t.parent_code = #{parentCode}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
+			</if>
+			<if test="kind != null and kind != '' ">
+				AND t.kind = #{kind}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_sysMenu" parameterType="sysMenu" resultMap="sysMenu_DB_Result">
+		SELECT 
+		code
+		,name
+		,type
+		,url
+		,order_no
+		,updater
+		,update_datetime
+		,remark	
+		,parent_code
+		,kind
+		FROM
+		tsys_menu t
+		<include refid="where_condition"/>
+		order by t.code
+	</select>
+
+	<select id="select_sysMenu_count" parameterType="sysMenu" resultType="java.lang.Long">
+		SELECT count(1) FROM tsys_menu t
+		<include refid="where_condition"/>
+	</select>
+
+	<insert id="insert_sysMenu" parameterType="sysMenu">
+		INSERT INTO tsys_menu(
+		code
+		,name
+		,type
+		,url
+		,order_no
+		,updater
+		,update_datetime
+		,remark	
+		,parent_code
+		,kind
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{type}
+		,#{url}	
+		,#{orderNo}	
+		
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		,#{parentCode}
+		,#{kind}
+		)
+	</insert>
+
+	<delete id="delete_sysMenu" parameterType="sysMenu">
+		DELETE FROM tsys_menu
+		WHERE
+		code = #{code}			
+	</delete>
+	
+	<update id="update_sysMenu" parameterType="sysMenu">
+	    UPDATE tsys_menu SET
+	    name = #{name}
+	    ,type= #{type}
+	    ,url = #{url}
+	    ,order_no = #{orderNo}
+	    
+	    ,updater= #{updater}
+	    ,update_datetime= #{updateDatetime}
+	    ,remark = #{remark}
+	    ,parent_code = #{parentCode}
+	    ,kind = #{kind}
+	    WHERE
+	    code = #{code}
+	</update>
+</mapper>

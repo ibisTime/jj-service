@@ -1,0 +1,1 @@
+INSERT INTO `tmoom_gjs_account` (account_number,status,amount,frozen_amount,currency,md5,create_datetime ) VALUES ('GJSACCOUNT','0',0,0,'CNY',md5(0),now());

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IPtCompanyCardDAO">
+	<resultMap id="ptCompanyCard_DB_Result" type="ptCompanyCard">
+		<result column="code" property="code" />
+		<result column="company_code" property="companyCode" />
+		<result column="subbranch_code" property="subbranchCode" />
+		<result column="kind" property="kind" />
+		<result column="currency" property="currency" />
+		
+		<result column="amount" property="amount" />
+		<result column="card_no" property="cardNo" />
+		<result column="limit_description" property="limitDescription" />
+		<result column="is_ebank" property="isEbank" />
+		<result column="is_eticket" property="isEticket" />
+		
+		<result column="hd_way" property="hdWay" />
+		<result column="hd_address" property="hdAddress" />
+		<result column="hd_card_pwd" property="hdCardPwd" />
+		<result column="hd_account_pwd" property="hdAccountPwd" />
+		<result column="yedzd_way" property="yedzdWay" />
+		
+		<result column="yedzd_address" property="yedzdAddress" />
+		<result column="yedzd_account_pwd" property="yedzdAccountPwd" />
+		<result column="lsdzd_way" property="lsdzdWay" />
+		<result column="lsdzd_address" property="lsdzdAddress" />
+		<result column="lsdzd_account_pwd" property="lsdzdAccountPwd" />
+		
+		<result column="gt_person" property="gtPerson" />
+		<result column="gt_contact" property="gtContact" />
+		<result column="kh_person" property="khPerson" />
+		<result column="kh_datetime" property="khDatetime" />
+		<result column="pdf" property="pdf" />
+		
+		<result column="jour_datetime" property="jourDatetime" />
+		<result column="status" property="status" />
+		<result column="is_accept" property="isAccept" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		
+		<result column="remark" property="remark" />
+	</resultMap>
+	
+	<resultMap id="ptCompanyCardDetail_DB_Result" type="ptCompanyCard">
+		<result column="zw_name" property="zwName" />
+		<result column="yw_name" property="ywName" />
+		<result column="zc_address" property="zcAddress" />
+		<result column="jy_address" property="jyAddress" />
+		<result column="gs_currency" property="gsCurrency" />
+		<result column="capital" property="capital" />
+		
+		<result column="fr_person" property="frPerson" />
+		<result column="gd_person" property="gdPerson" />
+		<result column="cw_person" property="cwPerson" />
+		<result column="debdtx_person" property="debdtxPerson" />
+		<result column="wy_recorder" property="wyRecorder" />
+		
+		<result column="wy_checker" property="wyChecker" /> 
+		<result column="telephone" property="telephone" /> 
+	    <result column="company_remark" property="companyRemark" /> 
+		<result column="subbranch_name" property="subbranchName" />
+		<result column="subbranch_status" property="subbranchStatus" />
+		
+		<result column="bank_code" property="bankCode" />
+		<result column="bank_name" property="bankName" />
+		<result column="region" property="region" />
+		<result column="address" property="address" />
+		<result column="cnaps_code" property="cnapsCode" />
+		
+		<result column="swift_code" property="swiftCode" />
+		<result column="khjl_person" property="khjlPerson" />
+		<result column="khjl_contact" property="khjlContact" />
+		<result column="subbranch_remark" property="subbranchRemark" /> 
+		<result column="code" property="code" />
+		
+		<result column="company_code" property="companyCode" />
+		<result column="subbranch_code" property="subbranchCode" />
+		<result column="kind" property="kind" />
+		<result column="currency" property="currency" />
+		<result column="card_no" property="cardNo" />
+		
+		<result column="limit_description" property="limitDescription" />
+		<result column="is_ebank" property="isEbank" />
+		<result column="is_eticket" property="isEticket" />
+		<result column="hd_way" property="hdWay" />
+		<result column="hd_address" property="hdAddress" />
+		
+		<result column="hd_card_pwd" property="hdCardPwd" />
+		<result column="hd_account_pwd" property="hdAccountPwd" />
+		<result column="yedzd_way" property="yedzdWay" />
+		<result column="yedzd_address" property="yedzdAddress" />
+		<result column="yedzd_account_pwd" property="yedzdAccountPwd" />
+		
+		<result column="lsdzd_way" property="lsdzdWay" />
+		<result column="lsdzd_address" property="lsdzdAddress" />
+		<result column="lsdzd_account_pwd" property="lsdzdAccountPwd" />
+		<result column="gt_person" property="gtPerson" />
+		<result column="gt_contact" property="gtContact" />
+		
+		<result column="kh_person" property="khPerson" />
+		<result column="kh_datetime" property="khDatetime" />
+		<result column="pdf" property="pdf" />
+		<result column="jour_datetime" property="jourDatetime" />
+		<result column="status" property="status" />
+		
+		<result column="is_accept" property="isAccept" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+			<if test="subbranchCode != null and subbranchCode != '' ">
+				AND t.subbranch_code = #{subbranchCode}
+			</if>
+			<if test="khPerson != null and khPerson != '' ">
+				AND t.kh_person = #{khPerson}
+			</if>
+			<if test="khDatetimeStart != null and khDatetimeStart != '' ">
+				<![CDATA[AND t.kh_datetime >= #{khDatetimeStart}]]>
+			</if>
+			<if test="khDatetimeEnd != null and khDatetimeEnd != '' ">
+				<![CDATA[AND t.kh_datetime < #{khDatetimeEnd}]]>
+			</if>
+			<if test="status != null and status != '' ">
+				<choose>  
+		        	<when test="status== 'new'">  
+		            	AND t.status in (0,2) 
+		        	</when>  
+		        	<otherwise>  
+		              	AND t.status = #{status}
+		        	</otherwise>  
+	        	</choose>	
+			</if>
+		</trim>
+	</sql>
+	
+	<sql id="where_detail_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND ta.code = #{code}
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND ta.company_code = #{companyCode}
+			</if>
+			<if test="zwName != null and zwName != '' ">
+				AND tc.zw_name like CONCAT('%',#{zwName},'%')
+			</if>
+			<if test="subbranchCode != null and subbranchCode != '' ">
+				AND ta.subbranch_code = #{subbranchCode}
+			</if>
+			<if test="subbranchName != null and subbranchName != '' ">
+				AND tb.name like CONCAT('%',#{subbranchName},'%')
+			</if>
+			<if test="kind != null and kind != '' ">
+				AND ta.kind = #{kind}
+			</if>
+			<if test="currency != null and currency != '' ">
+				AND ta.currency = #{currency}
+			</if>
+			<if test="cardNo != null and cardNo != '' ">
+				AND ta.card_no = #{cardNo}
+			</if>
+			<if test="status != null and status != '' ">
+		        AND ta.status = #{status}
+			</if>
+			<if test="isAccept != null and isAccept != '' ">
+		        AND ta.is_accept = #{isAccept}
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_ptCompanyCard" parameterType="ptCompanyCard" resultMap="ptCompanyCard_DB_Result">
+	   SELECT
+		t.code
+		,t.company_code
+		,t.subbranch_code
+		,t.kind
+		,t.currency
+		
+		,t.card_no
+		,t.limit_description
+		,t.is_ebank
+		,t.is_eticket
+		,t.hd_way
+		
+		,t.hd_address
+		,t.hd_card_pwd
+		,t.hd_account_pwd
+		,t.yedzd_way
+		,t.yedzd_address
+		
+		,t.yedzd_account_pwd
+		,t.lsdzd_way
+		,t.lsdzd_address
+		,t.lsdzd_account_pwd
+		,t.gt_person
+		
+		,t.gt_contact
+		,t.kh_person
+		,t.kh_datetime
+		,t.pdf
+		,t.jour_datetime
+		
+		,t.is_accept
+		,t.status
+		,t.updater
+		,t.update_datetime
+		,t.remark
+		FROM
+		tpt_company tc INNER JOIN tpt_company_card t on tc.code = t.company_code INNER JOIN 
+        tbk_subbranch tb on t.subbranch_code = tb.code
+        <include refid="where_condition" />
+		ORDER BY CONVERT(tc.zw_name using gbk) ASC,CONVERT(tb.name using gbk) ASC
+	</select>
+	
+	<select id="select_ptCompanyCard_count" parameterType="ptCompanyCard" resultType="java.lang.Long">
+		SELECT count(1) FROM tpt_company tc INNER JOIN tpt_company_card t on tc.code = t.company_code INNER JOIN 
+        tbk_subbranch tb on t.subbranch_code = tb.code
+		<include refid="where_condition" />
+	</select>
+	
+	<select id="select_ptCompanyCardDetail" parameterType="ptCompanyCard" resultMap="ptCompanyCardDetail_DB_Result">
+		SELECT
+		tc.zw_name
+		,tc.yw_name
+		,tc.zc_address
+		,tc.jy_address
+		,tc.currency gs_currency
+		
+		,tc.capital
+		,tc.fr_person
+		,tc.gd_person
+		,tc.cw_person
+		,tc.debdtx_person
+		,tc.wy_recorder
+		,tc.wy_checker
+		
+		,tc.telephone
+		,tc.remark as company_remark
+		,tb.name as subbranch_name
+		,tb.bank_code
+		,tb.bank_name
+		,tb.region
+		
+		,tb.address
+		,tb.cnaps_code
+		,tb.swift_code
+		,tb.khjl_person
+		,tb.khjl_contact
+		
+		,tb.remark
+		,tb.status as bank_status
+		
+        ,ta.code
+		,ta.company_code
+		,ta.subbranch_code
+		,ta.kind
+		,ta.currency
+		
+		,ta.card_no
+		,ta.limit_description
+		,ta.is_ebank
+		,ta.is_eticket
+		,ta.hd_way
+		
+		,ta.hd_address
+		,ta.hd_card_pwd
+		,ta.hd_account_pwd
+		,ta.yedzd_way
+		,ta.yedzd_address
+		
+		,ta.yedzd_account_pwd
+		,ta.lsdzd_way
+		,ta.lsdzd_address
+		,ta.lsdzd_account_pwd
+		,ta.gt_person
+		
+		,ta.gt_contact
+		,ta.kh_person
+		,ta.kh_datetime
+		,ta.pdf
+		,ta.jour_datetime
+		
+		,ta.is_accept
+		,ta.status
+		,ta.updater
+		,ta.update_datetime
+		,ta.remark
+		FROM
+		tpt_company tc INNER JOIN tpt_company_card ta on tc.code = ta.company_code INNER JOIN 
+        tbk_subbranch tb on ta.subbranch_code = tb.code
+		<include refid="where_detail_condition" />
+		<trim prefix="ORDER BY ">
+			${order}
+		</trim>
+	</select>	
+	
+	<select id="select_ptCompanyCardDetail_count" parameterType="ptCompanyCard" resultType="java.lang.Long">
+		SELECT count(1) FROM
+		tpt_company tc INNER JOIN tpt_company_card ta on tc.code = ta.company_code INNER JOIN 
+        tbk_subbranch  tb on ta.subbranch_code = tb.code
+		<include refid="where_detail_condition" />
+	</select>
+
+	<insert id="insert_ptCompanyCard" parameterType="ptCompanyCard">
+		INSERT INTO tpt_company_card(
+		code
+		,company_code
+		,subbranch_code
+		,kind
+		,currency
+		
+		,card_no
+		,limit_description
+		,is_ebank
+		,is_eticket
+		,hd_way
+		
+		,hd_address
+		,hd_card_pwd
+		,hd_account_pwd
+		,yedzd_way
+		,yedzd_address
+		
+		,yedzd_account_pwd
+		,lsdzd_way
+		,lsdzd_address
+		,lsdzd_account_pwd
+		,gt_person
+		
+		,gt_contact
+		,kh_person
+		,kh_datetime
+		,pdf
+		,status
+		
+		,is_accept
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{companyCode}
+		,#{subbranchCode}
+		,#{kind}
+		,#{currency}
+		
+		,#{cardNo}
+		,#{limitDescription}
+		,#{isEbank}
+		,#{isEticket}
+		,#{hdWay}
+		
+		,#{hdAddress}
+		,#{hdCardPwd}
+		,#{hdAccountPwd}
+		,#{yedzdWay}
+		,#{yedzdAddress}
+		
+		,#{yedzdAccountPwd}
+		,#{lsdzdWay}
+		,#{lsdzdAddress}
+		,#{lsdzdAccountPwd}
+		,#{gtPerson}
+		
+		,#{gtContact}
+		,#{khPerson}
+		,#{khDatetime}
+		,#{pdf}
+		,#{status}
+		
+		,#{isAccept}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+	
+	<delete id="delete_ptCompanyCard" parameterType="ptCompanyCard">
+		DELETE FROM tpt_company_card
+		WHERE
+		code = #{code}
+	</delete>
+	
+	<update id="update_ptCompanyCard" parameterType="ptCompanyCard">
+		UPDATE tpt_company_card SET
+		company_code=#{companyCode}
+		,subbranch_code=#{subbranchCode}
+		,kind=#{kind}
+		,currency=#{currency}
+		,card_no=#{cardNo}
+		
+		,limit_description=#{limitDescription}
+		,is_ebank=#{isEbank}
+		,is_eticket=#{isEticket}
+		,hd_way=#{hdWay}
+		,hd_address=#{hdAddress}
+		
+		,hd_card_pwd=#{hdCardPwd}
+		,hd_account_pwd=#{hdAccountPwd}
+		,yedzd_way=#{yedzdWay}
+		,yedzd_address=#{yedzdAddress}
+		,yedzd_account_pwd=#{yedzdAccountPwd}
+		
+		,lsdzd_way=#{lsdzdWay}
+		,lsdzd_address=#{lsdzdAddress}
+		,lsdzd_account_pwd=#{lsdzdAccountPwd}
+		,gt_person=#{gtPerson}
+		,gt_contact=#{gtContact}
+		
+		,kh_person=#{khPerson}
+		,kh_datetime=#{khDatetime}
+		,pdf=#{pdf}
+		,status=#{status}
+		,updater=#{updater}
+		
+		,update_datetime=#{updateDatetime}
+		,remark=#{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_passPTCompanyCard" parameterType="ptCompanyCard">
+		UPDATE tpt_company_card SET
+		status=#{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_unPassPTCompanyCard" parameterType="ptCompanyCard">
+		UPDATE tpt_company_card SET
+		status=#{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_isAcceptPTCompanyCard" parameterType="ptCompanyCard">
+		UPDATE tpt_company_card SET
+		is_accept=#{isAccept}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_jourDatePTCompanyCard" parameterType="ptCompanyCard">
+		UPDATE tpt_company_card SET
+		jour_datetime=#{jourDatetime}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+</mapper>

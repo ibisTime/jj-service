@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.ISYSConfigDAO">
+	<resultMap id="sysConfig_DB_Result" type="sysConfig">
+		<result column="id" property="id" />
+		<result column="to_system" property="toSystem" />
+		<result column="ckey" property="ckey" />
+		<result column="cvalue" property="cvalue" />
+		<result column="note" property="note" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id != null">
+				AND t.id = #{id}
+			</if>	
+			<if test="toSystem != null and toSystem != '' ">
+				AND t.to_system = #{toSystem}
+			</if>
+			<if test="ckey != null and ckey != '' ">
+				AND t.ckey = #{ckey}
+			</if>	
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_sysConfig" parameterType="sysConfig" resultMap="sysConfig_DB_Result">
+		SELECT
+		id
+		,to_system
+		,ckey
+		,cvalue
+		,note
+		,updater
+		,update_datetime
+		,remark
+		FROM
+		tsys_config t 
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>	
+	</select>
+
+	<select id="select_sysConfig_count" parameterType="sysConfig" resultType="java.lang.Long">
+		SELECT count(1) FROM tsys_config t 
+		<include refid="where_condition" />
+	</select>
+	
+	<insert id="insert_sysConfig" parameterType="sysConfig" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tsys_config(
+		to_system
+		,ckey
+		,cvalue
+		,note
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{toSystem}
+		,#{ckey}
+		,#{cvalue}
+		,#{note}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_value" parameterType="sysConfig">
+		UPDATE tsys_config SET
+		cvalue = #{cvalue}
+		,note = #{note}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark=#{remark}
+		WHERE id = #{id}
+	</update>
+</mapper>

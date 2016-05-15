@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IFDAccountDAO">
+	<resultMap id="fdAccount_DB_Result" type="fdAccount">
+		<result column="user_id" property="userId" />
+		<result column="real_name" property="realName" />		
+		<result column="account_number" property="accountNumber" />
+		<result column="status" property="status" />
+		<result column="amount" property="amount" />
+		
+		<result column="frozen_amount" property="frozenAmount" />
+		<result column="currency" property="currency" />		
+		<result column="create_datetime" property="createDatetime" />	
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">	
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>	
+			<if test="realName != null and realName != '' ">
+				AND t.real_name = #{realName}
+			</if>	
+			<if test="accountNumber != null and accountNumber != '' ">
+				AND t.account_number = #{accountNumber}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="createDatetimeStart != null and createDatetimeStart != '' ">
+				<![CDATA[AND t.create_datetime >= #{createDatetimeStart}]]>
+			</if>
+			<if test="createDatetimeEnd != null and createDatetimeEnd != '' ">
+				<![CDATA[AND t.create_datetime <= #{createDatetimeEnd}]]>
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_fdAccount" parameterType="fdAccount" resultMap="fdAccount_DB_Result">
+		SELECT 
+		t.user_id
+		,t.real_name
+		,t.account_number
+		,t.status
+		,t.amount
+		
+		,t.frozen_amount
+		,t.currency
+		,t.create_datetime
+		FROM
+		tfd_account t 
+		<include refid="where_condition"/>
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_fdAccount_count" parameterType="fdAccount" resultType="java.lang.Long">
+		SELECT count(1) FROM tfd_account t 
+		<include refid="where_condition"/>
+	</select>
+	
+	<select id="select_fdAccount_totalAmount" parameterType="fdAccount" resultType="java.lang.Long">
+		SELECT (SELECT amount FROM tfd_user_account WHERE user_id = #{userId}) +
+        (SELECT sum(tca.amount) FROM tfd_company_account tca inner join tfd_user_company tuc on tca.company_code=tuc.company_code where tuc.status ='2' AND tuc.user_id = #{userId}) as amount
+	</select>
+	
+	<insert id="insert_fdAccount" parameterType="fdAccount">
+		INSERT INTO tfd_account(
+		user_id
+		,real_name
+		,account_number
+		,status
+		,amount
+		
+		,frozen_amount
+		,currency
+		,md5
+		,create_datetime
+		)
+		VALUES(
+		#{userId}
+		,#{realName}
+		,#{accountNumber}
+		,#{status}
+		,#{amount}
+		
+		,#{frozenAmount}
+		,#{currency}
+		,#{md5}
+		,#{createDatetime}
+		)
+	</insert>
+	<update id="update_amount" parameterType="fdAccount">
+		UPDATE tfd_account
+		SET
+		 amount= #{amount}
+		,md5 = #{md5}
+		,update_datetime = #{updateDatetime}
+		WHERE
+		account_number = #{accountNumber}			
+	</update>
+	
+	<update id="update_frozen_amount" parameterType="fdAccount">
+		UPDATE tfd_account
+		SET
+		 amount= #{amount}
+		,frozen_amount = #{frozenAmount}
+		,md5 = #{md5}
+		,update_datetime = #{updateDatetime}
+		WHERE
+		account_number = #{accountNumber}			
+	</update>
+	
+	<update id="update_status" parameterType="fdAccount">
+		UPDATE tfd_account
+		SET
+		 status= #{status}
+		,update_datetime = #{updateDatetime}
+		WHERE
+		account_number = #{accountNumber}		
+	</update>
+	
+	<update id="update_realName" parameterType="fdAccount">
+		UPDATE tfd_account
+		SET
+		 real_name= #{realName}
+		 ,update_datetime = #{updateDatetime}
+		WHERE
+		user_id = #{userId}		
+	</update>
+</mapper>

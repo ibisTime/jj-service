@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.ISYSUserDAO">
+	<resultMap id="sysUser_DB_Result" type="sysUser">
+		<result column="user_id" property="userId" />
+		<result column="login_name" property="loginName" />
+		<result column="login_pwd" property="loginPwd" />
+		<result column="login_pwd_strength" property="loginPwdStrength" />	
+		<result column="status" property="status" />
+			
+		<result column="user_referee" property="userReferee" />
+		<result column="id_kind" property="idKind" />
+		<result column="id_no" property="idNo" />		
+		<result column="real_name" property="realName" />
+		<result column="trade_pwd" property="tradePwd" />
+		
+		<result column="trade_pwd_strength" property="tradePwdStrength" />
+		<result column="contact" property="contact" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+		
+		<result column="role_code" property="roleCode" />
+		<result column="kind" property="kind" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">		
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="loginName != null and loginName != '' ">
+				AND t.login_name = #{loginName}
+			</if>
+			<if test="loginPwd != null and loginPwd != '' ">
+				AND t.login_pwd = #{loginPwd}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>	
+			<if test="userReferee != null and userReferee != '' ">
+				AND t.user_referee = #{userReferee}
+			</if>	
+			<if test="tradePwd != null and tradePwd != '' ">
+				AND t.trade_pwd = #{tradePwd}
+			</if>
+			<if test="contact != null and contact != '' ">
+				AND t.contact = #{contact}
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
+			</if>
+			<if test="kind != null and kind != '' ">
+				AND t.kind = #{kind}
+			</if>
+			<choose>  
+	        	<when test="status == null or status == '' ">  
+	            	AND t.status = 1 
+	        	</when>  
+	        	<otherwise>  
+	              	AND t.status = #{status}
+	        	</otherwise>  
+	        </choose>	
+		</trim>
+	</sql>
+	<select id="select_sysUser" parameterType="sysUser" resultMap="sysUser_DB_Result">
+		SELECT 
+		user_id
+		,login_name
+		,login_pwd
+		,login_pwd_strength
+		,status
+		
+		,user_referee
+		,id_kind
+		,id_no
+		,real_name
+		,trade_pwd
+		,trade_pwd_strength
+		
+		,contact
+		,updater
+		,update_datetime
+		,remark
+		,role_code
+		
+		,kind
+		FROM
+		tsys_user t
+		<include refid="where_condition"/>
+		order by t.update_datetime desc
+	</select>
+
+	<select id="select_sysUser_count" parameterType="sysUser" resultType="java.lang.Long">
+		SELECT count(1) FROM tsys_user t
+		<include refid="where_condition"/>
+	</select>
+
+	<insert id="insert_sysUser" parameterType="sysUser">
+		INSERT INTO tsys_user(
+		user_id
+		,login_name
+		,login_pwd
+		,login_pwd_strength
+		,status
+		
+		,user_referee
+		,id_kind
+		,id_no
+		,real_name
+		,trade_pwd
+		
+		,trade_pwd_strength
+		,contact
+		,updater
+		,update_datetime
+		,remark
+		
+		,role_code
+		,kind
+		)
+		VALUES(
+		#{userId}
+		,#{loginName}
+		,#{loginPwd}
+		,#{loginPwdStrength}	
+		,#{status}
+		
+		,#{userReferee}
+		,#{idKind}
+		,#{idNo}
+		,#{realName}
+		,#{tradePwd}
+		
+		,#{tradePwdStrength}	
+		,#{contact}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}	
+		
+		,#{roleCode}
+		,#{kind}
+		)
+	</insert>
+
+	<delete id="delete_sysUser" parameterType="sysUser">
+		UPDATE tsys_user 
+		SET
+		status = #{status}
+		WHERE
+		user_id = #{userId}			
+	</delete>
+	
+	<update id="update_sysUser" parameterType="sysUser">
+	    UPDATE tsys_user 
+	    SET
+	    login_name = #{loginName}
+	    ,status = #{status}
+	    ,update_datetime = #{updateDatetime}
+	    ,updater = #{updater}
+	    ,remark = #{remark}
+	    WHERE
+	    user_id = #{userId}
+	</update>
+	
+	<update id="update_sysUserRealInfo" parameterType="sysUser">
+	    UPDATE tsys_user 
+	    SET
+	    id_kind = #{idKind}
+	    ,id_no = #{idNo}
+	    ,real_name = #{realName}
+	    ,updater = #{updater}
+	    ,update_datetime = #{updateDatetime}
+	    ,remark = #{remark}
+	    WHERE
+	    user_id = #{userId}
+	</update>
+	
+	<update id="update_sysUserLoginPwd" parameterType="sysUser">
+	    UPDATE tsys_user 
+	    SET
+	    login_pwd = #{loginPwd}
+	    ,updater = #{updater}
+	    ,update_datetime = #{updateDatetime}
+	    ,remark = #{remark}
+	    WHERE
+	    user_id = #{userId}
+	</update>
+	
+	
+	<update id="update_sysUserTradePwd" parameterType="sysUser">
+	    UPDATE tsys_user 
+	    SET
+	    trade_pwd = #{tradePwd}
+	    ,trade_pwd_strength = #{tradePwdStrength}
+	    ,updater = #{updater}
+	    ,update_datetime = #{updateDatetime}
+	    ,remark = #{remark}
+	    WHERE
+	    user_id = #{userId}
+	</update>
+	
+	<update id="update_sysUserContact" parameterType="sysUser">
+	    UPDATE tsys_user 
+	    SET
+	    contact = #{contact}
+	    ,updater = #{updater}
+	    ,update_datetime = #{updateDatetime}
+	    ,remark = #{remark}
+	    WHERE
+	    user_id = #{userId}
+	</update>
+	
+	<update id="update_sysUserRoleCode" parameterType="sysUser">
+	    UPDATE tsys_user 
+	    SET
+	    role_code = #{roleCode}
+	    ,updater = #{updater}
+	    ,update_datetime = #{updateDatetime}
+	    ,remark = #{remark}
+	    WHERE
+	    user_id = #{userId}
+	</update>
+	
+</mapper>

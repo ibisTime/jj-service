@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IRepayDetailDAO">
+	<resultMap id="repayDetail_DB_Result" type="repayDetail">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="status" property="status" />
+		<result column="towho" property="towho" />		
+		<result column="towho_name" property="towhoName" />
+				
+		<result column="repay_datetime" property="repayDatetime" />
+		<result column="amount" property="amount" />
+		<result column="real_repay_datetime" property="realRepayDatetime" />		
+		<result column="real_amount" property="realAmount" /> 
+	    <result column="remark" property="remark" /> 
+	   
+		<result column="business_code" property="businessCode" />
+		<result column="subject_code" property="subjectCode" /> 
+		<result column="business_profit" property="businessProfit" /> 
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			
+			<if test="towho != null and towho != '' ">
+				AND t.towho = #{towho}
+			</if>
+			<if test="towhoName != null and towhoName != '' ">
+				AND t.towho_name = #{towhoName}
+			</if>
+			<if test="businessCode != null and businessCode != '' ">
+				AND t.business_code = #{businessCode}
+			</if>
+			<if test="subjectCode != null and subjectCode != '' ">
+				AND t.subject_code = #{subjectCode}
+			</if>
+			<if test="towhoList != null and towhoList != '' ">
+				AND t.towho in 
+                <foreach item="item" index="index" collection="towhoList" open="(" separator="," close=")">
+	            #{item}
+                </foreach> 
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_repayDetail" parameterType="repayDetail" resultMap="repayDetail_DB_Result">
+		SELECT
+		code
+		,type
+		,status
+		,towho
+		,towho_name
+		
+		,repay_datetime
+		,amount
+		,real_repay_datetime		
+		,real_amount
+		,remark
+		
+		,business_code
+		,subject_code
+		,business_profit
+		FROM
+		tmo_repay_detail t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			${order}
+		</trim>
+	</select>
+
+	<select id="select_repayDetail_count" parameterType="repayDetail" resultType="java.lang.Long">
+		SELECT count(1) FROM tmo_repay_detail t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_repayDetail" parameterType="repayDetail">
+		INSERT INTO tmo_repay_detail(
+		code
+		,type
+		,status
+		,towho
+		,towho_name
+		
+		,repay_datetime
+		,amount
+		,remark
+		,subject_code
+		,business_code
+		
+		,business_profit
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{status}
+		,#{towho}
+		,#{towhoName}
+		
+		,#{repayDatetime}
+		,#{amount}
+		,#{remark}
+		,#{subjectCode}
+		,#{businessCode}
+		
+		,#{businessProfit}
+		)
+	</insert>
+
+	<update id="update_repayDetail" parameterType="repayDetail">
+		UPDATE tmo_repay_detail SET
+		status = #{status}
+		,real_repay_datetime = #{realRepayDatetime}		
+		,real_amount = #{realAmount}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+<!-- 	<select id="select_sumPP" parameterType="repayPlan" resultMap="sumPP_DB_Result">
+	</select> -->
+	
+	<select id="select_totalInvest" parameterType="repayDetail" resultType="java.lang.Long">
+		SELECT sum(amount) FROM tmo_repay_detail t
+		<include refid="where_condition" />
+	</select>
+	
+	<select id="select_totalProfit" parameterType="repayDetail" resultType="java.lang.Long">
+		SELECT sum(real_amount) FROM tmo_repay_detail t
+		<include refid="where_condition" />
+	</select>
+</mapper>

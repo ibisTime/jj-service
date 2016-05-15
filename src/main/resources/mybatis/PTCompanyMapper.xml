@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IPTCompanyDAO">
+	<resultMap id="ptCompany_DB_Result" type="ptCompany">
+		<result column="code" property="code" />
+		<result column="zw_name" property="zwName" />
+		<result column="yw_name" property="ywName" />
+		<result column="zc_address" property="zcAddress" />
+		<result column="jy_address" property="jyAddress" />
+		
+		<result column="currency" property="currency" />
+		<result column="capital" property="capital" />
+		<result column="fr_person" property="frPerson" />
+		<result column="gd_person" property="gdPerson" />
+		<result column="cw_person" property="cwPerson" />
+		<result column="debdtx_person" property="debdtxPerson" />
+		
+		<result column="wy_recorder" property="wyRecorder" />
+		<result column="wy_checker" property="wyChecker" /> 
+		<result column="telephone" property="telephone" /> 
+	    <result column="remark" property="remark" /> 
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="zwName != null and zwName != '' ">
+				AND t.zw_name like CONCAT('%',#{zwName},'%')
+			</if>
+				<if test="ywName != null and ywName != '' ">
+				AND t.yw_name like CONCAT('%',#{ywName},'%')
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_pt_company" parameterType="ptCompany" resultMap="ptCompany_DB_Result">
+		SELECT
+		code
+		,zw_name
+		,yw_name
+		,zc_address
+		,jy_address
+		,currency
+		,capital
+		,fr_person
+		,gd_person
+		,cw_person
+		,debdtx_person
+		,wy_recorder
+		,wy_checker
+		,telephone
+		,remark
+		FROM
+		tpt_company t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+			    <choose>  
+			        <when test="order == 'zwName ASC'">  
+			           	CONVERT(t.zw_name using gbk) ASC 
+			        </when>  
+			        <when test="order == 'zwName DESC'">  
+			           	CONVERT(t.zw_name using gbk) DESC 
+			        </when>
+			       	<otherwise>  
+			           	${order}
+			       	</otherwise>  
+		        </choose>
+	        </if>
+		</trim>
+	</select>
+
+	<select id="select_pt_company_count" parameterType="ptCompany" resultType="java.lang.Long">
+		SELECT count(1) FROM tpt_company t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_pt_company" parameterType="ptCompany">
+		INSERT INTO tpt_company(
+		code
+		,zw_name
+		,yw_name
+		,zc_address
+		,jy_address
+		
+		,currency
+		,capital
+		,fr_person
+		,gd_person
+		,cw_person
+		,debdtx_person
+		
+		,wy_recorder
+		,wy_checker
+		,telephone
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{zwName}
+		,#{ywName}
+		,#{zcAddress}
+		,#{jyAddress}
+		
+		,#{currency}
+		,#{capital}
+		,#{frPerson}
+		,#{gdPerson}
+		,#{cwPerson}
+		,#{debdtxPerson}
+		
+		,#{wyRecorder}
+		,#{wyChecker}
+		,#{telephone}
+		,#{remark}
+		)
+	</insert>
+	
+	<delete id="delete_pt_company" parameterType="ptCompany">
+		DELETE FROM tpt_company
+		WHERE
+		code = #{code}
+	</delete>
+
+	<update id="update_pt_company" parameterType="ptCompany">
+		UPDATE tpt_company SET
+		zw_name = #{zwName}
+		,yw_name = #{ywName}
+		,zc_address = #{zcAddress}
+		,jy_address = #{jyAddress}
+		
+		,currency=#{currency}
+		,capital = #{capital}
+		,fr_person = #{frPerson}
+		,gd_person = #{gdPerson}
+		,cw_person = #{cwPerson}
+		,debdtx_person = #{debdtxPerson}
+		
+		,wy_recorder = #{wyRecorder}
+		,wy_checker = #{wyChecker}
+		,telephone = #{telephone}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+</mapper>

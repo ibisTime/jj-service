@@ -1,0 +1,464 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>xn-jrkj</groupId>
+  <artifactId>xn-mall</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>xn-mall</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- test start -->
+	<junit.version>4.11</junit.version>
+	<unitils.version>3.3</unitils.version>
+	<!-- test end -->
+	<!--logging start -->
+	<slf4j.version>1.7.1</slf4j.version>
+	<log4j.verison>1.2.17</log4j.verison>
+	<!--logging end -->
+	<!-- mybatis start -->
+	<org.mybatis.version>3.2.7</org.mybatis.version>
+	<org.mybatis.spring.version>1.2.2</org.mybatis.spring.version>
+	<!-- mybatis end -->
+	<!-- mysql start -->
+	<mysql.connector.java.version>5.1.21</mysql.connector.java.version>
+	<!-- mysql end -->
+	<!-- about validation start -->
+	<javax.validation.version>1.1.0.Final</javax.validation.version>
+	<org.hibernate.validator.version>5.1.1.Final</org.hibernate.validator.version>
+	<!-- about validation end -->
+	<!-- aspectj start -->
+	<aspectj.version>1.7.4</aspectj.version>
+	<!-- aspectj end -->
+	<!-- apache start -->
+	<commons.lang3.version>3.1</commons.lang3.version>
+	<tomcat.jdbc.version>7.0.53</tomcat.jdbc.version>
+	<!-- apache end -->
+	<!-- spring start -->
+	<org.springframework.version>4.0.1.RELEASE</org.springframework.version>
+	<!-- spring end -->
+	<!-- Jackson start-->
+	<jackson.version>2.3.1</jackson.version>
+	<!-- Jackson end-->
+  </properties>
+  <dependencyManagement>
+  <dependencies>
+	<!-- test start -->
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>${junit.version}</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-dbunit</artifactId>
+		<version>${unitils.version}</version>
+		<scope>test</scope>
+		<exclusions>
+			<exclusion>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-nop</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-easymock</artifactId>
+		<version>${unitils.version}</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-spring</artifactId>
+		<version>${unitils.version}</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-inject</artifactId>
+		<version>${unitils.version}</version>
+		<scope>test</scope>
+	</dependency>
+	<!-- test end -->
+	<!--logging start -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jcl-over-slf4j</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>${log4j.verison}</version>
+	</dependency>
+	<!--logging end -->
+	<!-- mybatis start -->
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>${org.mybatis.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>${org.mybatis.spring.version}</version>
+	</dependency>
+	<!-- mybatis end -->
+	<!--mysql start -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql.connector.java.version}</version>
+	</dependency>
+	<!--mysql end -->
+	<!-- about validation start -->
+	<dependency>
+		<groupId>javax.validation</groupId>
+		<artifactId>validation-api</artifactId>
+		<version>${javax.validation.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-validator</artifactId>
+		<version>${org.hibernate.validator.version}</version>
+	</dependency>
+	<!-- about validation end -->
+	<!-- aspectj start -->
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjrt</artifactId>
+		<version>${aspectj.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>${aspectj.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	<!-- aspectj end -->
+	<!-- apache start -->
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>${commons.lang3.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-jdbc</artifactId>
+		<version>${tomcat.jdbc.version}</version>
+	</dependency>
+	<!-- apache end -->
+	<!-- spring start -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context-support</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-beans</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-aop</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-expression</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${org.springframework.version}</version>
+		<exclusions>
+			<exclusion>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>${org.springframework.version}</version>
+		<exclusions>
+			<exclusion>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<!-- spring end -->
+	<!-- Jackson start-->
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>${jackson.version}</version>
+	</dependency>
+	<!-- Jackson end-->
+  </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <!-- test start -->
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-dbunit</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-easymock</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-spring</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.unitils</groupId>
+		<artifactId>unitils-inject</artifactId>
+	</dependency>
+	<!-- test end -->
+    <!--logging start -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jcl-over-slf4j</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+	</dependency>
+	<!--logging end -->
+	<!-- mybatis start -->
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>			
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>			
+	</dependency>
+	<!-- mybatis end -->
+	<!--mysql start -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+	</dependency>
+	<!--mysql end -->
+	<!-- about validation start -->
+	<dependency>
+		<groupId>javax.validation</groupId>
+		<artifactId>validation-api</artifactId>		
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-validator</artifactId>		
+	</dependency>
+	<!-- about validation end -->
+	<!-- aspectj start -->
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjrt</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+	</dependency>
+	<!-- aspectj end -->
+	<!-- apache start -->
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-jdbc</artifactId>		
+	</dependency>
+	<!-- apache end -->
+	<!-- spring start -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context-support</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>		
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-beans</artifactId>		
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+	</dependency>	
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>			
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-aop</artifactId>			
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-expression</artifactId>			
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+	</dependency>	
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>			
+	</dependency>	
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+	</dependency>		
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+	</dependency>
+	<!-- spring end -->
+	<!-- Jackson start-->
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>			
+	</dependency>
+	<!-- Jackson end-->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.4</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.1.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>2.4</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2</version>
+	</dependency>
+	<!-- Crept deps -->
+	<dependency>
+		<groupId>org.bouncycastle</groupId>
+		<artifactId>bcprov-ext-jdk15on</artifactId>
+		<version>1.47</version>
+	</dependency>
+	<!-- quartz -->
+	<!-- <dependency>
+		<groupId>opensymphony</groupId>
+		<artifactId>quartz</artifactId>
+		<version>1.6.5</version>
+	</dependency> -->
+	
+	<!-- quartz -->
+	 <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>2.2.1</version>
+    </dependency>
+	<!-- yeepay -->
+	<dependency>
+		<groupId>com.yeepay</groupId>
+		<artifactId>fastpay-java</artifactId>
+		<version>0.0.1</version>
+	</dependency>
+	<!-- alibaba -->
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>fastjson</artifactId>
+		<version>1.1.41</version>
+	</dependency>
+	<!-- gson -->
+	<dependency>
+    	<groupId>com.google.code.gson</groupId>
+    	<artifactId>gson</artifactId>
+    	<version>2.3.1</version>
+	</dependency>
+	
+  </dependencies> 
+  <!-- 解决每次更新maven自动更改jdk1.5办法 -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

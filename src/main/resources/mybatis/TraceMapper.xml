@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.ITraceDAO">
+	<resultMap id="trace_DB_Result" type="trace">
+		<result column="code" property="code" />
+		<result column="company_code" property="companyCode" />
+		<result column="business_code" property="businessCode" />
+		<result column="type" property="type" />		
+	</resultMap>
+	
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != ''">
+				AND t.code = #{code}
+			</if>
+			<if test="companyCode != null and companyCode != ''">
+				AND t.company_code = #{companyCode}
+			</if>
+			<if test="businessCode != null and businessCode != ''">
+				AND t.business_code = #{businessCode}
+			</if>
+			<if test="type != null and type != ''">
+			    <choose>  
+		        	<when test="type== '12'">  
+		            	AND t.type in (1,2) 
+		        	</when>  
+		        	<otherwise>  
+		              	AND t.type = #{type}
+		        	</otherwise>  
+	        	</choose>		
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_trace" parameterType="trace" resultMap="trace_DB_Result">
+		SELECT
+		code
+		,company_code
+		,business_code
+		,type
+		FROM
+		tmo_trace t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			${order}
+		</trim>
+	</select>
+
+	<select id="select_trace_count" parameterType="trace" resultType="java.lang.Long">
+		SELECT count(1) FROM tmo_trace t
+		<include refid="where_condition" />
+	</select>
+	
+	<select id="select_trace_count_bussinessAndUser" parameterType="trace" resultType="java.lang.Long">
+		SELECT count(1)
+		FROM
+		    tmo_trace t,
+		    tmo_business tb,
+		    tfd_user_company tuc
+		WHERE
+		    ((t.type ='1'
+		    AND t.business_code = tb.code
+		    AND t.company_code = tuc.company_code
+		    AND tuc.status = '2'
+		 	AND tuc.user_id = #{userId})
+		    OR (t.type ='2'
+		    AND t.business_code = tb.code
+		    AND t.company_code = #{userId}
+		    AND tuc.status = '2'))
+		    AND t.business_code = #{businessCode}
+	</select>
+	
+	<insert id="insert_trace" parameterType="trace">
+		INSERT INTO tmo_trace(
+		code
+		,company_code
+		,business_code
+		,type
+		)
+		VALUES(
+		#{code}
+		,#{companyCode}
+		,#{businessCode}
+		,#{type}
+		)
+	</insert>
+</mapper>

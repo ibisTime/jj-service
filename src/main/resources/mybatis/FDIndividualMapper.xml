@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IFDIndividualDAO">
+	<resultMap id="fdIndividual_DB_Result" type="fdIndividual">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="serve_list" property="serveList" />
+		<result column="quote_list" property="quoteList" />
+		<result column="level" property="level" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="level != null and level != '' ">
+				AND t.level = #{level}
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_fdIndividual" parameterType="fdIndividual" resultMap="fdIndividual_DB_Result">
+		SELECT
+		code
+		,name
+		,serve_list
+		,quote_list
+		,level		
+		FROM
+		tfd_individual t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				#{order}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="select_fdIndividual_count" parameterType="fdIndividual"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tfd_individual t
+		<include refid="where_condition" />
+	</select>
+	
+	<insert id="insert_fdIndividual" parameterType="fdIndividual">
+		INSERT INTO
+		tfd_individual(
+		code
+		,name
+		,serve_list
+		,quote_list
+		,level	
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{serveList}
+		,#{quoteList}
+		,#{level}
+		)
+	</insert>
+	
+	<update id="update_fdIndividual" parameterType="fdIndividual">
+		UPDATE tfd_individual
+		SET
+		name= #{name}
+		,serve_list= #{serveList}
+		,quote_list= #{quoteList}
+		,level= #{level}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_fdIndividual" parameterType="fdIndividual">
+		DELETE FROM
+		tfd_individual
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

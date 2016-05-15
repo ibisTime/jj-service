@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IFDBankCardDAO">
+	<resultMap id="fdBankCard_DB_Result" type="fdBankCard">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="real_name" property="realName" />
+		<result column="bank_code" property="bankCode" />
+		<result column="bank_name" property="bankName" />
+		
+		<result column="subbranch" property="subbranch" />
+		<result column="bankcard_no" property="bankcardNo" />
+		<result column="status" property="status" />
+		<result column="create_datetime" property="createDatetime" />
+		<result column="update_datetime" property="updateDatetime" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id != null and id != '' ">
+				AND t.id = #{id}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="bankCode != null and bankCode != '' ">
+				AND t.bank_code = #{bankCode}
+			</if>
+			<if test="bankcardNo != null and bankcardNo != '' ">
+				AND t.bankcard_no = #{bankcardNo}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_fdBankCard" parameterType="fdBankCard" resultMap="fdBankCard_DB_Result">
+		SELECT
+		id
+		,user_id
+		,real_name
+		,bank_code
+		,bank_name	
+			
+		,subbranch
+		,bankcard_no
+		,status
+		,create_datetime
+		,update_datetime
+		FROM
+		tfd_bankcard t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				#{order}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="select_fdBankCard_count" parameterType="fdBankCard"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tfd_bankcard t
+		<include refid="where_condition" />
+	</select>
+	
+	<insert id="insert_fdBankCard" parameterType="fdBankCard" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		tfd_bankcard(
+		id
+		,user_id
+		,real_name
+		,bank_code
+		,bank_name	
+			
+		,subbranch
+		,bankcard_no
+		,status
+		,create_datetime
+		)
+		VALUES(
+		#{id}
+		,#{userId}
+		,#{realName}
+		,#{bankCode}
+		,#{bankName}
+		
+		,#{subbranch}
+		,#{bankcardNo}
+		,#{status}
+		,#{createDatetime}
+		)
+	</insert>
+	
+	<update id="update_fdBankCard" parameterType="fdBankCard">
+		UPDATE tfd_bankcard
+		SET
+		bank_code = #{bankCode}
+		,bank_name = #{bankName}
+		,subbranch = #{subbranch}
+		,bankcard_no = #{bankcardNo}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete_fdBankCard" parameterType="fdBankCard">
+		DELETE FROM
+		tfd_bankcard
+		WHERE
+		id = #{id}
+	</delete>
+</mapper>

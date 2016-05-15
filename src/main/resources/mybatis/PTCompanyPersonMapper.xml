@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IPTCompanyPersonDAO">
+	<resultMap id="ptCompanyPerson_DB_Result" type="ptCompanyPerson">
+		<result column="user_id" property="userId" />
+		<result column="real_name" property="realName" />
+		<result column="id_kind" property="idKind" />
+		<result column="id_no" property="idNo" />
+		<result column="id_yxq" property="idYxq" />
+		<result column="mobile" property="mobile" />
+		<result column="telephone" property="telephone" /> 
+		<result column="remark" property="remark" />
+		<result column="company_code" property="companyCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="realName != null and realName != '' ">
+				AND t.real_name like CONCAT('%',#{realName},'%')
+			</if>
+			<if test="mobile != null and mobile != '' ">
+				AND t.mobile like CONCAT('%',#{mobile},'%')
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_ptCompanyPerson" parameterType="ptcompanyPerson" resultMap="ptCompanyPerson_DB_Result">
+		SELECT
+		user_id
+		,real_name
+		,id_kind
+		,id_no
+		,id_yxq
+		,mobile
+		,telephone	
+		,remark
+		,company_code
+		FROM
+		tpt_company_person t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			${order}
+		</trim>
+	</select>
+
+	<select id="select_ptCompanyPerson_count" parameterType="ptCompanyPerson" resultType="java.lang.Long">
+		SELECT count(1) FROM tpt_company_person t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_ptCompanyPerson" parameterType="ptCompanyPerson">
+		INSERT INTO tpt_company_person(
+		user_id
+		,real_name
+		,id_kind
+		,id_no
+		,id_yxq
+		,mobile
+		,telephone	
+		,remark
+		,company_code
+		)
+		VALUES(
+		#{userId}
+		,#{realName}
+		,#{idKind}
+		,#{idNo}
+		,#{idYxq}
+		,#{mobile}
+		,#{telephone}
+		,#{remark}
+		,#{companyCode}
+		)
+	</insert>
+	
+	<delete id="delete_ptCompanyPerson" parameterType="ptCompanyPerson">
+		DELETE FROM tpt_company_person
+		WHERE
+		user_id = #{userId}
+	</delete>
+	
+	<delete id="delete_ptCompanyPerson_byCompany" parameterType="ptCompanyPerson">
+		DELETE FROM tpt_company_person
+		WHERE
+		company_code = #{companyCode}
+	</delete>
+	
+	<update id="update_ptCompanyPerson" parameterType="ptCompanyPerson">
+		UPDATE tpt_company_person SET
+		user_id = #{userId} 
+		,real_name = #{realName} 
+		,id_kind = #{idKind} 
+		,id_no = #{idNo} 
+		,id_yxq = #{idYxq}
+		,mobile = #{mobile} 
+		,telephone = #{telephone}  
+		,remark = #{remark} 
+		,company_code = #{companyCode} 
+		WHERE user_id = #{userId}
+	</update>
+</mapper>

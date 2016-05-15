@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.ISYSLogDAO">
+	<resultMap id="sysLog_DB_Result" type="sysLog">
+		<result column="code" property="code" />
+		<result column="to_system" property="toSystem" />
+		<result column="to_table" property="toTable" />
+		<result column="to_row" property="toRow" />
+		<result column="to_column" property="toColumn" />
+		<result column="operate_type" property="operateType" />
+		<result column="pre_value" property="preValue" />
+		<result column="post_value" property="postValue" />
+		<result column="operater" property="operater" />
+		<result column="operate_datetime" property="operateDatetime" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="toSystem != null and toSystem != '' ">
+				AND t.to_system = #{toSystem}
+			</if>
+			<if test="toTable != null and toTable != '' ">
+				AND t.to_table like CONCAT('%',#{toTable},'%')
+			</if>
+			<if test="operateType != null and operateType != '' ">
+				AND t.operate_type = #{operateType}
+			</if>
+			<if test="operater != null and operater != '' ">
+				AND t.operater = #{operater}
+			</if>
+			<if test="operateDatetimeStart != null and operateDatetimeStart != '' ">
+				<![CDATA[AND t.operate_datetime >= #{operateDatetimeStart}]]>
+			</if>
+			<if test="operateDatetimeEnd != null and operateDatetimeEnd != '' ">
+				<![CDATA[AND t.operate_datetime <= #{operateDatetimeEnd}]]>
+			</if>
+		</trim>
+	</sql>
+	<select id="select_sysLog" parameterType="sysLog" resultMap="sysLog_DB_Result">
+		SELECT
+		code
+		,to_system
+		,to_table
+		,to_row
+		,to_column
+		,operate_type		
+		,pre_value
+		,post_value
+		,operater
+		,operate_datetime
+		FROM
+		tsys_log t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_sysLog_count" parameterType="sysLog"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tsys_log t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_sysLog" parameterType="sysLog">
+		INSERT INTO
+		tsys_log(
+		code
+		,to_system
+		,to_table
+		,to_row
+		,to_column
+		,operate_type		
+		,pre_value
+		,post_value
+		,operater
+		,operate_datetime
+		)
+		VALUES(
+		#{code}
+		,#{toSystem}
+		,#{toTable}
+		,#{toRow}
+		,#{toColumn}
+		,#{operateType}
+		,#{preValue}
+		,#{postValue}
+		,#{operater}
+		,#{operateDatetime}
+		)
+	</insert>
+	
+</mapper>

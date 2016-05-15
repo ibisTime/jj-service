@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file 
+	distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to You under 
+	the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may 
+	obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to 
+	in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+	ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under 
+	the License. -->
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss,SSS} %t [%c]-[%p] %m%n" />
+		</layout>
+	</appender>
+	<!--<appender name="logfile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/ihoms-biz.log" />
+		<param name="MaxFileSize" value="512KB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss,SSS} [%c]-[%p] %m%n" />
+		</layout>
+	</appender>-->
+	<!-- <appender name="log4jJDBC" class="com.hundsun.ihoms.common.log4j.appender.SpringIBatisDBAppender">
+	 		<param name="BufferSize" value="10"/>
+	       	<param name="clazz" value="com.hundsun.ihoms.member.dao.MclientLoginLogsDao"/>
+	       	<param name="method" value="insertMclientLoginLogs"/>
+	       	<param name="paramsKey" value="param"/>
+	       	&lt;!&ndash; 自定义过滤日志执行的方法，只保存指定方法的日志 &ndash;&gt;
+	        <filter class="com.hundsun.ihoms.common.log4j.filter.MethodFilter">
+           		 <param name="methodName" value="logLoginLogs"/>
+        	</filter>
+	       	  &lt;!&ndash;过滤器设置输出的级别&ndash;&gt;
+	        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+	            <param name="levelMin" value="info" />
+	            <param name="levelMax" value="info" />
+	            <param name="AcceptOnMatch" value="true" />
+	        </filter>
+	    </appender>-->
+<!--	<category name="org.apache.log4j.xml">
+		<priority value="info" />
+	</category>-->
+
+<!--
+  <logger name="com.hundsun.ihoms.member.service.login.AbsLoginService">
+        <level value="INFO"/>
+       <appender-ref ref="log4jJDBC"/>
+    </logger>
+-->
+
+ 	<!--<logger name="com.ibatis">
+		<level value="DEBUG"/>
+	</logger>
+	
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource">
+		<level value="DEBUG"/>
+	</logger>
+	
+	<logger name="com.ibatis.common.jdbc.ScriptRunner">
+		<level value="DEBUG"/>
+	</logger>	
+	
+	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate">
+		<level value="DEBUG"/>
+	</logger>	
+	
+	<logger name="java.sql.Connection">
+		<level value="DEBUG"/>
+	</logger>
+	
+	<logger name="java.sql.Statement">
+		<level value="DEBUG"/>
+	</logger>	
+	
+	<logger name="java.sql.PreparedStatement">
+		<level value="DEBUG"/>
+	</logger> 
+
+	<logger name="java.sql.ResultSet">
+		<level value="DEBUG"/>
+		<appender-ref ref="logfile" />
+	</logger>-->
+	
+	<root>
+		<!-- <priority value="debug" /> -->
+		<priority value="DEBUG" />
+		<appender-ref ref="STDOUT" />
+<!--		<appender-ref  ref="logfile"/>-->
+	</root>
+</log4j:configuration>

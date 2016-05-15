@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"  
+            default-lazy-init="false"> 
+
+	<!-- 注解注入 -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.xnjr" />
+	
+	<!-- 使用annotation定义事务 -->
+  	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+  
+  	<!-- 定义aspectj -->
+  	<aop:aspectj-autoproxy proxy-target-class="true"/>
+ 
+    <bean id="springContextHolder" class="com.xnjr.mall.spring.SpringContextHolder"></bean>
+    
+    <!-- 参数验证 -->
+    <!-- <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>  -->   
+
+	<!-- mybatis写 -->
+    <bean id="sqlSessionFactoryMaster" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis/mybatis.xml" />
+		<property name="typeHandlersPackage" value="com.xnjr.mall.dao.base.handler" />
+		<property name="mapperLocations" value="classpath*:mybatis/*Mapper.xml" />
+	</bean>
+	<!-- mybatis读 -->
+	<bean id="sqlSessionFactorySlave" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis/mybatis.xml" />
+		<property name="typeHandlersPackage" value="com.xnjr.mall.dao.base.handler" />
+		<property name="mapperLocations" value="classpath*:mybatis/*Mapper.xml" />
+		<property name="plugins">
+			<array>
+				<bean
+					class="com.xnjr.mall.dao.base.interceptor.PaginationInterceptor">
+					<property name="dialect">
+						<bean class="com.xnjr.mall.dao.base.dialect.MySQLDialect" />
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+	
+	<bean id="writeSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
+		scope="prototype">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryMaster" />
+	</bean>
+
+	<bean id="readSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
+		scope="prototype">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactorySlave" />
+	</bean>
+	
+	<!-- 另一个事务管理器, Jdbc单数据源事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+        
+    <context:property-placeholder location="classpath*:/application.properties" />
+    
+    <!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="jmxEnabled" value="true"/> 
+        <property name="testWhileIdle" value="true"/> 
+        <property name="testOnBorrow" value="true"/>   
+        <property name="testOnReturn" value="false"/>   
+        <property name="validationInterval" value="30000"/>   
+        <property name="validationQuery" value="SELECT 1"/>   
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>    
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+	</bean>
+</beans>

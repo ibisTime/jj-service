@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IBusinessDAO">
+	<resultMap id="business_DB_Result" type="business">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="status" property="status" />
+		<result column="principal" property="principal" />
+		<result column="profit" property="profit" />
+		
+		<result column="hsb_url" property="hsbUrl" />
+		<result column="hspz_url" property="hspzUrl" />
+		<result column="fj_url" property="fjUrl" />
+		<result column="start_datetime" property="startDatetime" />
+		<result column="end_datetime" property="endDatetime" />
+		
+		<result column="apply_user" property="applyUser" /> 
+	    <result column="apply_datetime" property="applyDatetime" /> 
+	    <result column="check_user" property="checkUser" /> 
+	    <result column="check_datetime" property="checkDatetime" /> 
+		<result column="remark" property="remark" />
+		
+		<result column="subject_code" property="subjectCode" />
+		<result column="is_visual" property="isVisual" />
+		<result column="contract_code" property="contractCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="subjectCode != null and subjectCode != '' ">
+				AND t.subject_code = #{subjectCode}
+			</if>
+			<if test="isVisual != null and isVisual != '' ">
+				AND t.is_visual = #{isVisual}
+			</if>
+			<if test="applyUser != null and applyUser != '' ">
+				AND t.apply_user = #{applyUser}
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_business" parameterType="business" resultMap="business_DB_Result">
+		SELECT
+		code
+		,name
+		,status
+		,principal
+		,profit
+		
+		,hsb_url
+		,hspz_url
+		,fj_url
+		,start_datetime
+		,end_datetime
+		
+		,apply_user
+		,apply_datetime
+		,check_user
+		,check_datetime
+		,remark
+		
+		,subject_code
+		,is_visual
+		,contract_code
+		FROM
+		tmo_business t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			${order}
+		</trim>
+	</select>
+
+	<select id="select_business_count" parameterType="business" resultType="java.lang.Long">
+		SELECT count(1) FROM tmo_business t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_business" parameterType="business">
+		INSERT INTO tmo_business(
+		code
+		,name
+		,status
+		,principal
+		,profit
+		
+		,hsb_url
+		,hspz_url
+		,fj_url
+		,start_datetime
+		,end_datetime
+		
+		,apply_user
+		,apply_datetime
+		,remark
+		,subject_code
+		,is_visual
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{status}
+		,#{principal}
+		,#{profit}
+		
+		,#{hsbUrl}
+		,#{hspzUrl}
+		,#{fjUrl}
+		,#{startDatetime}
+		,#{endDatetime}
+		
+		,#{applyUser}
+		,#{applyDatetime}
+		,#{remark}
+		,#{subjectCode}
+		,#{isVisual}
+		)
+	</insert>
+
+	<update id="update_updateBusiness" parameterType="business">
+		UPDATE tmo_business SET
+		name = #{name}
+		,status = #{status}
+		,principal = #{principal}
+		,profit = #{profit}
+		
+		,hsb_url = #{hsbUrl}
+		,hspz_url = #{hspzUrl}
+		,fj_url = #{fjUrl}
+		,start_datetime = #{startDatetime}
+		,end_datetime = #{endDatetime}
+		
+		,apply_user = #{applyUser}
+		,apply_datetime = #{applyDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_unpassBusiness" parameterType="business">
+		UPDATE tmo_business SET
+		status = #{status}
+		,check_user = #{checkUser}
+		,check_datetime = #{checkDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	<update id="update_passBusiness" parameterType="business">
+		UPDATE tmo_business SET
+		status = #{status}
+		,check_user = #{checkUser}
+		,check_datetime = #{checkDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	<update id="update_contract" parameterType="business">
+		UPDATE tmo_business SET
+		contract_code = #{contractCode}
+		WHERE code = #{code}
+	</update>
+</mapper>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IFDUserDAO">
+	<resultMap id="fdUser_DB_Result" type="fdUser">
+		<result column="user_id" property="userId" />
+		<result column="mobile" property="mobile" />
+		<result column="login_pwd_strength" property="loginPwdStrength" />		
+		<result column="user_kind" property="userKind" />
+		
+		<result column="user_referee" property="userReferee" />
+		<result column="id_kind" property="idKind" />
+		<result column="id_no" property="idNo" />
+		<result column="real_name" property="realName" />
+		<result column="trade_pwd_strength" property="tradePwdStrength" />
+		
+		<result column="create_datetime" property="createDatetime" />
+		<result column="remark" property="remark" />
+		<result column="status" property="status" />	
+		<result column="serve_list" property="serveList" />
+		<result column="quote_list" property="quoteList" />
+		
+		<result column="level" property="level" />		
+		<result column="individual_code" property="individualCode" />		
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">			
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="mobile != null and mobile != '' ">
+				AND t.mobile like CONCAT('%',#{mobile},'%')
+			</if>
+			<if test="userKind != null and userKind != '' ">
+				AND t.user_kind = #{userKind}
+			</if>	
+			<if test="userReferee != null and userReferee != '' ">
+				AND t.user_referee = #{userReferee}
+			</if>	
+			<if test="idKind != null and idKind != '' ">
+				AND t.id_kind = #{idKind}
+			</if>
+			<if test="idNo != null and idNo != '' ">
+				AND t.id_no = #{idNo}
+			</if>
+			<if test="realName != null and realName != '' ">
+				AND t.real_name = #{realName}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+		    <if test="loginPwd != null and loginPwd != '' ">
+				AND t.login_pwd = #{loginPwd}
+			</if>	
+			<if test="tradePwd != null and tradePwd != '' ">
+				AND t.trade_pwd = #{tradePwd}
+			</if>
+			<if test="level != null">
+				AND t.level = #{level}
+			</if>		
+		</trim>
+	</sql>
+	<select id="select_fdUser" parameterType="fdUser" resultMap="fdUser_DB_Result">
+		SELECT 
+		user_id
+		,mobile
+		,login_pwd_strength
+		,user_kind	
+		,user_referee
+		
+		,id_kind
+		,id_no
+		,real_name
+		,trade_pwd_strength
+		,create_datetime
+		
+		,remark
+		,status		
+		,serve_list
+		,quote_list
+		,level
+		,individual_code
+		FROM
+		tfd_user t
+		<include refid="where_condition"/>
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_fdUser_count" parameterType="fdUser" resultType="java.lang.Long">
+		SELECT count(1) FROM tfd_user t
+		<include refid="where_condition"/>
+	</select>
+
+	<insert id="insert_fdUser" parameterType="fdUser">
+		INSERT INTO tfd_user(
+		user_id
+		,mobile
+		,login_pwd
+		,login_pwd_strength
+		,user_kind
+		
+		,user_referee
+		,create_datetime
+		,status
+		)
+		VALUES(
+		#{userId}
+		,#{mobile}
+		,#{loginPwd}
+		,#{loginPwdStrength}
+		,#{userKind}
+		
+		,#{userReferee}
+		,#{createDatetime}
+		,#{status}
+		)
+	</insert>
+	
+	
+	<insert id="quick_insert_fdUser" parameterType="fdUser">
+		INSERT INTO tfd_user(
+		user_id
+		,mobile
+		,login_pwd
+		,login_pwd_strength
+		,user_kind
+		
+		,user_referee
+		,id_kind
+		,id_no
+		,real_name
+		,trade_pwd
+		
+		,trade_pwd_strength
+		,create_datetime
+		,remark
+		,status
+		)
+		VALUES(
+		#{userId}
+		,#{mobile}
+		,#{loginPwd}
+		,#{loginPwdStrength}
+		,#{userKind}
+		
+		,#{userReferee}
+		,#{idKind}
+		,#{idNo}
+		,#{realName}
+		,#{tradePwd}
+		
+		,#{tradePwdStrength}
+		,#{createDatetime}
+		,#{remark}
+		,#{status}
+		)
+	</insert>
+	
+	<update id="update_fdUserIdentity" parameterType="fdUser">
+		UPDATE tfd_user
+		SET
+		real_name= #{realName}
+		,id_kind = #{idKind}
+		,id_no = #{idNo}
+		WHERE
+		user_id = #{userId}			
+	</update>
+	
+	<update id="update_fdUserTradePwd" parameterType="fdUser">
+		UPDATE tfd_user
+		SET
+		trade_pwd = #{tradePwd}
+		,trade_pwd_strength = #{tradePwdStrength}
+		WHERE
+		user_id = #{userId}			
+	</update>
+	
+	<update id="update_fdUserLoginPwd" parameterType="fdUser">
+		UPDATE tfd_user
+		SET
+		login_pwd = #{loginPwd}
+		,login_pwd_strength = #{loginPwdStrength}
+		WHERE
+		user_id = #{userId}			
+	</update>	
+	
+	<update id="update_fdUserMobile" parameterType="fdUser">
+		UPDATE tfd_user
+		SET
+		 mobile = #{mobile}
+		WHERE
+		user_id = #{userId}
+	</update>
+	
+	<update id="update_fdUserKYC" parameterType="fdUser">
+		UPDATE tfd_user
+		SET
+		 serve_list = #{serveList}
+		,quote_list = #{quoteList}
+		,level = #{level}
+		WHERE
+		user_id = #{userId}
+	</update>
+	
+	<update id="update_fdUserKYCIndividual" parameterType="fdUser">
+		UPDATE tfd_user
+		SET
+		 serve_list = #{serveList}
+		,quote_list = #{quoteList}
+		,level = #{level}
+		,individual_code = #{individualCode}
+		WHERE
+		user_id = #{userId}
+	</update>
+</mapper>

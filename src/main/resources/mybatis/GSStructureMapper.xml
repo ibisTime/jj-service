@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IGSStructureDAO">
+	<resultMap type="gsStructure" id="gsStructure_DB_Result">
+		<result column="code" property="code"/>
+		<result column="name" property="name"/>
+		<result column="status" property="status"/>
+		<result column="summary" property="summary"/>
+		<result column="description" property="description"/>
+		<result column="updater" property="updater"/>
+		<result column="update_datetime" property="updateDatetime"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_gsStructure" parameterType="gsStructure" resultMap="gsStructure_DB_Result">
+		SELECT
+		code
+		,name
+		,status
+		,summary
+		,description
+		
+		,updater
+		,update_datetime
+		,remark
+		FROM
+		tgs_structure t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			${order}
+		</trim>
+	</select>
+	
+	<select id="select_gsStructure_count" parameterType="gsStructure" resultType="java.lang.Long">
+		SELECT count(1) FROM tgs_structure t
+		<include refid="where_condition" />
+	</select>
+	
+	<insert id="insert_gsStructure" parameterType="gsStructure">
+		INSERT INTO tgs_structure(
+		code
+		,name
+		,status
+		,summary
+		,description
+		
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{status}
+		,#{summary}
+		,#{description}
+		
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_updateStructure" parameterType="gsStructure">
+		UPDATE tgs_structure SET
+		name = #{name}
+		,status = #{status}
+		,summary = #{summary}
+		,description = #{description}
+		
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_gsStructure" parameterType="gsStructure">
+		DELETE FROM tgs_structure
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

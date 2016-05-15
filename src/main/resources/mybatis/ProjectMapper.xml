@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IProjectDAO">
+	<resultMap id="project_DB_Result" type="project">
+	   <result column="code" property="code" />
+	   <result column="name" property="name" />
+	   <result column="status" property="status" />
+	   <result column="serve" property="serve" />
+	   <result column="quote" property="quote" />
+	   
+	   <result column="quote_value1" property="quoteValue1" />
+	   <result column="quote_value2" property="quoteValue2" />
+	   <result column="level" property="level" />
+	   <result column="total_amount" property="totalAmount" />
+	   <result column="type" property="type" />
+	   
+	   <result column="towho" property="towho" />
+	   <result column="amount" property="amount" />
+	   <result column="loaned_amount" property="loanedAmount" />
+	   <result column="trader" property="trader" />
+	   <result column="trader_name" property="traderName" />
+	   
+	   <result column="summary" property="summary" />
+	   <result column="description" property="description" />
+	   <result column="mjstart_datetime" property="mjstartDatetime" />
+	   <result column="period" property="period" />
+	   <result column="mjend_datetime" property="mjendDatetime" />
+	   
+	   <result column="min_invest_amount" property="minInvestAmount" />
+	   <result column="invest_amount_step" property="investAmountStep" />
+	   <result column="max_invest_amount" property="maxInvestAmount" />
+	   <result column="contract_template" property="contractTemplate" />
+	   <result column="repay_datetime" property="repayDatetime" />
+	   
+	   <result column="end_datetime" property="endDatetime" />
+       <result column="apply_user" property="applyUser" />
+	   <result column="apply_datetime" property="applyDatetime" />
+	   <result column="check_user" property="checkUser" />
+	   <result column="check_note" property="checkNote" /> 
+	   
+	   <result column="check_datetime" property="checkDatetime" />
+	   <result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="serve != null and serve != '' ">
+				AND t.serve = BINARY #{serve}
+			</if>
+			<if test="quote != null and quote != '' ">
+				AND t.quote = BINARY #{quote}
+			</if>
+			<if test="level != null and level != '' ">
+				AND t.level = #{level}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="trader != null and trader != '' ">
+				AND t.trader = #{trader}
+			</if>
+			<if test="mjstartDatetimeStart != null and mjstartDatetimeStart != '' ">
+				<![CDATA[AND t.mjstart_datetime > #{mjstartDatetimeStart}]]>
+			</if>
+			<if test="mjstartDatetimeEnd != null and mjstartDatetimeEnd != '' ">
+				<![CDATA[AND t.mjstart_datetime <= #{mjstartDatetimeEnd}]]>
+			</if>
+			<if test="mjendDatetimeStart != null and mjendDatetimeStart != '' ">
+				<![CDATA[AND t.mjend_datetime > #{mjendDatetimeStart}]]>
+			</if>
+			<if test="mjendDatetimeEnd != null and mjendDatetimeEnd != '' ">
+				<![CDATA[AND t.mjend_datetime <= #{mjendDatetimeEnd}]]>
+			</if>
+			<if test="applyUser != null and applyUser != '' ">
+				AND t.apply_user = #{applyUser}
+			</if>
+			<if test="checkUser != null and checkUser != '' ">
+				AND t.check_user = #{checkUser}
+			</if>
+			<if test="checkDatetimeStart != null and checkDatetimeStart != '' ">
+				<![CDATA[AND t.check_datetime > #{checkDatetimeStart}]]>
+			</if>
+			<if test="checkDatetimeEnd != null and checkDatetimeEnd != '' ">
+				<![CDATA[AND t.check_datetime <= #{checkDatetimeEnd}]]>
+			</if>
+		</trim>
+	</sql>
+	<select id="select_project" parameterType="project" resultMap="project_DB_Result">
+		SELECT
+		code
+		,name
+		,status
+		,serve
+		,quote
+		
+		,quote_value1
+		,quote_value2
+		,level
+		,total_amount
+		,type
+		
+		,towho
+		,amount
+		,loaned_amount
+		,trader
+		,trader_name
+		
+		,summary
+		,description
+		,mjstart_datetime
+		,period
+		,mjend_datetime
+		
+		,min_invest_amount
+		,invest_amount_step
+		,max_invest_amount
+		,contract_template
+		,repay_datetime
+		
+		,end_datetime
+		,apply_user
+		,apply_datetime
+		,check_user
+		,check_datetime
+		
+		,check_note
+		,remark
+		FROM
+		tmo_project t 
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			${order}
+		</trim>
+	</select>
+
+	<select id="select_project_count" parameterType="project" resultType="java.lang.Long">
+		SELECT count(1) FROM tmo_project t 
+		<include refid="where_condition" />
+	</select>
+	
+	<insert id="insert_project" parameterType="project">
+		INSERT INTO tmo_project(
+		code
+		,name
+		,status
+		,serve
+		,quote
+		
+		,quote_value1
+		,quote_value2
+		,level
+		,total_amount
+		,type
+		
+		,towho
+		,amount
+		,trader
+		,trader_name
+		,summary
+		
+		,description
+		,min_invest_amount
+		,invest_amount_step
+		,max_invest_amount
+		,contract_template
+		
+		,apply_user
+		,apply_datetime
+		,remark
+		)
+		VALUES(
+		 #{code}
+		,#{name}
+		,#{status}
+		,#{serve}
+		,#{quote}
+		
+		,#{quoteValue1}
+		,#{quoteValue2}
+		,#{level}
+		,#{totalAmount}
+		,#{type}
+		
+		,#{towho}
+		,#{amount}
+		,#{trader}
+		,#{traderName}
+		,#{summary}
+		
+		,#{description}
+		,#{minInvestAmount}
+		,#{investAmountStep}
+		,#{maxInvestAmount}
+		,#{contractTemplate}
+		
+		,#{applyUser}
+		,#{applyDatetime}
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_reapplyProject" parameterType="project">
+		UPDATE tmo_project SET
+		name= #{name}
+		,status= #{status}
+		,serve= #{serve}
+		,quote= #{quote}
+		
+		,quote_value1= #{quoteValue1}
+		,quote_value2= #{quoteValue2}
+		,level= #{level}
+		,total_amount= #{totalAmount}
+		,type= #{type}
+		
+		,towho= #{towho}
+		,amount= #{amount}
+		,trader= #{trader}
+		,trader_name= #{traderName}
+		,summary= #{summary}
+		
+		,description= #{description}
+		,min_invest_amount= #{minInvestAmount}
+		,invest_amount_step= #{investAmountStep}
+		,max_invest_amount= #{maxInvestAmount}
+		,contract_template= #{contractTemplate}
+		
+		,apply_user= #{applyUser}
+	    ,apply_datetime= #{applyDatetime}
+	    ,remark= #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_checkPassProject" parameterType="project">
+		UPDATE tmo_project SET
+		check_user = #{checkUser}
+		,check_note = #{checkNote}
+		,check_datetime = #{checkDatetime}
+		,status = #{status}
+		,remark = #{remark}
+		
+		,mjstart_datetime = #{mjstartDatetime}
+		,period= #{period}
+		,mjend_datetime= #{mjendDatetime}
+		,repay_datetime= #{repayDatetime}
+		,loaned_amount = #{loanedAmount}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_checkUnpassProject" parameterType="project">
+		UPDATE tmo_project SET
+		check_user = #{checkUser}
+		,check_note = #{checkNote}
+		,check_datetime = #{checkDatetime}
+		,status = #{status}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_forbidProject" parameterType="project">
+		UPDATE tmo_project SET
+		check_user = #{checkUser}
+		,check_note = #{checkNote}
+		,check_datetime = #{checkDatetime}
+		,status = #{status}
+		
+		,remark = #{remark}
+		,end_datetime = #{endDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_loanedAmountProject" parameterType="project">
+		UPDATE
+		tmo_project
+		SET
+		loaned_amount = #{loanedAmount}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_statusProject" parameterType="project">
+		UPDATE tmo_project SET
+		status = #{status}
+		WHERE code = #{code}
+	</update>
+</mapper>

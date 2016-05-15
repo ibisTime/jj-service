@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	
+	<!-- 分页BO层注入paginableDao -->
+	<bean id="bkBankBO" class="com.xnjr.mall.bo.impl.BKBankBOImpl">
+		<property name="paginableDAO" ref="bkBankDAOImpl"/>
+	</bean>	
+	
+	<bean id="bkSubbranchBO" class="com.xnjr.mall.bo.impl.BKSubbranchBOImpl">
+		<property name="paginableDAO" ref="bkSubbranchDAOImpl"/>
+	</bean>	
+	
+	<bean id="ptCompanyBO" class="com.xnjr.mall.bo.impl.PTCompanyBOImpl">
+		<property name="paginableDAO" ref="ptCompanyDAOImpl"/>
+	</bean>	
+	
+	<bean id="ptCompanyPersonBO" class="com.xnjr.mall.bo.impl.PTCompanyPersonBOImpl">
+		<property name="paginableDAO" ref="ptCompanyPersonDAOImpl"/>
+	</bean>	
+	
+	<bean id="ptCompanyCardBO" class="com.xnjr.mall.bo.impl.PTCompanyCardBOImpl">
+		<property name="paginableDAO" ref="ptCompanyCardDAOImpl"/>
+	</bean>	
+	
+	<bean id="sysMenuBO" class="com.xnjr.mall.bo.impl.SYSMenuBOImpl">
+		<property name="paginableDAO" ref="sysMenuDAOImpl"/>
+	</bean>
+	
+	<bean id="sysRoleBO" class="com.xnjr.mall.bo.impl.SYSRoleBOImpl">
+		<property name="paginableDAO" ref="sysRoleDAOImpl"/>
+	</bean>
+	
+	<bean id="sysUserBO" class="com.xnjr.mall.bo.impl.SYSUserBOImpl">
+		<property name="paginableDAO" ref="sysUserDAOImpl"/>
+	</bean>
+	
+	<bean id="sysLogBO" class="com.xnjr.mall.bo.impl.SYSLogBOImpl">
+		<property name="paginableDAO" ref="sysLogDAOImpl"/>
+	</bean>	
+	
+	<bean id="sysDictBO" class="com.xnjr.mall.bo.impl.SYSDictBOImpl">
+		<property name="paginableDAO" ref="sysDictDAOImpl"/>
+	</bean>	
+	
+	<bean id="contractTemplateBO" class="com.xnjr.mall.bo.impl.ContractTemplateBOImpl">
+		<property name="paginableDAO" ref="contractTemplateDAOImpl" />
+	</bean>
+	
+	<bean id="sysConfigBO" class="com.xnjr.mall.bo.impl.SYSConfigBOImpl">
+		<property name="paginableDAO" ref="sysConfigDAOImpl"/>
+	</bean>	
+	
+	<bean id="fdUserBO" class="com.xnjr.mall.bo.impl.FDUserBOImpl">
+		<property name="paginableDAO" ref="fdUserDAOImpl"/>
+	</bean>
+	
+	<bean id="fdAccountBO" class="com.xnjr.mall.bo.impl.FDAccountBOImpl">
+		<property name="paginableDAO" ref="fdAccountDAOImpl" />
+	</bean>
+	
+	<bean id="fdAJourBO" class="com.xnjr.mall.bo.impl.FDAJourBOImpl">
+		<property name="paginableDAO" ref="fdAJourDAOImpl" />
+	</bean>
+	
+	<bean id="fdAfJourBO" class="com.xnjr.mall.bo.impl.FDAFJourBOImpl">
+		<property name="paginableDAO" ref="fdAfJourDAOImpl" />
+	</bean>
+	
+	<bean id="fdUserIdentifyBO" class="com.xnjr.mall.bo.impl.FDUserIdentifyBOImpl">
+		<property name="paginableDAO" ref="fdUserIdentifyDAOImpl" />
+	</bean>
+	
+	<bean id="fdUserLoginLogBO" class="com.xnjr.mall.bo.impl.FDUserLoginLogBOImpl">
+		<property name="paginableDAO" ref="fdUserLoginLogDAOImpl" />
+	</bean>
+	
+	<bean id="fdIndividualBO" class="com.xnjr.mall.bo.impl.FDIndividualBOImpl">
+		<property name="paginableDAO" ref="fdIndividualDAOImpl" />
+	</bean>
+	
+	<bean id="fdUserAccountBO" class="com.xnjr.mall.bo.impl.FDUserAccountBOImpl">
+		<property name="paginableDAO" ref="fdUserAccountDAOImpl" />
+	</bean>
+	
+	<bean id="fdBankCardBO" class="com.xnjr.mall.bo.impl.FDBankCardBOImpl">
+		<property name="paginableDAO" ref="fdBankCardDAOImpl" />
+	</bean>
+	
+	<bean id="fdCompanyBO" class="com.xnjr.mall.bo.impl.FDCompanyBOImpl">
+		<property name="paginableDAO" ref="fdCompanyDAOImpl" />
+	</bean>
+	
+	<bean id="fdCompanyAccountBO" class="com.xnjr.mall.bo.impl.FDCompanyAccountBOImpl">
+		<property name="paginableDAO" ref="fdCompanyAccountDAOImpl" />
+	</bean>
+	
+	<bean id="fdUserCompanyBO" class="com.xnjr.mall.bo.impl.FDUserCompanyBOImpl">
+		<property name="paginableDAO" ref="fdUserCompanyDAOImpl" />
+	</bean>
+	
+	<bean id="fdCompanyCardBO" class="com.xnjr.mall.bo.impl.FDCompanyCardBOImpl">
+		<property name="paginableDAO" ref="fdCompanyCardDAOImpl" />
+	</bean>
+	
+	<bean id="gsAccountBO" class="com.xnjr.mall.bo.impl.GSAccountBOImpl">
+		<property name="paginableDAO" ref="gsAccountDAOImpl" />
+	</bean>
+	<bean id="gsAJourBO" class="com.xnjr.mall.bo.impl.GSAJourBOImpl">
+		<property name="paginableDAO" ref="gsAJourDAOImpl" />
+	</bean>
+	<bean id="gsTraderBO" class="com.xnjr.mall.bo.impl.GSTraderBOImpl">
+		<property name="paginableDAO" ref="gsTraderDAOImpl"/>
+	</bean>	
+	<bean id="gsStructureBO" class="com.xnjr.mall.bo.impl.GSStructureBOImpl">
+		<property name="paginableDAO" ref="gsStructureDAOImpl" />
+	</bean>
+	
+	<bean id="projectBO" class="com.xnjr.mall.bo.impl.ProjectBOImpl">
+		<property name="paginableDAO" ref="projectDAOImpl" />
+	</bean>
+	
+	<bean id="investBO" class="com.xnjr.mall.bo.impl.InvestBOImpl">
+		<property name="paginableDAO" ref="investDAOImpl"/>
+	</bean>
+	
+	<bean id="investTableBO" class="com.xnjr.mall.bo.impl.InvestTableBOImpl">
+		<property name="paginableDAO" ref="investTableDAOImpl"/>
+	</bean>
+	
+	<bean id="willInvestBO" class="com.xnjr.mall.bo.impl.WillInvestBOImpl">
+		<property name="paginableDAO" ref="willInvestDAOImpl"/>
+	</bean>
+	
+	<bean id="contractBO" class="com.xnjr.mall.bo.impl.ContractBOImpl">
+		<property name="paginableDAO" ref="contractDAOImpl" />
+	</bean>
+	
+	<bean id="subjectBO" class="com.xnjr.mall.bo.impl.SubjectBOImpl">
+		<property name="paginableDAO" ref="subjectDAOImpl" />
+	</bean>
+	
+	<bean id="businessBO" class="com.xnjr.mall.bo.impl.BusinessBOImpl">
+		<property name="paginableDAO" ref="businessDAOImpl"/>
+	</bean>	
+	
+	<bean id="repayDetailBO" class="com.xnjr.mall.bo.impl.RepayDetailBOImpl">
+		<property name="paginableDAO" ref="repayDetailDAOImpl"/>
+	</bean>	
+	
+	<bean id="fdWithdrawBO" class="com.xnjr.mall.bo.impl.FDWithdrawBOImpl">
+		<property name="paginableDAO" ref="fdWithdrawDAOImpl"/>
+	</bean>
+	<bean id="hlOrderBO" class="com.xnjr.mall.bo.impl.HLOrderBOImpl">
+		<property name="paginableDAO" ref="hlOrderDAOImpl"/>
+	</bean>
+</beans>
