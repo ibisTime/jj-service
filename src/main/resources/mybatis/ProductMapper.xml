@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IProductDAO">
+	<resultMap id="product_DB_Result" type="product">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+		<result column="adv_title" property="advTitle" />
+		<result column="adv_pic" property="advPic" />
+		<result column="major_pic" property="majorPic" />
+		<result column="major_text" property="majorText" />
+		<result column="family_pic" property="familyPic" />
+		<result column="family_text" property="familyText" />
+		<result column="highlight_pic" property="highlightPic" />
+		<result column="highligh_text" property="highlighText" />
+		<result column="status" property="status" />
+	    <result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_product" parameterType="product" resultMap="product_DB_Result">
+		SELECT
+		code
+		,name
+		,type
+		,adv_title
+		,adv_pic
+		,major_pic
+		,major_text
+		,family_pic
+		,family_text
+		,highlight_pic
+		,highligh_text
+		,status
+		,updater
+		,update_datetime
+		,remark
+		FROM
+		tmall_product t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_product_count" parameterType="product"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_product t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_product" parameterType="product">
+		INSERT INTO
+		tmall_product(
+		code
+		,name
+		,type
+		,adv_title
+		,adv_pic
+		,major_pic
+		,major_text
+		,family_pic
+		,family_text
+		,highlight_pic
+		,highligh_text
+		,status
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{type}
+		,#{advTitle}
+		,#{advPic}
+		,#{majorPic}
+		,#{majorText}
+		,#{familyPic}
+		,#{familyText}
+		,#{highlightPic}
+		,#{highlighText}
+		,#{status}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_product" parameterType="product">
+		UPDATE tmall_product
+		SET
+		name = #{name}
+		,type = #{type}
+		,adv_title = #{advTitle}
+		,adv_pic = #{advPic}
+		,major_pic = #{majorPic}
+		,major_text = #{majorText}
+		,family_pic = #{familyPic}
+		,family_text = #{familyText}
+		,highlight_pic = #{highlightPic}
+		,highligh_text = #{highlighText}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+	<delete id="delete_product" parameterType="product">
+		DELETE FROM
+		tmall_product
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

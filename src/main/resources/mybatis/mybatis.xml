@@ -2,59 +2,14 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>	
-	    <typeAlias alias="bkSubbranch" type="com.xnjr.mall.domain.BKSubbranch" />
-	    <typeAlias alias="bkBank" type="com.xnjr.mall.domain.BKBank" />
-		<typeAlias alias="ptCompany" type="com.xnjr.mall.domain.PTCompany" />
-	    <typeAlias alias="ptCompanyPerson" type="com.xnjr.mall.domain.PTCompanyPerson" />
-	    <typeAlias alias="ptCompanyCard" type="com.xnjr.mall.domain.PTCompanyCard" />
-	   
 	    <typeAlias alias="sysLog" type="com.xnjr.mall.domain.SYSLog" />
 	    <typeAlias alias="sysDict" type="com.xnjr.mall.domain.SYSDict" />
 	    <typeAlias alias="sysConfig" type="com.xnjr.mall.domain.SYSConfig" />
 	    <typeAlias alias="sysMenu" type="com.xnjr.mall.domain.SYSMenu" />
 	    <typeAlias alias="sysRole" type="com.xnjr.mall.domain.SYSRole" />
-	    <typeAlias alias="contractTemplate" type="com.xnjr.mall.domain.ContractTemplate" />
-	    
  	    <typeAlias alias="sysMenuRole" type="com.xnjr.mall.domain.SYSMenuRole" />
  	    <typeAlias alias="sysUser" type="com.xnjr.mall.domain.SYSUser" />
- 	    <typeAlias alias="fdUser" type="com.xnjr.mall.domain.FDUser" />
- 	    <typeAlias alias="fdUserIdentify" type="com.xnjr.mall.domain.FDUserIdentify" />
-		<typeAlias alias="fdUserLoginLog" type="com.xnjr.mall.domain.FDUserLoginLog" />
 		
- 	    <typeAlias alias="fdAccount" type="com.xnjr.mall.domain.FDAccount" />
- 	    <typeAlias alias="fdAccountJour" type="com.xnjr.mall.domain.FDAccountJour" />
- 	    <typeAlias alias="fdCompany" type="com.xnjr.mall.domain.FDCompany" />
-		<typeAlias alias="fdAfJour" type="com.xnjr.mall.domain.FDAccountFrozenJour" />
- 	    <typeAlias alias="fdUserAccount" type="com.xnjr.mall.domain.FDUserAccount" />
- 	    
-		<typeAlias alias="fdBankCard" type="com.xnjr.mall.domain.FDBankCard" />
-		<typeAlias alias="fdCompanyAccount" type="com.xnjr.mall.domain.FDCompanyAccount" />
-		<typeAlias alias="fdCompanyCard" type="com.xnjr.mall.domain.FDCompanyCard" />
-		<typeAlias alias="fdIndividual" type="com.xnjr.mall.domain.FDIndividual" />
-		<typeAlias alias="fdUserCompany" type="com.xnjr.mall.domain.FDUserCompany" />
-		
-		<typeAlias alias="fdWithdraw" type="com.xnjr.mall.domain.FDWithdraw" />
-		<typeAlias alias="gjsAccount" type="com.xnjr.mall.domain.GjsAccount" />
-		<typeAlias alias="gjsAccountJour" type="com.xnjr.mall.domain.GjsAccountJour"/>
-		
-		<typeAlias alias="gsAccount" type="com.xnjr.mall.domain.GSAccount" />
-		<typeAlias alias="gsAccountJour" type="com.xnjr.mall.domain.GSAccountJour"/>
-		<typeAlias alias="gsTrader" type="com.xnjr.mall.domain.GSTrader" />
-		<typeAlias alias="gsStructure" type="com.xnjr.mall.domain.GSStructure" />
-		
-		<typeAlias alias="project" type="com.xnjr.mall.domain.Project" />
-		<typeAlias alias="invest" type="com.xnjr.mall.domain.Invest" />
-		<typeAlias alias="investTable" type="com.xnjr.mall.domain.InvestTable" />
-		<typeAlias alias="willInvest" type="com.xnjr.mall.domain.WillInvest" />
-	    <typeAlias alias="subject" type="com.xnjr.mall.domain.Subject" />
-	    
-		<typeAlias alias="business" type="com.xnjr.mall.domain.Business" />
-		<typeAlias alias="businessTable" type="com.xnjr.mall.domain.BusinessTable" />
-		<typeAlias alias="trace" type="com.xnjr.mall.domain.Trace" />
-		<typeAlias alias="contract" type="com.xnjr.mall.domain.Contract" />
-		<typeAlias alias="repayDetail" type="com.xnjr.mall.domain.RepayDetail" />
-		<typeAlias alias="repayPlan" type="com.xnjr.mall.domain.RepayPlan" />
-		
-		<typeAlias alias="hlOrder" type="com.xnjr.mall.domain.HLOrder" />
+		<typeAlias alias="product" type="com.xnjr.mall.domain.Product" />
 	</typeAliases>	
 </configuration>	
