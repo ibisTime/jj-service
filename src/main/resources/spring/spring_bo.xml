@@ -12,7 +12,6 @@
 
 	
 	<!-- 分页BO层注入paginableDao -->
-	
 	<bean id="sysMenuBO" class="com.xnjr.mall.bo.impl.SYSMenuBOImpl">
 		<property name="paginableDAO" ref="sysMenuDAOImpl"/>
 	</bean>
@@ -33,9 +32,12 @@
 		<property name="paginableDAO" ref="sysDictDAOImpl"/>
 	</bean>	
 	
-	
 	<bean id="sysConfigBO" class="com.xnjr.mall.bo.impl.SYSConfigBOImpl">
 		<property name="paginableDAO" ref="sysConfigDAOImpl"/>
+	</bean>	
+	
+	<bean id="productBO" class="com.xnjr.mall.bo.impl.ProductBOImpl">
+		<property name="paginableDAO" ref="productDAOImpl"/>
 	</bean>	
 	
 </beans>

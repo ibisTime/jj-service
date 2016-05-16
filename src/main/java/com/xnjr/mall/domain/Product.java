@@ -8,6 +8,8 @@
  */
 package com.xnjr.mall.domain;
 
+import java.util.Date;
+
 import com.xnjr.mall.dao.base.ABaseDO;
 
 /** 
@@ -62,7 +64,7 @@ public class Product extends ABaseDO {
     private String updater;
 
     // 更新时间
-    private String updateDatetime;
+    private Date updateDatetime;
 
     // 备注
     private String remark;
@@ -171,11 +173,11 @@ public class Product extends ABaseDO {
         this.updater = updater;
     }
 
-    public String getUpdateDatetime() {
+    public Date getUpdateDatetime() {
         return updateDatetime;
     }
 
-    public void setUpdateDatetime(String updateDatetime) {
+    public void setUpdateDatetime(Date updateDatetime) {
         this.updateDatetime = updateDatetime;
     }
 
