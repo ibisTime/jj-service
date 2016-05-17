@@ -13,7 +13,7 @@
 		<result column="family_pic" property="familyPic" />
 		<result column="family_text" property="familyText" />
 		<result column="highlight_pic" property="highlightPic" />
-		<result column="highligh_text" property="highlighText" />
+		<result column="highlight_text" property="highlightText" />
 		<result column="status" property="status" />
 	    <result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
@@ -50,7 +50,7 @@
 		,family_pic
 		,family_text
 		,highlight_pic
-		,highligh_text
+		,highlight_text
 		,status
 		,updater
 		,update_datetime
@@ -84,7 +84,7 @@
 		,family_pic
 		,family_text
 		,highlight_pic
-		,highligh_text
+		,highlight_text
 		,status
 		,updater
 		,update_datetime
@@ -101,7 +101,7 @@
 		,#{familyPic}
 		,#{familyText}
 		,#{highlightPic}
-		,#{highlighText}
+		,#{highlightText}
 		,#{status}
 		,#{updater}
 		,#{updateDatetime}
@@ -121,7 +121,7 @@
 		,family_pic = #{familyPic}
 		,family_text = #{familyText}
 		,highlight_pic = #{highlightPic}
-		,highligh_text = #{highlighText}
+		,highlight_text = #{highlightText}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
 		WHERE code = #{code}

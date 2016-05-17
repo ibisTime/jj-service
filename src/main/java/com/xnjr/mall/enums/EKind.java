@@ -7,8 +7,7 @@ package com.xnjr.mall.enums;
  * @history:
  */
 public enum EKind {
-    SYSTEM("1", "系统方"), BANK("2", "银行方"), GS("3", "中国高盛"), PLAT("4", "平台方"), FUND(
-            "5", "资金方"), TRADE("6", "贸易方");
+    SYSTEM("1", "系统方");
 
     EKind(String code, String value) {
         this.code = code;
