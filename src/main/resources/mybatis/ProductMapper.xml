@@ -124,6 +124,15 @@
 		,highlight_text = #{highlightText}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_status" parameterType="product">
+		UPDATE tmall_product
+		SET
+		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>

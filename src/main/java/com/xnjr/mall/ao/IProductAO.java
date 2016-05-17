@@ -33,4 +33,7 @@ public interface IProductAO {
 
     public Product getProduct(String code);
 
+    public int checkProduct(String code, String checkUser, String checkResult,
+            String checkNote);
+
 }

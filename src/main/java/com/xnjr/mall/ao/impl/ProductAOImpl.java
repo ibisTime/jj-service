@@ -18,6 +18,8 @@ import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Product;
+import com.xnjr.mall.enums.EProductStatus;
+import com.xnjr.mall.exception.BizException;
 
 /** 
  * @author: haiqingzheng 
@@ -95,4 +97,21 @@ public class ProductAOImpl implements IProductAO {
         return product;
     }
 
+    @Override
+    public int checkProduct(String code, String checkUser, String checkResult,
+            String checkNote) {
+        int count = 0;
+        Product product = productBO.getProduct(code);
+        if (!EProductStatus.todoAPPROVE.getCode().equals(product.getStatus())) {
+            throw new BizException("xn000000", "该产品不处于待审核状态");
+        }
+        if (EProductStatus.APPROVE_YES.getCode().equals(checkResult)) {
+            count = productBO.approveProduct(code, checkUser, checkNote);
+        } else if (EProductStatus.APPROVE_NO.getCode().equals(checkResult)) {
+            count = productBO.unApproveProduct(code, checkUser, checkNote);
+        } else {
+            throw new BizException("xn000000", "审核结果传值有误");
+        }
+        return count;
+    }
 }

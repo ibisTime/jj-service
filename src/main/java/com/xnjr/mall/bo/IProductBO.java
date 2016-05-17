@@ -31,4 +31,8 @@ public interface IProductBO extends IPaginableBO<Product> {
     public List<Product> queryProductList(Product condition);
 
     public Product getProduct(String code);
+
+    public int approveProduct(String code, String checkUser, String checkNote);
+
+    public int unApproveProduct(String code, String checkUser, String checkNote);
 }
