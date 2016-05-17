@@ -20,6 +20,8 @@ import com.xnjr.mall.domain.Product;
  */
 public interface IProductAO {
 
+    static final String DEFAULT_ORDER_COLUMN = "code";
+
     public String addProduct(Product product);
 
     public int dropProduct(String code);
