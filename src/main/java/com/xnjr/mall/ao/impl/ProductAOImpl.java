@@ -18,6 +18,7 @@ import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Product;
+import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EProductStatus;
 import com.xnjr.mall.exception.BizException;
 
@@ -105,9 +106,9 @@ public class ProductAOImpl implements IProductAO {
         if (!EProductStatus.todoAPPROVE.getCode().equals(product.getStatus())) {
             throw new BizException("xn000000", "该产品不处于待审核状态");
         }
-        if (EProductStatus.APPROVE_YES.getCode().equals(checkResult)) {
+        if (EBoolean.YES.getCode().equals(checkResult)) {
             count = productBO.approveProduct(code, checkUser, checkNote);
-        } else if (EProductStatus.APPROVE_NO.getCode().equals(checkResult)) {
+        } else if (EBoolean.NO.getCode().equals(checkResult)) {
             count = productBO.unApproveProduct(code, checkUser, checkNote);
         } else {
             throw new BizException("xn000000", "审核结果传值有误");
