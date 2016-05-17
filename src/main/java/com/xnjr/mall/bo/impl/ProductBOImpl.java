@@ -20,6 +20,7 @@ import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IProductDAO;
 import com.xnjr.mall.domain.Product;
+import com.xnjr.mall.enums.EProductStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -118,6 +119,36 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int approveProduct(String code, String checkUser, String checkNote) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Product product = new Product();
+            product.setCode(code);
+            product.setUpdater(checkUser);
+            product.setUpdateDatetime(new Date());
+            product.setStatus(EProductStatus.APPROVE_YES.getCode());
+            product.setRemark(checkNote);
+            count = productDAO.updateStatus(product);
+        }
+        return count;
+    }
+
+    @Override
+    public int unApproveProduct(String code, String checkUser, String checkNote) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Product product = new Product();
+            product.setCode(code);
+            product.setUpdater(checkUser);
+            product.setUpdateDatetime(new Date());
+            product.setStatus(EProductStatus.APPROVE_NO.getCode());
+            product.setRemark(checkNote);
+            count = productDAO.updateStatus(product);
+        }
+        return count;
     }
 
 }
