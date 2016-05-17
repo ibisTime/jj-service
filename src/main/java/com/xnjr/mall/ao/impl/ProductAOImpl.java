@@ -106,9 +106,9 @@ public class ProductAOImpl implements IProductAO {
         if (!EProductStatus.todoAPPROVE.getCode().equals(product.getStatus())) {
             throw new BizException("xn000000", "该产品不处于待审核状态");
         }
-        if (EProductStatus.APPROVE_YES.getCode().equals(checkResult)) {
+        if (EBoolean.YES.getCode().equals(checkResult)) {
             count = productBO.approveProduct(code, checkUser, checkNote);
-        } else if (EProductStatus.APPROVE_NO.getCode().equals(checkResult)) {
+        } else if (EBoolean.NO.getCode().equals(checkResult)) {
             count = productBO.unApproveProduct(code, checkUser, checkNote);
         } else {
             throw new BizException("xn000000", "审核结果传值有误");
