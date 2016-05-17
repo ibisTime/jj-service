@@ -104,7 +104,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             }
             Product condition = new Product();
             condition.setCode(code);
-            product = productDAO.select(product);
+            product = productDAO.select(condition);
         }
         return product;
     }
