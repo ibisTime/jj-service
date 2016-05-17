@@ -32,7 +32,47 @@ public interface IProductBO extends IPaginableBO<Product> {
 
     public Product getProduct(String code);
 
+    /**
+     * 审核产品通过
+     * @param code
+     * @param checkUser
+     * @param checkNote
+     * @return 
+     * @create: 2016年5月17日 上午11:20:40 haiqingzheng
+     * @history:
+     */
     public int approveProduct(String code, String checkUser, String checkNote);
 
+    /**
+     * 审核产品不通过
+     * @param code
+     * @param checkUser
+     * @param checkNote
+     * @return 
+     * @create: 2016年5月17日 上午11:20:56 haiqingzheng
+     * @history:
+     */
     public int unApproveProduct(String code, String checkUser, String checkNote);
+
+    /**
+     * 上架产品
+     * @param code
+     * @param checkUser
+     * @param checkNote
+     * @return 
+     * @create: 2016年5月17日 上午11:24:04 haiqingzheng
+     * @history:
+     */
+    public int putOn(String code, String checkUser, String checkNote);
+
+    /**
+     * 下架产品
+     * @param code
+     * @param checkUser
+     * @param checkNote
+     * @return 
+     * @create: 2016年5月17日 上午11:24:14 haiqingzheng
+     * @history:
+     */
+    public int putOff(String code, String checkUser, String checkNote);
 }

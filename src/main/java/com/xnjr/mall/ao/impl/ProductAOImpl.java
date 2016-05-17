@@ -115,4 +115,26 @@ public class ProductAOImpl implements IProductAO {
         }
         return count;
     }
+
+    @Override
+    public int putOnOffProduct(String code, String checkUser,
+            String checkResult, String checkNote) {
+        int count = 0;
+        Product product = productBO.getProduct(code);
+        if (EBoolean.YES.getCode().equals(checkResult)) {
+            if (!EProductStatus.APPROVE_YES.getCode().equals(
+                product.getStatus())) {
+                throw new BizException("xn000000", "该产品不处于审核通过状态，不能上架");
+            }
+            count = productBO.putOn(code, checkUser, checkNote);
+        } else if (EBoolean.NO.getCode().equals(checkResult)) {
+            if (!EProductStatus.ONLINE.getCode().equals(product.getStatus())) {
+                throw new BizException("xn000000", "该产品不处于上架状态，不能下架");
+            }
+            count = productBO.putOff(code, checkUser, checkNote);
+        } else {
+            throw new BizException("xn000000", "审核结果传值有误");
+        }
+        return count;
+    }
 }
