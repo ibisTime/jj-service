@@ -152,4 +152,34 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
         return count;
     }
 
+    @Override
+    public int putOn(String code, String checkUser, String checkNote) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Product product = new Product();
+            product.setCode(code);
+            product.setUpdater(checkUser);
+            product.setUpdateDatetime(new Date());
+            product.setStatus(EProductStatus.ONLINE.getCode());
+            product.setRemark(checkNote);
+            count = productDAO.updateStatus(product);
+        }
+        return count;
+    }
+
+    @Override
+    public int putOff(String code, String checkUser, String checkNote) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Product product = new Product();
+            product.setCode(code);
+            product.setUpdater(checkUser);
+            product.setUpdateDatetime(new Date());
+            product.setStatus(EProductStatus.todoAPPROVE.getCode());
+            product.setRemark(checkNote);
+            count = productDAO.updateStatus(product);
+        }
+        return count;
+    }
+
 }
