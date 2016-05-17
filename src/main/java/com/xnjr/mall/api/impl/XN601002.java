@@ -48,7 +48,7 @@ public class XN601002 extends AProcessor {
         data.setFamilyPic(req.getFamilyPic());
         data.setFamilyText(req.getFamilyText());
         data.setHighlightPic(req.getHighlightPic());
-        data.setHighlighText(req.getHighlighText());
+        data.setHighlightText(req.getHighlightText());
         data.setUpdater(req.getUpdater());
         int count = productAO.editProduct(data);
         return new BooleanRes(count > 0 ? true : false);
@@ -63,7 +63,7 @@ public class XN601002 extends AProcessor {
         StringValidater.validateBlank(req.getCode(), req.getType(),
             req.getName(), req.getAdvTitle(), req.getAdvPic(),
             req.getMajorPic(), req.getMajorText(), req.getFamilyPic(),
-            req.getFamilyText(), req.getHighlightPic(), req.getHighlighText(),
+            req.getFamilyText(), req.getHighlightPic(), req.getHighlightText(),
             req.getUpdater());
     }
 

@@ -47,7 +47,7 @@ public class XN601000 extends AProcessor {
         data.setFamilyPic(req.getFamilyPic());
         data.setFamilyText(req.getFamilyText());
         data.setHighlightPic(req.getHighlightPic());
-        data.setHighlighText(req.getHighlighText());
+        data.setHighlightText(req.getHighlightText());
         data.setUpdater(req.getUpdater());
         return new PKCodeRes(productAO.addProduct(data));
     }
@@ -61,7 +61,7 @@ public class XN601000 extends AProcessor {
         StringValidater.validateBlank(req.getType(), req.getName(),
             req.getAdvTitle(), req.getAdvPic(), req.getMajorPic(),
             req.getMajorText(), req.getFamilyPic(), req.getFamilyText(),
-            req.getHighlightPic(), req.getHighlighText(), req.getUpdater());
+            req.getHighlightPic(), req.getHighlightText(), req.getUpdater());
     }
 
 }

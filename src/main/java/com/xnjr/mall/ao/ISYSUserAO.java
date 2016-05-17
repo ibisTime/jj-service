@@ -49,9 +49,6 @@ public interface ISYSUserAO {
     public Paginable<SYSUser> querySYSUserPage(int start, int limit,
             SYSUser condition);
 
-    public String doAddFdUser(String mobile, String userReferee, String idKind,
-            String idNo, String realName);
-
     public List<SYSUser> querySYSUserList(SYSUser condition);
 
     public SYSUser getSYSUserDetail(String code);

@@ -55,7 +55,7 @@ public class Product extends ABaseDO {
     private String highlightPic;
 
     // 亮点文本
-    private String highlighText;
+    private String highlightText;
 
     // 状态
     private String status;
@@ -149,12 +149,12 @@ public class Product extends ABaseDO {
         this.highlightPic = highlightPic;
     }
 
-    public String getHighlighText() {
-        return highlighText;
+    public String getHighlightText() {
+        return highlightText;
     }
 
-    public void setHighlighText(String highlighText) {
-        this.highlighText = highlighText;
+    public void setHighlightText(String highlightText) {
+        this.highlightText = highlightText;
     }
 
     public String getStatus() {

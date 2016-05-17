@@ -45,6 +45,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdateDatetime(new Date());
             product.setRemark("产品新增");
+            productDAO.insert(product);
         }
         return code;
     }
