@@ -44,6 +44,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             code = OrderNoGenerater.generateM("MP");
             product.setCode(code);
             product.setUpdateDatetime(new Date());
+            product.setRemark("产品新增");
         }
         return code;
     }

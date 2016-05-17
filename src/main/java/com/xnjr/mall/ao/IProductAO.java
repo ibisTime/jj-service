@@ -24,7 +24,7 @@ public interface IProductAO {
 
     public int dropProduct(String code);
 
-    public int updateProduct(Product product);
+    public int editProduct(Product product);
 
     public Paginable<Product> queryProductPage(int start, int limit,
             Product condition);
@@ -32,4 +32,5 @@ public interface IProductAO {
     public List<Product> queryProductList(Product condition);
 
     public Product getProduct(String code);
+
 }

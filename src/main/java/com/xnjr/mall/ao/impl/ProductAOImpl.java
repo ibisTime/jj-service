@@ -58,7 +58,7 @@ public class ProductAOImpl implements IProductAO {
      * @see com.xnjr.mall.ao.IProductAO#updateProduct(com.xnjr.mall.domain.Product)
      */
     @Override
-    public int updateProduct(Product product) {
+    public int editProduct(Product product) {
         int count = 0;
         if (product != null) {
             count = productBO.refreshProduct(product);
