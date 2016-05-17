@@ -1,5 +1,6 @@
 package com.xnjr.mall.ao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,5 +76,27 @@ public class SYSMenuRoleAOImpl implements ISYSMenuRoleAO {
     @Override
     public List<SYSMenu> querySYSMenuList(SYSMenuRole data) {
         return sysMenuRoleBO.querySYSMenuList(data);
+    }
+
+    /** 
+     * @see com.xnjr.moom.ao.ISYSMenuRoleAO#querySYSMenuListByTopCode(java.lang.String, java.lang.String)
+     */
+    @Override
+    public List<SYSMenu> querySYSMenuListByTopCode(String roleCode,
+            String parentCode, String type) {
+        List<SYSMenu> resultList = new ArrayList<SYSMenu>();
+        SYSMenuRole condition = new SYSMenuRole();
+        condition.setRoleCode(roleCode);
+        condition.setParentCode(parentCode);
+        condition.setType(type);
+        List<SYSMenu> list = sysMenuRoleBO.querySYSMenuList(condition);
+        for (SYSMenu sysMenu : list) {
+            SYSMenuRole childMenuRole = new SYSMenuRole();
+            childMenuRole.setRoleCode(roleCode);
+            childMenuRole.setParentCode(sysMenu.getCode());
+            childMenuRole.setType(type);
+            resultList.addAll(sysMenuRoleBO.querySYSMenuList(childMenuRole));
+        }
+        return resultList;
     }
 }

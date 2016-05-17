@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xnjr.moom.dao.ISYSLogDAO">
+<mapper namespace="com.xnjr.mall.dao.ISYSLogDAO">
 	<resultMap id="sysLog_DB_Result" type="sysLog">
 		<result column="code" property="code" />
 		<result column="to_system" property="toSystem" />
