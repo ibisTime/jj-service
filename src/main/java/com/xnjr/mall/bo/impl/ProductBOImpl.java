@@ -81,6 +81,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             }
             product.setStatus(EProductStatus.todoAPPROVE.getCode());
             product.setUpdateDatetime(new Date());
+            product.setRemark("产品信息被编辑，重新提交审核");
             count = productDAO.updateProduct(product);
         }
         return count;
