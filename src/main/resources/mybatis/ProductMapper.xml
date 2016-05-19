@@ -130,6 +130,7 @@
 		,family_text = #{familyText}
 		,highlight_pic = #{highlightPic}
 		,highlight_text = #{highlightText}
+		,status = #{status}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
 		WHERE code = #{code}
