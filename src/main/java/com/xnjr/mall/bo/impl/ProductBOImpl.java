@@ -44,8 +44,9 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
         if (product != null) {
             code = OrderNoGenerater.generateM("MP");
             product.setCode(code);
-            product.setStatus(EProductStatus.todoAPPROVE.getCode());
+            product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
+            product.setStatus(EProductStatus.todoAPPROVE.getCode());
             product.setRemark("产品新增");
             productDAO.insert(product);
         }
@@ -79,8 +80,9 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             if (!isProductExist(product.getCode())) {
                 throw new BizException("xn000000", "产品编号不存在");
             }
-            product.setStatus(EProductStatus.todoAPPROVE.getCode());
+            product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
+            product.setStatus(EProductStatus.todoAPPROVE.getCode());
             count = productDAO.updateProduct(product);
         }
         return count;
