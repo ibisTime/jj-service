@@ -30,9 +30,17 @@
 			<if test="type != null and type != '' ">
 				AND t.type = #{type}
 			</if>
-			<if test="status != null and status != '' ">
-				AND t.status = #{status}
-			</if>
+			<choose>
+				 <when test="status == '12'">
+				  AND (t.status = 1 or t.status = 2)
+				 </when>
+				 <when test="status != null and status != '' ">
+				  AND t.status = #{status}
+				 </when>
+				 <otherwise>
+				  AND 1 = 1
+				 </otherwise>
+			</choose>
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
 			</if>
@@ -122,6 +130,7 @@
 		,family_text = #{familyText}
 		,highlight_pic = #{highlightPic}
 		,highlight_text = #{highlightText}
+		,status = #{status}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
 		WHERE code = #{code}

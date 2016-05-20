@@ -64,7 +64,17 @@ public class ProductAOImpl implements IProductAO {
     public int editProduct(Product product) {
         int count = 0;
         if (product != null) {
-            count = productBO.refreshProduct(product);
+            Product dbProduct = productBO.getProduct(product.getCode());
+            // 只有待审核和审核不通过的产品可进行修改
+            if (EProductStatus.todoAPPROVE.getCode().equals(
+                dbProduct.getStatus())
+                    || EProductStatus.APPROVE_NO.getCode().equals(
+                        dbProduct.getStatus())) {
+                count = productBO.refreshProduct(product);
+            } else {
+                throw new BizException("xn000000", "只有待审核和审核不通过的产品可进行修改");
+            }
+
         }
         return count;
     }
