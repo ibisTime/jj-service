@@ -20,7 +20,7 @@ import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IProductDAO;
 import com.xnjr.mall.domain.Product;
-import com.xnjr.mall.enums.EProductStatus;
+import com.xnjr.mall.enums.EPutStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -46,7 +46,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
-            product.setStatus(EProductStatus.todoAPPROVE.getCode());
+            product.setStatus(EPutStatus.todoAPPROVE.getCode());
             product.setRemark("产品新增");
             productDAO.insert(product);
         }
@@ -82,7 +82,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             }
             product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
-            product.setStatus(EProductStatus.todoAPPROVE.getCode());
+            product.setStatus(EPutStatus.todoAPPROVE.getCode());
             product.setRemark("产品信息被编辑，重新提交审核");
             count = productDAO.updateProduct(product);
         }
@@ -135,7 +135,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdater(checkUser);
             product.setUpdateDatetime(new Date());
-            product.setStatus(EProductStatus.APPROVE_YES.getCode());
+            product.setStatus(EPutStatus.APPROVE_YES.getCode());
             product.setRemark(checkNote);
             count = productDAO.updateStatus(product);
         }
@@ -150,7 +150,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdater(checkUser);
             product.setUpdateDatetime(new Date());
-            product.setStatus(EProductStatus.APPROVE_NO.getCode());
+            product.setStatus(EPutStatus.APPROVE_NO.getCode());
             product.setRemark(checkNote);
             count = productDAO.updateStatus(product);
         }
@@ -165,7 +165,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdater(checkUser);
             product.setUpdateDatetime(new Date());
-            product.setStatus(EProductStatus.ONLINE.getCode());
+            product.setStatus(EPutStatus.ONLINE.getCode());
             product.setRemark(checkNote);
             count = productDAO.updateStatus(product);
         }
@@ -180,7 +180,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdater(checkUser);
             product.setUpdateDatetime(new Date());
-            product.setStatus(EProductStatus.todoAPPROVE.getCode());
+            product.setStatus(EPutStatus.todoAPPROVE.getCode());
             product.setRemark(checkNote);
             count = productDAO.updateStatus(product);
         }

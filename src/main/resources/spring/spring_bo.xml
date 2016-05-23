@@ -40,4 +40,11 @@
 		<property name="paginableDAO" ref="productDAOImpl"/>
 	</bean>	
 	
+	<bean id="modelBO" class="com.xnjr.mall.bo.impl.ModelBOImpl">
+		<property name="paginableDAO" ref="modelDAOImpl"/>
+	</bean>	
+	
+	<bean id="modelSpecsBO" class="com.xnjr.mall.bo.impl.ModelSpecsBOImpl">
+		<property name="paginableDAO" ref="modelSpecsDAOImpl"/>
+	</bean>
 </beans>

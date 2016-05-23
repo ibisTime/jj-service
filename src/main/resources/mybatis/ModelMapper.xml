@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IModelDAO">
+	<resultMap id="model_DB_Result" type="model">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="pic1" property="pic1" />
+		<result column="pic2" property="pic2" />
+		<result column="pic3" property="pic3" />
+		
+		<result column="description" property="description" />
+		<result column="product_code" property="productCode" />
+		<result column="status" property="status" />
+	    <result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="productCode != null and productCode != '' ">
+				AND t.product_code = #{productCode}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_model" parameterType="model" resultMap="model_DB_Result">
+		SELECT
+		code
+		,name
+		,pic1
+		,pic2
+		,pic3
+		
+		,description
+		,product_code
+		,status
+		,updater
+		,update_datetime
+		
+		,remark
+		FROM
+		tmall_model t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_model_count" parameterType="model"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_model t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_model" parameterType="model">
+		INSERT INTO
+		tmall_model(
+		code
+		,name
+		,pic1
+		,pic2
+		,pic3
+		
+		,description
+		,product_code
+		,status
+		,updater
+		,update_datetime
+		
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{pic1}
+		,#{pic2}
+		,#{pic3}
+		
+		,#{description}
+		,#{productCode}
+		,#{status}
+		,#{updater}
+		,#{updateDatetime}
+		
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_model" parameterType="model">
+		UPDATE tmall_model
+		SET
+		name = #{name}
+		,pic1 = #{pic1}
+		,pic2 = #{pic2}
+		,pic3 = #{pic3}
+		,description = #{description}
+		
+		,product_code = #{productCode}
+		,status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_modelStatus" parameterType="model">
+		UPDATE tmall_model
+		SET
+		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+	<delete id="delete_model" parameterType="model">
+		DELETE FROM
+		tmall_model
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

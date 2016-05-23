@@ -83,7 +83,7 @@ public class ProductDAOImpl extends AMybatisTemplate implements IProductDAO {
 
     @Override
     public int updateStatus(Product product) {
-        return super.update("update_status", product);
+        return super.update("update_productStatus", product);
     }
 
 }

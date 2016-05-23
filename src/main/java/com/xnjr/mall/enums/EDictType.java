@@ -1,6 +1,6 @@
 /**
  * @Title EDictType.java 
- * @Package com.xnjr.moom.enums 
+ * @Package com.std.security.enums 
  * @Description 
  * @author haiqingzheng  
  * @date 2016年4月17日 下午5:15:02 

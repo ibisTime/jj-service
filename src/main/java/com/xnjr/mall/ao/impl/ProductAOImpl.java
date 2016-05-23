@@ -19,7 +19,7 @@ import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.enums.EBoolean;
-import com.xnjr.mall.enums.EProductStatus;
+import com.xnjr.mall.enums.EPutStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -66,15 +66,13 @@ public class ProductAOImpl implements IProductAO {
         if (product != null) {
             Product dbProduct = productBO.getProduct(product.getCode());
             // 只有待审核和审核不通过的产品可进行修改
-            if (EProductStatus.todoAPPROVE.getCode().equals(
-                dbProduct.getStatus())
-                    || EProductStatus.APPROVE_NO.getCode().equals(
+            if (EPutStatus.todoAPPROVE.getCode().equals(dbProduct.getStatus())
+                    || EPutStatus.APPROVE_NO.getCode().equals(
                         dbProduct.getStatus())) {
                 count = productBO.refreshProduct(product);
             } else {
                 throw new BizException("xn000000", "只有待审核和审核不通过的产品可进行修改");
             }
-
         }
         return count;
     }
@@ -101,11 +99,7 @@ public class ProductAOImpl implements IProductAO {
      */
     @Override
     public Product getProduct(String code) {
-        Product product = null;
-        if (StringUtils.isNotBlank(code)) {
-            product = productBO.getProduct(code);
-        }
-        return product;
+        return productBO.getProduct(code);
     }
 
     @Override
@@ -113,7 +107,7 @@ public class ProductAOImpl implements IProductAO {
             String checkNote) {
         int count = 0;
         Product product = productBO.getProduct(code);
-        if (!EProductStatus.todoAPPROVE.getCode().equals(product.getStatus())) {
+        if (!EPutStatus.todoAPPROVE.getCode().equals(product.getStatus())) {
             throw new BizException("xn000000", "该产品不处于待审核状态");
         }
         if (EBoolean.YES.getCode().equals(checkResult)) {
@@ -132,13 +126,12 @@ public class ProductAOImpl implements IProductAO {
         int count = 0;
         Product product = productBO.getProduct(code);
         if (EBoolean.YES.getCode().equals(checkResult)) {
-            if (!EProductStatus.APPROVE_YES.getCode().equals(
-                product.getStatus())) {
+            if (!EPutStatus.APPROVE_YES.getCode().equals(product.getStatus())) {
                 throw new BizException("xn000000", "该产品不处于审核通过状态，不能上架");
             }
             count = productBO.putOn(code, checkUser, checkNote);
         } else if (EBoolean.NO.getCode().equals(checkResult)) {
-            if (!EProductStatus.ONLINE.getCode().equals(product.getStatus())) {
+            if (!EPutStatus.ONLINE.getCode().equals(product.getStatus())) {
                 throw new BizException("xn000000", "该产品不处于上架状态，不能下架");
             }
             count = productBO.putOff(code, checkUser, checkNote);

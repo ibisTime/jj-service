@@ -11,5 +11,8 @@
  	    <typeAlias alias="sysUser" type="com.xnjr.mall.domain.SYSUser" />
 		
 		<typeAlias alias="product" type="com.xnjr.mall.domain.Product" />
+		<typeAlias alias="model" type="com.xnjr.mall.domain.Model" />
+		<typeAlias alias="modelSpecs" type="com.xnjr.mall.domain.ModelSpecs" />
+		
 	</typeAliases>	
 </configuration>	

@@ -136,7 +136,7 @@
 		WHERE code = #{code}
 	</update>
 	
-	<update id="update_status" parameterType="product">
+	<update id="update_productStatus" parameterType="product">
 		UPDATE tmall_product
 		SET
 		status = #{status}
