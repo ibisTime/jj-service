@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.moom.dao.IAddressDAO">
+	<resultMap id="address_DB_Result" type="address">
+		<result column="code" property="code" />
+		<result column="addressee" property="addressee" />
+		<result column="mobile" property="mobile" />
+		<result column="province" property="province" />
+		<result column="city" property="city" />
+		<result column="district" property="district" />
+		<result column="detail_address" property="detailAddress" />
+		<result column="is_default" property="isDefault" />
+		<result column="user_id" property="userId" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="isDefault != null and isDefault != '' ">
+				AND t.is_default = #{isDefault}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_address" parameterType="address" resultMap="address_DB_Result">
+		SELECT
+		code,
+		addressee,
+		mobile,
+		province,
+		city,
+		district,
+		detail_address,
+		is_default,
+		user_id
+		FROM
+		tmall_address t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				#{order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_address_count" parameterType="address"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_address t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_address" parameterType="address">
+		INSERT INTO tmall_address(
+		code
+		,addressee
+		,mobile
+		,province
+		,city
+		,district
+		,detail_address
+		,is_default
+		,user_id
+		)
+		VALUES(
+		#{code}
+		,#{addressee}
+		,#{mobile}
+		,#{province}
+		,#{city}
+		,#{district}
+		,#{detailAddress}
+		,#{isDefault}
+		,#{userId}
+		)
+	</insert>
+
+	<update id="update_address" parameterType="address">
+		UPDATE tmall_address
+		SET
+		addressee=#{addressee},
+		mobile=#{mobile},
+		province=#{province},
+		city=#{city},
+		district=#{district},
+		detail_address=#{detailAddress},
+		is_default=#{isDefault}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_address_def" parameterType="address">
+		UPDATE tmall_address
+		SET
+		is_default=#{isDefault}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<delete id="delete_address" parameterType="address">
+		DELETE FROM tmall_address
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

@@ -21,9 +21,9 @@
   
 5. 启停tomcat 
   cd /mnt/wwwroot/tomcat_JY_mall/bin
-  ./shutdown.sh
-  ./startup.sh
+  ../bin/shutdown.sh
+  ../bin/startup.sh
   
 6. 验证程序
-  http://121.43.101.148:6203/xn-mall/api
+  http://121.43.101.148:6202/xn-mall/api
 

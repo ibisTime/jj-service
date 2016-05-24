@@ -1,11 +1,3 @@
-/**
- * @Title OrderNoGenerater.java 
- * @Package com.ibis.account.core 
- * @Description 
- * @author miyb  
- * @date 2015-5-5 下午1:13:04 
- * @version V1.0   
- */
 package com.xnjr.mall.core;
 
 import java.util.Random;

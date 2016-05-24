@@ -10,6 +10,7 @@ package com.xnjr.mall.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,7 +99,17 @@ public class ModelAOImpl implements IModelAO {
      */
     @Override
     public Paginable<Model> queryModelPage(int start, int limit, Model condition) {
-        return modelBO.getPaginable(start, limit, condition);
+        Paginable<Model> page = modelBO.getPaginable(start, limit, condition);
+        if (page != null && page.getList() != null) {
+            for (Model model : page.getList()) {
+                ModelSpecs specsCondition = new ModelSpecs();
+                specsCondition.setModelCode(model.getCode());
+                List<ModelSpecs> list = modelSpecsBO
+                    .queryModelSpecsList(specsCondition);
+                model.setModelSpecsList(list);
+            }
+        }
+        return page;
     }
 
     /** 
@@ -106,7 +117,17 @@ public class ModelAOImpl implements IModelAO {
      */
     @Override
     public List<Model> queryModelList(Model condition) {
-        return modelBO.queryModelList(condition);
+        List<Model> modelList = modelBO.queryModelList(condition);
+        if (CollectionUtils.isNotEmpty(modelList)) {
+            for (Model model : modelList) {
+                ModelSpecs specsCondition = new ModelSpecs();
+                specsCondition.setModelCode(model.getCode());
+                List<ModelSpecs> list = modelSpecsBO
+                    .queryModelSpecsList(specsCondition);
+                model.setModelSpecsList(list);
+            }
+        }
+        return modelList;
     }
 
     /** 
@@ -114,7 +135,14 @@ public class ModelAOImpl implements IModelAO {
      */
     @Override
     public Model getModel(String code) {
-        return modelBO.getModel(code);
+        Model model = modelBO.getModel(code);
+        // 获取型号规格
+        ModelSpecs specsCondition = new ModelSpecs();
+        specsCondition.setModelCode(model.getCode());
+        List<ModelSpecs> list = modelSpecsBO
+            .queryModelSpecsList(specsCondition);
+        model.setModelSpecsList(list);
+        return model;
     }
 
     /** 

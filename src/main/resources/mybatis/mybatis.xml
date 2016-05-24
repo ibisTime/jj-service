@@ -13,6 +13,8 @@
 		<typeAlias alias="product" type="com.xnjr.mall.domain.Product" />
 		<typeAlias alias="model" type="com.xnjr.mall.domain.Model" />
 		<typeAlias alias="modelSpecs" type="com.xnjr.mall.domain.ModelSpecs" />
+		<typeAlias alias="address" type="com.xnjr.mall.domain.Address" />
+		<typeAlias alias="buyGuide" type="com.xnjr.mall.domain.BuyGuide" />
 		
 	</typeAliases>	
 </configuration>	

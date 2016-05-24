@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IBuyGuideDAO">
+	<resultMap id="buyGuide_DB_Result" type="buyGuide">
+		<result column="code" property="code" />
+		<result column="original_price" property="originalPrice" />
+		<result column="discount_price" property="discountPrice" />
+		<result column="to_level" property="toLevel" />
+		<result column="model_code" property="modelCode" />
+		
+	    <result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="toLevel != null and toLevel != '' ">
+				AND t.to_level = #{toLevel}
+			</if>
+			<if test="modelCode != null and modelCode != '' ">
+				AND t.model_code = #{modelCode}
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_buyGuide" parameterType="buyGuide" resultMap="buyGuide_DB_Result">
+		SELECT
+		code
+		,original_price
+		,discount_price
+		,to_level
+		,model_code
+		
+		,updater
+		,update_datetime
+		,remark
+		FROM
+		tmall_buy_guide t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_buyGuide_count" parameterType="buyGuide"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_buy_guide t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_buyGuide" parameterType="buyGuide">
+		INSERT INTO
+		tmall_buy_guide(
+		code
+		,original_price
+		,discount_price
+		,to_level
+		,model_code
+		
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{originalPrice}
+		,#{discountPrice}
+		,#{toLevel}
+		,#{modelCode}
+		
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_buyGuide" parameterType="buyGuide">
+		UPDATE tmall_buy_guide
+		SET
+		original_price = #{originalPrice}
+		,discount_price = #{discountPrice}
+		,to_level = #{toLevel}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_buyGuide" parameterType="buyGuide">
+		DELETE FROM
+		tmall_buy_guide
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

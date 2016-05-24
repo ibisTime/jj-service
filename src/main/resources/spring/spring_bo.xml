@@ -47,4 +47,12 @@
 	<bean id="modelSpecsBO" class="com.xnjr.mall.bo.impl.ModelSpecsBOImpl">
 		<property name="paginableDAO" ref="modelSpecsDAOImpl"/>
 	</bean>
+	
+	<bean id="addressBO" class="com.xnjr.mall.bo.impl.AddressBOImpl">
+		<property name="paginableDAO" ref="addressDAOImpl"/>
+	</bean>	
+	
+	<bean id="buyGuideBO" class="com.xnjr.mall.bo.impl.BuyGuideBOImpl">
+		<property name="paginableDAO" ref="buyGuideDAOImpl"/>
+	</bean>	
 </beans>
