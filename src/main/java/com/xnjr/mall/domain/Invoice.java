@@ -9,6 +9,7 @@
 package com.xnjr.mall.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.xnjr.mall.dao.base.ABaseDO;
 
@@ -30,7 +31,7 @@ public class Invoice extends ABaseDO {
     private String applyUser;
 
     // 申请时间
-    private String applyDatetime;
+    private Date applyDatetime;
 
     // 申请备注
     private String applyNote;
@@ -55,6 +56,15 @@ public class Invoice extends ABaseDO {
 
     // 审核备注
     private String approveNote;
+
+    // *************dp properties **************
+    // 申请开始时间起
+    private Date applyDatetimeStart;
+
+    // 申请开始时间止
+    private Date applyDatetimeEnd;
+
+    List<InvoiceModel> invoiceModelList;
 
     public String getCode() {
         return code;
@@ -88,11 +98,11 @@ public class Invoice extends ABaseDO {
         this.applyNote = applyNote;
     }
 
-    public String getApplyDatetime() {
+    public Date getApplyDatetime() {
         return applyDatetime;
     }
 
-    public void setApplyDatetime(String applyDatetime) {
+    public void setApplyDatetime(Date applyDatetime) {
         this.applyDatetime = applyDatetime;
     }
 
@@ -142,5 +152,29 @@ public class Invoice extends ABaseDO {
 
     public void setApproveNote(String approveNote) {
         this.approveNote = approveNote;
+    }
+
+    public Date getApplyDatetimeStart() {
+        return applyDatetimeStart;
+    }
+
+    public void setApplyDatetimeStart(Date applyDatetimeStart) {
+        this.applyDatetimeStart = applyDatetimeStart;
+    }
+
+    public Date getApplyDatetimeEnd() {
+        return applyDatetimeEnd;
+    }
+
+    public void setApplyDatetimeEnd(Date applyDatetimeEnd) {
+        this.applyDatetimeEnd = applyDatetimeEnd;
+    }
+
+    public List<InvoiceModel> getInvoiceModelList() {
+        return invoiceModelList;
+    }
+
+    public void setInvoiceModelList(List<InvoiceModel> invoiceModelList) {
+        this.invoiceModelList = invoiceModelList;
     }
 }

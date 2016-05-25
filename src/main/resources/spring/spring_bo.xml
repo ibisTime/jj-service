@@ -55,4 +55,16 @@
 	<bean id="buyGuideBO" class="com.xnjr.mall.bo.impl.BuyGuideBOImpl">
 		<property name="paginableDAO" ref="buyGuideDAOImpl"/>
 	</bean>	
+	
+	<bean id="cartBO" class="com.xnjr.mall.bo.impl.CartBOImpl">
+		<property name="paginableDAO" ref="cartDAOImpl"/>
+	</bean>	
+	
+	<bean id="invoiceBO" class="com.xnjr.mall.bo.impl.InvoiceBOImpl">
+		<property name="paginableDAO" ref="invoiceDAOImpl"/>
+	</bean>	
+	
+	<bean id="invoiceModelBO" class="com.xnjr.mall.bo.impl.InvoiceModelBOImpl">
+		<property name="paginableDAO" ref="invoiceModelDAOImpl"/>
+	</bean>	
 </beans>

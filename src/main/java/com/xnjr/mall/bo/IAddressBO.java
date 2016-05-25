@@ -27,7 +27,7 @@ public interface IAddressBO extends IPaginableBO<Address> {
      * @create: 2015年8月21日 下午5:06:38 xieyj
      * @history:
      */
-    public int saveAddress(Address data);
+    public String saveAddress(Address data);
 
     /**
      * 删除收件地址

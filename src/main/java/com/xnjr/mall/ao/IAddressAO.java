@@ -68,4 +68,13 @@ public interface IAddressAO {
      */
     public List<Address> queryAddressList(Address condition);
 
+    /**
+     * 收件地址详情
+     * @param code
+     * @return 
+     * @create: 2016年5月24日 下午3:13:59 xieyj
+     * @history:
+     */
+    public Address getAddress(String code);
+
 }

@@ -49,6 +49,9 @@ public class Model extends ABaseDO {
     // 型号参数列表
     private List<ModelSpecs> modelSpecsList;
 
+    // 购买引导
+    private List<BuyGuide> buyGuideList;
+
     // 状态
     private String status;
 
@@ -123,6 +126,14 @@ public class Model extends ABaseDO {
 
     public void setModelSpecsList(List<ModelSpecs> modelSpecsList) {
         this.modelSpecsList = modelSpecsList;
+    }
+
+    public List<BuyGuide> getBuyGuideList() {
+        return buyGuideList;
+    }
+
+    public void setBuyGuideList(List<BuyGuide> buyGuideList) {
+        this.buyGuideList = buyGuideList;
     }
 
     public String getStatus() {

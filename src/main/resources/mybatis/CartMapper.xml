@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.ICartDAO">
+	<resultMap id="cart_DB_Result" type="cart">
+		<result column="code" property="code" />
+		<result column="user_id" property="userId" />
+		<result column="model_code" property="modelCode" />
+		<result column="quantity" property="quantity" />
+		<result column="sale_price" property="salePrice" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="modelCode != null and modelCode != '' ">
+				AND t.model_code = #{modelCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_cart" parameterType="cart" resultMap="cart_DB_Result">
+		SELECT
+		code
+		,user_id
+		,model_code
+		,quantity
+		,sale_price
+		FROM
+		tmall_cart t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_cart_count" parameterType="cart"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_cart t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_cart" parameterType="cart">
+		INSERT INTO
+		tmall_cart(
+		code
+		,user_id
+		,model_code
+		,quantity
+		,sale_price
+		)
+		VALUES(
+		#{code}
+		,#{userId}
+		,#{modelCode}
+		,#{quantity}
+		,#{salePrice}
+		)
+	</insert>
+	
+	<update id="update_cart" parameterType="cart">
+		UPDATE tmall_cart
+		SET
+		quantity = #{quantity}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_cart" parameterType="cart">
+		DELETE FROM
+		tmall_cart
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

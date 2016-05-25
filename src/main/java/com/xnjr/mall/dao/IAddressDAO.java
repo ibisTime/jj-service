@@ -21,11 +21,20 @@ public interface IAddressDAO extends IBaseDAO<Address> {
     public int update(Address data);
 
     /**
-     * 更新默认收件地址
+     * 设置默认收件地址
      * @param data
      * @return 
      * @create: 2015年8月26日 下午11:28:13 xieyj
      * @history:
      */
     public int updateAddressDef(Address data);
+
+    /**
+     * 根据用户编号设置收件地址
+     * @param data
+     * @return 
+     * @create: 2016年5月24日 上午11:26:45 xieyj
+     * @history:
+     */
+    public int updateAddressDefByUser(Address data);
 }

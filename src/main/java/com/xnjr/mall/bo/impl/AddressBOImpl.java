@@ -32,23 +32,17 @@ public class AddressBOImpl extends PaginableBOImpl<Address> implements
     @Autowired
     private IAddressDAO addressDAO;
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressBO#saveAddress(com.xnjr.cpzc.domain.Address)
-     */
     @Override
-    public int saveAddress(Address data) {
-        int count = 0;
+    public String saveAddress(Address data) {
+        String code = null;
         if (data != null) {
-            data.setCode(OrderNoGenerater.generateM(EGeneratePrefix.AD
-                .getCode()));
-            count = addressDAO.insert(data);
+            code = OrderNoGenerater.generateM(EGeneratePrefix.AD.getCode());
+            data.setCode(code);
+            addressDAO.insert(data);
         }
-        return count;
+        return code;
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressBO#deleteAddress(java.lang.String)
-     */
     @Override
     public int deleteAddress(String code) {
         int count = 0;
@@ -60,9 +54,6 @@ public class AddressBOImpl extends PaginableBOImpl<Address> implements
         return count;
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressBO#refreshAddress(com.xnjr.cpzc.domain.Address)
-     */
     @Override
     public int refreshAddress(Address data) {
         int count = 0;
@@ -72,17 +63,11 @@ public class AddressBOImpl extends PaginableBOImpl<Address> implements
         return count;
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressBO#queryAddressList(com.xnjr.cpzc.domain.Address)
-     */
     @Override
     public List<Address> queryAddressList(Address data) {
         return addressDAO.selectList(data);
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressBO#refreshAddressDef(com.xnjr.cpzc.domain.Address)
-     */
     @Override
     public int refreshAddressDef(String code, String isDefault) {
         int count = 0;
@@ -95,18 +80,15 @@ public class AddressBOImpl extends PaginableBOImpl<Address> implements
         return count;
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressBO#refreshAddressDefByUser(java.lang.String, java.lang.String)
-     */
     @Override
     public int refreshAddressDefByUser(String userId, String isDefault) {
         int count = 0;
-        // if (StringUtils.isNotBlank(userId)) {
-        // Address addressDO = new Address();
-        // addressDO.setUserId(userId);
-        // addressDO.setIsDefault(isDefault);
-        // count = addressDAO.updatDefByUser(addressDO);
-        // }
+        if (StringUtils.isNotBlank(userId)) {
+            Address data = new Address();
+            data.setUserId(userId);
+            data.setIsDefault(isDefault);
+            count = addressDAO.updateAddressDefByUser(data);
+        }
         return count;
     }
 

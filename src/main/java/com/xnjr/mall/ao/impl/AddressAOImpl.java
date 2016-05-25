@@ -41,8 +41,7 @@ public class AddressAOImpl implements IAddressAO {
                 addressBO.refreshAddressDefByUser(data.getUserId(),
                     EBoolean.NO.getCode());
             }
-            addressBO.saveAddress(data);
-            code = data.getCode();
+            code = addressBO.saveAddress(data);
         }
         return code;
     }
@@ -63,9 +62,6 @@ public class AddressAOImpl implements IAddressAO {
         return count;
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressAO#refreshAddressDef(java.lang.String, java.lang.String)
-     */
     @Override
     public int refreshAddressDef(String userId, String code, String isDefault) {
         if (StringUtils.isBlank(userId)) {
@@ -85,9 +81,6 @@ public class AddressAOImpl implements IAddressAO {
         return count;
     }
 
-    /**
-     * @see com.xnjr.cpzc.user.IAddressAO#setDefaultAddress(java.lang.String, java.lang.String)
-     */
     @Override
     @Transactional
     public int setDefaultAddress(String userId, String code) {
@@ -110,19 +103,21 @@ public class AddressAOImpl implements IAddressAO {
         return count;
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressAO#dropProject(java.lang.String)
-     */
     @Override
     public int dropAddress(String code) {
         return addressBO.deleteAddress(code);
     }
 
-    /** 
-     * @see com.xnjr.cpzc.user.IAddressAO#queryAddressList(com.xnjr.cpzc.domain.Address)
-     */
     @Override
     public List<Address> queryAddressList(Address condition) {
         return addressBO.queryAddressList(condition);
+    }
+
+    /** 
+     * @see com.xnjr.mall.ao.IAddressAO#getAddress(java.lang.String)
+     */
+    @Override
+    public Address getAddress(String code) {
+        return addressBO.getAddress(code);
     }
 }

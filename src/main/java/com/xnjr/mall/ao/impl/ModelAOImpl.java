@@ -16,10 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xnjr.mall.ao.IModelAO;
+import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.IModelSpecsBO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.domain.ModelSpecs;
 import com.xnjr.mall.enums.EBoolean;
@@ -42,6 +44,9 @@ public class ModelAOImpl implements IModelAO {
 
     @Autowired
     private IProductBO productBO;
+
+    @Autowired
+    private IBuyGuideBO buyGuideBO;
 
     /** 
      * @see com.xnjr.mall.ao.IModelAO#addModel(com.xnjr.mall.domain.Model)
@@ -125,6 +130,11 @@ public class ModelAOImpl implements IModelAO {
                 List<ModelSpecs> list = modelSpecsBO
                     .queryModelSpecsList(specsCondition);
                 model.setModelSpecsList(list);
+                BuyGuide buyGuide = new BuyGuide();
+                buyGuide.setModelCode(model.getCode());
+                List<BuyGuide> buyGuideList = buyGuideBO
+                    .queryBuyGuideList(buyGuide);
+                model.setBuyGuideList(buyGuideList);
             }
         }
         return modelList;

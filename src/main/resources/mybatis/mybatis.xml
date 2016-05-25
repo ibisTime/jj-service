@@ -16,5 +16,9 @@
 		<typeAlias alias="address" type="com.xnjr.mall.domain.Address" />
 		<typeAlias alias="buyGuide" type="com.xnjr.mall.domain.BuyGuide" />
 		
+		<typeAlias alias="cart" type="com.xnjr.mall.domain.Cart" />
+		<typeAlias alias="invoice" type="com.xnjr.mall.domain.Invoice" />
+		<typeAlias alias="invoiceModel" type="com.xnjr.mall.domain.InvoiceModel" />
+		
 	</typeAliases>	
 </configuration>	

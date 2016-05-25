@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xnjr.moom.dao.IAddressDAO">
+<mapper namespace="com.xnjr.mall.dao.IAddressDAO">
 	<resultMap id="address_DB_Result" type="address">
 		<result column="code" property="code" />
 		<result column="addressee" property="addressee" />
@@ -92,12 +92,20 @@
 		code = #{code}
 	</update>
 	
-	<update id="update_address_def" parameterType="address">
+	<update id="update_addressDef" parameterType="address">
 		UPDATE tmall_address
 		SET
 		is_default=#{isDefault}
 		WHERE
 		code = #{code}
+	</update>
+	
+	<update id="update_addressDefByUser" parameterType="address">
+		UPDATE tmall_address
+		SET
+		is_default=#{isDefault}
+		WHERE
+		user_id = #{userId}
 	</update>
 	
 	<delete id="delete_address" parameterType="address">

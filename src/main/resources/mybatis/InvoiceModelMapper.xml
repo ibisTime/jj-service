@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IInvoiceModelDAO">
+	<resultMap id="invoiceModel_DB_Result" type="invoiceModel">
+		<result column="code" property="code" />
+		<result column="invoice_code" property="invoiceCode" />
+		<result column="model_code" property="modelCode" />
+		<result column="quantity" property="quantity" />
+		<result column="sale_price" property="salePrice" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="invoiceCode != null and invoiceCode != '' ">
+				AND t.invoice_code = #{invoiceCode}
+			</if>
+			<if test="modelCode != null and modelCode != '' ">
+				AND t.model_code = #{modelCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_invoiceModel" parameterType="invoiceModel" resultMap="invoiceModel_DB_Result">
+		SELECT
+		code
+		,invoice_code
+		,model_code
+		,quantity
+		,sale_price
+		FROM
+		tmall_invoice_model t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				#{order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_invoiceModel_count" parameterType="invoiceModel"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_invoice_model t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_invoiceModel" parameterType="invoiceModel">
+		INSERT INTO tmall_invoice_model(
+		code
+		,invoice_code
+		,model_code
+		,quantity
+		,sale_price
+		)
+		VALUES(
+		#{code}
+		,#{invoiceCode}
+		,#{modelCode}
+		,#{quantity}
+		,#{salePrice}
+		)
+	</insert>
+</mapper>

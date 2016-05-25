@@ -1,0 +1,40 @@
+package com.xnjr.mall.dao;
+
+import com.xnjr.mall.dao.base.IBaseDAO;
+import com.xnjr.mall.domain.Invoice;
+
+/**
+ * @author: xieyj 
+ * @since: 2016年5月24日 下午9:03:38 
+ * @history:
+ */
+public interface IInvoiceDAO extends IBaseDAO<Invoice> {
+    String NAMESPACE = IInvoiceDAO.class.getName().concat(".");
+
+    /**
+     * 更新状态
+     * @param data
+     * @return 
+     * @create: 2015年8月26日 下午11:27:59 xieyj
+     * @history:
+     */
+    public int updateInvoiceStatus(Invoice data);
+
+    /**
+     * 订单取消
+     * @param data
+     * @return 
+     * @create: 2016年5月24日 下午9:05:31 xieyj
+     * @history:
+     */
+    public int updateInvoiceCancel(Invoice data);
+
+    /**
+     * 订单发货
+     * @param data
+     * @return 
+     * @create: 2016年5月24日 下午9:05:31 xieyj
+     * @history:
+     */
+    public int updateInvoiceApprove(Invoice data);
+}

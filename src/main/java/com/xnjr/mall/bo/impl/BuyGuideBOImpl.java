@@ -56,8 +56,7 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
         String code = null;
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.BG.getCode());
-            data.setCode(OrderNoGenerater.generateM(EGeneratePrefix.BG
-                .getCode()));
+            data.setCode(code);
             data.setUpdateDatetime(new Date());
             buyGuideDAO.insert(data);
         }
