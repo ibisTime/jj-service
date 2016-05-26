@@ -140,7 +140,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (page != null && CollectionUtils.isNotEmpty(page.getList())) {
             for (Invoice invoice : page.getList()) {
                 InvoiceModel imCondition = new InvoiceModel();
-                imCondition.setModelCode(condition.getCode());
+                imCondition.setInvoiceCode(condition.getCode());
                 List<InvoiceModel> invoiceModelList = invoiceModelBO
                     .queryInvoiceModelList(imCondition);
                 invoice.setInvoiceModelList(invoiceModelList);
@@ -164,7 +164,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (CollectionUtils.isNotEmpty(list)) {
             for (Invoice invoice : list) {
                 InvoiceModel imCondition = new InvoiceModel();
-                imCondition.setModelCode(condition.getCode());
+                imCondition.setInvoiceCode(condition.getCode());
                 List<InvoiceModel> invoiceModelList = invoiceModelBO
                     .queryInvoiceModelList(imCondition);
                 invoice.setInvoiceModelList(invoiceModelList);
@@ -186,7 +186,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
     public Invoice getInvoice(String code) {
         Invoice invoice = invoiceBO.getInvoice(code);
         InvoiceModel imCondition = new InvoiceModel();
-        imCondition.setModelCode(code);
+        imCondition.setInvoiceCode(code);
         List<InvoiceModel> invoiceModelList = invoiceModelBO
             .queryInvoiceModelList(imCondition);
         invoice.setInvoiceModelList(invoiceModelList);
