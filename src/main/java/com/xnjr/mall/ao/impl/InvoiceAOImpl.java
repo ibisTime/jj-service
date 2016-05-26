@@ -144,6 +144,12 @@ public class InvoiceAOImpl implements IInvoiceAO {
                 List<InvoiceModel> invoiceModelList = invoiceModelBO
                     .queryInvoiceModelList(imCondition);
                 invoice.setInvoiceModelList(invoiceModelList);
+                Long totalAmount = 0L;
+                for (InvoiceModel invoiceModel : invoiceModelList) {
+                    totalAmount += invoiceModel.getQuantity()
+                            * invoiceModel.getSalePrice();
+                }
+                invoice.setTotalAmount(totalAmount);
             }
         }
         return page;
@@ -162,6 +168,12 @@ public class InvoiceAOImpl implements IInvoiceAO {
                 List<InvoiceModel> invoiceModelList = invoiceModelBO
                     .queryInvoiceModelList(imCondition);
                 invoice.setInvoiceModelList(invoiceModelList);
+                Long totalAmount = 0L;
+                for (InvoiceModel invoiceModel : invoiceModelList) {
+                    totalAmount += invoiceModel.getQuantity()
+                            * invoiceModel.getSalePrice();
+                }
+                invoice.setTotalAmount(totalAmount);
             }
         }
         return list;
@@ -178,6 +190,12 @@ public class InvoiceAOImpl implements IInvoiceAO {
         List<InvoiceModel> invoiceModelList = invoiceModelBO
             .queryInvoiceModelList(imCondition);
         invoice.setInvoiceModelList(invoiceModelList);
+        Long totalAmount = 0L;
+        for (InvoiceModel invoiceModel : invoiceModelList) {
+            totalAmount += invoiceModel.getQuantity()
+                    * invoiceModel.getSalePrice();
+        }
+        invoice.setTotalAmount(totalAmount);
         return invoice;
     }
 }

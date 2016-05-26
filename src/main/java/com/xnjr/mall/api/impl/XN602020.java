@@ -46,7 +46,7 @@ public class XN602020 extends AProcessor {
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602020Req.class);
         StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode(),
-            req.getReceiptType(), req.getReceiptTitle(), req.getModelCode());
+            req.getModelCode());
         StringValidater.validateNumber(req.getQuantity());
         StringValidater.validateAmount(req.getSalePrice());
     }

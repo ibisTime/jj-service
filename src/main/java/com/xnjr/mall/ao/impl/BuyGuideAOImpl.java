@@ -10,6 +10,7 @@ package com.xnjr.mall.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,11 +41,22 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
      */
     @Override
     public String addBuyGuide(BuyGuide data) {
+        String result = null;
         Model model = modelBO.getModel(data.getModelCode());
         if (!EPutStatus.ONLINE.getCode().equals(model.getStatus())) {
             throw new BizException("xn0000", "该型号不是已上架状态");
         }
-        return buyGuideBO.saveBuyGuide(data);
+        BuyGuide condition = new BuyGuide();
+        condition.setModelCode(data.getModelCode());
+        List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
+        if (!CollectionUtils.sizeIsEmpty(list)) {
+            BuyGuide buyGuide = list.get(0);
+            data.setCode(buyGuide.getCode());
+            buyGuideBO.refreshBuyGuide(data);
+        } else {
+            result = buyGuideBO.saveBuyGuide(data);
+        }
+        return result;
     }
 
     /** 

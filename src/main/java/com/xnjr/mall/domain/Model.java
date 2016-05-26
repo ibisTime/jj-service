@@ -64,6 +64,10 @@ public class Model extends ABaseDO {
     // 备注
     private String remark;
 
+    // **********db properties************
+    // 折扣价
+    private Long discountPrice;
+
     public String getCode() {
         return code;
     }
@@ -166,5 +170,13 @@ public class Model extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Long getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(Long discountPrice) {
+        this.discountPrice = discountPrice;
     }
 }

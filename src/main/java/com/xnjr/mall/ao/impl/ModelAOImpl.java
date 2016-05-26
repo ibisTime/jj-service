@@ -112,6 +112,17 @@ public class ModelAOImpl implements IModelAO {
                 List<ModelSpecs> list = modelSpecsBO
                     .queryModelSpecsList(specsCondition);
                 model.setModelSpecsList(list);
+
+                // 购买引导
+                BuyGuide buyGuide = new BuyGuide();
+                buyGuide.setModelCode(model.getCode());
+                List<BuyGuide> buyGuideList = buyGuideBO
+                    .queryBuyGuideList(buyGuide);
+                model.setBuyGuideList(buyGuideList);
+                if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
+                    BuyGuide data = buyGuideList.get(0);
+                    model.setDiscountPrice(data.getDiscountPrice());
+                }
             }
         }
         return page;
@@ -135,6 +146,10 @@ public class ModelAOImpl implements IModelAO {
                 List<BuyGuide> buyGuideList = buyGuideBO
                     .queryBuyGuideList(buyGuide);
                 model.setBuyGuideList(buyGuideList);
+                if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
+                    BuyGuide data = buyGuideList.get(0);
+                    model.setDiscountPrice(data.getDiscountPrice());
+                }
             }
         }
         return modelList;
@@ -152,6 +167,15 @@ public class ModelAOImpl implements IModelAO {
         List<ModelSpecs> list = modelSpecsBO
             .queryModelSpecsList(specsCondition);
         model.setModelSpecsList(list);
+        // 购买引导
+        BuyGuide buyGuide = new BuyGuide();
+        buyGuide.setModelCode(model.getCode());
+        List<BuyGuide> buyGuideList = buyGuideBO.queryBuyGuideList(buyGuide);
+        model.setBuyGuideList(buyGuideList);
+        if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
+            BuyGuide data = buyGuideList.get(0);
+            model.setDiscountPrice(data.getDiscountPrice());
+        }
         return model;
     }
 

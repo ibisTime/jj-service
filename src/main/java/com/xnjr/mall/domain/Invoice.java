@@ -66,6 +66,9 @@ public class Invoice extends ABaseDO {
 
     List<InvoiceModel> invoiceModelList;
 
+    // 订单总金额
+    private Long totalAmount;
+
     public String getCode() {
         return code;
     }
@@ -176,5 +179,13 @@ public class Invoice extends ABaseDO {
 
     public void setInvoiceModelList(List<InvoiceModel> invoiceModelList) {
         this.invoiceModelList = invoiceModelList;
+    }
+
+    public Long getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Long totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }

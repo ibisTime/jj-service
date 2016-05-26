@@ -6,6 +6,7 @@ import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.dto.req.XN601040Req;
+import com.xnjr.mall.dto.res.PKCodeRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -35,7 +36,7 @@ public class XN601040 extends AProcessor {
         data.setToLevel(req.getToLevel());
         data.setUpdater(req.getUpdater());
         data.setRemark(req.getRemark());
-        return buyGuideAO.addBuyGuide(data);
+        return new PKCodeRes(buyGuideAO.addBuyGuide(data));
     }
 
     /** 
