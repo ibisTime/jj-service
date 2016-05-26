@@ -6,6 +6,10 @@
 		<result column="code" property="code" />
 		<result column="user_id" property="userId" />
 		<result column="model_code" property="modelCode" />
+		<result column="model_name" property="modelName" />
+		<result column="pic1" property="pic1" />
+		<result column="pic2" property="pic2" />
+		<result column="pic3" property="pic3" />
 		<result column="quantity" property="quantity" />
 		<result column="sale_price" property="salePrice" />
 	</resultMap>
@@ -24,24 +28,28 @@
 	</sql>
 	<select id="select_cart" parameterType="cart" resultMap="cart_DB_Result">
 		SELECT
-		code
-		,user_id
-		,model_code
-		,quantity
-		,sale_price
+		t.code
+		,t.user_id
+		,t.model_code
+		,tm.name model_name
+		,tm.pic1
+		,tm.pic2
+		,tm.pic3
+		,t.quantity
+		,t.sale_price
 		FROM
-		tmall_cart t
+		tmall_cart t inner join tmall_model tm on t.model_code = tm.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
-				${order}
+				t.${order}
 			</if>
 		</trim>
 	</select>
 
 	<select id="select_cart_count" parameterType="cart"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_cart t
+		SELECT count(1) FROM tmall_cart t inner join tmall_model tm on t.model_code = tm.code
 		<include refid="where_condition" />
 	</select>
 

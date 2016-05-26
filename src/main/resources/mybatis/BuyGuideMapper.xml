@@ -9,6 +9,7 @@
 		<result column="to_level" property="toLevel" />
 		<result column="model_code" property="modelCode" />
 		
+		<result column="model_name" property="modelName" />
 	    <result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
@@ -31,17 +32,18 @@
 	</sql>
 	<select id="select_buyGuide" parameterType="buyGuide" resultMap="buyGuide_DB_Result">
 		SELECT
-		code
-		,original_price
-		,discount_price
-		,to_level
-		,model_code
+		t.code
+		,t.original_price
+		,t.discount_price
+		,t.to_level
+		,t.model_code
+		,tm.name as model_name
 		
-		,updater
-		,update_datetime
-		,remark
+		,t.updater
+		,t.update_datetime
+		,t.remark
 		FROM
-		tmall_buy_guide t
+		tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -52,7 +54,7 @@
 
 	<select id="select_buyGuide_count" parameterType="buyGuide"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_buy_guide t
+		SELECT count(1) FROM tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code
 		<include refid="where_condition" />
 	</select>
 

@@ -11,7 +11,7 @@ import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 选择一个型号，提交订单
+ * 立即购买
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:

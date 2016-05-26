@@ -40,6 +40,10 @@ public class BuyGuide extends ABaseDO {
     // 备注
     private String remark;
 
+    // *************db properties**************
+    // 型号名称
+    private String modelName;
+
     public String getCode() {
         return code;
     }
@@ -102,5 +106,13 @@ public class BuyGuide extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }
