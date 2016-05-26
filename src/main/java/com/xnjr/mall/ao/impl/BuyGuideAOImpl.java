@@ -11,6 +11,7 @@ package com.xnjr.mall.ao.impl;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.enums.EPutStatus;
+import com.xnjr.mall.enums.EUserLevel;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -49,6 +51,14 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
         BuyGuide condition = new BuyGuide();
         condition.setModelCode(data.getModelCode());
         List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
+        // 默认等级设置
+        if (StringUtils.isBlank(data.getToLevel())) {
+            data.setToLevel(EUserLevel.ONE.getCode());
+        }
+        // 设置默认折扣价
+        if (data.getDiscountPrice() == null || data.getDiscountPrice() == 0) {
+            data.setDiscountPrice(data.getOriginalPrice());
+        }
         if (!CollectionUtils.sizeIsEmpty(list)) {
             BuyGuide buyGuide = list.get(0);
             data.setCode(buyGuide.getCode());

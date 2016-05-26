@@ -121,6 +121,7 @@ public class ModelAOImpl implements IModelAO {
                 model.setBuyGuideList(buyGuideList);
                 if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
                     BuyGuide data = buyGuideList.get(0);
+                    model.setOriginalPrice(data.getOriginalPrice());
                     model.setDiscountPrice(data.getDiscountPrice());
                 }
             }
@@ -148,6 +149,7 @@ public class ModelAOImpl implements IModelAO {
                 model.setBuyGuideList(buyGuideList);
                 if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
                     BuyGuide data = buyGuideList.get(0);
+                    model.setOriginalPrice(data.getOriginalPrice());
                     model.setDiscountPrice(data.getDiscountPrice());
                 }
             }
@@ -174,6 +176,7 @@ public class ModelAOImpl implements IModelAO {
         model.setBuyGuideList(buyGuideList);
         if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
             BuyGuide data = buyGuideList.get(0);
+            model.setOriginalPrice(data.getOriginalPrice());
             model.setDiscountPrice(data.getDiscountPrice());
         }
         return model;

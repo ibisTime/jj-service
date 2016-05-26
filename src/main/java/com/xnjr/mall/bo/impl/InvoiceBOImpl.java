@@ -58,6 +58,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.IN.getCode());
             data.setCode(code);
+            data.setStatus(EInvoiceStatus.COMMIT.getCode());
             data.setApplyDatetime(new Date());
             invoiceDAO.insert(data);
         }
