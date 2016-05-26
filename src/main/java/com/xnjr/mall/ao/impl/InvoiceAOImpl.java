@@ -16,10 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xnjr.mall.ao.IInvoiceAO;
+import com.xnjr.mall.bo.IAddressBO;
 import com.xnjr.mall.bo.ICartBO;
 import com.xnjr.mall.bo.IInvoiceBO;
 import com.xnjr.mall.bo.IInvoiceModelBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.domain.Address;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.InvoiceModel;
@@ -43,6 +45,9 @@ public class InvoiceAOImpl implements IInvoiceAO {
 
     @Autowired
     private ICartBO cartBO;
+
+    @Autowired
+    private IAddressBO addressBO;
 
     /**
      * @see com.xnjr.mall.ao.IInvoiceAO#commitInvoice(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Invoice)
@@ -196,6 +201,9 @@ public class InvoiceAOImpl implements IInvoiceAO {
                     * invoiceModel.getSalePrice();
         }
         invoice.setTotalAmount(totalAmount);
+        // 收货地址信息
+        Address address = addressBO.getAddress(invoice.getAddressCode());
+        invoice.setAddress(address);
         return invoice;
     }
 }

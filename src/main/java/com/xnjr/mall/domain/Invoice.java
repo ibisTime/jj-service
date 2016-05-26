@@ -58,6 +58,10 @@ public class Invoice extends ABaseDO {
     private String approveNote;
 
     // *************dp properties **************
+
+    // 订单总金额
+    private Long totalAmount;
+
     // 申请开始时间起
     private Date applyDatetimeStart;
 
@@ -66,8 +70,8 @@ public class Invoice extends ABaseDO {
 
     List<InvoiceModel> invoiceModelList;
 
-    // 订单总金额
-    private Long totalAmount;
+    // 收货信息
+    private Address address;
 
     public String getCode() {
         return code;
@@ -187,5 +191,13 @@ public class Invoice extends ABaseDO {
 
     public void setTotalAmount(Long totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
