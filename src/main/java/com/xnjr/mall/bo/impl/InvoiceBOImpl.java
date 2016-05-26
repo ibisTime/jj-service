@@ -103,6 +103,26 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
     }
 
     /** 
+     * @see com.xnjr.mall.bo.IInvoiceBO#cancelInvoice(java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public int cancelInvoice(String code, String approveUser, String approveNote) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            if (!isInvoiceExist(code)) {
+                throw new BizException("xn0000", "发货单不存在");
+            }
+            Invoice data = new Invoice();
+            data.setCode(code);
+            data.setApproveUser(approveUser);
+            data.setStatus(EInvoiceStatus.CANCEL.getCode());
+            data.setApproveDatetime(new Date());
+            count = invoiceDAO.updateInvoiceCancel(data);
+        }
+        return count;
+    }
+
+    /** 
      * @see com.xnjr.mall.bo.IInvoiceBO#sendInvoice(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override

@@ -41,7 +41,7 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
     public int refreshInvoiceStatus(String code, String status);
 
     /**
-     * 取消发货单
+     * 取消发货单（前端）
      * @param code
      * @param applyNote
      * @return 
@@ -49,6 +49,17 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
      * @history:
      */
     public int cancelInvoice(String code, String applyNote);
+
+    /**
+     * 取消发货单（后端）
+     * @param code
+     * @param approveUser
+     * @param approveNote
+     * @return 
+     * @create: 2016年5月26日 下午4:54:23 xieyj
+     * @history:
+     */
+    public int cancelInvoice(String code, String approveUser, String approveNote);
 
     /**
      * 发货反馈更新

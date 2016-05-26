@@ -109,8 +109,20 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (EInvoiceStatus.COMMIT.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单状态不是已提交状态");
         }
-
         return invoiceBO.cancelInvoice(code, applyNote);
+    }
+
+    /**
+     * @see com.xnjr.mall.ao.IInvoiceAO#cancelInvoice(java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public int cancelInvoiceOss(String code, String approveUser,
+            String approveNote) {
+        Invoice data = invoiceBO.getInvoice(code);
+        if (!EInvoiceStatus.COMMIT.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "订单状态不是已提交状态");
+        }
+        return invoiceBO.cancelInvoice(code, approveUser, approveNote);
     }
 
     /** 
@@ -120,7 +132,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
     public int sendInvoice(String code, String approveUser,
             String approveResult, String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
-        if (EInvoiceStatus.PAY.getCode().equals(data.getStatus())) {
+        if (!EInvoiceStatus.PAY.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单状态不是已支付状态");
         }
         int count = 0;

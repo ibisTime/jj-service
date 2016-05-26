@@ -59,6 +59,18 @@ public interface IInvoiceAO {
     public int cancelInvoice(String code, String userId, String applyNote);
 
     /**
+     * 取消发货单
+     * @param code
+     * @param approveUser
+     * @param approveNote
+     * @return 
+     * @create: 2016年5月26日 下午4:51:22 xieyj
+     * @history:
+     */
+    public int cancelInvoiceOss(String code, String approveUser,
+            String approveNote);
+
+    /**
      * 发货反馈
      * @param code
      * @param approveUser
