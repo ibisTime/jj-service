@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.xnjr.mall.ao.IGoodsAO;
 import com.xnjr.mall.bo.IGoodsBO;
+import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Goods;
+import com.xnjr.mall.exception.BizException;
 
 /** 
  * @author: haiqingzheng 
@@ -27,6 +29,9 @@ public class GoodsAOImpl implements IGoodsAO {
 
     @Autowired
     IGoodsBO goodsBO;
+
+    @Autowired
+    IModelBO modelBO;
 
     /** 
      * @see com.xnjr.mall.ao.IGoodsAO#getGoods(java.lang.String)
@@ -55,6 +60,9 @@ public class GoodsAOImpl implements IGoodsAO {
     public String getGoodsCodeStart(String modelCode) {
         String startCode = null;
         if (StringUtils.isNotBlank(modelCode)) {
+            if (!modelBO.isModelExist(modelCode)) {
+                throw new BizException("xn000000", "型号不存在");
+            }
             Goods goods = new Goods();
             goods.setModelCode(modelCode);
             Long count = goodsBO.getTotalCount(goods);

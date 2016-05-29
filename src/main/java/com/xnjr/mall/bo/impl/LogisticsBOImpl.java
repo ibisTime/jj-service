@@ -58,6 +58,9 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
             Logistics condition = new Logistics();
             condition.setCode(code);
             logistics = logisticsDAO.select(condition);
+            if (logistics == null) {
+                throw new BizException("xn000000", "物流单号不存在");
+            }
         }
         return logistics;
     }

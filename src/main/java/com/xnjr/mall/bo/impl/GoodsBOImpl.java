@@ -63,7 +63,7 @@ public class GoodsBOImpl extends PaginableBOImpl<Goods> implements IGoodsBO {
         if (StringUtils.isNotBlank(logisticsCode)) {
             Goods condition = new Goods();
             condition.setLogisticsCode(logisticsCode);
-            goodsDAO.queryGoodsInLogistics(condition);
+            goodsList = goodsDAO.queryGoodsInLogistics(condition);
         }
         return goodsList;
     }

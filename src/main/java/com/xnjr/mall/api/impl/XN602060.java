@@ -13,6 +13,7 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.dto.req.XN602060Req;
+import com.xnjr.mall.dto.res.PKCodeRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -33,7 +34,7 @@ public class XN602060 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        return goodsAO.getGoodsCodeStart(req.getModelCode());
+        return new PKCodeRes(goodsAO.getGoodsCodeStart(req.getModelCode()));
     }
 
     /** 

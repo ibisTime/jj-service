@@ -14,7 +14,7 @@
 	<resultMap id="goodsInLogistics_DB_Result" type="goods">
 		<result column="model_code" property="modelCode" />
 		<result column="code_start" property="codeStart" />
-		<result column="code_end" property="codeStart" />
+		<result column="code_end" property="codeEnd" />
 		<result column="cost_price" property="costPrice" />
 		<result column="sale_price" property="salePrice" />
 	</resultMap>
@@ -25,7 +25,7 @@
 				AND t.code = #{code}
 			</if>
 			<if test="modelCode != null and modelCode != '' ">
-				AND t.model_code = #{name}
+				AND t.model_code = #{modelCode}
 			</if>
 			<if test="logisticsCode != null and logisticsCode != '' ">
 				AND t.logistics_code = #{logisticsCode}

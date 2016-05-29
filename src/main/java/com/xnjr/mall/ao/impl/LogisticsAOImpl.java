@@ -25,6 +25,7 @@ import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Goods;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.Logistics;
+import com.xnjr.mall.enums.EInvoiceStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -55,6 +56,10 @@ public class LogisticsAOImpl implements ILogisticsAO {
     public String addLogistics(Logistics logistics, List<Goods> goods) {
         // 保存物流单信息
         Invoice invoice = invoiceBO.getInvoice(logistics.getInvoiceCode());
+        if (!EInvoiceStatus.PAY.getCode().equalsIgnoreCase(invoice.getStatus())) {
+            throw new BizException("xn000000", "发货单未支付，不能发货");
+        }
+        logistics.setUserId(invoice.getApplyUser());
         String code = logisticsBO.saveLogistics(logistics);
         // 记录改物流单已经添加的型号
         List<String> addedList = new ArrayList<String>();
@@ -65,18 +70,18 @@ public class LogisticsAOImpl implements ILogisticsAO {
                 throw new BizException("xn000000", "相同型号的货不能添加多次");
             }
             addedList.add(item.getModelCode());
+            // 获取该型号最新的货编号
+            Goods condition = new Goods();
+            condition.setModelCode(item.getModelCode());
+            Long count = goodsBO.getTotalCount(condition);
             // 添加N个货
             for (int i = 0; i < item.getQuantity(); i++) {
                 if (!modelBO.isModelExist(item.getModelCode())) {
                     throw new BizException("xn000000", "型号编号不存在");
                 }
-                // 获取该型号最新的货编号
-                Goods condition = new Goods();
-                condition.setModelCode(item.getModelCode());
-                Long count = goodsBO.getTotalCount(condition);
                 // 保存货信息
                 Goods newGoods = new Goods();
-                newGoods.setCode(item.getModelCode() + "-" + (count + 1));
+                newGoods.setCode(item.getModelCode() + "-" + (count + 1 + i));
                 newGoods.setCostPrice(item.getCostPrice());
                 newGoods.setSalePrice(item.getSalePrice());
                 newGoods.setModelCode(item.getModelCode());
@@ -85,6 +90,10 @@ public class LogisticsAOImpl implements ILogisticsAO {
                 goodsBO.saveGoods(newGoods);
             }
         }
+
+        // 修改发货单状态
+        invoiceBO.refreshInvoiceStatus(invoice.getCode(),
+            EInvoiceStatus.SEND_YES.getCode());
         return code;
     }
 
