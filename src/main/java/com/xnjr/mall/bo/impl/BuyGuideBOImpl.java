@@ -120,17 +120,16 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
      * @see com.xnjr.mall.bo.IBuyGuideBO#getBuyGuidePrice(java.lang.String, java.lang.String)
      */
     @Override
-    public Long getBuyGuidePrice(String modelCode, Integer level) {
+    public Long getBuyGuidePrice(String modelCode, String level) {
         Long salePrice = null;
-        BuyGuide condition = new BuyGuide();
-        condition.setModelCode(modelCode);
-        if (level == null) {
-            throw new BizException("xn0000", "用户等级不能为空");
-        }
-        condition.setToLevel(String.valueOf(level));
-        List<BuyGuide> list = buyGuideDAO.selectList(condition);
-        if (!CollectionUtils.sizeIsEmpty(list)) {
-            salePrice = list.get(0).getDiscountPrice();
+        if (StringUtils.isNotBlank(modelCode) && StringUtils.isNotBlank(level)) {
+            BuyGuide condition = new BuyGuide();
+            condition.setModelCode(modelCode);
+            condition.setToLevel(String.valueOf(level));
+            List<BuyGuide> list = buyGuideDAO.selectList(condition);
+            if (!CollectionUtils.sizeIsEmpty(list)) {
+                salePrice = list.get(0).getDiscountPrice();
+            }
         }
         return salePrice;
     }

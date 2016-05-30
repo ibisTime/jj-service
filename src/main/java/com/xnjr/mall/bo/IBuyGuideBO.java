@@ -76,10 +76,11 @@ public interface IBuyGuideBO extends IPaginableBO<BuyGuide> {
 
     /**
      * 根据模型编号和用户等级查询折扣价
-     * @param data
+     * @param modeCode
+     * @param level
      * @return 
-     * @create: 2015年8月21日 下午5:07:41 xieyj
+     * @create: 2016年5月30日 下午4:04:42 xieyj
      * @history:
      */
-    public Long getBuyGuidePrice(String modeCode, Integer level);
+    public Long getBuyGuidePrice(String modeCode, String level);
 }

@@ -17,14 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xnjr.mall.ao.IInvoiceAO;
 import com.xnjr.mall.bo.IAddressBO;
+import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.ICartBO;
 import com.xnjr.mall.bo.IInvoiceBO;
 import com.xnjr.mall.bo.IInvoiceModelBO;
+import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Address;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.InvoiceModel;
+import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EInvoiceStatus;
 import com.xnjr.mall.exception.BizException;
@@ -49,6 +52,12 @@ public class InvoiceAOImpl implements IInvoiceAO {
     @Autowired
     private IAddressBO addressBO;
 
+    @Autowired
+    private IBuyGuideBO buyGuideBO;
+
+    @Autowired
+    private IUserBO userBO;
+
     /**
      * @see com.xnjr.mall.ao.IInvoiceAO#commitInvoice(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Invoice)
      */
@@ -72,10 +81,15 @@ public class InvoiceAOImpl implements IInvoiceAO {
             throw new BizException("xn0000", "请选择购物车中的货物");
         }
         String code = invoiceBO.saveInvoice(data);
+        // 获取用户信息
+        String userId = data.getApplyUser();
+        XN805901Res user = userBO.getRemoteUser(userId, userId);
         for (String cartCode : cartCodeList) {
             Cart cart = cartBO.getCart(cartCode);
+            Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getModelCode(),
+                user.getLevel());
             invoiceModelBO.saveInvoiceModel(code, cart.getModelCode(),
-                cart.getQuantity(), cart.getSalePrice());
+                cart.getQuantity(), salePrice);
         }
         return code;
     }
