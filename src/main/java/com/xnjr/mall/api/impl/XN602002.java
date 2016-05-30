@@ -31,7 +31,6 @@ public class XN602002 extends AProcessor {
         Cart data = new Cart();
         data.setCode(req.getCode());
         data.setUserId(req.getUserId());
-        data.setModelCode(req.getModelCode());
         data.setQuantity(Integer.valueOf(req.getQuantity()));
         return new BooleanRes(cartAO.editCart(data) > 0 ? true : false);
     }
@@ -42,8 +41,7 @@ public class XN602002 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602002Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getUserId(),
-            req.getModelCode());
+        StringValidater.validateBlank(req.getCode(), req.getUserId());
         StringValidater.validateNumber(req.getQuantity());
     }
 }

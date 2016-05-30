@@ -13,9 +13,6 @@ public class XN602002Req {
     // 用户编号（必填）
     private String userId;
 
-    // 型号编号（必填）
-    private String modelCode;
-
     // 数量（必填）
     private String quantity;
 
@@ -33,14 +30,6 @@ public class XN602002Req {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getModelCode() {
-        return modelCode;
-    }
-
-    public void setModelCode(String modelCode) {
-        this.modelCode = modelCode;
     }
 
     public String getQuantity() {
