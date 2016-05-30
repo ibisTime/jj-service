@@ -52,7 +52,7 @@ public class CartBOImpl extends PaginableBOImpl<Cart> implements ICartBO {
      */
     @Override
     public Cart getCart(String userId, String modelCode) {
-        Cart result = new Cart();
+        Cart result = null;
         Cart condition = new Cart();
         condition.setUserId(userId);
         condition.setModelCode(modelCode);

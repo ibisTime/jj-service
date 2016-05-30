@@ -45,8 +45,7 @@ public class XN602021 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602021Req.class);
-        StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode(),
-            req.getReceiptType(), req.getReceiptTitle());
+        StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode());
         if (CollectionUtils.isEmpty(req.getCartCodeList())) {
             throw new BizException("xn702000", "购物车中货物不能为空");
         }

@@ -81,5 +81,5 @@ public interface IBuyGuideBO extends IPaginableBO<BuyGuide> {
      * @create: 2015年8月21日 下午5:07:41 xieyj
      * @history:
      */
-    public Long getBuyGuidePrice(String modeCode, String level);
+    public Long getBuyGuidePrice(String modeCode, Integer level);
 }

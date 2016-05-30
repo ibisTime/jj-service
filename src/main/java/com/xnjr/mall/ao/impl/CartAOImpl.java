@@ -22,7 +22,7 @@ import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Cart;
-import com.xnjr.mall.dto.req.XN805056Res;
+import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -56,10 +56,11 @@ public class CartAOImpl implements ICartAO {
         }
         Cart cart = cartBO.getCart(data.getUserId(), data.getModelCode());
         if (cart != null) {
+            code = cart.getCode();
+            data.setCode(code);
             int quantity = cart.getQuantity() + data.getQuantity();
             data.setQuantity(quantity);
             cartBO.refreshCart(data);
-            code = cart.getCode();
         } else {
             code = cartBO.saveCart(data);
         }
@@ -107,7 +108,8 @@ public class CartAOImpl implements ICartAO {
     @Override
     public Paginable<Cart> queryCartPage(int start, int limit, Cart condition) {
         // 获取用户信息
-        XN805056Res user = userBO.getRemoteUser(condition.getUserId());
+        String userId = condition.getUserId();
+        XN805901Res user = userBO.getRemoteUser(userId, userId);
         Paginable<Cart> page = cartBO.getPaginable(start, limit, condition);
         if (page != null && page.getList() != null) {
             for (Cart cart : page.getList()) {
@@ -125,7 +127,8 @@ public class CartAOImpl implements ICartAO {
     @Override
     public List<Cart> queryCartList(Cart condition) {
         // 获取用户信息
-        XN805056Res user = userBO.getRemoteUser(condition.getUserId());
+        String userId = condition.getUserId();
+        XN805901Res user = userBO.getRemoteUser(userId, userId);
         List<Cart> list = cartBO.queryCartList(condition);
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
@@ -144,7 +147,8 @@ public class CartAOImpl implements ICartAO {
     public Cart getCart(String code) {
         Cart cart = cartBO.getCart(code);
         // 获取用户信息
-        XN805056Res user = userBO.getRemoteUser(cart.getUserId());
+        String userId = cart.getUserId();
+        XN805901Res user = userBO.getRemoteUser(userId, userId);
         // 获取价格
         Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getModelCode(),
             user.getLevel());
