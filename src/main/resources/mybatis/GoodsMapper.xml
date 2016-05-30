@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IGoodsDAO">
+	<resultMap id="goods_DB_Result" type="goods">
+		<result column="code" property="code" />
+		<result column="cost_price" property="costPrice" />
+		<result column="sale_price" property="salePrice" />
+		<result column="model_code" property="modelCode" />
+		<result column="logistics_code" property="logisticsCode" />
+		<result column="user_id" property="userId" />
+	</resultMap>
+	
+	<resultMap id="goodsInLogistics_DB_Result" type="goods">
+		<result column="model_code" property="modelCode" />
+		<result column="code_start" property="codeStart" />
+		<result column="code_end" property="codeEnd" />
+		<result column="cost_price" property="costPrice" />
+		<result column="sale_price" property="salePrice" />
+	</resultMap>
+	
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="modelCode != null and modelCode != '' ">
+				AND t.model_code = #{modelCode}
+			</if>
+			<if test="logisticsCode != null and logisticsCode != '' ">
+				AND t.logistics_code = #{logisticsCode}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_goods" parameterType="goods" resultMap="goods_DB_Result">
+		SELECT
+		code
+		,cost_price
+		,sale_price
+		,model_code
+		,logistics_code
+		,user_id
+		FROM
+		tmall_goods t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="select_goodsInLogistics" parameterType="goods" resultMap="goodsInLogistics_DB_Result">
+		SELECT
+		t.model_code,
+        MIN(t.code) code_start,
+        MAX(t.code) code_end,
+        (select count(*) from tmall_goods where model_code = t.model_code) quantity,
+        t.cost_price,
+        t.sale_price
+		FROM
+		tmall_goods t where logistics_code = #{logisticsCode} GROUP BY model_code
+	</select>
+
+	<select id="select_goods_count" parameterType="goods"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_goods t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_goods" parameterType="goods">
+		INSERT INTO
+		tmall_goods(
+		code
+		,cost_price
+		,sale_price
+		,model_code
+		,logistics_code
+		,user_id
+		)
+		VALUES(
+		#{code}
+		,#{costPrice}
+		,#{salePrice}
+		,#{modelCode}
+		,#{logisticsCode}
+		,#{userId}
+		)
+	</insert>
+	
+</mapper>

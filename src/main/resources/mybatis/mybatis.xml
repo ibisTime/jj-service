@@ -20,5 +20,8 @@
 		<typeAlias alias="invoice" type="com.xnjr.mall.domain.Invoice" />
 		<typeAlias alias="invoiceModel" type="com.xnjr.mall.domain.InvoiceModel" />
 		
+		<typeAlias alias="logistics" type="com.xnjr.mall.domain.Logistics" />
+		<typeAlias alias="goods" type="com.xnjr.mall.domain.Goods" />
+		
 	</typeAliases>	
 </configuration>	

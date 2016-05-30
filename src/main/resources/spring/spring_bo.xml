@@ -67,4 +67,12 @@
 	<bean id="invoiceModelBO" class="com.xnjr.mall.bo.impl.InvoiceModelBOImpl">
 		<property name="paginableDAO" ref="invoiceModelDAOImpl"/>
 	</bean>	
+	
+	<bean id="logisticsBO" class="com.xnjr.mall.bo.impl.LogisticsBOImpl">
+		<property name="paginableDAO" ref="logisticsDAOImpl"/>
+	</bean>	
+	
+	<bean id="goodsBO" class="com.xnjr.mall.bo.impl.GoodsBOImpl">
+		<property name="paginableDAO" ref="goodsDAOImpl"/>
+	</bean>	
 </beans>
