@@ -106,7 +106,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (!userId.equals(data.getApplyUser())) {
             throw new BizException("xn0000", "订单申请人和取消操作用户不符");
         }
-        if (EInvoiceStatus.COMMIT.getCode().equals(data.getStatus())) {
+        if (!EInvoiceStatus.COMMIT.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单状态不是已提交状态");
         }
         return invoiceBO.cancelInvoice(code, applyNote);
@@ -157,7 +157,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (page != null && CollectionUtils.isNotEmpty(page.getList())) {
             for (Invoice invoice : page.getList()) {
                 InvoiceModel imCondition = new InvoiceModel();
-                imCondition.setInvoiceCode(condition.getCode());
+                imCondition.setInvoiceCode(invoice.getCode());
                 List<InvoiceModel> invoiceModelList = invoiceModelBO
                     .queryInvoiceModelList(imCondition);
                 invoice.setInvoiceModelList(invoiceModelList);
@@ -181,7 +181,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (CollectionUtils.isNotEmpty(list)) {
             for (Invoice invoice : list) {
                 InvoiceModel imCondition = new InvoiceModel();
-                imCondition.setInvoiceCode(condition.getCode());
+                imCondition.setInvoiceCode(invoice.getCode());
                 List<InvoiceModel> invoiceModelList = invoiceModelBO
                     .queryInvoiceModelList(imCondition);
                 invoice.setInvoiceModelList(invoiceModelList);

@@ -10,6 +10,7 @@ package com.xnjr.mall.bo.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,10 +41,26 @@ public class CartBOImpl extends PaginableBOImpl<Cart> implements ICartBO {
     public boolean isCartExist(String code) {
         Cart condition = new Cart();
         condition.setCode(code);
-        if (cartDAO.selectTotalCount(condition) == 1) {
+        if (cartDAO.selectTotalCount(condition) > 0) {
             return true;
         }
         return false;
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.ICartBO#isCartExist(java.lang.String, java.lang.String)
+     */
+    @Override
+    public Cart getCart(String userId, String modelCode) {
+        Cart result = new Cart();
+        Cart condition = new Cart();
+        condition.setUserId(userId);
+        condition.setModelCode(modelCode);
+        List<Cart> list = cartDAO.selectList(condition);
+        if (!CollectionUtils.sizeIsEmpty(list)) {
+            result = list.get(0);
+        }
+        return result;
     }
 
     /** 

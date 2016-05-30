@@ -32,6 +32,15 @@ public interface ICartAO {
     public int dropCart(String code);
 
     /**
+     * 批量删除
+     * @param data
+     * @return 
+     * @create: 2015年8月27日 下午2:22:25 xieyj
+     * @history:
+     */
+    public int dropCartList(List<String> cartCodeList);
+
+    /**
      * 修改
      * @param data
      * @return 

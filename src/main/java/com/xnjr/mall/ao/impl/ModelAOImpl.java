@@ -112,7 +112,6 @@ public class ModelAOImpl implements IModelAO {
                 List<ModelSpecs> list = modelSpecsBO
                     .queryModelSpecsList(specsCondition);
                 model.setModelSpecsList(list);
-
                 // 购买引导
                 BuyGuide buyGuide = new BuyGuide();
                 buyGuide.setModelCode(model.getCode());

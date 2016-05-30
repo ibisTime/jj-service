@@ -7,7 +7,7 @@ package com.xnjr.mall.enums;
  * @history:
  */
 public enum EUserLevel {
-    ONE("1", "一级"), TWO("2", "二级");
+    ZERO("0", "零级"), ONE("1", "一级"), TWO("2", "二级");
 
     EUserLevel(String code, String value) {
         this.code = code;

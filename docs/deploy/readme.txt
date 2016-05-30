@@ -2,9 +2,9 @@
 1，eclipse导出war包
 
 2. 本地war包上传至服务器
-  scp -P 57652 xn-mall.war root@120.26.222.73:/home
+  scp -P 57652 xn-mall.war root@120.26.222.73:/home  
   
-  scp -P57652 ./xn-mall.war root@121.43.101.148:/mnt/wwwroot/
+    scp -P 57652 xn-mall.war root@121.43.101.148:/home  
   
 
 3. 备份原先配置(如果第一次部署，跳过此步骤)
@@ -13,7 +13,7 @@
   cp ./xn-mall/WEB-INF/classes/config.properties .
   rm -rf xn-mall.war
   rm -rf xn-mall
-  mv /mnt/wwwroot/xn-mall.war .
+  mv /home/xn-mall.war .
   
 4. 已备份配置文件放回原处
   mv -f application.properties ./xn-mall/WEB-INF/classes/

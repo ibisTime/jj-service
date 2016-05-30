@@ -53,7 +53,7 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
         List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
         // 默认等级设置
         if (StringUtils.isBlank(data.getToLevel())) {
-            data.setToLevel(EUserLevel.ONE.getCode());
+            data.setToLevel(EUserLevel.ZERO.getCode());
         }
         // 设置默认折扣价
         if (data.getDiscountPrice() == null || data.getDiscountPrice() == 0) {

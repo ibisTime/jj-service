@@ -11,6 +11,7 @@ package com.xnjr.mall.bo.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -113,5 +114,21 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
             }
         }
         return data;
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IBuyGuideBO#getBuyGuidePrice(java.lang.String, java.lang.String)
+     */
+    @Override
+    public Long getBuyGuidePrice(String modelCode, String level) {
+        Long salePrice = null;
+        BuyGuide condition = new BuyGuide();
+        condition.setModelCode(modelCode);
+        condition.setToLevel(level);
+        List<BuyGuide> list = buyGuideDAO.selectList(condition);
+        if (!CollectionUtils.sizeIsEmpty(list)) {
+            salePrice = list.get(0).getDiscountPrice();
+        }
+        return salePrice;
     }
 }

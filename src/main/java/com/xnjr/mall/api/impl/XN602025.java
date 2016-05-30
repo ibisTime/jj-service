@@ -3,7 +3,6 @@ package com.xnjr.mall.api.impl;
 import org.apache.commons.lang3.StringUtils;
 
 import com.xnjr.mall.ao.IInvoiceAO;
-import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
@@ -36,7 +35,7 @@ public class XN602025 extends AProcessor {
         condition.setStatus(req.getStatus());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
-            orderColumn = IProductAO.DEFAULT_ORDER_COLUMN;
+            orderColumn = IInvoiceAO.DEFAULT_ORDER_COLUMN;
         }
         condition.setOrder(orderColumn, req.getOrderDir());
         int start = StringValidater.toInteger(req.getStart());

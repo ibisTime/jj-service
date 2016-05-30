@@ -26,9 +26,6 @@ public class Cart extends ABaseDO {
     // 数量
     private Integer quantity;
 
-    // 单价
-    private Long salePrice;
-
     // ***********db properties***************
     // 型号名称
     private String modelName;
@@ -41,6 +38,9 @@ public class Cart extends ABaseDO {
 
     // pic3
     private String pic3;
+
+    // 价格
+    private Long salePrice;
 
     public String getCode() {
         return code;
@@ -74,14 +74,6 @@ public class Cart extends ABaseDO {
         this.quantity = quantity;
     }
 
-    public Long getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(Long salePrice) {
-        this.salePrice = salePrice;
-    }
-
     public String getModelName() {
         return modelName;
     }
@@ -112,5 +104,13 @@ public class Cart extends ABaseDO {
 
     public void setPic3(String pic3) {
         this.pic3 = pic3;
+    }
+
+    public Long getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Long salePrice) {
+        this.salePrice = salePrice;
     }
 }

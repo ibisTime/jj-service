@@ -30,6 +30,16 @@ public interface ICartBO extends IPaginableBO<Cart> {
     public boolean isCartExist(String code);
 
     /**
+     * 根据用户编号和型号编号获取购物车详情
+     * @param userId
+     * @param modelCode
+     * @return 
+     * @create: 2016年5月30日 下午1:34:12 xieyj
+     * @history:
+     */
+    public Cart getCart(String userId, String modelCode);
+
+    /**
      * 保存购物车
      * @param data
      * @return 

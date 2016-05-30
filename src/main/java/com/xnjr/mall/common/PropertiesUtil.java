@@ -27,19 +27,23 @@ public class PropertiesUtil {
     }
 
     public static final class Config {
+        public static String SMS_URL = props.getProperty("SMS_URL");
+
+        public static String USER_URL = props.getProperty("USER_URL");
+
+        public static String ACCOUNT_URL = props.getProperty("ACCOUNT_URL");
+        
         public static String SYS_INIT_PWD_STRENGTH = props
-            .getProperty("SYS_INIT_PWD_STRENGTH");
+                .getProperty("SYS_INIT_PWD_STRENGTH");
 
         public static String SYS_INIT_LOGIN_PWD = props
-            .getProperty("SYS_INIT_LOGIN_PWD");
+                .getProperty("SYS_INIT_LOGIN_PWD");
 
         public static String SYS_INIT_TRADE_PWD = props
-            .getProperty("SYS_INIT_TRADE_PWD");
-
+                .getProperty("SYS_INIT_TRADE_PWD");
+        
         public static String CUSTOMER_TELEPHONE = props
-            .getProperty("CUSTOMER_TELEPHONE");
+                .getProperty("CUSTOMER_TELEPHONE");
 
-        public static String INDIVIDUAL_CODE = props
-            .getProperty("INDIVIDUAL_CODE");
     }
 }
