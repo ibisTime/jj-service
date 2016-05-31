@@ -114,7 +114,7 @@ public class CartAOImpl implements ICartAO {
         if (page != null && page.getList() != null) {
             for (Cart cart : page.getList()) {
                 Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    condition.getModelCode(), user.getLevel());
+                    cart.getModelCode(), user.getLevel());
                 cart.setSalePrice(salePrice);
             }
         }
@@ -133,7 +133,7 @@ public class CartAOImpl implements ICartAO {
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
                 Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    condition.getModelCode(), user.getLevel());
+                    cart.getModelCode(), user.getLevel());
                 cart.setSalePrice(salePrice);
             }
         }
