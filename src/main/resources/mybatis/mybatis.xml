@@ -23,5 +23,7 @@
 		<typeAlias alias="logistics" type="com.xnjr.mall.domain.Logistics" />
 		<typeAlias alias="goods" type="com.xnjr.mall.domain.Goods" />
 		
+		<typeAlias alias="repairOrder" type="com.xnjr.mall.domain.RepairOrder" />
+		
 	</typeAliases>	
 </configuration>	

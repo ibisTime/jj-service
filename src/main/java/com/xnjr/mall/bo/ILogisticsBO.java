@@ -20,4 +20,13 @@ public interface ILogisticsBO extends IPaginableBO<Logistics> {
     public String saveLogistics(Logistics data);
 
     public Logistics getLogistics(String code);
+
+    /**
+     * 根据发货单编号查询物流信息
+     * @param invoiceCode
+     * @return 
+     * @create: 2016年5月31日 下午1:36:45 haiqingzheng
+     * @history:
+     */
+    public Logistics getLogisticsByInvoiceCode(String invoiceCode);
 }
