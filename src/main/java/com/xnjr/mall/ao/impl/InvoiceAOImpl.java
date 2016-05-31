@@ -21,6 +21,7 @@ import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.ICartBO;
 import com.xnjr.mall.bo.IInvoiceBO;
 import com.xnjr.mall.bo.IInvoiceModelBO;
+import com.xnjr.mall.bo.ILogisticsBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Address;
@@ -57,6 +58,9 @@ public class InvoiceAOImpl implements IInvoiceAO {
 
     @Autowired
     private IUserBO userBO;
+
+    @Autowired
+    private ILogisticsBO logisticsBO;
 
     /**
      * @see com.xnjr.mall.ao.IInvoiceAO#commitInvoice(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Invoice)
@@ -230,6 +234,8 @@ public class InvoiceAOImpl implements IInvoiceAO {
         // 收货地址信息
         Address address = addressBO.getAddress(invoice.getAddressCode());
         invoice.setAddress(address);
+        // 附带物流信息
+        invoice.setLogistics(logisticsBO.getLogisticsByInvoiceCode(code));
         return invoice;
     }
 }

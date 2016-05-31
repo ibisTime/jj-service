@@ -65,4 +65,18 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
         return logistics;
     }
 
+    @Override
+    public Logistics getLogisticsByInvoiceCode(String invoiceCode) {
+        Logistics logistics = null;
+        if (StringUtils.isNotBlank(invoiceCode)) {
+            Logistics condition = new Logistics();
+            condition.setInvoiceCode(invoiceCode);
+            logistics = logisticsDAO.select(condition);
+            if (logistics == null) {
+                throw new BizException("xn000000", "物流单号不存在");
+            }
+        }
+        return logistics;
+    }
+
 }

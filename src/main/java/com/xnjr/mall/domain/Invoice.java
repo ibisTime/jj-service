@@ -70,6 +70,16 @@ public class Invoice extends ABaseDO {
 
     List<InvoiceModel> invoiceModelList;
 
+    private Logistics logistics;
+
+    public Logistics getLogistics() {
+        return logistics;
+    }
+
+    public void setLogistics(Logistics logistics) {
+        this.logistics = logistics;
+    }
+
     // 收货信息
     private Address address;
 
