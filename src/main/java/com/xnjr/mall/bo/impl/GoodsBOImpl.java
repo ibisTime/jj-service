@@ -18,6 +18,7 @@ import com.xnjr.mall.bo.IGoodsBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.dao.IGoodsDAO;
 import com.xnjr.mall.domain.Goods;
+import com.xnjr.mall.exception.BizException;
 
 /** 
  * @author: haiqingzheng 
@@ -53,6 +54,9 @@ public class GoodsBOImpl extends PaginableBOImpl<Goods> implements IGoodsBO {
             Goods condition = new Goods();
             condition.setCode(code);
             goods = goodsDAO.select(condition);
+            if (goods == null) {
+                throw new BizException("xn000000", "货编号不存在");
+            }
         }
         return goods;
     }

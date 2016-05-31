@@ -1,49 +1,56 @@
+/**
+ * @Title XN602081.java 
+ * @Package com.xnjr.mall.api.impl 
+ * @Description 
+ * @author haiqingzheng  
+ * @date 2016年5月31日 下午3:47:01 
+ * @version V1.0   
+ */
 package com.xnjr.mall.api.impl;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.xnjr.mall.ao.IModelAO;
-import com.xnjr.mall.ao.IProductAO;
+import com.xnjr.mall.ao.IRepairOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.domain.Model;
-import com.xnjr.mall.dto.req.XN601024Req;
+import com.xnjr.mall.domain.RepairOrder;
+import com.xnjr.mall.dto.req.XN602081Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
-/**
- * 分页查询型号
- * @author: xieyj 
- * @since: 2016年5月23日 上午9:11:37 
+/** 
+ * 维修单分页查询
+ * @author: haiqingzheng 
+ * @since: 2016年5月31日 下午3:47:01 
  * @history:
  */
-public class XN601024 extends AProcessor {
+public class XN602081 extends AProcessor {
+    private IRepairOrderAO repairOrderAO = SpringContextHolder
+        .getBean(IRepairOrderAO.class);
 
-    private IModelAO modelAO = SpringContextHolder.getBean(IModelAO.class);
-
-    private XN601024Req req = null;
+    private XN602081Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        Model condition = new Model();
+        RepairOrder condition = new RepairOrder();
         condition.setCode(req.getCode());
-        condition.setName(req.getName());
-        condition.setProductCode(req.getProductCode());
-        condition.setProductName(req.getProductName());
+        condition.setGoodsCode(req.getGoodsCode());
         condition.setStatus(req.getStatus());
+        condition.setApplyUser(req.getApplyUser());
+        condition.setUpdater(req.getUpdater());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
-            orderColumn = IProductAO.DEFAULT_ORDER_COLUMN;
+            orderColumn = IRepairOrderAO.DEFAULT_ORDER_COLUMN;
         }
         condition.setOrder(orderColumn, req.getOrderDir());
         int start = StringValidater.toInteger(req.getStart());
         int limit = StringValidater.toInteger(req.getLimit());
-        return modelAO.queryModelPage(start, limit, condition);
+        return repairOrderAO.queryRepairOrderPage(start, limit, condition);
     }
 
     /** 
@@ -51,7 +58,8 @@ public class XN601024 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN601024Req.class);
-        StringValidater.validateNumber(req.getStart(), req.getLimit());
+        req = JsonUtil.json2Bean(inputparams, XN602081Req.class);
+        StringValidater.validateBlank(req.getStart(), req.getLimit());
     }
+
 }

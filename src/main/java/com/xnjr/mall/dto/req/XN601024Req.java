@@ -24,6 +24,17 @@ public class XN601024Req extends APageReq {
     // 产品编号（选填）
     private String productCode;
 
+    // 产品名称（选填）
+    private String productName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public String getCode() {
         return code;
     }

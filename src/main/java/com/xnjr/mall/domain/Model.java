@@ -71,6 +71,16 @@ public class Model extends ABaseDO {
     // 折扣价
     private Long discountPrice;
 
+    private String productName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public String getCode() {
         return code;
     }

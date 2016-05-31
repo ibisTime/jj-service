@@ -16,6 +16,7 @@
 		<result column="update_datetime" property="updateDatetime" />
 		
 		<result column="remark" property="remark" />
+		<result column="product_name" property="productName" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -23,10 +24,13 @@
 				AND t.code = #{code}
 			</if>
 			<if test="name != null and name != '' ">
-				AND t.name = #{name}
+				AND t.name like "%"#{name}"%"
 			</if>
 			<if test="productCode != null and productCode != '' ">
 				AND t.product_code = #{productCode}
+			</if>
+			<if test="productName != null and productName != '' ">
+				AND p.name like "%"#{productName}"%"
 			</if>
 			<choose>
 				 <when test="status == '13'">
@@ -46,21 +50,22 @@
 	</sql>
 	<select id="select_model" parameterType="model" resultMap="model_DB_Result">
 		SELECT
-		code
-		,name
-		,pic1
-		,pic2
-		,pic3
+		t.code
+		,t.name
+		,t.pic1
+		,t.pic2
+		,t.pic3
 		
-		,description
-		,product_code
-		,status
-		,updater
-		,update_datetime
+		,t.description
+		,t.product_code
+		,t.status
+		,t.updater
+		,t.update_datetime
 		
-		,remark
+		,t.remark
+		,p.name as product_name
 		FROM
-		tmall_model t
+		tmall_model t INNER JOIN tmall_product p ON t.product_code = p.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -71,7 +76,7 @@
 
 	<select id="select_model_count" parameterType="model"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_model t
+		SELECT count(1) FROM tmall_model t INNER JOIN tmall_product p ON t.product_code = p.code
 		<include refid="where_condition" />
 	</select>
 
