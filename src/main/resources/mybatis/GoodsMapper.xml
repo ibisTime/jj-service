@@ -9,6 +9,9 @@
 		<result column="model_code" property="modelCode" />
 		<result column="logistics_code" property="logisticsCode" />
 		<result column="user_id" property="userId" />
+		
+		<result column="model_name" property="modelName" />
+		<result column="product_name" property="productName" />
 	</resultMap>
 	
 	<resultMap id="goodsInLogistics_DB_Result" type="goods">
@@ -37,14 +40,16 @@
 	</sql>
 	<select id="select_goods" parameterType="goods" resultMap="goods_DB_Result">
 		SELECT
-		code
-		,cost_price
-		,sale_price
-		,model_code
-		,logistics_code
-		,user_id
+		t.code
+		,t.cost_price
+		,t.sale_price
+		,t.model_code
+		,t.logistics_code
+		,t.user_id
+		,m.name model_name
+		,p.name product_name
 		FROM
-		tmall_goods t
+		tmall_goods t INNER JOIN tmall_model m ON t.model_code = m.code INNER JOIN tmall_product p ON m.product_code = p.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -67,7 +72,7 @@
 
 	<select id="select_goods_count" parameterType="goods"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_goods t
+		SELECT count(1) FROM tmall_goods t 
 		<include refid="where_condition" />
 	</select>
 

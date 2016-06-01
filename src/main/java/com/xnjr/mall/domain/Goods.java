@@ -39,6 +39,11 @@ public class Goods extends ABaseDO {
     // 所属用户ID
     private String userId;
 
+    /**** 显示字段 ****/
+    private String modelName;
+
+    private String productName;
+
     /**** 物流信息录入辅助字段 ****/
     // 数量
     private Long quantity;
@@ -46,6 +51,22 @@ public class Goods extends ABaseDO {
     private String codeStart;
 
     private String codeEnd;
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public String getCode() {
         return code;
