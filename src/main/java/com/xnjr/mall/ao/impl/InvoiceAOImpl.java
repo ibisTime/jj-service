@@ -235,7 +235,13 @@ public class InvoiceAOImpl implements IInvoiceAO {
         Address address = addressBO.getAddress(invoice.getAddressCode());
         invoice.setAddress(address);
         // 附带物流信息
-        invoice.setLogistics(logisticsBO.getLogisticsByInvoiceCode(code));
+        if (EInvoiceStatus.SEND_YES.getCode().equalsIgnoreCase(
+            invoice.getStatus())
+                && EInvoiceStatus.RECEIVE.getCode().equalsIgnoreCase(
+                    invoice.getStatus())) {
+            invoice.setLogistics(logisticsBO.getLogisticsByInvoiceCode(code));
+        }
+
         return invoice;
     }
 }

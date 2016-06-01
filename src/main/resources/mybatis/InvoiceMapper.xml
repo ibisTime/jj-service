@@ -52,7 +52,7 @@
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
-				#{order}
+				${order}
 			</if>
 		</trim>
 	</select>
