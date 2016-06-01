@@ -6,9 +6,9 @@ package com.xnjr.mall.enums;
  * @history:
  */
 public enum EInvoiceStatus {
-    COMMIT("1", "已提交，待支付"), CANCEL("2", "已取消"), PAY("3", "已支付，待发货"), SEND_YES(
-            "4", "已发货，待收货"), SEND_NO("5", "系统退货"), RECEIVE("6", "已收货"), RETURN(
-            "7", "客户退货");
+    TO_PAY("1", "待支付"), PAY_CONFIRM("2", "付款待确认"), PAY_YES("3", "已付款"), SEND_YES(
+            "4", "已发货"), FINISHED("5", "已完成"), SELF_CLOSED("6", "主动取消 "), FORBID_CLOSED(
+            "7", "强制取消"), SYS_CLOSED("8", "系统自动关闭");
 
     EInvoiceStatus(String code, String value) {
         this.code = code;

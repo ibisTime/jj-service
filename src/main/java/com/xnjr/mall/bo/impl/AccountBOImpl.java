@@ -15,5 +15,6 @@ public class AccountBOImpl implements IAccountBO {
     @Override
     public void transferOrder(String accountNumber, String direction,
             Long amount, Long fee, String remark, String tradePwd) {
+        // TODO Auto-generated method stub
     }
 }

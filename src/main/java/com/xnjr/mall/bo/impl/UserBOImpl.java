@@ -7,6 +7,7 @@ import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.domain.User;
 import com.xnjr.mall.dto.req.XN805901Req;
+import com.xnjr.mall.dto.req.XN805902Req;
 import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.http.BizConnecter;
@@ -35,5 +36,17 @@ public class UserBOImpl extends PaginableBOImpl<User> implements IUserBO {
             throw new BizException("XN000000", "编号为" + userId + "的用户不存在");
         }
         return res;
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IUserBO#checkTradePwd(java.lang.String, java.lang.String)
+     */
+    @Override
+    public void checkTradePwd(String userId, String tradePwd) {
+        XN805902Req req = new XN805902Req();
+        req.setUserId(userId);
+        req.setTradePwd(tradePwd);
+        BizConnecter.getBizData("805902", JsonUtils.object2Json(req),
+            Object.class);
     }
 }

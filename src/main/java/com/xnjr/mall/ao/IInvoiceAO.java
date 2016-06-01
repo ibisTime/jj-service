@@ -14,7 +14,7 @@ public interface IInvoiceAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
     /**
-     * 选择一个型号，直接提交
+     * 立即购买
      * @param userId
      * @param modelCode
      * @param quantity
@@ -28,7 +28,7 @@ public interface IInvoiceAO {
             Long salePrice, Invoice data);
 
     /**
-     * 提交发货单
+     * 批量提交发货单
      * @param userId
      * @param data
      * @return 
@@ -38,22 +38,34 @@ public interface IInvoiceAO {
     public String commitInvoice(List<String> cartCodeList, Invoice data);
 
     /**
-     * 支付订单
+     * 支付订单，待确认
      * @param code
-     * @param userId
      * @param tradePwd
      * @return 
      * @create: 2016年5月25日 上午11:40:28 xieyj
      * @history:
      */
-    public int payInvoice(String code, String userId, String tradePwd);
+    public int toPayInvoice(String code, String tradePwd);
+
+    /**
+     * 支付订单，确认付款
+     * @param code
+     * @param approveUser
+     * @param approveNote
+     * @return 
+     * @create: 2016年6月1日 下午7:57:29 xieyj
+     * @history:
+     */
+    public int payConfirmInvoice(String code, String approveUser,
+            String approveNote);
 
     /**
      * 取消发货单
      * @param code
+     * @param userId
      * @param applyNote
      * @return 
-     * @create: 2016年5月25日 上午9:16:19 xieyj
+     * @create: 2016年6月1日 下午6:09:54 xieyj
      * @history:
      */
     public int cancelInvoice(String code, String userId, String applyNote);
@@ -69,19 +81,6 @@ public interface IInvoiceAO {
      */
     public int cancelInvoiceOss(String code, String approveUser,
             String approveNote);
-
-    /**
-     * 发货反馈
-     * @param code
-     * @param approveUser
-     * @param approveResult
-     * @param approveNote
-     * @return 
-     * @create: 2016年5月25日 下午12:00:22 xieyj
-     * @history:
-     */
-    public int sendInvoice(String code, String approveUser,
-            String approveResult, String approveNote);
 
     /**
      * 发货单分页查询

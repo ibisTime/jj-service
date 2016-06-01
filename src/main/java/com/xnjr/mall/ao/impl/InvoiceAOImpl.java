@@ -29,7 +29,6 @@ import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.InvoiceModel;
 import com.xnjr.mall.dto.res.XN805901Res;
-import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EInvoiceStatus;
 import com.xnjr.mall.exception.BizException;
 
@@ -98,21 +97,39 @@ public class InvoiceAOImpl implements IInvoiceAO {
         return code;
     }
 
-    /** 
-     * @see com.xnjr.mall.ao.IInvoiceAO#payInvoice(java.lang.String)
-     */
     @Override
-    public int payInvoice(String code, String userId, String tradePwd) {
+    public int toPayInvoice(String code, String tradePwd) {
         Invoice data = invoiceBO.getInvoice(code);
-        if (!userId.equals(data.getApplyUser())) {
-            throw new BizException("xn0000", "订单申请人和支付操作用户不符");
-        }
-        if (!EInvoiceStatus.COMMIT.getCode().equals(data.getStatus())) {
+        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单不是处于待支付状态");
         }
         // 校验交易密码
+        userBO.checkTradePwd(data.getApplyUser(), tradePwd);
+
         return invoiceBO.refreshInvoiceStatus(code,
-            EInvoiceStatus.PAY.getCode());
+            EInvoiceStatus.PAY_CONFIRM.getCode());
+    }
+
+    @Override
+    public int payConfirmInvoice(String code, String approveUser,
+            String approveNote) {
+        Invoice data = invoiceBO.getInvoice(code);
+        if (!EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "订单不是处于支付待确认状态");
+        }
+
+        InvoiceModel imCondition = new InvoiceModel();
+        imCondition.setInvoiceCode(code);
+        List<InvoiceModel> invoiceModelList = invoiceModelBO
+            .queryInvoiceModelList(imCondition);
+        Long totalAmount = 0L;
+        for (InvoiceModel invoiceModel : invoiceModelList) {
+            totalAmount += invoiceModel.getQuantity()
+                    * invoiceModel.getSalePrice();
+        }
+        // 更新流水(暂缺)
+        return invoiceBO.refreshInvoiceStatus(code,
+            EInvoiceStatus.PAY_CONFIRM.getCode());
     }
 
     /** 
@@ -124,7 +141,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (!userId.equals(data.getApplyUser())) {
             throw new BizException("xn0000", "订单申请人和取消操作用户不符");
         }
-        if (!EInvoiceStatus.COMMIT.getCode().equals(data.getStatus())) {
+        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单状态不是已提交状态");
         }
         return invoiceBO.cancelInvoice(code, applyNote);
@@ -137,31 +154,15 @@ public class InvoiceAOImpl implements IInvoiceAO {
     public int cancelInvoiceOss(String code, String approveUser,
             String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.COMMIT.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单状态不是已提交状态");
+        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())
+                || !EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "订单状态不是已提交或支付待确认状态");
         }
-        return invoiceBO.cancelInvoice(code, approveUser, approveNote);
-    }
-
-    /** 
-     * @see com.xnjr.mall.ao.IInvoiceAO#sendInvoice(java.lang.String, java.lang.String, java.lang.String)
-     */
-    @Override
-    public int sendInvoice(String code, String approveUser,
-            String approveResult, String approveNote) {
-        Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.PAY.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单状态不是已支付状态");
+        if (EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {
+            // 更新打款记录(暂缺)
         }
-        int count = 0;
-        if (EBoolean.YES.getCode().equals(approveResult)) {
-            count = invoiceBO.approveInvoice(code, approveUser,
-                EInvoiceStatus.SEND_YES.getCode(), approveNote);
-        } else {
-            count = invoiceBO.approveInvoice(code, approveUser,
-                EInvoiceStatus.SEND_NO.getCode(), approveNote);
-        }
-        return count;
+        return invoiceBO.cancelInvoice(code, approveUser, approveNote,
+            EInvoiceStatus.FORBID_CLOSED.getCode());
     }
 
     /** 
@@ -237,7 +238,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         // 附带物流信息
         if (EInvoiceStatus.SEND_YES.getCode().equalsIgnoreCase(
             invoice.getStatus())
-                && EInvoiceStatus.RECEIVE.getCode().equalsIgnoreCase(
+                || EInvoiceStatus.FINISHED.getCode().equalsIgnoreCase(
                     invoice.getStatus())) {
             invoice.setLogistics(logisticsBO.getLogisticsByInvoiceCode(code));
         }

@@ -56,7 +56,8 @@ public class LogisticsAOImpl implements ILogisticsAO {
     public String addLogistics(Logistics logistics, List<Goods> goods) {
         // 保存物流单信息
         Invoice invoice = invoiceBO.getInvoice(logistics.getInvoiceCode());
-        if (!EInvoiceStatus.PAY.getCode().equalsIgnoreCase(invoice.getStatus())) {
+        if (!EInvoiceStatus.PAY_CONFIRM.getCode().equalsIgnoreCase(
+            invoice.getStatus())) {
             throw new BizException("xn000000", "发货单未支付，不能发货");
         }
         logistics.setUserId(invoice.getApplyUser());

@@ -51,15 +51,17 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
     public int cancelInvoice(String code, String applyNote);
 
     /**
-     * 取消发货单（后端）
+     * 取消发货单，分强制取消(支付待确认)和系统自动取消(未支付)
      * @param code
      * @param approveUser
      * @param approveNote
+     * @param status
      * @return 
-     * @create: 2016年5月26日 下午4:54:23 xieyj
+     * @create: 2016年6月1日 下午8:12:34 xieyj
      * @history:
      */
-    public int cancelInvoice(String code, String approveUser, String approveNote);
+    public int cancelInvoice(String code, String approveUser,
+            String approveNote, String status);
 
     /**
      * 发货反馈更新

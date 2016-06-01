@@ -11,9 +11,6 @@ public class XN602022Req {
     // 编号（必填）
     private String code;
 
-    // 用户编号（必填）
-    private String userId;
-
     // 交易密码（必填）
     private String tradePwd;
 
@@ -23,14 +20,6 @@ public class XN602022Req {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getTradePwd() {

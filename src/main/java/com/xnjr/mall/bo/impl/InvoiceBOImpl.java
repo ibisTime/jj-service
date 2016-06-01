@@ -58,7 +58,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.IN.getCode());
             data.setCode(code);
-            data.setStatus(EInvoiceStatus.COMMIT.getCode());
+            data.setStatus(EInvoiceStatus.TO_PAY.getCode());
             data.setApplyDatetime(new Date());
             invoiceDAO.insert(data);
         }
@@ -96,7 +96,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             Invoice data = new Invoice();
             data.setCode(code);
             data.setApplyNote(applyNote);
-            data.setStatus(EInvoiceStatus.CANCEL.getCode());
+            data.setStatus(EInvoiceStatus.SELF_CLOSED.getCode());
             count = invoiceDAO.updateInvoiceCancel(data);
         }
         return count;
@@ -106,7 +106,8 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
      * @see com.xnjr.mall.bo.IInvoiceBO#cancelInvoice(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public int cancelInvoice(String code, String approveUser, String approveNote) {
+    public int cancelInvoice(String code, String approveUser,
+            String approveNote, String status) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
             if (!isInvoiceExist(code)) {
@@ -115,7 +116,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             Invoice data = new Invoice();
             data.setCode(code);
             data.setApproveUser(approveUser);
-            data.setStatus(EInvoiceStatus.CANCEL.getCode());
+            data.setStatus(status);
             data.setApproveDatetime(new Date());
             count = invoiceDAO.updateInvoiceCancel(data);
         }
