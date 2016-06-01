@@ -63,7 +63,7 @@
 		t.model_code,
         MIN(t.code) code_start,
         MAX(t.code) code_end,
-        (select count(*) from tmall_goods where model_code = t.model_code) quantity,
+        (select count(*) from tmall_goods where model_code = t.model_code and logistics_code = #{logisticsCode}) quantity,
         t.cost_price,
         t.sale_price
 		FROM
