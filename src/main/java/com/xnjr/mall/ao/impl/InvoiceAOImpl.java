@@ -104,7 +104,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
             throw new BizException("xn0000", "订单不是处于待支付状态");
         }
         // 校验交易密码
-        userBO.checkTradePwd(data.getApplyUser(), tradePwd);
+        // userBO.checkTradePwd(data.getApplyUser(), tradePwd);
 
         return invoiceBO.refreshInvoiceStatus(code,
             EInvoiceStatus.PAY_CONFIRM.getCode());
