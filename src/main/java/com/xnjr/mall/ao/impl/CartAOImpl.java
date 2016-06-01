@@ -75,9 +75,6 @@ public class CartAOImpl implements ICartAO {
         if (!cartBO.isCartExist(data.getCode())) {
             throw new BizException("xn0000", "购物车编号不存在");
         }
-        if (!modelBO.isModelExist(data.getModelCode())) {
-            throw new BizException("xn0000", "型号编号不存在");
-        }
         return cartBO.refreshCart(data);
     }
 
