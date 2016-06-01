@@ -133,7 +133,7 @@ public class CartAOImpl implements ICartAO {
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
                 Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    condition.getModelCode(), user.getLevel());
+                    cart.getModelCode(), user.getLevel());
                 cart.setSalePrice(salePrice);
             }
         }
