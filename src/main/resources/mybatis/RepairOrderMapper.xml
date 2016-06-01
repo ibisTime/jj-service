@@ -7,6 +7,7 @@
 		<result column="goods_code" property="goodsCode" />
 		<result column="model_name" property="modelName" />
 		<result column="product_name" property="productName" />
+		<result column="user_id" property="userId" />
 		<result column="apply_user" property="applyUser" />
 		<result column="contact" property="contact" />
 		<result column="apply_reason" property="applyReason" />
@@ -23,6 +24,9 @@
 			</if>
 			<if test="goodsCode != null and goodsCode != '' ">
 				AND t.goods_code = #{goodsCode}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
 			</if>
 			<if test="applyUser != null and applyUser != '' ">
 				AND t.apply_user = #{applyUser}
@@ -46,6 +50,7 @@
 		,goods_code
 		,model_name
 		,product_name
+		,user_id
 		,apply_user
 		,contact
 		,apply_reason
@@ -77,6 +82,7 @@
 		,goods_code
 		,model_name
 		,product_name
+		,user_id
 		,apply_user
 		,contact
 		,apply_reason
@@ -88,6 +94,7 @@
 		,#{goodsCode}
 		,#{modelName}
 		,#{productName}
+		,#{userId}
 		,#{applyUser}
 		,#{contact}
 		,#{applyReason}

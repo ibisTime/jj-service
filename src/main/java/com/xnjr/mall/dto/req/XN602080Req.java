@@ -18,7 +18,10 @@ public class XN602080Req {
     // 维修单关联的货编号（必填）
     private String goodsCode;
 
-    // 申请人（必填）
+    // 申请用户ID
+    private String userId;
+
+    // 申请人姓名（必填）
     private String applyUser;
 
     // 申请人联系方式（必填）
@@ -26,6 +29,14 @@ public class XN602080Req {
 
     // 申请维修理由（必填）
     private String applyReason;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getGoodsCode() {
         return goodsCode;

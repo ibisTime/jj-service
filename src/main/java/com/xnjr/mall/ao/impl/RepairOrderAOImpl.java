@@ -55,7 +55,9 @@ public class RepairOrderAOImpl implements IRepairOrderAO {
         Product product = productBO.getProduct(model.getProductCode());
         data.setModelName(model.getName());
         data.setProductName(product.getName());
-
+        if (!goods.getUserId().equals(data.getUserId())) {
+            throw new BizException("xn000000", "该用户不是货的拥有者！");
+        }
         RepairOrder condition = new RepairOrder();
         condition.setGoodsCode(data.getGoodsCode());
         condition.setStatus(ERepairOrderStatus.NEW.getCode());

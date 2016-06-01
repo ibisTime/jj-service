@@ -38,6 +38,7 @@ public class XN602080 extends AProcessor {
     public Object doBusiness() throws BizException {
         RepairOrder data = new RepairOrder();
         data.setGoodsCode(req.getGoodsCode());
+        data.setUserId(req.getUserId());
         data.setApplyUser(req.getApplyUser());
         data.setContact(req.getContact());
         data.setApplyReason(req.getApplyReason());
@@ -50,8 +51,8 @@ public class XN602080 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602080Req.class);
-        StringValidater.validateBlank(req.getGoodsCode(), req.getApplyUser(),
-            req.getApplyReason(), req.getContact());
+        StringValidater.validateBlank(req.getGoodsCode(), req.getUserId(),
+            req.getApplyUser(), req.getApplyReason(), req.getContact());
     }
 
 }

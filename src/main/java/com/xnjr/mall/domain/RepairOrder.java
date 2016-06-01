@@ -35,6 +35,9 @@ public class RepairOrder extends ABaseDO {
     // 所属产品
     private String productName;
 
+    // 用户ID
+    private String userId;
+
     // 申请人
     private String applyUser;
 
@@ -89,6 +92,14 @@ public class RepairOrder extends ABaseDO {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getApplyUser() {

@@ -26,6 +26,9 @@ public class XN602081Req extends APageReq {
     // 维修单关联的货编号
     private String goodsCode;
 
+    // 申请用户ID
+    private String userId;
+
     // 申请人
     private String applyUser;
 
@@ -41,6 +44,14 @@ public class XN602081Req extends APageReq {
 
     public void setGoodsCode(String goodsCode) {
         this.goodsCode = goodsCode;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getApplyUser() {

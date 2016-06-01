@@ -41,6 +41,7 @@ public class XN602081 extends AProcessor {
         condition.setCode(req.getCode());
         condition.setGoodsCode(req.getGoodsCode());
         condition.setStatus(req.getStatus());
+        condition.setUserId(req.getUserId());
         condition.setApplyUser(req.getApplyUser());
         condition.setUpdater(req.getUpdater());
         String orderColumn = req.getOrderColumn();
