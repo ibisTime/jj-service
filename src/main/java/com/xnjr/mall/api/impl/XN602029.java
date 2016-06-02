@@ -5,7 +5,7 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Invoice;
-import com.xnjr.mall.dto.req.XN602028Req;
+import com.xnjr.mall.dto.req.XN602029Req;
 import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
@@ -22,7 +22,7 @@ public class XN602029 extends AProcessor {
     private IInvoiceAO invoiceAO = SpringContextHolder
         .getBean(IInvoiceAO.class);
 
-    private XN602028Req req = null;
+    private XN602029Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
@@ -44,7 +44,7 @@ public class XN602029 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602028Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN602029Req.class);
         StringValidater.validateBlank(req.getCode(), req.getApproveUser(),
             req.getApproveNote());
     }

@@ -119,7 +119,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
     public int payConfirmInvoice(String code, String approveUser,
             String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {
+        if (!EInvoiceStatus.PAY_CONFIRM.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单不是处于支付待确认状态");
         }
 
@@ -134,7 +134,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         }
         // 更新流水(暂缺)
         return invoiceBO.refreshInvoiceStatus(code,
-            EInvoiceStatus.PAY_CONFIRM.getCode());
+            EInvoiceStatus.PAY_YES.getCode());
     }
 
     /** 
