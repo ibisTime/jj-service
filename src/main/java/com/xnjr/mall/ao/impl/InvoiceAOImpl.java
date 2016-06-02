@@ -83,10 +83,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (CollectionUtils.isEmpty(cartCodeList)) {
             throw new BizException("xn0000", "请选择购物车中的货物");
         }
-        // 删除购物车选中记录
-        for (String code : cartCodeList) {
-            cartBO.removeCart(code);
-        }
+
         String code = invoiceBO.saveInvoice(data);
         // 获取用户信息
         String userId = data.getApplyUser();
@@ -97,6 +94,10 @@ public class InvoiceAOImpl implements IInvoiceAO {
                 user.getLevel());
             invoiceModelBO.saveInvoiceModel(code, cart.getModelCode(),
                 cart.getQuantity(), salePrice);
+        }
+        // 删除购物车选中记录
+        for (String cartCode : cartCodeList) {
+            cartBO.removeCart(cartCode);
         }
         return code;
     }
