@@ -40,6 +40,12 @@ public class InvoiceModel extends ABaseDO {
     // 型号名称
     private String modelName;
 
+    // 产品编号
+    private String productCode;
+
+    // 产品名称
+    private String productName;
+
     // pic1
     private String pic1;
 
@@ -95,6 +101,22 @@ public class InvoiceModel extends ABaseDO {
 
     public void setModelName(String modelName) {
         this.modelName = modelName;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getPic1() {
