@@ -37,8 +37,6 @@ public class InvoiceModel extends ABaseDO {
     private Long salePrice;
 
     // **************db properties
-    // 产品名称
-    private String productName;
 
     // 型号名称
     private String modelName;
@@ -144,13 +142,5 @@ public class InvoiceModel extends ABaseDO {
 
     public void setPic3(String pic3) {
         this.pic3 = pic3;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
     }
 }
