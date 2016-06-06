@@ -20,6 +20,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="codeForQuery != null and codeForQuery != '' ">
+				AND t.code like "%"#{codeForQuery}"%"
+			</if>
 			<if test="applyUser != null and applyUser != '' ">
 				AND t.apply_user = #{applyUser}
 			</if>
