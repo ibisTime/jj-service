@@ -5,6 +5,7 @@
 	<resultMap id="invoiceModel_DB_Result" type="invoiceModel">
 		<result column="code" property="code" />
 		<result column="invoice_code" property="invoiceCode" />
+		<result column="product_name" property="productName" />
 		<result column="model_code" property="modelCode" />
 		<result column="model_name" property="modelName" />
 		<result column="quantity" property="quantity" />
@@ -30,6 +31,7 @@
 		SELECT
 		t.code
 		,t.invoice_code
+		,tp.name as product_name
 		,t.model_code
 		,tm.name as model_name
 		,t.quantity
@@ -38,7 +40,7 @@
 		,tm.pic2
 		,tm.pic3
 		FROM
-		tmall_invoice_model t inner join tmall_model tm on t.model_code = tm.code
+		tmall_invoice_model t inner join tmall_model tm on t.model_code = tm.code inner join tmall_product tp on tm.product_code = tp.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">

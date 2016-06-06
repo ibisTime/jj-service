@@ -7,12 +7,22 @@ package com.xnjr.mall.dto.req;
  * @history:
  */
 public class XN602026Req {
+    // 订单编号（选填）
+    private String code;
 
     // 用户编号（选填）
     private String applyUser;
 
     // 状态（选填）
     private String status;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getApplyUser() {
         return applyUser;

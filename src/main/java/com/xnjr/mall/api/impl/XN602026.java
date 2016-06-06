@@ -28,6 +28,7 @@ public class XN602026 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Invoice condition = new Invoice();
+        condition.setCode(req.getCode());
         condition.setApplyUser(req.getApplyUser());
         condition.setStatus(req.getStatus());
         return invoiceAO.queryInvoiceList(condition);

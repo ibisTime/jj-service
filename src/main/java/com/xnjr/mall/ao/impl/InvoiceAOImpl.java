@@ -160,7 +160,8 @@ public class InvoiceAOImpl implements IInvoiceAO {
             String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
         if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())
-                || !EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {
+                && !EInvoiceStatus.PAY_CONFIRM.getCode().equals(
+                    data.getStatus())) {
             throw new BizException("xn0000", "订单状态不是已提交或支付待确认状态");
         }
         if (EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {

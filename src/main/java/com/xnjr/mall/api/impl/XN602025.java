@@ -31,6 +31,7 @@ public class XN602025 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Invoice condition = new Invoice();
+        condition.setCode(req.getCode());
         condition.setApplyUser(req.getApplyUser());
         condition.setStatus(req.getStatus());
         String orderColumn = req.getOrderColumn();
