@@ -68,7 +68,18 @@ public class Invoice extends ABaseDO {
     // 申请开始时间止
     private Date applyDatetimeEnd;
 
+    // 模糊查询使用
+    private String codeForQuery;
+
     List<InvoiceModel> invoiceModelList;
+
+    public String getCodeForQuery() {
+        return codeForQuery;
+    }
+
+    public void setCodeForQuery(String codeForQuery) {
+        this.codeForQuery = codeForQuery;
+    }
 
     private Logistics logistics;
 

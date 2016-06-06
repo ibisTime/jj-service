@@ -7,6 +7,8 @@
 		<result column="user_id" property="userId" />
 		<result column="model_code" property="modelCode" />
 		<result column="model_name" property="modelName" />
+		<result column="product_code" property="productCode" />
+		<result column="product_name" property="productName" />
 		<result column="pic1" property="pic1" />
 		<result column="pic2" property="pic2" />
 		<result column="pic3" property="pic3" />
@@ -31,12 +33,14 @@
 		,t.user_id
 		,t.model_code
 		,tm.name model_name
+		,tp.code product_code
+		,tp.name product_name
 		,tm.pic1
 		,tm.pic2
 		,tm.pic3
 		,t.quantity
 		FROM
-		tmall_cart t inner join tmall_model tm on t.model_code = tm.code
+		tmall_cart t INNER JOIN tmall_model tm on t.model_code = tm.code INNER JOIN tmall_product tp ON tm.product_code = tp.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -47,7 +51,7 @@
 
 	<select id="select_cart_count" parameterType="cart"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_cart t inner join tmall_model tm on t.model_code = tm.code
+		SELECT count(1) FROM tmall_cart t inner join tmall_model tm on t.model_code = tm.code INNER JOIN tmall_product tp ON tm.product_code = tp.code
 		<include refid="where_condition" />
 	</select>
 

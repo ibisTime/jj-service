@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.xnjr.mall.ao.IInvoiceAO;
 import com.xnjr.mall.api.AProcessor;
+import com.xnjr.mall.common.DateUtil;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Invoice;
@@ -31,9 +32,13 @@ public class XN602025 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Invoice condition = new Invoice();
-        condition.setCode(req.getCode());
+        condition.setCodeForQuery(req.getCode());
         condition.setApplyUser(req.getApplyUser());
         condition.setStatus(req.getStatus());
+        condition.setApplyDatetimeStart(DateUtil.strToDate(req.getDateStart(),
+            DateUtil.DATA_TIME_PATTERN_1));
+        condition.setApplyDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),
+            DateUtil.DATA_TIME_PATTERN_1));
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = IInvoiceAO.DEFAULT_ORDER_COLUMN;
