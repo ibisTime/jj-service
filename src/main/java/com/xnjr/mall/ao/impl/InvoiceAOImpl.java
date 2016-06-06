@@ -147,7 +147,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
             throw new BizException("xn0000", "订单申请人和取消操作用户不符");
         }
         if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单状态不是已提交状态");
+            throw new BizException("xn0000", "订单状态不是待支付状态");
         }
         return invoiceBO.cancelInvoice(code, applyNote);
     }
@@ -162,7 +162,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())
                 && !EInvoiceStatus.PAY_CONFIRM.getCode().equals(
                     data.getStatus())) {
-            throw new BizException("xn0000", "订单状态不是已提交或支付待确认状态");
+            throw new BizException("xn0000", "订单状态不是待支付或支付待确认状态");
         }
         if (EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {
             // 更新打款记录(暂缺)
