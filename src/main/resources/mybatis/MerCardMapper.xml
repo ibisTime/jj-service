@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IMerCardDAO">
+	<resultMap id="merCard_DB_Result" type="merCard">
+		<result column="code" property="code" />
+		<result column="company_code" property="companyCode" />
+		<result column="subbranch" property="subbranch" />
+		<result column="card_no" property="cardNo" />
+		<result column="status" property="status" />
+		
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="updater" property="updater" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+			<if test="subbranch != null and subbranch != '' ">
+				AND t.subbranch = #{subbranch}
+			</if>
+			<if test="cardNo != null and cardNo != '' ">
+				AND t.card_no = #{cardNo}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+		</trim>
+	</sql>
+	
+	<select id="select_merCard" parameterType="merCard" resultMap="merCard_DB_Result">
+		SELECT
+		code
+		,company_code
+		,subbranch
+		,card_no
+		,status	
+			
+		,update_datetime
+		,updater
+		,remark
+		FROM
+		tmall_mer_card t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				#{order}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="select_merCard_count" parameterType="merCard"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_mer_card t
+		<include refid="where_condition" />
+	</select>
+	
+	<insert id="insert_merCard" parameterType="merCard" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		tmall_mer_card(
+		code
+		,company_code
+		,subbranch
+		,card_no
+		,status	
+			
+		,update_datetime
+		,updater
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{companyCode}
+		,#{subbranch}
+		,#{cardNo}
+		,#{status}
+			
+		,#{updateDatetime}
+		,#{updater}
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_merCard" parameterType="merCard">
+		UPDATE tmall_mer_card
+		SET
+		company_code = #{companyCode}
+		,subbranch = #{subbranch}
+		,card_no = #{cardNo}
+		,status = #{status}
+		,update_datetime = #{updateDatetime}
+		,updater = #{updater}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_merCard" parameterType="merCard">
+		DELETE FROM
+		tmall_mer_card
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

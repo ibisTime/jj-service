@@ -12,18 +12,6 @@
 
 	
 	<!-- 分页BO层注入paginableDao -->
-	<bean id="sysMenuBO" class="com.xnjr.mall.bo.impl.SYSMenuBOImpl">
-		<property name="paginableDAO" ref="sysMenuDAOImpl"/>
-	</bean>
-	
-	<bean id="sysRoleBO" class="com.xnjr.mall.bo.impl.SYSRoleBOImpl">
-		<property name="paginableDAO" ref="sysRoleDAOImpl"/>
-	</bean>
-	
-	<bean id="sysUserBO" class="com.xnjr.mall.bo.impl.SYSUserBOImpl">
-		<property name="paginableDAO" ref="sysUserDAOImpl"/>
-	</bean>
-	
 	<bean id="sysLogBO" class="com.xnjr.mall.bo.impl.SYSLogBOImpl">
 		<property name="paginableDAO" ref="sysLogDAOImpl"/>
 	</bean>	
@@ -78,5 +66,9 @@
 	
 	<bean id="repairOrderBO" class="com.xnjr.mall.bo.impl.RepairOrderBOImpl">
 		<property name="paginableDAO" ref="repairOrderDAOImpl"/>
+	</bean>	
+	
+	<bean id="merCardBO" class="com.xnjr.mall.bo.impl.MerCardBOImpl">
+		<property name="paginableDAO" ref="merCardDAOImpl"/>
 	</bean>	
 </beans>
