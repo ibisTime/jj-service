@@ -8,7 +8,12 @@
 		<result column="company" property="company" />
 		<result column="delivery_datetime" property="deliveryDatetime" />
 		<result column="deliverer" property="deliverer" />
+		
 		<result column="user_id" property="userId" />
+		<result column="status" property="status" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="updater" property="updater" />
+		<result column="remark" property="remark" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -42,7 +47,12 @@
 		,company
 		,delivery_datetime
 		,deliverer
+		
 		,user_id
+		,status	
+		,update_datetime
+		,updater
+		,remark
 		FROM
 		tmall_logistics t
 		<include refid="where_condition" />
@@ -67,7 +77,12 @@
 		,company
 		,delivery_datetime
 		,deliverer
+		
 		,user_id
+		,status	
+		,update_datetime
+		,updater
+		,remark
 		)
 		VALUES(
 		#{code}
@@ -75,8 +90,23 @@
 		,#{company}
 		,#{deliveryDatetime}
 		,#{deliverer}
+		
 		,#{userId}
+		,#{status}
+		,#{updateDatetime}
+		,#{updater}
+		,#{remark}
 		)
 	</insert>
+	
+	<update id="update_logisticsStatus" parameterType="logistics">
+		UPDATE tmall_logistics
+		SET
+		status = #{status}
+		,update_datetime = #{updateDatetime}
+		,updater = #{updater}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
 	
 </mapper>

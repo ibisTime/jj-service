@@ -18,4 +18,13 @@ import com.xnjr.mall.domain.Logistics;
  */
 public interface ILogisticsDAO extends IBaseDAO<Logistics> {
     String NAMESPACE = ILogisticsDAO.class.getName().concat(".");
+
+    /**
+     * 更新物流单状态
+     * @param data
+     * @return 
+     * @create: 2016年6月11日 下午10:16:29 xieyj
+     * @history:
+     */
+    public int updateLogisticsStatus(Logistics data);
 }

@@ -29,4 +29,14 @@ public interface ILogisticsBO extends IPaginableBO<Logistics> {
      * @history:
      */
     public Logistics getLogisticsByInvoiceCode(String invoiceCode);
+
+    /**
+     * 物流确认
+     * @param code
+     * @param updater
+     * @param remark 
+     * @create: 2016年6月11日 下午10:19:01 xieyj
+     * @history:
+     */
+    public int refreshLogisticsStatus(String code, String updater, String remark);
 }

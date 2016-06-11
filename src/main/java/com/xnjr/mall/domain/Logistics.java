@@ -42,6 +42,18 @@ public class Logistics extends ABaseDO {
     // 下单用户
     private String userId;
 
+    // 状态
+    private String status;
+
+    // 更新时间
+    private Date updateDatetime;
+
+    // 更新人
+    private String updater;
+
+    // 备注
+    private String remark;
+
     /***** 查询条件 *****/
     // 发货时间起
     private Date deliveryDatetimeStart;
@@ -124,4 +136,35 @@ public class Logistics extends ABaseDO {
         this.goodsList = goodsList;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getUpdateDatetime() {
+        return updateDatetime;
+    }
+
+    public void setUpdateDatetime(Date updateDatetime) {
+        this.updateDatetime = updateDatetime;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

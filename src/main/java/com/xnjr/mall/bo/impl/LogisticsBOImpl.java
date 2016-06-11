@@ -8,6 +8,8 @@
  */
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import com.xnjr.mall.bo.ILogisticsBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.dao.ILogisticsDAO;
 import com.xnjr.mall.domain.Logistics;
+import com.xnjr.mall.enums.ELogisticsStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -79,4 +82,19 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
         return logistics;
     }
 
+    /** 
+     * @see com.xnjr.mall.bo.ILogisticsBO#refreshLogisticsStatus(java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public int refreshLogisticsStatus(String code, String updater, String remark) {
+        // 校验code是否存在
+        getLogistics(code);
+        Logistics data = new Logistics();
+        data.setCode(code);
+        data.setStatus(ELogisticsStatus.RECIEVE.getCode());
+        data.setUpdater(updater);
+        data.setUpdateDatetime(new Date());
+        data.setRemark(remark);
+        return logisticsDAO.updateLogisticsStatus(data);
+    }
 }

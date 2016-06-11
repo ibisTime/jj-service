@@ -77,4 +77,11 @@ public class LogisticsDAOImpl extends AMybatisTemplate implements ILogisticsDAO 
             count, condition, Logistics.class);
     }
 
+    /** 
+     * @see com.xnjr.mall.dao.ILogisticsDAO#updateLogisticsStatus(com.xnjr.mall.domain.Logistics)
+     */
+    @Override
+    public int updateLogisticsStatus(Logistics data) {
+        return super.update("update_logisticsStatus", data);
+    }
 }
