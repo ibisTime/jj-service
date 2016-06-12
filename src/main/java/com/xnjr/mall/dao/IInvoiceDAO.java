@@ -37,4 +37,13 @@ public interface IInvoiceDAO extends IBaseDAO<Invoice> {
      * @history:
      */
     public int updateInvoiceApprove(Invoice data);
+
+    /**
+     * 更新订单支付金额
+     * @param data
+     * @return 
+     * @create: 2016年6月12日 下午12:24:19 xieyj
+     * @history:
+     */
+    public int updateInvoicePayAmount(Invoice data);
 }

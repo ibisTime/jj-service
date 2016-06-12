@@ -227,17 +227,6 @@ public class InvoiceAOImpl implements IInvoiceAO {
     @Override
     public Invoice getInvoice(String code) {
         Invoice invoice = invoiceBO.getInvoice(code);
-        InvoiceModel imCondition = new InvoiceModel();
-        imCondition.setInvoiceCode(code);
-        List<InvoiceModel> invoiceModelList = invoiceModelBO
-            .queryInvoiceModelList(imCondition);
-        invoice.setInvoiceModelList(invoiceModelList);
-        Long totalAmount = 0L;
-        for (InvoiceModel invoiceModel : invoiceModelList) {
-            totalAmount += invoiceModel.getQuantity()
-                    * invoiceModel.getSalePrice();
-        }
-        invoice.setTotalAmount(totalAmount);
         // 收货地址信息
         Address address = addressBO.getAddress(invoice.getAddressCode());
         invoice.setAddress(address);

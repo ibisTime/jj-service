@@ -77,6 +77,16 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
             String approveNote);
 
     /**
+     * 更新发货单金额
+     * @param code
+     * @param payAmount
+     * @return 
+     * @create: 2016年6月12日 下午12:26:06 xieyj
+     * @history:
+     */
+    public int refreshInvoicePayAmount(String code, Long payAmount);
+
+    /**
      * 查询发货单列表
      * @param data
      * @return 

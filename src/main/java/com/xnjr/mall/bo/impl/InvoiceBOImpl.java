@@ -20,7 +20,9 @@ import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.core.EGeneratePrefix;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IInvoiceDAO;
+import com.xnjr.mall.dao.IInvoiceModelDAO;
 import com.xnjr.mall.domain.Invoice;
+import com.xnjr.mall.domain.InvoiceModel;
 import com.xnjr.mall.enums.EInvoiceStatus;
 import com.xnjr.mall.exception.BizException;
 
@@ -35,6 +37,9 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
 
     @Autowired
     private IInvoiceDAO invoiceDAO;
+
+    @Autowired
+    private IInvoiceModelDAO invoiceModelDAO;
 
     /** 
      * @see com.xnjr.mall.bo.IBuyGuideBO#isBuyGuideExist(java.lang.String)
@@ -60,6 +65,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             data.setCode(code);
             data.setStatus(EInvoiceStatus.TO_PAY.getCode());
             data.setApplyDatetime(new Date());
+            data.setPayAmount(0L);
             invoiceDAO.insert(data);
         }
         return code;
@@ -162,7 +168,33 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             if (data == null) {
                 throw new BizException("xn0000", "发货单编号不存在");
             }
+            InvoiceModel imCondition = new InvoiceModel();
+            imCondition.setInvoiceCode(code);
+            List<InvoiceModel> invoiceModelList = invoiceModelDAO
+                .selectList(imCondition);
+            Long totalAmount = 0L;
+            for (InvoiceModel invoiceModel : invoiceModelList) {
+                totalAmount += invoiceModel.getQuantity()
+                        * invoiceModel.getSalePrice();
+            }
+            data.setTotalAmount(totalAmount);
+            data.setInvoiceModelList(invoiceModelList);
         }
         return data;
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IInvoiceBO#refreshInvoicePayAmount(java.lang.String, java.lang.Long)
+     */
+    @Override
+    public int refreshInvoicePayAmount(String code, Long payAmount) {
+        int count = 0;
+        if (isInvoiceExist(code)) {
+            Invoice data = new Invoice();
+            data.setCode(code);
+            data.setPayAmount(payAmount);
+            count = invoiceDAO.updateInvoicePayAmount(data);
+        }
+        return count;
     }
 }
