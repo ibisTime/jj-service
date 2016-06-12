@@ -44,6 +44,8 @@ public class XN602040 extends AProcessor {
         logistics.setDeliveryDatetime(DateUtil.strToDate(
             req.getDeliveryDatetime(), DateUtil.DATA_TIME_PATTERN_1));
         logistics.setDeliverer(req.getDeliverer());
+        logistics.setUpdater(req.getUpdater());
+        logistics.setRemark(req.getRemark());
         return new PKCodeRes(logisticsAO.addLogistics(logistics,
             req.getGoodsList()));
     }
@@ -55,7 +57,8 @@ public class XN602040 extends AProcessor {
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602040Req.class);
         StringValidater.validateBlank(req.getCode(), req.getInvoiceCode(),
-            req.getCompany(), req.getDeliveryDatetime(), req.getDeliverer());
+            req.getCompany(), req.getDeliveryDatetime(), req.getDeliverer(),
+            req.getUpdater());
     }
 
 }

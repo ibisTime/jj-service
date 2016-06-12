@@ -45,11 +45,11 @@ public class Logistics extends ABaseDO {
     // 状态
     private String status;
 
-    // 更新时间
-    private Date updateDatetime;
-
     // 更新人
     private String updater;
+
+    // 更新时间
+    private Date updateDatetime;
 
     // 备注
     private String remark;

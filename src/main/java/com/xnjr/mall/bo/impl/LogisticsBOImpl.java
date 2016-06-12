@@ -34,6 +34,19 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
     private ILogisticsDAO logisticsDAO;
 
     /** 
+     * @see com.xnjr.mall.bo.ILogisticsBO#isLogisticsExist(java.lang.String)
+     */
+    @Override
+    public boolean isLogisticsExist(String code) {
+        Logistics condition = new Logistics();
+        condition.setCode(code);
+        if (logisticsDAO.selectTotalCount(condition) == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    /** 
      * @see com.xnjr.mall.bo.ILogisticsBO#saveLogistics(com.xnjr.mall.domain.Logistics)
      */
     @Override
@@ -45,6 +58,8 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
             if (getTotalCount(condition) > 0) {
                 throw new BizException("xn000000", "物流单号已存在，不能重复添加");
             }
+            data.setStatus(ELogisticsStatus.TO_RECEIVE.getCode());
+            data.setUpdateDatetime(new Date());
             logisticsDAO.insert(data);
             code = data.getCode();
         }
@@ -91,7 +106,7 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
         getLogistics(code);
         Logistics data = new Logistics();
         data.setCode(code);
-        data.setStatus(ELogisticsStatus.RECIEVE.getCode());
+        data.setStatus(ELogisticsStatus.RECEIVE.getCode());
         data.setUpdater(updater);
         data.setUpdateDatetime(new Date());
         data.setRemark(remark);

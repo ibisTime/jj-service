@@ -11,6 +11,7 @@ package com.xnjr.mall.ao.impl;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,23 +105,24 @@ public class InvoiceAOImpl implements IInvoiceAO {
 
     @Override
     public int toPayInvoice(String code, String tradePwd) {
-        Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单不是处于待支付状态");
-        }
-        // 校验交易密码
-        // userBO.checkTradePwd(data.getApplyUser(), tradePwd);
-
-        return invoiceBO.refreshInvoiceStatus(code,
-            EInvoiceStatus.PAY_CONFIRM.getCode());
+        // Invoice data = invoiceBO.getInvoice(code);
+        // if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
+        // throw new BizException("xn0000", "订单不是处于待支付状态");
+        // }
+        // // 校验交易密码
+        // // userBO.checkTradePwd(data.getApplyUser(), tradePwd);
+        //
+        // return invoiceBO.refreshInvoiceStatus(code,
+        // EInvoiceStatus.PAY_CONFIRM.getCode());
+        return 0;
     }
 
     @Override
     public int payConfirmInvoice(String code, String approveUser,
             String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.PAY_CONFIRM.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单不是处于支付待确认状态");
+        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "订单不是处于待付款状态");
         }
 
         InvoiceModel imCondition = new InvoiceModel();
@@ -159,16 +161,14 @@ public class InvoiceAOImpl implements IInvoiceAO {
     public int cancelInvoiceOss(String code, String approveUser,
             String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())
-                && !EInvoiceStatus.PAY_CONFIRM.getCode().equals(
-                    data.getStatus())) {
-            throw new BizException("xn0000", "订单状态不是待支付或支付待确认状态");
+        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "订单状态不是待支付状态");
         }
-        if (EInvoiceStatus.PAY_YES.getCode().equals(data.getStatus())) {
-            // 更新打款记录(暂缺)
+        if (StringUtils.isBlank(approveNote)) {
+            approveNote = "管理端取消订单";
         }
         return invoiceBO.cancelInvoice(code, approveUser, approveNote,
-            EInvoiceStatus.FORBID_CLOSED.getCode());
+            EInvoiceStatus.FINISH.getCode());
     }
 
     /** 
@@ -242,9 +242,8 @@ public class InvoiceAOImpl implements IInvoiceAO {
         Address address = addressBO.getAddress(invoice.getAddressCode());
         invoice.setAddress(address);
         // 附带物流信息
-        if (EInvoiceStatus.SEND_YES.getCode().equalsIgnoreCase(
-            invoice.getStatus())
-                || EInvoiceStatus.FINISHED.getCode().equalsIgnoreCase(
+        if (EInvoiceStatus.SEND.getCode().equalsIgnoreCase(invoice.getStatus())
+                || EInvoiceStatus.FINISH.getCode().equalsIgnoreCase(
                     invoice.getStatus())) {
             invoice.setLogistics(logisticsBO.getLogisticsByInvoiceCode(code));
         }

@@ -37,6 +37,12 @@ public class XN602040Req {
     // 货品信息
     private List<Goods> goodsList;
 
+    // 更新人
+    private String updater;
+
+    // 备注
+    private String remark;
+
     public String getInvoiceCode() {
         return invoiceCode;
     }
@@ -83,5 +89,21 @@ public class XN602040Req {
 
     public void setGoodsList(List<Goods> goodsList) {
         this.goodsList = goodsList;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

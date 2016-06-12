@@ -48,6 +48,9 @@ public class Invoice extends ABaseDO {
     // 状态
     private String status;
 
+    // 支付金额
+    private Long payAmount;
+
     // 审核人
     private String approveUser;
 
@@ -156,6 +159,14 @@ public class Invoice extends ABaseDO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(Long payAmount) {
+        this.payAmount = payAmount;
     }
 
     public String getApproveUser() {

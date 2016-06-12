@@ -17,8 +17,31 @@ import com.xnjr.mall.domain.Logistics;
  * @history:
  */
 public interface ILogisticsBO extends IPaginableBO<Logistics> {
+
+    /**
+     * 判断物流单是否存在
+     * @param code
+     * @return 
+     * @create: 2016年6月12日 上午8:46:46 xieyj
+     * @history:
+     */
+    public boolean isLogisticsExist(String code);
+
+    /**
+     * 录入物流单
+     * @param data
+     * @return 
+     * @create: 2016年6月12日 上午8:45:20 xieyj
+     * @history:
+     */
     public String saveLogistics(Logistics data);
 
+    /**
+     * @param code
+     * @return 
+     * @create: 2016年6月12日 上午8:46:19 xieyj
+     * @history:
+     */
     public Logistics getLogistics(String code);
 
     /**

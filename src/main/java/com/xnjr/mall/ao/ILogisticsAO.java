@@ -34,6 +34,17 @@ public interface ILogisticsAO {
     public String addLogistics(Logistics logistics, List<Goods> goods);
 
     /**
+     * 确认物流单
+     * @param code
+     * @param updater
+     * @param remark
+     * @return 
+     * @create: 2016年6月12日 上午8:42:43 xieyj
+     * @history:
+     */
+    public int confirmLogistics(String code, String updater, String remark);
+
+    /**
      * 获取物流单信息（将对应的货物信息查询出来）
      * @param code
      * @return 
