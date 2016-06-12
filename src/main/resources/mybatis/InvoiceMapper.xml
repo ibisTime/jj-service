@@ -10,6 +10,7 @@
 		<result column="address_code" property="addressCode" />
 		<result column="receipt_type" property="receiptType" />
 		<result column="receipt_title" property="receiptTitle" />
+		<result column="pay_amount" property="payAmount" />
 		<result column="status" property="status" />
 		<result column="approve_user" property="approveUser" />
 		<result column="approve_datetime" property="approveDatetime" />
@@ -46,6 +47,7 @@
 		,address_code
 		,receipt_type
 		,receipt_title
+		,pay_amount
 		,status
 		,approve_user
 		,approve_datetime
@@ -75,6 +77,7 @@
 		,address_code
 		,receipt_type
 		,receipt_title
+		,pay_amount
 		,status
 		)
 		VALUES(
@@ -85,6 +88,7 @@
 		,#{addressCode}
 		,#{receiptType}
 		,#{receiptTitle}
+		,#{payAmount}
 		,#{status}
 		)
 	</insert>
@@ -113,6 +117,14 @@
 		,approve_user = #{approveUser}
 		,approve_datetime = #{approveDatetime}
 		,approve_note = #{approveNote}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_invoicePayAmount" parameterType="invoice">
+		UPDATE tmall_invoice
+		SET
+		pay_amount = #{payAmount}
 		WHERE
 		code = #{code}
 	</update>

@@ -52,6 +52,9 @@ public class Goods extends ABaseDO {
 
     private String codeEnd;
 
+    // 物流单状态
+    private String status;
+
     public String getModelName() {
         return modelName;
     }
@@ -138,5 +141,13 @@ public class Goods extends ABaseDO {
 
     public void setCodeEnd(String codeEnd) {
         this.codeEnd = codeEnd;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

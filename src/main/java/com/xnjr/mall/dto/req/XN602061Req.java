@@ -31,6 +31,9 @@ public class XN602061Req extends APageReq {
     // 所属用户ID
     private String userId;
 
+    // 状态
+    private String status;
+
     public String getCode() {
         return code;
     }
@@ -63,4 +66,11 @@ public class XN602061Req extends APageReq {
         this.userId = userId;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

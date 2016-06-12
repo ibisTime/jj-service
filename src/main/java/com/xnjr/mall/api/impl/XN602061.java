@@ -41,6 +41,8 @@ public class XN602061 extends AProcessor {
         condition.setModelCode(req.getModelCode());
         condition.setLogisticsCode(req.getLogisticsCode());
         condition.setUserId(req.getUserId());
+
+        condition.setStatus(req.getStatus());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = IGoodsAO.DEFAULT_ORDER_COLUMN;

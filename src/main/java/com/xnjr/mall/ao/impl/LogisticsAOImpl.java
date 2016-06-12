@@ -110,9 +110,16 @@ public class LogisticsAOImpl implements ILogisticsAO {
         if (!ELogisticsStatus.TO_RECEIVE.getCode().equals(data.getStatus())) {
             throw new BizException("xn000000", "物流单状态不是待收货状态");
         }
-        // 修改发货单状态(已收货)
-        invoiceBO.refreshInvoiceStatus(data.getInvoiceCode(),
-            EInvoiceStatus.RECEIVE.getCode());
+        // 修改发货单状态,判断订单款项是否已经结清
+        Invoice invoice = invoiceBO.getInvoice(data.getInvoiceCode());
+        if (invoice.getTotalAmount().longValue() == invoice.getPayAmount()
+            .longValue()) {
+            invoiceBO.refreshInvoiceStatus(data.getInvoiceCode(),
+                EInvoiceStatus.FINISH.getCode());
+        } else {
+            invoiceBO.refreshInvoiceStatus(data.getInvoiceCode(),
+                EInvoiceStatus.RECEIVE.getCode());
+        }
         // 更新物流单状态为已收货状态
         return logisticsBO.refreshLogisticsStatus(code, updater, remark);
     }
