@@ -21,4 +21,6 @@ public interface ISYSConfigAO {
             SYSConfig condition);
 
     public SYSConfig getSYSConfig(Long id);
+
+    public String getConfigValue(String key);
 }

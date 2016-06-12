@@ -10,7 +10,7 @@ package com.xnjr.mall.http;
 
 import java.util.Properties;
 
-import com.xnjr.mall.common.PropertiesUtil;
+import com.xnjr.mall.common.DBPropertiesUtil;
 import com.xnjr.mall.core.RegexUtils;
 import com.xnjr.mall.exception.BizException;
 
@@ -22,11 +22,11 @@ import com.xnjr.mall.exception.BizException;
 public class BizConnecter {
     public static final String YES = "0";
 
-    public static final String SMS_URL = PropertiesUtil.Config.SMS_URL;
+    public static final String SMS_URL = DBPropertiesUtil.Config.SMS_URL;
 
-    public static final String USER_URL = PropertiesUtil.Config.USER_URL;
+    public static final String USER_URL = DBPropertiesUtil.Config.USER_URL;
 
-    public static final String ACCOUNT_URL = PropertiesUtil.Config.ACCOUNT_URL;
+    public static final String ACCOUNT_URL = DBPropertiesUtil.Config.ACCOUNT_URL;
 
     public static final String POST_URL = "...";
 
