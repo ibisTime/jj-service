@@ -37,6 +37,7 @@ public class InvoiceModel extends ABaseDO {
     private Long salePrice;
 
     // **************db properties
+
     // 型号名称
     private String modelName;
 

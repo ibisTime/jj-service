@@ -8,6 +8,8 @@
  */
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import com.xnjr.mall.bo.ILogisticsBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.dao.ILogisticsDAO;
 import com.xnjr.mall.domain.Logistics;
+import com.xnjr.mall.enums.ELogisticsStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -31,6 +34,19 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
     private ILogisticsDAO logisticsDAO;
 
     /** 
+     * @see com.xnjr.mall.bo.ILogisticsBO#isLogisticsExist(java.lang.String)
+     */
+    @Override
+    public boolean isLogisticsExist(String code) {
+        Logistics condition = new Logistics();
+        condition.setCode(code);
+        if (logisticsDAO.selectTotalCount(condition) == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    /** 
      * @see com.xnjr.mall.bo.ILogisticsBO#saveLogistics(com.xnjr.mall.domain.Logistics)
      */
     @Override
@@ -42,6 +58,8 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
             if (getTotalCount(condition) > 0) {
                 throw new BizException("xn000000", "物流单号已存在，不能重复添加");
             }
+            data.setStatus(ELogisticsStatus.TO_RECEIVE.getCode());
+            data.setUpdateDatetime(new Date());
             logisticsDAO.insert(data);
             code = data.getCode();
         }
@@ -79,4 +97,19 @@ public class LogisticsBOImpl extends PaginableBOImpl<Logistics> implements
         return logistics;
     }
 
+    /** 
+     * @see com.xnjr.mall.bo.ILogisticsBO#refreshLogisticsStatus(java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public int refreshLogisticsStatus(String code, String updater, String remark) {
+        // 校验code是否存在
+        getLogistics(code);
+        Logistics data = new Logistics();
+        data.setCode(code);
+        data.setStatus(ELogisticsStatus.RECEIVE.getCode());
+        data.setUpdater(updater);
+        data.setUpdateDatetime(new Date());
+        data.setRemark(remark);
+        return logisticsDAO.updateLogisticsStatus(data);
+    }
 }

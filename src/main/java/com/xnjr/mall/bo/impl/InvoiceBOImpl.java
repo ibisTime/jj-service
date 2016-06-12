@@ -96,7 +96,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             Invoice data = new Invoice();
             data.setCode(code);
             data.setApplyNote(applyNote);
-            data.setStatus(EInvoiceStatus.SELF_CLOSED.getCode());
+            data.setStatus(EInvoiceStatus.FINISH.getCode());
             count = invoiceDAO.updateInvoiceCancel(data);
         }
         return count;

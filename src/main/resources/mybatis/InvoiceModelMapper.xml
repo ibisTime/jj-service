@@ -5,6 +5,7 @@
 	<resultMap id="invoiceModel_DB_Result" type="invoiceModel">
 		<result column="code" property="code" />
 		<result column="invoice_code" property="invoiceCode" />
+		<result column="product_name" property="productName" />
 		<result column="model_code" property="modelCode" />
 		<result column="model_name" property="modelName" />
 		<result column="product_code" property="productCode" />
@@ -32,6 +33,7 @@
 		SELECT
 		t.code
 		,t.invoice_code
+		,tp.name as product_name
 		,t.model_code
 		,tm.name as model_name
 		,tp.code product_code

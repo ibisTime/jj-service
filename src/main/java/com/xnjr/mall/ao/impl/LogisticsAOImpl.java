@@ -26,6 +26,7 @@ import com.xnjr.mall.domain.Goods;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.Logistics;
 import com.xnjr.mall.enums.EInvoiceStatus;
+import com.xnjr.mall.enums.ELogisticsStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -94,8 +95,26 @@ public class LogisticsAOImpl implements ILogisticsAO {
 
         // 修改发货单状态
         invoiceBO.refreshInvoiceStatus(invoice.getCode(),
-            EInvoiceStatus.SEND_YES.getCode());
+            EInvoiceStatus.SEND.getCode());
         return code;
+    }
+
+    /** 
+     * @see com.xnjr.mall.ao.ILogisticsAO#confirmLogistics(java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    @Transactional
+    public int confirmLogistics(String code, String updater, String remark) {
+        // 判断单号是否存在
+        Logistics data = logisticsBO.getLogistics(code);
+        if (!ELogisticsStatus.TO_RECEIVE.getCode().equals(data.getStatus())) {
+            throw new BizException("xn000000", "物流单状态不是待收货状态");
+        }
+        // 修改发货单状态(已收货)
+        invoiceBO.refreshInvoiceStatus(data.getInvoiceCode(),
+            EInvoiceStatus.RECEIVE.getCode());
+        // 更新物流单状态为已收货状态
+        return logisticsBO.refreshLogisticsStatus(code, updater, remark);
     }
 
     /** 
@@ -128,5 +147,4 @@ public class LogisticsAOImpl implements ILogisticsAO {
         }
         return false;
     }
-
 }

@@ -50,6 +50,7 @@ public class XN601001 extends AProcessor {
         data.setHighlightPic(req.getHighlightPic());
         data.setHighlightText(req.getHighlightText());
         data.setUpdater(req.getUpdater());
+        data.setRemark(req.getRemark());
         int count = productAO.editProduct(data);
         return new BooleanRes(count > 0 ? true : false);
     }

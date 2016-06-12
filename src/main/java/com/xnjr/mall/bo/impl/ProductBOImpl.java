@@ -47,7 +47,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
             product.setStatus(EPutStatus.todoAPPROVE.getCode());
-            product.setRemark("产品新增");
+            product.setRemark(product.getRemark());
             productDAO.insert(product);
         }
         return code;
@@ -83,7 +83,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
             product.setStatus(EPutStatus.todoAPPROVE.getCode());
-            product.setRemark("产品信息被编辑，重新提交审核");
+            product.setRemark(product.getRemark());
             count = productDAO.updateProduct(product);
         }
         return count;

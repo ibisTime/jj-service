@@ -49,6 +49,7 @@ public class XN601000 extends AProcessor {
         data.setHighlightPic(req.getHighlightPic());
         data.setHighlightText(req.getHighlightText());
         data.setUpdater(req.getUpdater());
+        data.setRemark(req.getRemark());
         return new PKCodeRes(productAO.addProduct(data));
     }
 

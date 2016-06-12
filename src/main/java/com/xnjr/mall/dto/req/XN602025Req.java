@@ -13,7 +13,7 @@ public class XN602025Req extends APageReq {
      */
     private static final long serialVersionUID = 1L;
 
-    // 订单编号
+    // 订单编号（选填）
     private String code;
 
     // 用户编号（选填）
