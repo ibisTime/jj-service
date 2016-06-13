@@ -152,9 +152,11 @@ public class InvoiceAOImpl implements IInvoiceAO {
      * @see com.xnjr.mall.ao.IInvoiceAO#payInvoice(com.xnjr.mall.domain.Invoice)
      */
     @Override
+    @Transactional
     public void payInvoice(String code, Long amount, String fromType,
             String fromCode, String pdf, String toCardNo, String approveUser,
             String approveNote) {
+        Long payAmount = 0L;
         Invoice invoice = invoiceBO.getInvoice(code);
         // 更新订单
         if (EInvoiceStatus.TO_PAY.getCode().equals(invoice.getStatus())) {
@@ -163,12 +165,17 @@ public class InvoiceAOImpl implements IInvoiceAO {
             }
             invoiceBO.refreshInvoiceStatus(code,
                 EInvoiceStatus.PAY_YES.getCode());
+            payAmount = amount;
         } else {
             amount = invoice.getTotalAmount() - invoice.getPayAmount();
             if (EInvoiceStatus.RECEIVE.getCode().equals(invoice.getStatus())) {
                 invoiceBO.refreshInvoiceStatus(code,
                     EInvoiceStatus.FINISH.getCode());
             }
+            payAmount = invoice.getTotalAmount();
+        }
+        if (payAmount != 0L) {
+            invoiceBO.refreshInvoicePayAmount(code, payAmount);
         }
         // 当前用户充值，划出；系统账户划入
         XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
@@ -242,6 +249,8 @@ public class InvoiceAOImpl implements IInvoiceAO {
         invoice.setAddress(address);
         // 附带物流信息
         if (EInvoiceStatus.SEND.getCode().equalsIgnoreCase(invoice.getStatus())
+                || EInvoiceStatus.RECEIVE.getCode().equalsIgnoreCase(
+                    invoice.getStatus())
                 || EInvoiceStatus.FINISH.getCode().equalsIgnoreCase(
                     invoice.getStatus())) {
             invoice.setLogistics(logisticsBO.getLogisticsByInvoiceCode(code));

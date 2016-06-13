@@ -25,6 +25,9 @@ public class XN602025Req extends APageReq {
     // 状态（选填）
     private String status;
 
+    // 是否二次付款（选填）
+    private String isSecondPay;
+
     public String getCode() {
         return code;
     }
@@ -55,5 +58,13 @@ public class XN602025Req extends APageReq {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getIsSecondPay() {
+        return isSecondPay;
+    }
+
+    public void setIsSecondPay(String isSecondPay) {
+        this.isSecondPay = isSecondPay;
     }
 }

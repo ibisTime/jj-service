@@ -40,6 +40,9 @@
 			<if test="loginName != null and loginName != '' ">
 				AND tu.login_name like "%"#{loginName}"%"
 			</if>
+			<if test="isSecondPay != null and isSecondPay != '' and isSecondPay == 1 ">
+			    <![CDATA[AND t.pay_amount > 0  AND t.pay_amount < (select sum(tim.quantity * tim.sale_price) as total_amount from tmall_invoice_model tim where tim.invoice_code=t.code)]]>
+			</if>
 		</trim>
 	</sql>
 	<select id="select_invoice" parameterType="invoice" resultMap="invoice_DB_Result">
