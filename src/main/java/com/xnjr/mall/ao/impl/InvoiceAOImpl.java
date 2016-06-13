@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xnjr.mall.ao.IInvoiceAO;
+import com.xnjr.mall.bo.IAccountBO;
 import com.xnjr.mall.bo.IAddressBO;
 import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.ICartBO;
@@ -29,8 +30,11 @@ import com.xnjr.mall.domain.Address;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.InvoiceModel;
+import com.xnjr.mall.dto.res.XN802011Res;
 import com.xnjr.mall.dto.res.XN805901Res;
+import com.xnjr.mall.enums.EDirection;
 import com.xnjr.mall.enums.EInvoiceStatus;
+import com.xnjr.mall.enums.ESysAccount;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -61,6 +65,9 @@ public class InvoiceAOImpl implements IInvoiceAO {
 
     @Autowired
     private ILogisticsBO logisticsBO;
+
+    @Autowired
+    private IAccountBO accountBO;
 
     /**
      * @see com.xnjr.mall.ao.IInvoiceAO#commitInvoice(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Invoice)
@@ -105,38 +112,8 @@ public class InvoiceAOImpl implements IInvoiceAO {
 
     @Override
     public int toPayInvoice(String code, String tradePwd) {
-        // Invoice data = invoiceBO.getInvoice(code);
-        // if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
-        // throw new BizException("xn0000", "订单不是处于待支付状态");
-        // }
-        // // 校验交易密码
-        // // userBO.checkTradePwd(data.getApplyUser(), tradePwd);
-        //
-        // return invoiceBO.refreshInvoiceStatus(code,
-        // EInvoiceStatus.PAY_CONFIRM.getCode());
+        invoiceBO.refreshInvoiceStatus(code, EInvoiceStatus.PAY_YES.getCode());
         return 0;
-    }
-
-    @Override
-    public int payConfirmInvoice(String code, String approveUser,
-            String approveNote) {
-        Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单不是处于待付款状态");
-        }
-
-        InvoiceModel imCondition = new InvoiceModel();
-        imCondition.setInvoiceCode(code);
-        List<InvoiceModel> invoiceModelList = invoiceModelBO
-            .queryInvoiceModelList(imCondition);
-        Long totalAmount = 0L;
-        for (InvoiceModel invoiceModel : invoiceModelList) {
-            totalAmount += invoiceModel.getQuantity()
-                    * invoiceModel.getSalePrice();
-        }
-        // 更新流水(暂缺)
-        return invoiceBO.refreshInvoiceStatus(code,
-            EInvoiceStatus.PAY_YES.getCode());
     }
 
     /** 
@@ -169,6 +146,43 @@ public class InvoiceAOImpl implements IInvoiceAO {
         }
         return invoiceBO.cancelInvoice(code, approveUser, approveNote,
             EInvoiceStatus.FINISH.getCode());
+    }
+
+    /** 
+     * @see com.xnjr.mall.ao.IInvoiceAO#payInvoice(com.xnjr.mall.domain.Invoice)
+     */
+    @Override
+    public int payInvoice(Invoice data) {
+        int count = 0;
+        Invoice invoice = invoiceBO.getInvoice(data.getCode());
+        Long amount = 0L;
+        // 更新订单
+        if (EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
+            if (data.getAmount() == null || data.getAmount().longValue() == 0) {
+                throw new BizException("xn0000", "首款金额不能为空");
+            }
+            amount = data.getAmount();
+            count = invoiceBO.refreshInvoiceStatus(data.getCode(),
+                EInvoiceStatus.PAY_YES.getCode());
+        } else {
+            amount = invoice.getTotalAmount() - invoice.getPayAmount();
+            if (EInvoiceStatus.RECEIVE.getCode().equals(invoice.getStatus())) {
+                count = invoiceBO.refreshInvoiceStatus(data.getCode(),
+                    EInvoiceStatus.FINISH.getCode());
+            }
+        }
+        // 当前用户充值，划出；系统账户划入
+        XN802011Res res = accountBO.getAccountByUserId(data.getApplyUser());
+        accountBO.doChargeOfflineWithdrawApp(res.getAccountNumber(), amount,
+            data.getFromType(), data.getFromCode(), data.getPdf());
+        accountBO.doTransferOss(res.getAccountNumber(),
+            EDirection.MINUS.getCode(), amount, null,
+            EDirection.MINUS.getValue());
+        accountBO
+            .doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
+                EDirection.PLUS.getCode(), amount, null,
+                EDirection.PLUS.getValue());
+        return count;
     }
 
     /** 

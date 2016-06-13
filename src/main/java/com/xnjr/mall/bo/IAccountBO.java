@@ -8,6 +8,8 @@
  */
 package com.xnjr.mall.bo;
 
+import com.xnjr.mall.dto.res.XN802011Res;
+
 /** 
  * @author: miyb 
  * @since: 2015-3-15 下午3:15:49 
@@ -16,17 +18,37 @@ package com.xnjr.mall.bo;
 public interface IAccountBO {
 
     /**
-     * 转入转出(front)
+     * @param accountNumber
+     * @param amount
+     * @param fromType
+     * @param fromCode
+     * @param pdf
+     * @return 
+     * @create: 2016年6月12日 下午8:33:51 xieyj
+     * @history:
+     */
+    public String doChargeOfflineWithdrawApp(String accountNumber, Long amount,
+            String fromType, String fromCode, String pdf);
+
+    /**
      * @param accountNumber
      * @param direction
      * @param amount
      * @param fee
      * @param remark
-     * @param tradePwd 
-     * @create: 2016年5月31日 下午5:48:42 xieyj
+     * @return 
+     * @create: 2016年6月12日 下午8:05:07 xieyj
      * @history:
      */
-    public void transferOrder(String accountNumber, String direction,
-            Long amount, Long fee, String remark, String tradePwd);
+    public String doTransferOss(String accountNumber, String direction,
+            Long amount, Long fee, String remark);
+
+    /**
+     * @param userId
+     * @return 
+     * @create: 2016年6月12日 下午9:14:13 xieyj
+     * @history:
+     */
+    public XN802011Res getAccountByUserId(String userId);
 
 }

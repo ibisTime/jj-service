@@ -8,7 +8,6 @@
  */
 package com.xnjr.mall.dto.req;
 
-
 /** 
  * @author: haiqingzheng 
  * @since: 2016年5月29日 下午3:23:59 
@@ -38,6 +37,9 @@ public class XN602041Req extends APageReq {
 
     // 下单用户
     private String userId;
+
+    // 状态
+    private String status;
 
     public String getInvoiceCode() {
         return invoiceCode;
@@ -87,4 +89,11 @@ public class XN602041Req extends APageReq {
         this.userId = userId;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

@@ -9,8 +9,6 @@ public enum EInvoiceStatus {
     TO_PAY("1", "待支付"), PAY_YES("2", "已支付"), SEND("3", "已发货"), RECEIVE("4",
             "已收货"), FINISH("5", "已完成");
 
-    // 待付款，已付款
-
     EInvoiceStatus(String code, String value) {
         this.code = code;
         this.value = value;

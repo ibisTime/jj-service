@@ -38,6 +38,9 @@
 			<if test="userId != null and userId != '' ">
 				AND t.user_id = #{userId}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_logistics" parameterType="logistics" resultMap="logistics_DB_Result">

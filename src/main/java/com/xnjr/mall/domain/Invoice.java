@@ -74,6 +74,24 @@ public class Invoice extends ABaseDO {
     // 模糊查询使用
     private String codeForQuery;
 
+    // 金额(必填)
+    private Long amount;
+
+    // 打款方式(必填)
+    private String fromType;
+
+    // 打款账号(必填)
+    private String fromCode;
+
+    // pdf(必填)
+    private String pdf;
+
+    // 受款账号(必填)
+    private String toCardNo;
+
+    // 备注(选填)
+    private String remark;
+
     List<InvoiceModel> invoiceModelList;
 
     public String getCodeForQuery() {
@@ -231,5 +249,53 @@ public class Invoice extends ABaseDO {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    public String getFromType() {
+        return fromType;
+    }
+
+    public void setFromType(String fromType) {
+        this.fromType = fromType;
+    }
+
+    public String getFromCode() {
+        return fromCode;
+    }
+
+    public void setFromCode(String fromCode) {
+        this.fromCode = fromCode;
+    }
+
+    public String getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(String pdf) {
+        this.pdf = pdf;
+    }
+
+    public String getToCardNo() {
+        return toCardNo;
+    }
+
+    public void setToCardNo(String toCardNo) {
+        this.toCardNo = toCardNo;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
