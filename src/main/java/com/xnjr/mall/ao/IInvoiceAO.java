@@ -48,18 +48,6 @@ public interface IInvoiceAO {
     public int toPayInvoice(String code, String tradePwd);
 
     /**
-     * 支付订单，确认付款
-     * @param code
-     * @param approveUser
-     * @param approveNote
-     * @return 
-     * @create: 2016年6月1日 下午7:57:29 xieyj
-     * @history:
-     */
-    public int payConfirmInvoice(String code, String approveUser,
-            String approveNote);
-
-    /**
      * 取消发货单
      * @param code
      * @param userId
@@ -81,6 +69,15 @@ public interface IInvoiceAO {
      */
     public int cancelInvoiceOss(String code, String approveUser,
             String approveNote);
+
+    /**
+     * 订单付款
+     * @param data
+     * @return 
+     * @create: 2016年6月12日 下午5:28:47 xieyj
+     * @history:
+     */
+    public int payInvoice(Invoice data);
 
     /**
      * 发货单分页查询

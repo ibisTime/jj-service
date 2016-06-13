@@ -46,7 +46,9 @@ public class XN602041 extends AProcessor {
         condition.setDeliveryDatetimeEnd(DateUtil.strToDate(
             req.getDeliveryDatetimeEnd(), DateUtil.DATA_TIME_PATTERN_1));
         condition.setDeliverer(req.getDeliverer());
+
         condition.setUserId(req.getUserId());
+        condition.setStatus(req.getStatus());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ILogisticsAO.DEFAULT_ORDER_COLUMN;
