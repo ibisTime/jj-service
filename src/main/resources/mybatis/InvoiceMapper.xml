@@ -5,6 +5,7 @@
 	<resultMap id="invoice_DB_Result" type="invoice">
 		<result column="code" property="code" />
 		<result column="apply_user" property="applyUser" />
+		<result column="login_name" property="loginName" />
 		<result column="apply_datetime" property="applyDatetime" />
 		<result column="apply_note" property="applyNote" />
 		<result column="address_code" property="addressCode" />
@@ -28,7 +29,7 @@
 				AND t.apply_user = #{applyUser}
 			</if>
 			<if test="applyDatetimeStart != null and applyDatetimeStart != '' ">
-				<![CDATA[AND t.apply_datetime > #{applyDatetimeStart}]]>
+				<![CDATA[AND t.apply_datetime >= #{applyDatetimeStart}]]>
 			</if>
 			<if test="applyDatetimeEnd != null and applyDatetimeEnd != '' ">
 				<![CDATA[AND t.apply_datetime <= #{applyDatetimeEnd}]]>
@@ -36,24 +37,28 @@
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
+			<if test="loginName != null and loginName != '' ">
+				AND tu.login_name like "%"#{loginName}"%"
+			</if>
 		</trim>
 	</sql>
 	<select id="select_invoice" parameterType="invoice" resultMap="invoice_DB_Result">
 		SELECT
 		code
-		,apply_user
-		,apply_datetime
-		,apply_note
-		,address_code
-		,receipt_type
-		,receipt_title
-		,pay_amount
-		,status
-		,approve_user
-		,approve_datetime
-		,approve_note
+		,t.apply_user
+		,tu.login_name
+		,t.apply_datetime
+		,t.apply_note
+		,t.address_code
+		,t.receipt_type
+		,t.receipt_title
+		,t.pay_amount
+		,t.status
+		,t.approve_user
+		,t.approve_datetime
+		,t.approve_note
 		FROM
-		tmall_invoice t
+		tmall_invoice t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -64,7 +69,7 @@
 
 	<select id="select_invoice_count" parameterType="invoice"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_invoice t
+		SELECT count(1) FROM tmall_invoice t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
 		<include refid="where_condition" />
 	</select>
 

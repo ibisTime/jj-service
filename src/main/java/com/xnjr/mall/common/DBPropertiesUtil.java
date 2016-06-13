@@ -8,8 +8,6 @@
  */
 package com.xnjr.mall.common;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.xnjr.mall.ao.ISYSConfigAO;
 import com.xnjr.mall.spring.SpringContextHolder;
 
@@ -20,7 +18,6 @@ import com.xnjr.mall.spring.SpringContextHolder;
  */
 public class DBPropertiesUtil {
 
-    @Autowired
     private static ISYSConfigAO sysConfigAO = SpringContextHolder
         .getBean(ISYSConfigAO.class);
 

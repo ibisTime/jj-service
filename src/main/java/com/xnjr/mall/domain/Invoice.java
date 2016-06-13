@@ -74,6 +74,9 @@ public class Invoice extends ABaseDO {
     // 模糊查询使用
     private String codeForQuery;
 
+    // 下单人用户名
+    private String loginName;
+
     List<InvoiceModel> invoiceModelList;
 
     public String getCodeForQuery() {
@@ -232,4 +235,13 @@ public class Invoice extends ABaseDO {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
 }
