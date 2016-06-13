@@ -39,7 +39,7 @@ public class XN602041 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Logistics condition = new Logistics();
-        condition.setCode(req.getCode());
+        condition.setCodeForLikeQuery(req.getCode());
         condition.setInvoiceCode(req.getInvoiceCode());
         condition.setDeliveryDatetimeStart(DateUtil.strToDate(
             req.getDeliveryDatetimeStart(), DateUtil.DATA_TIME_PATTERN_1));

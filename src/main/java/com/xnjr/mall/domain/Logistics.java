@@ -55,6 +55,10 @@ public class Logistics extends ABaseDO {
     private String remark;
 
     /***** 查询条件 *****/
+
+    // code模糊查询
+    private String codeForLikeQuery;
+
     // 发货时间起
     private Date deliveryDatetimeStart;
 
@@ -166,5 +170,13 @@ public class Logistics extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCodeForLikeQuery() {
+        return codeForLikeQuery;
+    }
+
+    public void setCodeForLikeQuery(String codeForLikeQuery) {
+        this.codeForLikeQuery = codeForLikeQuery;
     }
 }
