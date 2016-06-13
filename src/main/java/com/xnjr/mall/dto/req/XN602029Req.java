@@ -26,8 +26,11 @@ public class XN602029Req {
     // 受款账号(必填)
     private String toCardNo;
 
-    // 备注(选填)
-    private String remark;
+    // 审核人(必填)
+    private String approveUser;
+
+    // 审核意见(必填)
+    private String approveNote;
 
     public String getCode() {
         return code;
@@ -77,11 +80,19 @@ public class XN602029Req {
         this.toCardNo = toCardNo;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getApproveUser() {
+        return approveUser;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setApproveUser(String approveUser) {
+        this.approveUser = approveUser;
+    }
+
+    public String getApproveNote() {
+        return approveNote;
+    }
+
+    public void setApproveNote(String approveNote) {
+        this.approveNote = approveNote;
     }
 }

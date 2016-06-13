@@ -21,14 +21,17 @@ public class AccountBOImpl implements IAccountBO {
      * @see com.xnjr.mall.bo.IAccountBO#doChargeOfflineWithdrawApp(java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
      */
     @Override
-    public String doChargeOfflineWithdrawApp(String accountNumber, Long amount,
-            String fromType, String fromCode, String pdf) {
+    public String doChargeOfflineWithoutApp(String accountNumber, Long amount,
+            String fromType, String fromCode, String pdf, String approveUser,
+            String approveNote) {
         XN802112Req req = new XN802112Req();
         req.setAccountNumber(accountNumber);
         req.setAmount(String.valueOf(amount));
         req.setFromType(fromType);
         req.setFromCode(fromCode);
         req.setPdf(pdf);
+        req.setApproveUser(approveUser);
+        req.setApproveNote(approveNote);
         XN802112Res res = BizConnecter.getBizData("802112",
             JsonUtils.object2Json(req), XN802112Res.class);
         return res.getCqNo();

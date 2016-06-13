@@ -16,6 +16,12 @@ public class XN802112Req {
     // pdf
     private String pdf;
 
+    // 审核人
+    private String approveUser;
+
+    // 审核意见
+    private String approveNote;
+
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -54,5 +60,21 @@ public class XN802112Req {
 
     public void setPdf(String pdf) {
         this.pdf = pdf;
+    }
+
+    public String getApproveUser() {
+        return approveUser;
+    }
+
+    public void setApproveUser(String approveUser) {
+        this.approveUser = approveUser;
+    }
+
+    public String getApproveNote() {
+        return approveNote;
+    }
+
+    public void setApproveNote(String approveNote) {
+        this.approveNote = approveNote;
     }
 }

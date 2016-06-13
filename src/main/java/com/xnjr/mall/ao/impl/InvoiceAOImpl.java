@@ -152,37 +152,33 @@ public class InvoiceAOImpl implements IInvoiceAO {
      * @see com.xnjr.mall.ao.IInvoiceAO#payInvoice(com.xnjr.mall.domain.Invoice)
      */
     @Override
-    public int payInvoice(Invoice data) {
-        int count = 0;
-        Invoice invoice = invoiceBO.getInvoice(data.getCode());
-        Long amount = 0L;
+    public void payInvoice(String code, Long amount, String fromType,
+            String fromCode, String pdf, String toCardNo, String approveUser,
+            String approveNote) {
+        Invoice invoice = invoiceBO.getInvoice(code);
         // 更新订单
-        if (EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
-            if (data.getAmount() == null || data.getAmount().longValue() == 0) {
+        if (EInvoiceStatus.TO_PAY.getCode().equals(invoice.getStatus())) {
+            if (amount == null || amount.longValue() == 0) {
                 throw new BizException("xn0000", "首款金额不能为空");
             }
-            amount = data.getAmount();
-            count = invoiceBO.refreshInvoiceStatus(data.getCode(),
+            invoiceBO.refreshInvoiceStatus(code,
                 EInvoiceStatus.PAY_YES.getCode());
         } else {
             amount = invoice.getTotalAmount() - invoice.getPayAmount();
             if (EInvoiceStatus.RECEIVE.getCode().equals(invoice.getStatus())) {
-                count = invoiceBO.refreshInvoiceStatus(data.getCode(),
+                invoiceBO.refreshInvoiceStatus(code,
                     EInvoiceStatus.FINISH.getCode());
             }
         }
         // 当前用户充值，划出；系统账户划入
-        XN802011Res res = accountBO.getAccountByUserId(data.getApplyUser());
-        accountBO.doChargeOfflineWithdrawApp(res.getAccountNumber(), amount,
-            data.getFromType(), data.getFromCode(), data.getPdf());
-        accountBO.doTransferOss(res.getAccountNumber(),
-            EDirection.MINUS.getCode(), amount, null,
-            EDirection.MINUS.getValue());
+        XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
+        accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(), amount,
+            fromType, fromCode, pdf, approveUser, approveNote);
         accountBO
-            .doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
-                EDirection.PLUS.getCode(), amount, null,
-                EDirection.PLUS.getValue());
-        return count;
+            .doTransferOss(res.getAccountNumber(), EDirection.MINUS.getCode(),
+                amount, 0L, EDirection.MINUS.getValue());
+        accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
+            EDirection.PLUS.getCode(), amount, 0L, EDirection.PLUS.getValue());
     }
 
     /** 

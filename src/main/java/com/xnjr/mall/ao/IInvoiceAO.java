@@ -72,12 +72,20 @@ public interface IInvoiceAO {
 
     /**
      * 订单付款
-     * @param data
-     * @return 
-     * @create: 2016年6月12日 下午5:28:47 xieyj
+     * @param code
+     * @param amount
+     * @param fromType
+     * @param fromCode
+     * @param pdf
+     * @param toCardNo
+     * @param approveUser
+     * @param approveNote 
+     * @create: 2016年6月13日 上午11:35:08 xieyj
      * @history:
      */
-    public int payInvoice(Invoice data);
+    public void payInvoice(String code, Long amount, String fromType,
+            String fromCode, String pdf, String toCardNo, String approveUser,
+            String approveNote);
 
     /**
      * 发货单分页查询
