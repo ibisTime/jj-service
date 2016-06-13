@@ -22,3 +22,5 @@
 		<typeAlias alias="merCard" type="com.xnjr.mall.domain.MerCard" />
 	</typeAliases>	
 </configuration>
+
+

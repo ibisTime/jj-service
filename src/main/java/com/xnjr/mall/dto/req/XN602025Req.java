@@ -19,6 +19,9 @@ public class XN602025Req extends APageReq {
     // 用户编号（选填）
     private String applyUser;
 
+    // 用户名（选填）
+    private String loginName;
+
     // 状态（选填）
     private String status;
 
@@ -44,5 +47,13 @@ public class XN602025Req extends APageReq {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 }

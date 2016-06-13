@@ -20,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class ABaseDO implements Serializable {
 
+    private String userDB;
+
     /** 
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
      */
@@ -52,4 +54,13 @@ public abstract class ABaseDO implements Serializable {
         return StringUtils.replace(UUID.randomUUID().toString(), "-".intern(),
             StringUtils.EMPTY);
     }
+
+    public String getUserDB() {
+        return userDB;
+    }
+
+    public void setUserDB(String userDB) {
+        this.userDB = userDB;
+    }
+
 }

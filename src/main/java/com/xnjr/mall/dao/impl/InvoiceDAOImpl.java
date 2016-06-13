@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.xnjr.mall.common.DBPropertiesUtil;
 import com.xnjr.mall.dao.IInvoiceDAO;
 import com.xnjr.mall.dao.base.support.AMybatisTemplate;
 import com.xnjr.mall.domain.Invoice;
@@ -37,6 +38,7 @@ public class InvoiceDAOImpl extends AMybatisTemplate implements IInvoiceDAO {
      */
     @Override
     public Invoice select(Invoice condition) {
+        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
         return super.select(NAMESPACE.concat("select_invoice"), condition,
             Invoice.class);
     }
@@ -46,6 +48,7 @@ public class InvoiceDAOImpl extends AMybatisTemplate implements IInvoiceDAO {
      */
     @Override
     public Long selectTotalCount(Invoice condition) {
+        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
         return super.selectTotalCount(NAMESPACE.concat("select_invoice_count"),
             condition);
     }
@@ -55,6 +58,7 @@ public class InvoiceDAOImpl extends AMybatisTemplate implements IInvoiceDAO {
      */
     @Override
     public List<Invoice> selectList(Invoice condition) {
+        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_invoice"), condition,
             Invoice.class);
     }
@@ -64,6 +68,7 @@ public class InvoiceDAOImpl extends AMybatisTemplate implements IInvoiceDAO {
      */
     @Override
     public List<Invoice> selectList(Invoice condition, int start, int count) {
+        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_invoice"), start,
             count, condition, Invoice.class);
     }

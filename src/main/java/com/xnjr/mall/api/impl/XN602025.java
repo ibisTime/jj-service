@@ -33,6 +33,7 @@ public class XN602025 extends AProcessor {
     public Object doBusiness() throws BizException {
         Invoice condition = new Invoice();
         condition.setCodeForQuery(req.getCode());
+        condition.setLoginName(req.getLoginName());
         condition.setApplyUser(req.getApplyUser());
         condition.setStatus(req.getStatus());
         condition.setApplyDatetimeStart(DateUtil.strToDate(req.getDateStart(),
