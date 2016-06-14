@@ -120,7 +120,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
      * @see com.xnjr.mall.ao.IInvoiceAO#cancelInvoice(java.lang.String, java.lang.String)
      */
     @Override
-    public int cancelInvoice(String code, String userId, String applyNote) {
+    public int cancelInvoice(String code, String userId, String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
         if (!userId.equals(data.getApplyUser())) {
             throw new BizException("xn0000", "订单申请人和取消操作用户不符");
@@ -128,7 +128,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单状态不是待支付状态");
         }
-        return invoiceBO.cancelInvoice(code, applyNote);
+        return invoiceBO.cancelInvoice(code, approveNote);
     }
 
     /**
@@ -255,7 +255,6 @@ public class InvoiceAOImpl implements IInvoiceAO {
                     invoice.getStatus())) {
             invoice.setLogistics(logisticsBO.getLogisticsByInvoiceCode(code));
         }
-
         return invoice;
     }
 }

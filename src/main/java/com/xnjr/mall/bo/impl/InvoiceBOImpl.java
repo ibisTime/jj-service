@@ -93,7 +93,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
      * @see com.xnjr.mall.bo.IInvoiceBO#cancelInvoice(java.lang.String, java.lang.String)
      */
     @Override
-    public int cancelInvoice(String code, String applyNote) {
+    public int cancelInvoice(String code, String approveNote) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
             if (!isInvoiceExist(code)) {
@@ -101,7 +101,7 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             }
             Invoice data = new Invoice();
             data.setCode(code);
-            data.setApplyNote(applyNote);
+            data.setApproveNote(approveNote);
             data.setStatus(EInvoiceStatus.FINISH.getCode());
             count = invoiceDAO.updateInvoiceCancel(data);
         }

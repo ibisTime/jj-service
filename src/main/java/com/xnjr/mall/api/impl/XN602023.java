@@ -29,7 +29,7 @@ public class XN602023 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         int count = invoiceAO.cancelInvoice(req.getCode(), req.getUserId(),
-            req.getApplyNote());
+            req.getApproveNote());
         return new BooleanRes(count > 0 ? true : false);
 
     }
@@ -41,6 +41,6 @@ public class XN602023 extends AProcessor {
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602023Req.class);
         StringValidater.validateBlank(req.getCode(), req.getUserId(),
-            req.getApplyNote());
+            req.getApproveNote());
     }
 }

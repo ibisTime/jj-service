@@ -15,7 +15,7 @@ public class XN602023Req {
     private String code;
 
     // 取消原因（必填）
-    private String applyNote;
+    private String approveNote;
 
     public String getCode() {
         return code;
@@ -33,11 +33,11 @@ public class XN602023Req {
         this.userId = userId;
     }
 
-    public String getApplyNote() {
-        return applyNote;
+    public String getApproveNote() {
+        return approveNote;
     }
 
-    public void setApplyNote(String applyNote) {
-        this.applyNote = applyNote;
+    public void setApproveNote(String approveNote) {
+        this.approveNote = approveNote;
     }
 }

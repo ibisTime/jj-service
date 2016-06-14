@@ -113,7 +113,7 @@
 		UPDATE tmall_invoice
 		SET
 		status = #{status}
-		,apply_note = #{applyNote}
+		,approve_note = #{approveNote}
 		WHERE
 		code = #{code}
 	</update>
