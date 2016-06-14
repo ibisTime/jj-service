@@ -45,7 +45,7 @@ public interface IInvoiceAO {
      * @create: 2016年5月25日 上午11:40:28 xieyj
      * @history:
      */
-    public int toPayInvoice(String code, String tradePwd);
+    public void toPayInvoice(String code, String tradePwd);
 
     /**
      * 取消发货单
