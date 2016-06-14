@@ -37,7 +37,7 @@ public class XN602061 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Goods condition = new Goods();
-        condition.setCode(req.getCode());
+        condition.setCodeForLikeQuery(req.getCode());
         condition.setModelCode(req.getModelCode());
         condition.setLogisticsCode(req.getLogisticsCode());
         condition.setUserId(req.getUserId());

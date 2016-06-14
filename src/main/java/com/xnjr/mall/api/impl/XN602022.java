@@ -28,8 +28,8 @@ public class XN602022 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        int count = invoiceAO.toPayInvoice(req.getCode(), req.getTradePwd());
-        return new BooleanRes(count > 0 ? true : false);
+        invoiceAO.toPayInvoice(req.getCode(), req.getTradePwd());
+        return new BooleanRes(true);
     }
 
     /** 

@@ -28,6 +28,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="codeForLikeQuery != null and codeForLikeQuery != '' ">
+				AND t.code like "%"#{codeForLikeQuery}"%"
+			</if>
 			<if test="modelCode != null and modelCode != '' ">
 				AND t.model_code = #{modelCode}
 			</if>

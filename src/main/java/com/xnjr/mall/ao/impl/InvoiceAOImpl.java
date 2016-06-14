@@ -111,9 +111,24 @@ public class InvoiceAOImpl implements IInvoiceAO {
     }
 
     @Override
-    public int toPayInvoice(String code, String tradePwd) {
+    @Transactional
+    public void toPayInvoice(String code, String tradePwd) {
+        Invoice invoice = invoiceBO.getInvoice(code);
+        if (!EInvoiceStatus.TO_PAY.getValue().equals(invoice.getStatus())) {
+            throw new BizException("xn000000", "订单不处于待支付状态");
+        }
+        // 当前用户充值，划出；系统账户划入
+        XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
+        accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
+            invoice.getTotalAmount(), "alipay", "6228584324242", "http",
+            "admin", "线上支付模拟");
+        accountBO.doTransferOss(res.getAccountNumber(),
+            EDirection.MINUS.getCode(), invoice.getTotalAmount(), 0L,
+            EDirection.MINUS.getValue());
+        accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
+            EDirection.PLUS.getCode(), invoice.getTotalAmount(), 0L,
+            EDirection.PLUS.getValue());
         invoiceBO.refreshInvoiceStatus(code, EInvoiceStatus.PAY_YES.getCode());
-        return 0;
     }
 
     /** 

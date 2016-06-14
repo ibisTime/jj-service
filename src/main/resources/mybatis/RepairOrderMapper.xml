@@ -26,7 +26,7 @@
 				AND t.code like "%"#{codeForQuery}"%"
 			</if>
 			<if test="goodsCode != null and goodsCode != '' ">
-				AND t.goods_code = #{goodsCode}
+				AND t.goods_code like "%"#{goodsCode}"%"
 			</if>
 			<if test="goodsCodeForQuery != null and goodsCodeForQuery != '' ">
 				AND t.goods_code like "%"#{goodsCodeForQuery}"%"
