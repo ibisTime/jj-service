@@ -22,8 +22,14 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="codeForQuery != null and codeForQuery != '' ">
+				AND t.code like "%"#{codeForQuery}"%"
+			</if>
 			<if test="goodsCode != null and goodsCode != '' ">
 				AND t.goods_code = #{goodsCode}
+			</if>
+			<if test="goodsCodeForQuery != null and goodsCodeForQuery != '' ">
+				AND t.goods_code like "%"#{goodsCodeForQuery}"%"
 			</if>
 			<if test="userId != null and userId != '' ">
 				AND t.user_id = #{userId}

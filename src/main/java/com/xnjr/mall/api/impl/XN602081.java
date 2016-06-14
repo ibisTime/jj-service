@@ -38,8 +38,9 @@ public class XN602081 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         RepairOrder condition = new RepairOrder();
-        condition.setCode(req.getCode());
-        condition.setGoodsCode(req.getGoodsCode());
+        condition.setCodeForQuery(req.getCode());
+
+        condition.setGoodsCodeForQuery(req.getGoodsCode());
         condition.setStatus(req.getStatus());
         condition.setUserId(req.getUserId());
         condition.setApplyUser(req.getApplyUser());
