@@ -52,6 +52,8 @@ public class Goods extends ABaseDO {
 
     private String codeEnd;
 
+    private String codeForLikeQuery;
+
     // 物流单状态
     private String status;
 
@@ -149,5 +151,13 @@ public class Goods extends ABaseDO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCodeForLikeQuery() {
+        return codeForLikeQuery;
+    }
+
+    public void setCodeForLikeQuery(String codeForLikeQuery) {
+        this.codeForLikeQuery = codeForLikeQuery;
     }
 }

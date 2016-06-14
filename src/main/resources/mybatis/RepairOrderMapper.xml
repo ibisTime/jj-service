@@ -23,7 +23,7 @@
 				AND t.code = #{code}
 			</if>
 			<if test="goodsCode != null and goodsCode != '' ">
-				AND t.goods_code = #{goodsCode}
+				AND t.goods_code like "%"#{goodsCode}"%"
 			</if>
 			<if test="userId != null and userId != '' ">
 				AND t.user_id = #{userId}
