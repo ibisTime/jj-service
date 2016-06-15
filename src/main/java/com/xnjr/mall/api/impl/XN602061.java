@@ -38,8 +38,8 @@ public class XN602061 extends AProcessor {
     public Object doBusiness() throws BizException {
         Goods condition = new Goods();
         condition.setCodeForLikeQuery(req.getCode());
-        condition.setModelCode(req.getModelCode());
-        condition.setLogisticsCode(req.getLogisticsCode());
+        condition.setModelCodeForLikeQuery(req.getModelCode());
+        condition.setLogisticsCodeForLikeQuery(req.getLogisticsCode());
         condition.setUserId(req.getUserId());
 
         condition.setStatus(req.getStatus());

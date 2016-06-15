@@ -23,6 +23,9 @@
 			<if test="ckey != null and ckey != '' ">
 				AND t.ckey = #{ckey}
 			</if>	
+			<if test="ckeyForQuery != null and ckeyForQuery != '' ">
+				AND t.ckey like "%"#{ckeyForQuery}"%"
+			</if>
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
 			</if>

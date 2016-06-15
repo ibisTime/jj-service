@@ -96,11 +96,10 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
     public int cancelInvoice(String code, String approveNote) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
-            if (!isInvoiceExist(code)) {
-                throw new BizException("xn0000", "发货单不存在");
-            }
+            Invoice invoice = this.getInvoice(code);
             Invoice data = new Invoice();
             data.setCode(code);
+            data.setApproveUser(invoice.getApplyUser());
             data.setApproveNote(approveNote);
             data.setStatus(EInvoiceStatus.FINISH.getCode());
             count = invoiceDAO.updateInvoiceCancel(data);
@@ -121,8 +120,9 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             }
             Invoice data = new Invoice();
             data.setCode(code);
-            data.setApproveUser(approveUser);
             data.setStatus(status);
+            data.setApproveUser(approveUser);
+            data.setApproveNote(approveNote);
             data.setApproveDatetime(new Date());
             count = invoiceDAO.updateInvoiceCancel(data);
         }

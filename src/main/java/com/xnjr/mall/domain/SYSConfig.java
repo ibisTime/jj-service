@@ -47,6 +47,9 @@ public class SYSConfig extends ABaseDO {
     // 备注
     private String remark;
 
+    // ************* 模糊查询 *****************
+    private String ckeyForQuery;
+
     public Long getId() {
         return id;
     }
@@ -111,4 +114,11 @@ public class SYSConfig extends ABaseDO {
         this.remark = remark;
     }
 
+    public String getCkeyForQuery() {
+        return ckeyForQuery;
+    }
+
+    public void setCkeyForQuery(String ckeyForQuery) {
+        this.ckeyForQuery = ckeyForQuery;
+    }
 }

@@ -35,8 +35,14 @@
 			<if test="modelCode != null and modelCode != '' ">
 				AND t.model_code = #{modelCode}
 			</if>
+			<if test="modelCodeForLikeQuery != null and modelCodeForLikeQuery != '' ">
+				AND t.model_code like "%"#{modelCodeForLikeQuery}"%"
+			</if>
 			<if test="logisticsCode != null and logisticsCode != '' ">
 				AND t.logistics_code = #{logisticsCode}
+			</if>
+			<if test="logisticsCodeForLikeQuery != null and logisticsCodeForLikeQuery != '' ">
+				AND t.logistics_code like "%"#{logisticsCodeForLikeQuery}"%"
 			</if>
 			<if test="userId != null and userId != '' ">
 				AND t.user_id = #{userId}
