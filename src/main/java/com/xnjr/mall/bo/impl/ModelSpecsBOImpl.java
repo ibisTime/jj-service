@@ -61,7 +61,7 @@ public class ModelSpecsBOImpl extends PaginableBOImpl<ModelSpecs> implements
     public String saveModelSpecs(ModelSpecs data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM("MS");
+            code = OrderNoGenerater.generateME("MS");
             data.setCode(code);
             modelSpecsDAO.insert(data);
         }
@@ -77,7 +77,7 @@ public class ModelSpecsBOImpl extends PaginableBOImpl<ModelSpecs> implements
         if (StringUtils.isNotBlank(modelCode)) {
             ModelSpecs data = new ModelSpecs();
             data.setModelCode(modelCode);
-            count = modelSpecsDAO.delete(data);
+            count = modelSpecsDAO.deleteByModelCode(data);
         }
         return count;
     }

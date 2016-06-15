@@ -22,7 +22,7 @@ public class AccountBOImpl implements IAccountBO {
     @Override
     public String doChargeOfflineWithoutApp(String accountNumber, Long amount,
             String fromType, String fromCode, String pdf, String approveUser,
-            String approveNote) {
+            String approveNote, String refNo) {
         XN802112Req req = new XN802112Req();
         req.setAccountNumber(accountNumber);
         req.setAmount(String.valueOf(amount));
@@ -31,6 +31,7 @@ public class AccountBOImpl implements IAccountBO {
         req.setPdf(pdf);
         req.setApproveUser(approveUser);
         req.setApproveNote(approveNote);
+        req.setRefNo(refNo);
         XN802112Res res = BizConnecter.getBizData("802112",
             JsonUtils.object2Json(req), XN802112Res.class);
         return res.getCqNo();

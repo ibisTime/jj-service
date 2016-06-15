@@ -121,7 +121,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
         accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
             invoice.getTotalAmount(), "alipay", "6228584324242", "http",
-            "admin", "线上支付模拟");
+            "admin", "线上支付模拟", code);
         accountBO.doTransferOss(res.getAccountNumber(),
             EDirection.MINUS.getCode(), invoice.getTotalAmount(), 0L,
             EDirection.MINUS.getValue());
@@ -195,7 +195,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         // 当前用户充值，划出；系统账户划入
         XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
         accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(), amount,
-            fromType, fromCode, pdf, approveUser, approveNote);
+            fromType, fromCode, pdf, approveUser, approveNote, code);
         accountBO
             .doTransferOss(res.getAccountNumber(), EDirection.MINUS.getCode(),
                 amount, 0L, EDirection.MINUS.getValue());

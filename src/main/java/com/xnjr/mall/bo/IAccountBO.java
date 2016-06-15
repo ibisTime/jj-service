@@ -25,13 +25,14 @@ public interface IAccountBO {
      * @param pdf
      * @param approveUser
      * @param approveNote
+     * @param refNo
      * @return 
-     * @create: 2016年6月13日 上午11:37:24 xieyj
+     * @create: 2016年6月15日 下午6:31:43 xieyj
      * @history:
      */
     public String doChargeOfflineWithoutApp(String accountNumber, Long amount,
             String fromType, String fromCode, String pdf, String approveUser,
-            String approveNote);
+            String approveNote, String refNo);
 
     /**
      * @param accountNumber

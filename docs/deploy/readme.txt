@@ -20,7 +20,6 @@
   mv -f config.properties ./xn-mall/WEB-INF/classes/
   
 5. 启停tomcat 
-  cd /home/wwwroot/tomcat_JY_mall/bin
   ../bin/shutdown.sh
   ../bin/startup.sh
   

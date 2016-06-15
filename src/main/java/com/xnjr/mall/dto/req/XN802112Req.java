@@ -22,6 +22,9 @@ public class XN802112Req {
     // 审核意见
     private String approveNote;
 
+    // refNo
+    private String refNo;
+
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -76,5 +79,13 @@ public class XN802112Req {
 
     public void setApproveNote(String approveNote) {
         this.approveNote = approveNote;
+    }
+
+    public String getRefNo() {
+        return refNo;
+    }
+
+    public void setRefNo(String refNo) {
+        this.refNo = refNo;
     }
 }
