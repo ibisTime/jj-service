@@ -17,6 +17,7 @@
 	
 	<resultMap id="goodsInLogistics_DB_Result" type="goods">
 		<result column="model_code" property="modelCode" />
+		<result column="model_name" property="modelName" />
 		<result column="code_start" property="codeStart" />
 		<result column="code_end" property="codeEnd" />
 		<result column="cost_price" property="costPrice" />
@@ -69,6 +70,7 @@
 	<select id="select_goodsInLogistics" parameterType="goods" resultMap="goodsInLogistics_DB_Result">
 		SELECT
 		t.model_code,
+		(select name from tmall_model tm where tm.code = t.model_code) as model_name,
         MIN(t.code) code_start,
         MAX(t.code) code_end,
         (select count(*) from tmall_goods where model_code = t.model_code and logistics_code = #{logisticsCode}) quantity,

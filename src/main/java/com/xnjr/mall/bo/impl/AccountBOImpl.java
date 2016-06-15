@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.IAccountBO;
-import com.xnjr.mall.dto.req.XN802011Req;
 import com.xnjr.mall.dto.req.XN802112Req;
 import com.xnjr.mall.dto.req.XN802310Req;
 import com.xnjr.mall.dto.res.XN802011Res;
@@ -59,9 +58,7 @@ public class AccountBOImpl implements IAccountBO {
      */
     @Override
     public XN802011Res getAccountByUserId(String userId) {
-        XN802011Req req = new XN802011Req();
-        req.setUserId(userId);
-        return BizConnecter.getBizData("802011", JsonUtils.object2Json(req),
-            XN802011Res.class);
+        return BizConnecter.getBizData("802012",
+            JsonUtils.string2Json("userId", userId), XN802011Res.class);
     }
 }

@@ -26,14 +26,8 @@ public class RepairOrder extends ABaseDO {
     // 维修单编号
     private String code;
 
-    // 维修单编号_模糊查询
-    private String codeForQuery;
-
     // 维修单关联的货编号
     private String goodsCode;
-
-    // 维修单关联的货编号_模糊查询
-    private String goodsCodeForQuery;
 
     // 所属型号
     private String modelName;
@@ -67,6 +61,13 @@ public class RepairOrder extends ABaseDO {
 
     // 备注
     private String remark;
+
+    /***** 模糊查询使用字段 ******/
+    // 维修单编号_模糊查询
+    private String codeForQuery;
+
+    // 维修单关联的货编号_模糊查询
+    private String goodsCodeForQuery;
 
     public String getCode() {
         return code;

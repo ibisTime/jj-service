@@ -114,7 +114,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
     @Transactional
     public void toPayInvoice(String code, String tradePwd) {
         Invoice invoice = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.TO_PAY.getValue().equals(invoice.getStatus())) {
+        if (!EInvoiceStatus.TO_PAY.getCode().equals(invoice.getStatus())) {
             throw new BizException("xn000000", "订单不处于待支付状态");
         }
         // 当前用户充值，划出；系统账户划入
@@ -129,6 +129,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
             EDirection.PLUS.getCode(), invoice.getTotalAmount(), 0L,
             EDirection.PLUS.getValue());
         invoiceBO.refreshInvoiceStatus(code, EInvoiceStatus.PAY_YES.getCode());
+        invoiceBO.refreshInvoicePayAmount(code, invoice.getTotalAmount());
     }
 
     /** 
@@ -189,9 +190,8 @@ public class InvoiceAOImpl implements IInvoiceAO {
             }
             payAmount = invoice.getTotalAmount();
         }
-        if (payAmount != 0L) {
-            invoiceBO.refreshInvoicePayAmount(code, payAmount);
-        }
+        // 更新支付金额
+        invoiceBO.refreshInvoicePayAmount(code, payAmount);
         // 当前用户充值，划出；系统账户划入
         XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
         accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(), amount,

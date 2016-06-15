@@ -8,7 +8,7 @@
   
 
 3. 备份原先配置(如果第一次部署，跳过此步骤)
-  cd /mnt/wwwroot/tomcat_JY_mall/webapps
+  cd /home/wwwroot/tomcat_JY_mall/webapps
   cp ./xn-mall/WEB-INF/classes/application.properties .
   cp ./xn-mall/WEB-INF/classes/config.properties .
   rm -rf xn-mall.war
@@ -20,7 +20,7 @@
   mv -f config.properties ./xn-mall/WEB-INF/classes/
   
 5. 启停tomcat 
-  cd /mnt/wwwroot/tomcat_JY_mall/bin
+  cd /home/wwwroot/tomcat_JY_mall/bin
   ../bin/shutdown.sh
   ../bin/startup.sh
   
