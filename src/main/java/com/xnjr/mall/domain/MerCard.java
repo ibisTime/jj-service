@@ -38,6 +38,13 @@ public class MerCard extends ABaseDO {
     // 备注
     private String remark;
 
+    // ************* 模糊查询 *****************
+    // 支行模糊查询
+    private String subbranchForQuery;
+
+    // 开户账号模糊查询
+    private String cardNoForQuery;
+
     public String getCode() {
         return code;
     }
@@ -100,5 +107,21 @@ public class MerCard extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getSubbranchForQuery() {
+        return subbranchForQuery;
+    }
+
+    public void setSubbranchForQuery(String subbranchForQuery) {
+        this.subbranchForQuery = subbranchForQuery;
+    }
+
+    public String getCardNoForQuery() {
+        return cardNoForQuery;
+    }
+
+    public void setCardNoForQuery(String cardNoForQuery) {
+        this.cardNoForQuery = cardNoForQuery;
     }
 }

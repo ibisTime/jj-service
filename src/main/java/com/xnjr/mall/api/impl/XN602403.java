@@ -32,8 +32,8 @@ public class XN602403 extends AProcessor {
     public Object doBusiness() throws BizException {
         MerCard condition = new MerCard();
         condition.setCompanyCode(req.getCompanyCode());
-        condition.setSubbranch(req.getSubbranch());
-        condition.setCardNo(req.getCardNo());
+        condition.setSubbranchForQuery(req.getSubbranch());
+        condition.setCardNoForQuery(req.getCardNo());
         condition.setStatus(req.getStatus());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {

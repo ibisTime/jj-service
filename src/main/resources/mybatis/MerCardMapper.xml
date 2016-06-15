@@ -24,8 +24,14 @@
 			<if test="subbranch != null and subbranch != '' ">
 				AND t.subbranch = #{subbranch}
 			</if>
+			<if test="subbranchForQuery != null and subbranchForQuery != '' ">
+				AND t.subbranch like "%"#{subbranchForQuery}"%"
+			</if>
 			<if test="cardNo != null and cardNo != '' ">
 				AND t.card_no = #{cardNo}
+			</if>
+			<if test="cardNoForQuery != null and cardNoForQuery != '' ">
+				AND t.card_no like "%"#{cardNoForQuery}"%"
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}

@@ -79,7 +79,6 @@ public class MerCardAOImpl implements IMerCardAO {
         }
         count = merCardBO.refreshMerCard(data);
         return count;
-
     }
 
     /** 
