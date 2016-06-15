@@ -10,6 +10,7 @@ package com.xnjr.mall.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,12 @@ public class ProductAOImpl implements IProductAO {
      */
     @Override
     public String addProduct(Product product) {
+        Product condition = new Product();
+        condition.setName(product.getName());
+        List<Product> list = productBO.queryProductList(condition);
+        if (!CollectionUtils.sizeIsEmpty(list)) {
+            throw new BizException("jd00001", "产品名称已存在");
+        }
         String code = null;
         if (product != null) {
             code = productBO.saveProduct(product);
@@ -62,9 +69,17 @@ public class ProductAOImpl implements IProductAO {
      */
     @Override
     public int editProduct(Product product) {
+        Product dbProduct = productBO.getProduct(product.getCode());
+        Product condition = new Product();
+        condition.setName(product.getName());
+        List<Product> list = productBO.queryProductList(condition);
+        if (!CollectionUtils.sizeIsEmpty(list)
+                && !dbProduct.getName().equals(list.get(0).getName())) {
+            throw new BizException("jd00001", "产品名称已存在");
+        }
+
         int count = 0;
         if (product != null) {
-            Product dbProduct = productBO.getProduct(product.getCode());
             // 只有待审核和审核不通过的产品可进行修改
             if (EPutStatus.todoAPPROVE.getCode().equals(dbProduct.getStatus())
                     || EPutStatus.APPROVE_NO.getCode().equals(
