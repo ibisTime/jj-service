@@ -26,6 +26,9 @@
 			<if test="invoiceCode != null and invoiceCode != '' ">
 				AND t.invoice_code = #{invoiceCode}
 			</if>
+			<if test="invoiceCodeForLikeQuery != null and invoiceCodeForLikeQuery != '' ">
+				AND t.invoice_code like "%"#{invoiceCodeForLikeQuery}"%"
+			</if>
 			<if test="company != null and company != '' ">
 				AND t.company = #{company}
 			</if>

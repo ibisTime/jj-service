@@ -59,6 +59,9 @@ public class Logistics extends ABaseDO {
     // code模糊查询
     private String codeForLikeQuery;
 
+    // invoiceCode模糊查询
+    private String invoiceCodeForLikeQuery;
+
     // 发货时间起
     private Date deliveryDatetimeStart;
 
@@ -178,5 +181,13 @@ public class Logistics extends ABaseDO {
 
     public void setCodeForLikeQuery(String codeForLikeQuery) {
         this.codeForLikeQuery = codeForLikeQuery;
+    }
+
+    public String getInvoiceCodeForLikeQuery() {
+        return invoiceCodeForLikeQuery;
+    }
+
+    public void setInvoiceCodeForLikeQuery(String invoiceCodeForLikeQuery) {
+        this.invoiceCodeForLikeQuery = invoiceCodeForLikeQuery;
     }
 }
