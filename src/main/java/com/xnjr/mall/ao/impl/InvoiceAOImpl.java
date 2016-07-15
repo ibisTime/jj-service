@@ -119,20 +119,13 @@ public class InvoiceAOImpl implements IInvoiceAO {
         }
         // 当前用户充值，划出；系统账户划入
         XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
-        // 判断用户积分是否足够
-        if (invoice.getTotalAmount() > res.getAmount()) {
-            throw new BizException("xn000000", "账户积分不足，无法支付");
-
-        }
-        accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
-            invoice.getTotalAmount(), "alipay", "6228584324242", "无", "admin",
-            "线上支付模拟", code);
+        // accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
+        // invoice.getTotalAmount(), "alipay", "6228584324242", "无", "admin",
+        // "线上支付模拟", code);
         accountBO.doTransferOss(res.getAccountNumber(),
-            EDirection.MINUS.getCode(), invoice.getTotalAmount(), 0L,
-            EDirection.MINUS.getValue());
+            EDirection.MINUS.getCode(), invoice.getTotalAmount(), 0L, "购买商品");
         accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
-            EDirection.PLUS.getCode(), invoice.getTotalAmount(), 0L,
-            EDirection.PLUS.getValue());
+            EDirection.PLUS.getCode(), invoice.getTotalAmount(), 0L, "卖出商品");
         invoiceBO.refreshInvoiceStatus(code, EInvoiceStatus.PAY_YES.getCode());
         invoiceBO.refreshInvoicePayAmount(code, invoice.getTotalAmount());
     }
