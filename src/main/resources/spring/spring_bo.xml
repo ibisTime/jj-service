@@ -71,4 +71,8 @@
 	<bean id="merCardBO" class="com.xnjr.mall.bo.impl.MerCardBOImpl">
 		<property name="paginableDAO" ref="merCardDAOImpl"/>
 	</bean>	
+	
+	<bean id="integralBO" class="com.xnjr.mall.bo.impl.IntegralBOImpl">
+		<property name="paginableDAO" ref="integralBOImpl"/>
+	</bean>	
 </beans>

@@ -18,8 +18,9 @@
 		<typeAlias alias="logistics" type="com.xnjr.mall.domain.Logistics" />
 		<typeAlias alias="goods" type="com.xnjr.mall.domain.Goods" />
 		<typeAlias alias="repairOrder" type="com.xnjr.mall.domain.RepairOrder" />
-		
 		<typeAlias alias="merCard" type="com.xnjr.mall.domain.MerCard" />
+		
+		<typeAlias alias="integral" type="com.xnjr.mall.domain.Integral" />
 	</typeAliases>	
 </configuration>
 
