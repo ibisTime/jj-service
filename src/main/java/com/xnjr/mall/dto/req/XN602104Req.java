@@ -9,17 +9,17 @@ package com.xnjr.mall.dto.req;
 public class XN602104Req {
 
     // 编号(必填)
-    private String code;
+    private String integralCode;
 
     // 用户编号(必填)
     private String userId;
 
-    public String getCode() {
-        return code;
+    public String getIntegralCode() {
+        return integralCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setIntegralCode(String integralCode) {
+        this.integralCode = integralCode;
     }
 
     public String getUserId() {

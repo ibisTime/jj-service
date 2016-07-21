@@ -1,9 +1,9 @@
 /**
- * @Title ECheckResult.java 
+ * @Title ECurrency.java 
  * @Package com.ibis.account.enums 
  * @Description 
  * @author miyb  
- * @date 2015-2-26 下午2:58:54 
+ * @date 2015-3-15 下午4:41:06 
  * @version V1.0   
  */
 package com.xnjr.mall.enums;
@@ -13,20 +13,20 @@ import java.util.Map;
 
 /** 
  * @author: miyb 
- * @since: 2015-2-26 下午2:58:54 
+ * @since: 2015-3-15 下午4:41:06 
  * @history:
  */
-public enum EBoolean {
-    YES("1", "对"), NO("0", "错");
-    public static Map<String, EBoolean> getBooleanResultMap() {
-        Map<String, EBoolean> map = new HashMap<String, EBoolean>();
-        for (EBoolean status : EBoolean.values()) {
-            map.put(status.getCode(), status);
+public enum ECurrency {
+    CNY("CNY", "人民币"), XNB("XNB", "积分虚拟币");
+    public static Map<String, ECurrency> getCurrencyMap() {
+        Map<String, ECurrency> map = new HashMap<String, ECurrency>();
+        for (ECurrency currency : ECurrency.values()) {
+            map.put(currency.getCode(), currency);
         }
         return map;
     }
 
-    EBoolean(String code, String value) {
+    ECurrency(String code, String value) {
         this.code = code;
         this.value = value;
     }

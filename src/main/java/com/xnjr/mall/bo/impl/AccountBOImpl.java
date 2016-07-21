@@ -4,17 +4,29 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.IAccountBO;
+import com.xnjr.mall.dto.req.XN802013Req;
 import com.xnjr.mall.dto.req.XN802112Req;
 import com.xnjr.mall.dto.req.XN802310Req;
-import com.xnjr.mall.dto.res.XN802011Res;
+import com.xnjr.mall.dto.res.XN802012Res;
+import com.xnjr.mall.dto.res.XN802013Res;
 import com.xnjr.mall.dto.res.XN802112Res;
 import com.xnjr.mall.dto.res.XN802310Res;
+import com.xnjr.mall.enums.ECurrency;
 import com.xnjr.mall.http.BizConnecter;
 import com.xnjr.mall.http.JsonUtils;
 
 @Component
 public class AccountBOImpl implements IAccountBO {
     static Logger logger = Logger.getLogger(AccountBOImpl.class);
+
+    /** 
+     * @see com.xnjr.mall.bo.IAccountBO#doChargeOffline(java.lang.String, java.lang.Long, java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public String doChargeOffline(String userAccountNumber,
+            String jfAccountNumber, Long amount, String remark) {
+        return null;
+    }
 
     /** 
      * @see com.xnjr.mall.bo.IAccountBO#doChargeOfflineWithdrawApp(java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
@@ -58,8 +70,32 @@ public class AccountBOImpl implements IAccountBO {
      * @see com.xnjr.mall.bo.IAccountBO#getAccountByUserId(java.lang.String)
      */
     @Override
-    public XN802011Res getAccountByUserId(String userId) {
+    public XN802012Res getAccountByUserId(String userId) {
         return BizConnecter.getBizData("802012",
-            JsonUtils.string2Json("userId", userId), XN802011Res.class);
+            JsonUtils.string2Json("userId", userId), XN802012Res.class);
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IAccountBO#getXNBAccountByUserId(java.lang.String)
+     */
+    @Override
+    public XN802013Res getXNBAccountByUserId(String userId) {
+        XN802013Req req = new XN802013Req();
+        req.setUserId(userId);
+        req.setCurrency(ECurrency.XNB.getCode());
+        return BizConnecter.getBizData("802013", JsonUtils.object2Json(req),
+            XN802013Res.class);
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IAccountBO#getCNYAccountByUserId(java.lang.String)
+     */
+    @Override
+    public XN802013Res getCNYAccountByUserId(String userId) {
+        XN802013Req req = new XN802013Req();
+        req.setUserId(userId);
+        req.setCurrency(ECurrency.CNY.getCode());
+        return BizConnecter.getBizData("802013", JsonUtils.object2Json(req),
+            XN802013Res.class);
     }
 }

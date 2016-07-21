@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IGoodsOrderDAO">
+	<resultMap id="goodsOrder_DB_Result" type="goodsOrder">
+		<result column="code" property="code" />
+		<result column="goods_code" property="goodsCode" />
+		<result column="price" property="price" />
+		<result column="quantity" property="quantity" />
+		<result column="status" property="status" />
+		
+		<result column="apply_user" property="applyUser" />
+		<result column="apply_datetime" property="applyDatetime" />
+		<result column="apply_note" property="applyNote" />
+		<result column="approve_user" property="approveUser" />
+		<result column="approve_datetime" property="approveDatetime" />
+		<result column="approve_note" property="approveNote" />
+	</resultMap>
+	
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="goodsCode != null and goodsCode != '' ">
+				AND t.goods_code = #{goodsCode}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="applyUser != null and applyUser != '' ">
+				AND t.apply_user = #{applyUser}
+			</if>
+			<if test="applyDatetimeStart != null and applyDatetimeStart != '' ">
+				<![CDATA[AND t.apply_datetime >= #{applyDatetimeStart}]]>
+			</if>
+			<if test="applyDatetimeEnd != null and applyDatetimeEnd != '' ">
+				<![CDATA[AND t.apply_datetime <= #{applyDatetimeEnd}]]>
+			</if>
+		</trim>
+	</sql>
+	<select id="select_goodsOrder" parameterType="goodsOrder" resultMap="goodsOrder_DB_Result">
+		SELECT
+		code
+		,goods_code
+		,price
+		,quantity
+		,status
+		
+		,apply_user
+		,apply_datetime
+		,apply_note
+		,approve_user
+		,approve_datetime
+		,approve_note
+		FROM
+		tmall_goods_order t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_goodsOrder_count" parameterType="goodsOrder"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_goods_order t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_goodsOrder" parameterType="goodsOrder">
+		INSERT INTO
+		tmall_goods_order(
+		code
+		,goods_code
+		,price
+		,quantity
+		,status
+		
+		,apply_user
+		,apply_datetime
+		,apply_note
+		,approve_user
+		,approve_datetime
+		,approve_note
+		)
+		VALUES(
+		#{code}
+		,#{goodsCode}
+		,#{price}
+		,#{quantity}
+		,#{status}
+		
+		,#{applyUser}
+		,#{applyDatetime}
+		,#{applyNote}
+		,#{approveUser}
+		,#{approveDatetime}
+		,#{approveNote}
+		)
+	</insert>
+	
+	<update id="update_goodsOrderApprove" parameterType="goodsOrder">
+		UPDATE tmall_goods_order
+		SET
+		status = #{status}
+		,approve_user = #{approveUser}
+		,approve_datetime = #{approveDatetime}
+		,approve_note = #{approveNote}
+		WHERE
+		code = #{code}
+	</update>
+	
+</mapper>

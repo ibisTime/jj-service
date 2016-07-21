@@ -8,8 +8,10 @@
  */
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,8 @@ import com.xnjr.mall.core.EGeneratePrefix;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IIntegralDAO;
 import com.xnjr.mall.domain.Integral;
+import com.xnjr.mall.enums.EIntegralStatus;
+import com.xnjr.mall.exception.BizException;
 
 /** 
  * @author: xieyj 
@@ -41,6 +45,9 @@ public class IntegralBOImpl extends PaginableBOImpl<Integral> implements
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.JF.getCode());
             data.setCode(code);
+            data.setStatus(EIntegralStatus.TO_PUT.getCode());
+            data.setUpdater(data.getUserId());
+            data.setUpdateDatetime(new Date());
             integralDAO.insert(data);
         }
         return code;
@@ -62,5 +69,20 @@ public class IntegralBOImpl extends PaginableBOImpl<Integral> implements
         Integral condition = new Integral();
         condition.setCode(code);
         return integralDAO.select(condition);
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IIntegralBO#isExistIntegral(java.lang.String)
+     */
+    @Override
+    public void isExistIntegral(String code) {
+        if (StringUtils.isNotBlank(code)) {
+            Integral condition = new Integral();
+            condition.setCode(code);
+            Integral data = integralDAO.select(condition);
+            if (data == null) {
+                throw new BizException("xn0000", "积分编号不存在");
+            }
+        }
     }
 }

@@ -73,6 +73,10 @@
 	</bean>	
 	
 	<bean id="integralBO" class="com.xnjr.mall.bo.impl.IntegralBOImpl">
-		<property name="paginableDAO" ref="integralBOImpl"/>
+		<property name="paginableDAO" ref="integralDAOImpl"/>
+	</bean>	
+	
+	<bean id="goodsOrderBO" class="com.xnjr.mall.bo.impl.GoodsOrderBOImpl">
+		<property name="paginableDAO" ref="goodsOrderDAOImpl"/>
 	</bean>	
 </beans>

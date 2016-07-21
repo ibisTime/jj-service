@@ -1,6 +1,5 @@
 package com.xnjr.mall.bo.impl;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.IUserBO;
@@ -31,8 +30,7 @@ public class UserBOImpl extends PaginableBOImpl<User> implements IUserBO {
         req.setUserId(userId);
         XN805901Res res = BizConnecter.getBizData("805901",
             JsonUtils.object2Json(req), XN805901Res.class);
-        if (res == null
-                || (res != null && StringUtils.isBlank(res.getLoginName()))) {
+        if (res == null) {
             throw new BizException("XN000000", "编号为" + userId + "的用户不存在");
         }
         return res;

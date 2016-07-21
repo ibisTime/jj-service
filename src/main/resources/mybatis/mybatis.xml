@@ -21,6 +21,7 @@
 		<typeAlias alias="merCard" type="com.xnjr.mall.domain.MerCard" />
 		
 		<typeAlias alias="integral" type="com.xnjr.mall.domain.Integral" />
+		<typeAlias alias="goodsOrder" type="com.xnjr.mall.domain.GoodsOrder" />
 	</typeAliases>	
 </configuration>
 

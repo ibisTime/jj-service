@@ -30,7 +30,7 @@ import com.xnjr.mall.domain.Address;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.InvoiceModel;
-import com.xnjr.mall.dto.res.XN802011Res;
+import com.xnjr.mall.dto.res.XN802012Res;
 import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.enums.EDirection;
 import com.xnjr.mall.enums.EInvoiceStatus;
@@ -118,7 +118,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
             throw new BizException("xn000000", "订单不处于待支付状态");
         }
         // 当前用户充值，划出；系统账户划入
-        XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
+        XN802012Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
         // accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
         // invoice.getTotalAmount(), "alipay", "6228584324242", "无", "admin",
         // "线上支付模拟", code);
@@ -191,7 +191,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         // 更新支付金额
         invoiceBO.refreshInvoicePayAmount(code, payAmount);
         // 当前用户充值，划出；系统账户划入
-        XN802011Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
+        XN802012Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
         accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(), amount,
             fromType, fromCode, pdf, approveUser, approveNote, code);
         accountBO

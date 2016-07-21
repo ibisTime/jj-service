@@ -14,6 +14,8 @@ public interface IIntegralBO extends IPaginableBO<Integral> {
 
     public String saveIntegral(Integral data);
 
+    public void isExistIntegral(String code);
+
     public List<Integral> queryIntegralList(Integral condition);
 
     public Integral getIntegral(String code);

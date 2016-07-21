@@ -8,14 +8,22 @@
  */
 package com.xnjr.mall.bo;
 
-import com.xnjr.mall.dto.res.XN802011Res;
+import com.xnjr.mall.dto.res.XN802012Res;
+import com.xnjr.mall.dto.res.XN802013Res;
 
-/** 
- * @author: miyb 
- * @since: 2015-3-15 下午3:15:49 
- * @history:
- */
 public interface IAccountBO {
+
+    /**
+     * 
+     * @param userAccountNumber
+     * @param jfAccountNumber
+     * @param amount
+     * @return 
+     * @create: 2016年7月21日 上午10:53:32 xieyj
+     * @history:
+     */
+    public String doChargeOffline(String userAccountNumber,
+            String jfAccountNumber, Long amount, String remark);
 
     /**
      * @param accountNumber
@@ -53,6 +61,22 @@ public interface IAccountBO {
      * @create: 2016年6月12日 下午9:14:13 xieyj
      * @history:
      */
-    public XN802011Res getAccountByUserId(String userId);
+    public XN802012Res getAccountByUserId(String userId);
+
+    /**
+     * @param userId
+     * @return 
+     * @create: 2016年6月12日 下午9:14:13 xieyj
+     * @history:
+     */
+    public XN802013Res getXNBAccountByUserId(String userId);
+
+    /**
+     * @param userId
+     * @return 
+     * @create: 2016年6月12日 下午9:14:13 xieyj
+     * @history:
+     */
+    public XN802013Res getCNYAccountByUserId(String userId);
 
 }

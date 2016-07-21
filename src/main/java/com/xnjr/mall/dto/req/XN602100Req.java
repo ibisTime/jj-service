@@ -11,16 +11,13 @@ public class XN602100Req {
     private String userId;
 
     // 数据(必填)
-    private Long quantity;
+    private String quantity;
 
     // 价格(必填)
-    private Long price;
+    private String price;
 
     // 是否需要审核(必填)
     private String isApprove;
-
-    // 更新人(必填)
-    private String updater;
 
     // 备注(选填)
     private String remark;
@@ -33,19 +30,19 @@ public class XN602100Req {
         this.userId = userId;
     }
 
-    public Long getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
-    public Long getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -55,14 +52,6 @@ public class XN602100Req {
 
     public void setIsApprove(String isApprove) {
         this.isApprove = isApprove;
-    }
-
-    public String getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(String updater) {
-        this.updater = updater;
     }
 
     public String getRemark() {

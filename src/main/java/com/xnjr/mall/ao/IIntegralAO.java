@@ -49,4 +49,14 @@ public interface IIntegralAO {
      * @history:
      */
     public Integral getIntegral(String code);
+
+    /**
+     * 扫描积分
+     * @param code
+     * @param userId
+     * @return 
+     * @create: 2016年7月21日 上午8:57:18 xieyj
+     * @history:
+     */
+    public void scannIntegral(String code, String userId);
 }
