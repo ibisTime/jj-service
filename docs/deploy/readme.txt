@@ -15,11 +15,9 @@
   rm -rf xn-mall
   mv /home/xn-mall.war .
   
-4. 已备份配置文件放回原处
+4. 已备份配置文件放回原处,启停tomcat 
   mv -f application.properties ./xn-mall/WEB-INF/classes/
   mv -f config.properties ./xn-mall/WEB-INF/classes/
-  
-5. 启停tomcat 
   ../bin/shutdown.sh
   ../bin/startup.sh
   
