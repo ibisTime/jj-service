@@ -66,9 +66,16 @@ public class IntegralBOImpl extends PaginableBOImpl<Integral> implements
      */
     @Override
     public Integral getIntegral(String code) {
-        Integral condition = new Integral();
-        condition.setCode(code);
-        return integralDAO.select(condition);
+        Integral data = null;
+        if (StringUtils.isNotBlank(code)) {
+            Integral condition = new Integral();
+            condition.setCode(code);
+            data = integralDAO.select(condition);
+            if (data == null) {
+                throw new BizException("xn0000", "积分二维码编号不存在");
+            }
+        }
+        return data;
     }
 
     /** 
@@ -84,5 +91,24 @@ public class IntegralBOImpl extends PaginableBOImpl<Integral> implements
                 throw new BizException("xn0000", "积分编号不存在");
             }
         }
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IIntegralBO#approveIntegral(java.lang.String, java.lang.String, java.lang.String, com.xnjr.mall.enums.EIntegralStatus)
+     */
+    @Override
+    public int refreshIntegralStatus(String code, EIntegralStatus status,
+            String updater, String remark) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Integral data = new Integral();
+            data.setCode(code);
+            data.setStatus(status.getCode());
+            data.setUpdater(updater);
+            data.setUpdateDatetime(new Date());
+            data.setRemark(remark);
+            count = integralDAO.updateStatus(data);
+        }
+        return count;
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.xnjr.mall.bo.base.IPaginableBO;
 import com.xnjr.mall.domain.Integral;
+import com.xnjr.mall.enums.EIntegralStatus;
 
 /** 
  * @author: xieyj 
@@ -19,4 +20,7 @@ public interface IIntegralBO extends IPaginableBO<Integral> {
     public List<Integral> queryIntegralList(Integral condition);
 
     public Integral getIntegral(String code);
+
+    public int refreshIntegralStatus(String code, EIntegralStatus status,
+            String updater, String remark);
 }

@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum EIntegralStatus {
-    TO_PUT("0", "待发布"), PUT_YES("1", "已发布"), INVALID("2", "已过期");
+    TO_PUT("1", "使用中"), PUT_ON("2", "已上架"), PUT_OFF("3", "已下架"), INVALID("4",
+            "已废弃");
     public static Map<String, EIntegralStatus> getIntegralStatusMap() {
         Map<String, EIntegralStatus> map = new HashMap<String, EIntegralStatus>();
         for (EIntegralStatus currency : EIntegralStatus.values()) {

@@ -1,12 +1,12 @@
 package com.xnjr.mall.dto.req;
 
 /**
- * 扫描积分二维码，需审批产生积分申请；无需审批直接从商家里扣除积分，直接加上
+ * (前端购买)扫描积分二维码，需审批产生积分申请；无需审批直接从商家里扣除积分，直接加上
  * @author: xieyj 
  * @since: 2016年7月20日 下午5:38:20 
  * @history:
  */
-public class XN602104Req {
+public class XN602106Req {
 
     // 编号(必填)
     private String integralCode;

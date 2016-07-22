@@ -59,4 +59,38 @@ public interface IIntegralAO {
      * @history:
      */
     public void scannIntegral(String code, String userId);
+
+    /**
+     * 上架/下架积分二维码
+     * @param code
+     * @param updater
+     * @param updateResult
+     * @param remark
+     * @return 
+     * @create: 2016年7月22日 上午10:55:10 xieyj
+     * @history:
+     */
+    public int approveIntegral(String code, String updater,
+            String updateResult, String remark);
+
+    /**
+     * 购买上架积分二维码
+     * @param code
+     * @param userId
+     * @return 
+     * @create: 2016年7月21日 上午8:57:18 xieyj
+     * @history:
+     */
+    public void bugIntegral(String code, String userId);
+
+    /**
+     * 失效积分二维码
+     * @param code
+     * @param updater
+     * @param remark
+     * @return 
+     * @create: 2016年7月22日 上午10:55:10 xieyj
+     * @history:
+     */
+    public int invalidIntegral(String code, String updater, String remark);
 }
