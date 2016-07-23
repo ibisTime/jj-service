@@ -22,6 +22,9 @@ public class XN805901Res {
     // 用户等级
     private String level;
 
+    // 身份标识
+    private String kind;
+
     // 推荐人
     private String userReferee;
 
@@ -131,5 +134,13 @@ public class XN805901Res {
 
     public void setUserReferee(String userReferee) {
         this.userReferee = userReferee;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 }

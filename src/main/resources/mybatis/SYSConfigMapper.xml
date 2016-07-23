@@ -23,6 +23,14 @@
 			<if test="ckey != null and ckey != '' ">
 				AND t.ckey = #{ckey}
 			</if>	
+			<choose>
+				 <when test="dhhlFlag == 'notIn'">
+				 	AND t.ckey not in('TOP_TWO_DHHL','TWO_THREE_DHHL','GOODS_TOP_DHHL')
+				 </when>
+				 <when test="dhhlFlag == 'in'">
+				 	AND t.ckey in('TOP_TWO_DHHL','TWO_THREE_DHHL','GOODS_TOP_DHHL')
+				 </when>
+			</choose>
 			<if test="ckeyForQuery != null and ckeyForQuery != '' ">
 				AND t.ckey like "%"#{ckeyForQuery}"%"
 			</if>

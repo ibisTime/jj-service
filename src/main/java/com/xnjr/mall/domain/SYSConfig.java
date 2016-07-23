@@ -50,6 +50,8 @@ public class SYSConfig extends ABaseDO {
     // ************* 模糊查询 *****************
     private String ckeyForQuery;
 
+    private String dhhlFlag;
+
     public Long getId() {
         return id;
     }
@@ -120,5 +122,13 @@ public class SYSConfig extends ABaseDO {
 
     public void setCkeyForQuery(String ckeyForQuery) {
         this.ckeyForQuery = ckeyForQuery;
+    }
+
+    public String getDhhlFlag() {
+        return dhhlFlag;
+    }
+
+    public void setDhhlFlag(String dhhlFlag) {
+        this.dhhlFlag = dhhlFlag;
     }
 }

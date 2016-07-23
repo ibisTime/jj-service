@@ -6,10 +6,13 @@ import org.springframework.stereotype.Component;
 import com.xnjr.mall.bo.IAccountBO;
 import com.xnjr.mall.dto.req.XN802013Req;
 import com.xnjr.mall.dto.req.XN802112Req;
+import com.xnjr.mall.dto.req.XN802120Req;
+import com.xnjr.mall.dto.req.XN802122Req;
 import com.xnjr.mall.dto.req.XN802310Req;
 import com.xnjr.mall.dto.res.XN802012Res;
 import com.xnjr.mall.dto.res.XN802013Res;
 import com.xnjr.mall.dto.res.XN802112Res;
+import com.xnjr.mall.dto.res.XN802122Res;
 import com.xnjr.mall.dto.res.XN802310Res;
 import com.xnjr.mall.enums.ECurrency;
 import com.xnjr.mall.http.BizConnecter;
@@ -19,18 +22,24 @@ import com.xnjr.mall.http.JsonUtils;
 public class AccountBOImpl implements IAccountBO {
     static Logger logger = Logger.getLogger(AccountBOImpl.class);
 
-    /** 
-     * @see com.xnjr.mall.bo.IAccountBO#doChargeOffline(java.lang.String, java.lang.Long, java.lang.String, java.lang.String, java.lang.String)
-     */
     @Override
-    public String doChargeOffline(String userAccountNumber,
-            String jfAccountNumber, Long amount, String remark) {
-        return null;
+    public String doChargeOfflineJf(String fromUserId, String toUserId,
+            String amount, String price, String type, String pdf, String refNo,
+            String applyUser) {
+        XN802120Req req = new XN802120Req();
+        req.setFromUserId(fromUserId);
+        req.setToUserId(toUserId);
+        req.setAmount(amount);
+        req.setPrice(price);
+        req.setType(type);
+        req.setPdf(pdf);
+        req.setRefNo(refNo);
+        req.setApplyUser(applyUser);
+        XN802112Res res = BizConnecter.getBizData("802120",
+            JsonUtils.object2Json(req), XN802112Res.class);
+        return res.getCqNo();
     }
 
-    /** 
-     * @see com.xnjr.mall.bo.IAccountBO#doChargeOfflineWithdrawApp(java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
-     */
     @Override
     public String doChargeOfflineWithoutApp(String accountNumber, Long amount,
             String fromType, String fromCode, String pdf, String approveUser,
@@ -46,6 +55,28 @@ public class AccountBOImpl implements IAccountBO {
         req.setRefNo(refNo);
         XN802112Res res = BizConnecter.getBizData("802112",
             JsonUtils.object2Json(req), XN802112Res.class);
+        return res.getCqNo();
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IAccountBO#doChargeOfflineJfWithoutApp(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public String doChargeOfflineJfWithoutApp(String fromUserId,
+            String toUserId, String amount, String price, String type,
+            String pdf, String approveUser, String approveNote, String refNo) {
+        XN802122Req req = new XN802122Req();
+        req.setFromUserId(fromUserId);
+        req.setToUserId(toUserId);
+        req.setAmount(amount);
+        req.setPrice(price);
+        req.setType(type);
+        req.setPdf(pdf);
+        req.setApproveUser(approveUser);
+        req.setApproveNote(approveNote);
+        req.setRefNo(refNo);
+        XN802122Res res = BizConnecter.getBizData("802122",
+            JsonUtils.object2Json(req), XN802122Res.class);
         return res.getCqNo();
     }
 

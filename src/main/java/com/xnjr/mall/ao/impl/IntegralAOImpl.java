@@ -14,8 +14,9 @@ import com.xnjr.mall.domain.Integral;
 import com.xnjr.mall.dto.res.XN802013Res;
 import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.enums.EBoolean;
-import com.xnjr.mall.enums.EDirection;
+import com.xnjr.mall.enums.EChargeType;
 import com.xnjr.mall.enums.EIntegralStatus;
+import com.xnjr.mall.enums.EUserKind;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -44,7 +45,7 @@ public class IntegralAOImpl implements IIntegralAO {
         XN805901Res user = userBO.getRemoteUser(data.getUserId(),
             data.getUserId());
         if (user == null) {
-            throw new BizException("xn0000", "用户不存在");
+            throw new BizException("xn000000", "用户不存在");
         }
         return integralBO.saveIntegral(data);
     }
@@ -80,37 +81,43 @@ public class IntegralAOImpl implements IIntegralAO {
      */
     @Override
     public void scannIntegral(String code, String userId) {
-        applyIntegral(code, userId, EBoolean.YES);
+        applyIntegral(code, userId);
     }
 
     /**
      * 积分申请
      * @param code
      * @param userId
-     * @param flag 
      * @create: 2016年7月22日 上午11:15:13 xieyj
      * @history:
      */
-    private void applyIntegral(String code, String userId, EBoolean flag) {
+    private void applyIntegral(String code, String userId) {
         // 判断用户是否存在
         XN805901Res user = userBO.getRemoteUser(userId, userId);
         if (user == null) {
-            throw new BizException("xn0000", "用户不存在");
+            throw new BizException("xn000000", "用户不存在");
+        }
+        EChargeType type = EChargeType.UNDERUSER;
+        if (EUserKind.F1.getCode().equals(user.getKind())) {
+            type = EChargeType.ENDUSER;
         }
         // 判断所属积分商
         Integral integral = this.getIntegral(code);
-        // 判断积分商和当前用户的关系；积分上架无需判断关系，但需判断当前状态是否处于已上架状态
-        if (EBoolean.YES.equals(flag)) {
-            if (integral.getUserId().equals(user.getUserReferee())) {
-                throw new BizException("xn0000", "当前用户所属积分商和积分二维码上商户不符");
-            }
-            if (EIntegralStatus.INVALID.getCode().equals(integral.getStatus())) {
-                throw new BizException("xn0000", "该积分二维码已失效");
-            }
-        } else {
-            if (!EIntegralStatus.PUT_ON.getCode().equals(integral.getStatus())) {
-                throw new BizException("xn0000", "当前积分二维码不是已上架状态");
-            }
+        // // 判断积分商和当前用户的关系；积分上架无需判断关系，但需判断当前状态是否处于已上架状态
+        // if (EBoolean.YES.equals(flag)) {
+        // if (integral.getUserId().equals(user.getUserReferee())) {
+        // throw new BizException("xn0000", "当前用户所属积分商和积分二维码上商户不符");
+        // }
+        // if (EIntegralStatus.INVALID.getCode().equals(integral.getStatus())) {
+        // throw new BizException("xn0000", "该积分二维码已失效");
+        // }
+        // } else {
+        // if (!EIntegralStatus.PUT_ON.getCode().equals(integral.getStatus())) {
+        // throw new BizException("xn0000", "当前积分二维码不是已上架状态");
+        // }
+        // }
+        if (EIntegralStatus.INVALID.getCode().equals(integral.getStatus())) {
+            throw new BizException("xn0000", "该积分二维码已失效");
         }
         XN802013Res jfAccount = accountBO.getXNBAccountByUserId(integral
             .getUserId());
@@ -127,14 +134,16 @@ public class IntegralAOImpl implements IIntegralAO {
             if (jfAccount.getAmount() < integral.getQuantity()) {
                 throw new BizException("xn0000", "积分商账户余额不足");
             }
-            accountBO.doTransferOss(jfAccount.getAccountNumber(),
-                EDirection.MINUS.getCode(), integral.getQuantity(), 0L, "送积分");
-            accountBO.doTransferOss(userAccount.getAccountNumber(),
-                EDirection.PLUS.getCode(), integral.getQuantity(), 0L, "扫描送积分");
+            accountBO.doChargeOfflineJfWithoutApp(integral.getUserId(),
+                user.getUserId(), String.valueOf(integral.getQuantity()),
+                String.valueOf(integral.getPrice()), type.getCode(), "无", "系统",
+                "扫一下，直接送积分", integral.getCode());
         } else {
             // 需审批送积分
-            accountBO.doChargeOffline(userAccount.getAccountNumber(),
-                jfAccount.getAccountNumber(), integral.getQuantity(), null);
+            accountBO.doChargeOfflineJf(integral.getUserId(), user.getUserId(),
+                String.valueOf(integral.getQuantity()),
+                String.valueOf(integral.getPrice()), type.getCode(), "无",
+                integral.getCode(), user.getUserId());
         }
     }
 
@@ -169,7 +178,7 @@ public class IntegralAOImpl implements IIntegralAO {
      */
     @Override
     public void bugIntegral(String code, String userId) {
-        applyIntegral(code, userId, EBoolean.NO);
+        applyIntegral(code, userId);
     }
 
     /** 

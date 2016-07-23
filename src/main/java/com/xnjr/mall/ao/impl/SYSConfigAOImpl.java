@@ -11,13 +11,14 @@ import com.xnjr.mall.domain.SYSConfig;
 import com.xnjr.mall.exception.BizException;
 
 /**
- * 
- * @author: Gejin 
- * @since: 2016年4月17日 下午7:32:28 
+ * 系统参数
+ * @author: xieyj 
+ * @since: 2016年7月23日 下午3:50:20 
  * @history:
  */
 @Service
 public class SYSConfigAOImpl implements ISYSConfigAO {
+
     @Autowired
     ISYSConfigBO sysConfigBO;
 

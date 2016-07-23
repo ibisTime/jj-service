@@ -28,6 +28,7 @@ public class XNlh5032 extends AProcessor {
     public Object doBusiness() throws BizException {
         SYSConfig data = new SYSConfig();
         data.setCkeyForQuery(req.getCkey());
+        data.setDhhlFlag(req.getDhhlFlag());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ISYSConfigAO.DEFAULT_ORDER_COLUMN;

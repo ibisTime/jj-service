@@ -14,18 +14,25 @@ import com.xnjr.mall.dto.res.XN802013Res;
 public interface IAccountBO {
 
     /**
-     * 
-     * @param userAccountNumber
-     * @param jfAccountNumber
+     * 积分申请
+     * @param fromUserId
+     * @param toUserId
      * @param amount
+     * @param price
+     * @param type
+     * @param pdf
+     * @param refNo
+     * @param applyUser
      * @return 
-     * @create: 2016年7月21日 上午10:53:32 xieyj
+     * @create: 2016年7月23日 下午10:57:50 xieyj
      * @history:
      */
-    public String doChargeOffline(String userAccountNumber,
-            String jfAccountNumber, Long amount, String remark);
+    public String doChargeOfflineJf(String fromUserId, String toUserId,
+            String amount, String price, String type, String pdf, String refNo,
+            String applyUser);
 
     /**
+     * 积分申请一键通过
      * @param accountNumber
      * @param amount
      * @param fromType
@@ -41,6 +48,24 @@ public interface IAccountBO {
     public String doChargeOfflineWithoutApp(String accountNumber, Long amount,
             String fromType, String fromCode, String pdf, String approveUser,
             String approveNote, String refNo);
+
+    /**
+     * @param fromUserId
+     * @param toUserId
+     * @param amount
+     * @param price
+     * @param type
+     * @param pdf
+     * @param approveUser
+     * @param approveNote
+     * @param refNo
+     * @return 
+     * @create: 2016年7月23日 下午7:40:55 xieyj
+     * @history:
+     */
+    public String doChargeOfflineJfWithoutApp(String fromUserId,
+            String toUserId, String amount, String price, String type,
+            String pdf, String approveUser, String approveNote, String refNo);
 
     /**
      * @param accountNumber
