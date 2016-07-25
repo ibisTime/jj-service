@@ -75,20 +75,11 @@ public class ProductAOImpl implements IProductAO {
         List<Product> list = productBO.queryProductList(condition);
         if (!CollectionUtils.sizeIsEmpty(list)
                 && !dbProduct.getName().equals(list.get(0).getName())) {
-            throw new BizException("jd00001", "产品名称已存在");
+            throw new BizException("jd00001", "产品名称不存在");
         }
 
         int count = 0;
-        if (product != null) {
-            // 只有待审核和审核不通过的产品可进行修改
-            if (EPutStatus.todoAPPROVE.getCode().equals(dbProduct.getStatus())
-                    || EPutStatus.APPROVE_NO.getCode().equals(
-                        dbProduct.getStatus())) {
-                count = productBO.refreshProduct(product);
-            } else {
-                throw new BizException("xn000000", "只有待审核和审核不通过的产品可进行修改");
-            }
-        }
+        count = productBO.refreshProduct(product);
         return count;
     }
 

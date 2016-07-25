@@ -28,7 +28,16 @@ public class Product extends ABaseDO {
     private String code;
 
     // 产品大类
+    private String category;
+
+    // 产品小类
     private String type;
+
+    // 小类图片
+    private String typePic;
+
+    // 次序
+    private String orderNo;
 
     // 产品名称
     private String name;
@@ -187,5 +196,29 @@ public class Product extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getTypePic() {
+        return typePic;
+    }
+
+    public void setTypePic(String typePic) {
+        this.typePic = typePic;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 }

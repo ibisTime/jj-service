@@ -10,6 +10,7 @@ package com.xnjr.mall.api.impl;
 
 import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.api.AProcessor;
+import com.xnjr.mall.api.converter.ProductConverter;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Product;
@@ -37,20 +38,7 @@ public class XN601001 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        Product data = new Product();
-        data.setCode(req.getCode());
-        data.setType(req.getType());
-        data.setName(req.getName());
-        data.setAdvTitle(req.getAdvTitle());
-        data.setAdvPic(req.getAdvPic());
-        data.setMajorPic(req.getMajorPic());
-        data.setMajorText(req.getMajorText());
-        data.setFamilyPic(req.getFamilyPic());
-        data.setFamilyText(req.getFamilyText());
-        data.setHighlightPic(req.getHighlightPic());
-        data.setHighlightText(req.getHighlightText());
-        data.setUpdater(req.getUpdater());
-        data.setRemark(req.getRemark());
+        Product data = ProductConverter.converter(req);
         int count = productAO.editProduct(data);
         return new BooleanRes(count > 0 ? true : false);
     }

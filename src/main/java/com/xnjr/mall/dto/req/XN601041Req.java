@@ -22,6 +22,9 @@ public class XN601041Req {
     // 受众（必填）
     private String toLevel;
 
+    // 受众（必填）
+    private String toSite;
+
     // 更新人（必填）
     private String updater;
 
@@ -82,5 +85,13 @@ public class XN601041Req {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getToSite() {
+        return toSite;
+    }
+
+    public void setToSite(String toSite) {
+        this.toSite = toSite;
     }
 }

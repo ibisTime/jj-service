@@ -45,9 +45,6 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     public String addBuyGuide(BuyGuide data) {
         String result = null;
         Model model = modelBO.getModel(data.getModelCode());
-        if (!EPutStatus.ONLINE.getCode().equals(model.getStatus())) {
-            throw new BizException("xn0000", "该型号不是已上架状态");
-        }
         BuyGuide condition = new BuyGuide();
         condition.setModelCode(data.getModelCode());
         List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
@@ -75,6 +72,14 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     @Override
     public int editBuyGuide(BuyGuide data) {
         Model model = modelBO.getModel(data.getModelCode());
+        // 默认等级设置
+        if (StringUtils.isBlank(data.getToLevel())) {
+            data.setToLevel(EUserLevel.ZERO.getCode());
+        }
+        // 设置默认折扣价
+        if (data.getDiscountPrice() == null || data.getDiscountPrice() == 0) {
+            data.setDiscountPrice(data.getOriginalPrice());
+        }
         if (!EPutStatus.ONLINE.getCode().equals(model.getStatus())) {
             throw new BizException("xn0000", "该型号不是已上架状态");
         }

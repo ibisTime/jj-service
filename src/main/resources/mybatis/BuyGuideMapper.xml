@@ -13,6 +13,12 @@
 	    <result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
+		
+		<result column="from_user" property="fromUser" />
+		<result column="from_quantity" property="fromQuantity" />
+		<result column="from_site" property="fromSite" />
+		<result column="cost_price" property="costPrice" />
+		<result column="to_site" property="toSite" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -28,6 +34,18 @@
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
 			</if>
+			<if test="fromUser != null and fromUser != '' ">
+				AND t.from_user = #{fromUser}
+			</if>
+			<if test="fromQuantity != null and fromQuantity != '' ">
+				AND t.from_quantity = #{fromQuantity}
+			</if>
+			<if test="fromSite != null and fromSite != '' ">
+				AND t.from_site = #{fromSite}
+			</if>
+			<if test="toSite != null and toSite != '' ">
+				AND t.to_site = #{toSite}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_buyGuide" parameterType="buyGuide" resultMap="buyGuide_DB_Result">
@@ -42,6 +60,12 @@
 		,t.updater
 		,t.update_datetime
 		,t.remark
+		
+		,t.from_user
+		,t.from_quantity
+		,t.from_site
+		,t.cost_price
+		,t.to_site
 		FROM
 		tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code
 		<include refid="where_condition" />
@@ -70,6 +94,12 @@
 		,updater
 		,update_datetime
 		,remark
+		
+		,from_user
+		,from_quantity
+		,from_site
+		,cost_price
+		,to_site
 		)
 		VALUES(
 		#{code}
@@ -81,6 +111,12 @@
 		,#{updater}
 		,#{updateDatetime}
 		,#{remark}
+		
+		,#{fromUser}
+		,#{fromQuantity}
+		,#{fromSite}
+		,#{costPrice}
+		,#{toSite}
 		)
 	</insert>
 	
@@ -91,6 +127,7 @@
 		,discount_price = #{discountPrice}
 		,to_level = #{toLevel}
 		,updater = #{updater}
+		,to_site = #{toSite}
 		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
 		WHERE code = #{code}

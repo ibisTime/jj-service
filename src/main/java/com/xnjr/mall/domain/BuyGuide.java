@@ -40,6 +40,21 @@ public class BuyGuide extends ABaseDO {
     // 备注
     private String remark;
 
+    // 对应货品商
+    private String fromUser;
+
+    // 仓库数量
+    private String fromQuantity;
+
+    // 仓库位置（预留）
+    private String fromSite;
+
+    // 成本价
+    private Date costPrice;
+
+    // 线上位置
+    private String toSite;
+
     // *************db properties**************
     // 型号名称
     private String modelName;
@@ -114,5 +129,45 @@ public class BuyGuide extends ABaseDO {
 
     public void setModelName(String modelName) {
         this.modelName = modelName;
+    }
+
+    public String getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
+    }
+
+    public String getFromQuantity() {
+        return fromQuantity;
+    }
+
+    public void setFromQuantity(String fromQuantity) {
+        this.fromQuantity = fromQuantity;
+    }
+
+    public String getFromSite() {
+        return fromSite;
+    }
+
+    public void setFromSite(String fromSite) {
+        this.fromSite = fromSite;
+    }
+
+    public Date getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(Date costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public String getToSite() {
+        return toSite;
+    }
+
+    public void setToSite(String toSite) {
+        this.toSite = toSite;
     }
 }

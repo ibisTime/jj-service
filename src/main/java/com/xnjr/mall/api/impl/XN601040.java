@@ -38,6 +38,7 @@ public class XN601040 extends AProcessor {
             data.setDiscountPrice(Long.valueOf(req.getDiscountPrice()));
         }
         data.setToLevel(req.getToLevel());
+        data.setToSite(req.getToSite());
         data.setUpdater(req.getUpdater());
         data.setRemark(req.getRemark());
         return new PKCodeRes(buyGuideAO.addBuyGuide(data));

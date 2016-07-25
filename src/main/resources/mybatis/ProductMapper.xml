@@ -4,8 +4,11 @@
 <mapper namespace="com.xnjr.mall.dao.IProductDAO">
 	<resultMap id="product_DB_Result" type="product">
 		<result column="code" property="code" />
-		<result column="name" property="name" />
+		<result column="category" property="category" />
 		<result column="type" property="type" />
+		<result column="type_pic" property="typePic" />
+		<result column="name" property="name" />
+		<result column="order_no" property="orderNo" />
 		<result column="adv_title" property="advTitle" />
 		<result column="adv_pic" property="advPic" />
 		<result column="major_pic" property="majorPic" />
@@ -30,17 +33,9 @@
 			<if test="type != null and type != '' ">
 				AND t.type = #{type}
 			</if>
-			<choose>
-				 <when test="status == '13'">
-				  AND (t.status = 1 or t.status = 3)
-				 </when>
-				 <when test="status != null and status != '' ">
-				  AND t.status = #{status}
-				 </when>
-				 <otherwise>
-				  AND 1 = 1
-				 </otherwise>
-			</choose>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
 			</if>
@@ -49,8 +44,11 @@
 	<select id="select_product" parameterType="product" resultMap="product_DB_Result">
 		SELECT
 		code
-		,name
+		,category
 		,type
+		,type_pic
+		,order_no
+		,name
 		,adv_title
 		,adv_pic
 		,major_pic
@@ -83,8 +81,11 @@
 		INSERT INTO
 		tmall_product(
 		code
-		,name
+		,category
 		,type
+		,type_pic
+		,order_no
+		,name
 		,adv_title
 		,adv_pic
 		,major_pic
@@ -100,8 +101,11 @@
 		)
 		VALUES(
 		#{code}
-		,#{name}
+		,#{category}
 		,#{type}
+		,#{typePic}
+		,#{orderNo}
+		,#{name}
 		,#{advTitle}
 		,#{advPic}
 		,#{majorPic}
@@ -122,6 +126,9 @@
 		SET
 		name = #{name}
 		,type = #{type}
+		,category = #{category}
+		,type_pic = #{typePic}
+		,order_no = #{orderNo}
 		,adv_title = #{advTitle}
 		,adv_pic = #{advPic}
 		,major_pic = #{majorPic}

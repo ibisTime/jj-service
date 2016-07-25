@@ -35,6 +35,7 @@ public class XN601041 extends AProcessor {
         data.setOriginalPrice(Long.valueOf(req.getOriginalPrice()));
         data.setDiscountPrice(Long.valueOf(req.getDiscountPrice()));
         data.setToLevel(req.getToLevel());
+        data.setToSite(req.getToSite());
         data.setUpdater(req.getUpdater());
         data.setRemark(req.getRemark());
         int count = buyGuideAO.editBuyGuide(data);
