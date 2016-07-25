@@ -20,17 +20,20 @@ public class XN602020Req {
     // 单价（必填）
     private String salePrice;
 
-    // 申请备注（选填）
-    private String applyNote;
-
     // 收件编号（必填）
     private String addressCode;
+
+    // 申请备注（选填）
+    private String applyNote;
 
     // 发票类型（必填）
     private String receiptType;
 
     // 发票抬头（必填）
     private String receiptTitle;
+
+    // 对应货品商（必填）
+    private String toUser;
 
     public String getApplyUser() {
         return applyUser;
@@ -95,4 +98,13 @@ public class XN602020Req {
     public void setReceiptTitle(String receiptTitle) {
         this.receiptTitle = receiptTitle;
     }
+
+    public String getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(String toUser) {
+        this.toUser = toUser;
+    }
+
 }

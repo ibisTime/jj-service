@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.ISaleGuideDAO">
+	<resultMap id="saleGuide_DB_Result" type="saleGuide">
+		<result column="code" property="code" />
+		<result column="model_code" property="modelCode" />
+		<result column="to_level" property="toLevel" />
+		<result column="quantity" property="quantity" />
+		<result column="price" property="price" />
+	    <result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+		<result column="model_name" property="modelName" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="toLevel != null and toLevel != '' ">
+				AND t.to_level = #{toLevel}
+			</if>
+			<if test="modelCode != null and modelCode != '' ">
+				AND t.model_code = #{modelCode}
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_saleGuide" parameterType="saleGuide" resultMap="saleGuide_DB_Result">
+		SELECT
+		t.code
+		,t.model_code
+		,t.to_level
+		,t.quantity
+		,t.price
+		,t.updater
+		,t.update_datetime
+		,t.remark
+		,tm.name as model_name
+		FROM
+		tmall_sale_guide t left join tmall_model tm on t.model_code = tm.code
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_saleGuide_count" parameterType="saleGuide"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_sale_guide t left join tmall_model tm on t.model_code = tm.code
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_saleGuide" parameterType="saleGuide">
+		INSERT INTO
+		tmall_sale_guide(
+		code
+		,model_code
+		,to_level
+		,quantity
+		,price
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{modelCode}
+		,#{toLevel}
+		,#{quantity}
+		,#{price}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+	
+	<update id="update_saleGuide" parameterType="saleGuide">
+		UPDATE tmall_sale_guide
+		SET
+		to_level = #{toLevel}
+		,quantity = #{quantity}
+		,price = #{price}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+</mapper>

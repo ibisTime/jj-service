@@ -16,6 +16,7 @@
 		<result column="approve_user" property="approveUser" />
 		<result column="approve_datetime" property="approveDatetime" />
 		<result column="approve_note" property="approveNote" />
+		<result column="to_user" property="toUser" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -27,6 +28,9 @@
 			</if>
 			<if test="applyUser != null and applyUser != '' ">
 				AND t.apply_user = #{applyUser}
+			</if>
+			<if test="toUser != null and toUser != '' ">
+				AND t.to_user = #{toUser}
 			</if>
 			<if test="applyDatetimeStart != null and applyDatetimeStart != '' ">
 				<![CDATA[AND t.apply_datetime >= #{applyDatetimeStart}]]>
@@ -60,6 +64,7 @@
 		,t.approve_user
 		,t.approve_datetime
 		,t.approve_note
+		,t.to_user
 		FROM
 		tmall_invoice t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
 		<include refid="where_condition" />
@@ -87,6 +92,7 @@
 		,receipt_title
 		,pay_amount
 		,status
+		,to_user
 		)
 		VALUES(
 		#{code}
@@ -98,6 +104,7 @@
 		,#{receiptTitle}
 		,#{payAmount}
 		,#{status}
+		,#{toUser}
 		)
 	</insert>
 

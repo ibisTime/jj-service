@@ -60,6 +60,9 @@ public class Invoice extends ABaseDO {
     // 审核备注
     private String approveNote;
 
+    // 审核备注
+    private String toUser;
+
     // *************dp properties **************
 
     // 订单总金额
@@ -254,4 +257,13 @@ public class Invoice extends ABaseDO {
     public void setIsSecondPay(String isSecondPay) {
         this.isSecondPay = isSecondPay;
     }
+
+    public String getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(String toUser) {
+        this.toUser = toUser;
+    }
+
 }

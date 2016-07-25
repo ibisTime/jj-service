@@ -34,6 +34,7 @@ public class XN602020 extends AProcessor {
         data.setAddressCode(req.getAddressCode());
         data.setReceiptType(req.getReceiptType());
         data.setReceiptTitle(req.getReceiptTitle());
+        data.setToUser(req.getToUser());
         return invoiceAO.commitInvoice(req.getModelCode(),
             Integer.valueOf(req.getQuantity()),
             Long.valueOf(req.getSalePrice()), data);
