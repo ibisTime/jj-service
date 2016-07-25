@@ -22,6 +22,7 @@
 		
 		<typeAlias alias="integral" type="com.xnjr.mall.domain.Integral" />
 		<typeAlias alias="goodsOrder" type="com.xnjr.mall.domain.GoodsOrder" />
+		<typeAlias alias="saleGuide" type="com.xnjr.mall.domain.SaleGuide" />
 	</typeAliases>	
 </configuration>
 
