@@ -21,8 +21,10 @@ import com.xnjr.mall.bo.ICartBO;
 import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.dto.res.XN805901Res;
+import com.xnjr.mall.enums.EUser;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -110,9 +112,10 @@ public class CartAOImpl implements ICartAO {
         Paginable<Cart> page = cartBO.getPaginable(start, limit, condition);
         if (page != null && page.getList() != null) {
             for (Cart cart : page.getList()) {
-                Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    cart.getModelCode(), user.getLevel());
-                cart.setSalePrice(salePrice);
+                BuyGuide buyGuide = buyGuideBO.getOnlineModel(
+                    cart.getModelCode(), user.getLevel(),
+                    EUser.Top_Model.getCode());
+                cart.setSalePrice(buyGuide.getDiscountPrice());
             }
         }
         return page;
@@ -129,9 +132,11 @@ public class CartAOImpl implements ICartAO {
         List<Cart> list = cartBO.queryCartList(condition);
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
-                Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    cart.getModelCode(), user.getLevel());
-                cart.setSalePrice(salePrice);
+
+                BuyGuide buyGuide = buyGuideBO.getOnlineModel(
+                    cart.getModelCode(), user.getLevel(),
+                    EUser.Top_Model.getCode());
+                cart.setSalePrice(buyGuide.getDiscountPrice());
             }
         }
         return list;
@@ -147,9 +152,9 @@ public class CartAOImpl implements ICartAO {
         String userId = cart.getUserId();
         XN805901Res user = userBO.getRemoteUser(userId, userId);
         // 获取价格
-        Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getModelCode(),
-            user.getLevel());
-        cart.setSalePrice(salePrice);
+        BuyGuide buyGuide = buyGuideBO.getOnlineModel(cart.getModelCode(),
+            user.getLevel(), EUser.Top_Model.getCode());
+        cart.setSalePrice(buyGuide.getDiscountPrice());
         return cart;
     }
 }

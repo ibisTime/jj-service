@@ -117,24 +117,6 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
         return data;
     }
 
-    /** 
-     * @see com.xnjr.mall.bo.IBuyGuideBO#getBuyGuidePrice(java.lang.String, java.lang.String)
-     */
-    @Override
-    public Long getBuyGuidePrice(String modelCode, String level) {
-        Long salePrice = null;
-        if (StringUtils.isNotBlank(modelCode) && StringUtils.isNotBlank(level)) {
-            BuyGuide condition = new BuyGuide();
-            condition.setModelCode(modelCode);
-            condition.setToLevel(String.valueOf(level));
-            List<BuyGuide> list = buyGuideDAO.selectList(condition);
-            if (!CollectionUtils.sizeIsEmpty(list)) {
-                salePrice = list.get(0).getDiscountPrice();
-            }
-        }
-        return salePrice;
-    }
-
     @Override
     public BuyGuide getOnlineModel(String modelCode, String level,
             String fromUser) {
