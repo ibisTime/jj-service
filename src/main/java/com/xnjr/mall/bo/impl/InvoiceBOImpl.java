@@ -194,4 +194,17 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
         }
         return count;
     }
+
+    @Override
+    public int doFirstPay(String code, Long amount) {
+        int count = 0;
+        if (isInvoiceExist(code)) {
+            Invoice data = new Invoice();
+            data.setCode(code);
+            data.setPayAmount(amount);
+            data.setStatus(EInvoiceStatus.PAY_START.getCode());
+            count = invoiceDAO.doFirstPay(data);
+        }
+        return count;
+    }
 }

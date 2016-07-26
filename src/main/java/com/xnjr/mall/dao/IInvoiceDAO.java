@@ -55,4 +55,6 @@ public interface IInvoiceDAO extends IBaseDAO<Invoice> {
      * @history:
      */
     public int updateInvoicePayAmount(Invoice data);
+
+    public int doFirstPay(Invoice data);
 }

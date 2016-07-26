@@ -11,6 +11,9 @@ public class XN602022Req {
     // 编号（必填）
     private String code;
 
+    // 首款金额（必填）
+    private String amount;
+
     // 交易密码（必填）
     private String tradePwd;
 
@@ -22,6 +25,14 @@ public class XN602022Req {
         this.code = code;
     }
 
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
     public String getTradePwd() {
         return tradePwd;
     }
@@ -29,4 +40,5 @@ public class XN602022Req {
     public void setTradePwd(String tradePwd) {
         this.tradePwd = tradePwd;
     }
+
 }

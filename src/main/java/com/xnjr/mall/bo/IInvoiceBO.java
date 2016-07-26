@@ -86,6 +86,8 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
      */
     public int refreshInvoicePayAmount(String code, Long payAmount);
 
+    public int doFirstPay(String code, Long amount);
+
     /**
      * 查询发货单列表
      * @param data
@@ -103,4 +105,5 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
      * @history:
      */
     public Invoice getInvoice(String code);
+
 }

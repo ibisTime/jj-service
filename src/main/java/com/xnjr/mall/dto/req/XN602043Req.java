@@ -14,7 +14,7 @@ public class XN602043Req {
     // 更新人(必填)
     private String updater;
 
-    // 备注(必填)
+    // 备注(选填)
     private String remark;
 
     public String getCode() {

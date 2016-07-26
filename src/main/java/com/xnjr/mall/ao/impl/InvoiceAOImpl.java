@@ -27,6 +27,7 @@ import com.xnjr.mall.bo.ILogisticsBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Address;
+import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.InvoiceModel;
@@ -69,39 +70,34 @@ public class InvoiceAOImpl implements IInvoiceAO {
     @Autowired
     private IAccountBO accountBO;
 
-    /**
-     * @see com.xnjr.mall.ao.IInvoiceAO#commitInvoice(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Invoice)
-     */
     @Override
     @Transactional
-    public String commitInvoice(String modelCode, Integer quantity,
-            Long salePrice, Invoice data) {
+    public String commitInvoice(String modelCode, Integer quantity, Invoice data) {
         String code = invoiceBO.saveInvoice(data);
-        invoiceModelBO.saveInvoiceModel(code, modelCode, quantity, salePrice);
+        // 获取销售价格
+        String userId = data.getApplyUser();
+        XN805901Res user = userBO.getRemoteUser(userId, userId);
+        BuyGuide model = buyGuideBO.getOnlineModel(modelCode, user.getLevel(),
+            data.getToUser());
+        // 存入DB
+        invoiceModelBO.saveInvoiceModel(code, modelCode, quantity,
+            model.getDiscountPrice());
         return code;
     }
 
-    /** 
-     * @see com.xnjr.mall.ao.IInvoiceAO#commitInvoice(com.xnjr.mall.domain.Invoice)
-     */
     @Override
     @Transactional
     public String commitInvoice(List<String> cartCodeList, Invoice data) {
-        // 获取购物车中的记录，形成订单型号关联表
-        if (CollectionUtils.isEmpty(cartCodeList)) {
-            throw new BizException("xn0000", "请选择购物车中的货物");
-        }
-
         String code = invoiceBO.saveInvoice(data);
-        // 获取用户信息
+        // 获取销售价格
         String userId = data.getApplyUser();
         XN805901Res user = userBO.getRemoteUser(userId, userId);
         for (String cartCode : cartCodeList) {
             Cart cart = cartBO.getCart(cartCode);
-            Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getModelCode(),
-                user.getLevel());
+            BuyGuide model = buyGuideBO.getOnlineModel(cart.getModelCode(),
+                user.getLevel(), data.getToUser());
             invoiceModelBO.saveInvoiceModel(code, cart.getModelCode(),
-                cart.getQuantity(), salePrice);
+                cart.getQuantity(), model.getDiscountPrice());
         }
         // 删除购物车选中记录
         for (String cartCode : cartCodeList) {
@@ -112,22 +108,20 @@ public class InvoiceAOImpl implements IInvoiceAO {
 
     @Override
     @Transactional
-    public void toPayInvoice(String code, String tradePwd) {
+    public boolean doFirstPay(String code, Long amount, String tradePwd) {
         Invoice invoice = invoiceBO.getInvoice(code);
         if (!EInvoiceStatus.TO_PAY.getCode().equals(invoice.getStatus())) {
             throw new BizException("xn000000", "订单不处于待支付状态");
         }
-        // 当前用户充值，划出；系统账户划入
-        XN802012Res res = accountBO.getAccountByUserId(invoice.getApplyUser());
-        // accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
-        // invoice.getTotalAmount(), "alipay", "6228584324242", "无", "admin",
-        // "线上支付模拟", code);
-        accountBO.doTransferOss(res.getAccountNumber(),
-            EDirection.MINUS.getCode(), invoice.getTotalAmount(), 0L, "购买商品");
-        accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
-            EDirection.PLUS.getCode(), invoice.getTotalAmount(), 0L, "卖出商品");
-        invoiceBO.refreshInvoiceStatus(code, EInvoiceStatus.PAY_YES.getCode());
-        invoiceBO.refreshInvoicePayAmount(code, invoice.getTotalAmount());
+        // 支付人减钱
+        accountBO.doTransferOss(invoice.getApplyUser(),
+            EDirection.MINUS.getCode(), amount, 0L, "购买商品");
+        // 货品商加钱
+        accountBO.doTransferOss(invoice.getToUser(), EDirection.PLUS.getCode(),
+            amount, 0L, "卖出商品");
+        // 第一次支付
+        invoiceBO.doFirstPay(code, amount);
+        return true;
     }
 
     /** 

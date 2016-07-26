@@ -14,22 +14,19 @@ public interface IInvoiceAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
     /**
-     * 立即购买
-     * @param userId
+     * 单种型号购买
      * @param modelCode
      * @param quantity
-     * @param salePrice
      * @param data
      * @return 
      * @create: 2016年5月25日 上午10:48:20 xieyj
      * @history:
      */
-    public String commitInvoice(String modelCode, Integer quantity,
-            Long salePrice, Invoice data);
+    public String commitInvoice(String modelCode, Integer quantity, Invoice data);
 
     /**
-     * 批量提交发货单
-     * @param userId
+     * 多种型号购买
+     * @param cartCodeList
      * @param data
      * @return 
      * @create: 2016年5月25日 上午10:16:02 xieyj
@@ -38,14 +35,16 @@ public interface IInvoiceAO {
     public String commitInvoice(List<String> cartCodeList, Invoice data);
 
     /**
-     * 支付订单，待确认
+     * 支付首款
      * @param code
+     * @param amount
      * @param tradePwd
      * @return 
-     * @create: 2016年5月25日 上午11:40:28 xieyj
+     * @create: 2016年7月26日 下午7:36:58 myb858
      * @history:
      */
-    public void toPayInvoice(String code, String tradePwd);
+
+    public boolean doFirstPay(String code, Long amount, String tradePwd);
 
     /**
      * 不支付

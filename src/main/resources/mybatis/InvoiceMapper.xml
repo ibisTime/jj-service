@@ -153,4 +153,15 @@
 		WHERE
 		code = #{code}
 	</update>
+	
+	<update id="update_doFirstPay" parameterType="invoice">
+		UPDATE tmall_invoice
+		SET
+		pay_amount = #{payAmount}
+		,status = #{status}
+		WHERE
+		code = #{code}
+	</update>
+	
+	
 </mapper>

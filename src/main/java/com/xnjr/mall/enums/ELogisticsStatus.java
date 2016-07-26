@@ -6,9 +6,7 @@ package com.xnjr.mall.enums;
  * @history:
  */
 public enum ELogisticsStatus {
-    TO_RECEIVE("0", "待收货"), RECEIVE("1", "已收货");
-
-    // 待付款，已付款
+    TO_RECEIVE("0", "物流中"), RECEIVE("1", "已收货");
 
     ELogisticsStatus(String code, String value) {
         this.code = code;
