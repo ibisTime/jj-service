@@ -120,6 +120,16 @@
 		UPDATE tmall_invoice
 		SET
 		status = #{status}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_invoiceCancelOss" parameterType="invoice">
+		UPDATE tmall_invoice
+		SET
+		status = #{status}
+		,approve_user = #{approveUser}
+		,approve_datetime = #{approveDatetime}
 		,approve_note = #{approveNote}
 		WHERE
 		code = #{code}

@@ -48,7 +48,7 @@ public interface IInvoiceAO {
     public void toPayInvoice(String code, String tradePwd);
 
     /**
-     * 取消发货单
+     * 不支付
      * @param code
      * @param userId
      * @param applyNote
@@ -56,7 +56,7 @@ public interface IInvoiceAO {
      * @create: 2016年6月1日 下午6:09:54 xieyj
      * @history:
      */
-    public int cancelInvoice(String code, String userId, String applyNote);
+    public int cancelInvoice(String code);
 
     /**
      * 取消发货单

@@ -89,6 +89,11 @@ public class InvoiceDAOImpl extends AMybatisTemplate implements IInvoiceDAO {
         return super.update("update_invoiceCancel", data);
     }
 
+    @Override
+    public int updateInvoiceCancelOss(Invoice data) {
+        return super.update("update_invoiceCancelOss", data);
+    }
+
     /** 
      * @see com.xnjr.mall.dao.IInvoiceDAO#updateInvoiceApprove(com.xnjr.mall.domain.Invoice)
      */
