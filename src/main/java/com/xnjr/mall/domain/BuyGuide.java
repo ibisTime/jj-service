@@ -59,8 +59,7 @@ public class BuyGuide extends ABaseDO {
     private String status;
 
     // *************db properties**************
-    // 型号名称
-    private String modelName;
+    private Model model;
 
     public String getCode() {
         return code;
@@ -126,14 +125,6 @@ public class BuyGuide extends ABaseDO {
         this.remark = remark;
     }
 
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
     public String getFromUser() {
         return fromUser;
     }
@@ -180,5 +171,13 @@ public class BuyGuide extends ABaseDO {
 
     public void setCostPrice(Long costPrice) {
         this.costPrice = costPrice;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 }

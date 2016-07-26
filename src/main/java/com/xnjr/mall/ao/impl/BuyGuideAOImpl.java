@@ -102,7 +102,12 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
      */
     @Override
     public List<BuyGuide> queryBuyGuideList(BuyGuide condition) {
-        return buyGuideBO.queryBuyGuideList(condition);
+        List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
+        for (BuyGuide buyGuide : list) {
+            Model model = modelBO.getModel(buyGuide.getModelCode());
+            buyGuide.setModel(model);
+        }
+        return list;
     }
 
     /** 
@@ -111,7 +116,15 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     @Override
     public Paginable<BuyGuide> queryBuyGuidePage(int start, int limit,
             BuyGuide condition) {
-        return buyGuideBO.getPaginable(start, limit, condition);
+        Paginable<BuyGuide> page = buyGuideBO.getPaginable(start, limit,
+            condition);
+        if (page != null && page.getList() != null) {
+            for (BuyGuide buyGuide : page.getList()) {
+                Model model = modelBO.getModel(buyGuide.getModelCode());
+                buyGuide.setModel(model);
+            }
+        }
+        return page;
     }
 
     /** 
@@ -119,6 +132,11 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
      */
     @Override
     public BuyGuide getBuyGuide(String code) {
-        return buyGuideBO.getBuyGuide(code);
+        BuyGuide buyGuide = buyGuideBO.getBuyGuide(code);
+        if (buyGuide != null) {
+            Model model = modelBO.getModel(buyGuide.getModelCode());
+            buyGuide.setModel(model);
+        }
+        return buyGuide;
     }
 }
