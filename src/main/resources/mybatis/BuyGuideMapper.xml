@@ -13,6 +13,7 @@
 	    <result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
+		<result column="status" property="status" />
 		
 		<result column="from_user" property="fromUser" />
 		<result column="from_quantity" property="fromQuantity" />
@@ -46,6 +47,9 @@
 			<if test="toSite != null and toSite != '' ">
 				AND t.to_site = #{toSite}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_buyGuide" parameterType="buyGuide" resultMap="buyGuide_DB_Result">
@@ -60,6 +64,7 @@
 		,t.updater
 		,t.update_datetime
 		,t.remark
+		,t.status
 		
 		,t.from_user
 		,t.from_quantity
@@ -94,6 +99,7 @@
 		,updater
 		,update_datetime
 		,remark
+		,status
 		
 		,from_user
 		,from_quantity
@@ -111,6 +117,7 @@
 		,#{updater}
 		,#{updateDatetime}
 		,#{remark}
+		,#{status}
 		
 		,#{fromUser}
 		,#{fromQuantity}
@@ -130,6 +137,7 @@
 		,to_site = #{toSite}
 		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
+		,status = ${status}
 		WHERE code = #{code}
 	</update>
 	

@@ -31,14 +31,9 @@ public class XN601041 extends AProcessor {
     public Object doBusiness() throws BizException {
         BuyGuide data = new BuyGuide();
         data.setCode(req.getCode());
-        data.setModelCode(req.getModelCode());
-        data.setOriginalPrice(Long.valueOf(req.getOriginalPrice()));
-        data.setDiscountPrice(Long.valueOf(req.getDiscountPrice()));
-        data.setToLevel(req.getToLevel());
-        data.setToSite(req.getToSite());
         data.setUpdater(req.getUpdater());
         data.setRemark(req.getRemark());
-        int count = buyGuideAO.editBuyGuide(data);
+        int count = buyGuideAO.offBuyGuide(data);
         return new BooleanRes(count > 0 ? true : false);
     }
 

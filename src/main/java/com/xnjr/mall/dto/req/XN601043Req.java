@@ -6,22 +6,17 @@ package com.xnjr.mall.dto.req;
  * @history:
  */
 public class XN601043Req {
-    // 编号（选填）
-    private String code;
-
     // 型号编号（选填）
     private String modelCode;
 
     // 受众（选填）
     private String toLevel;
 
-    public String getCode() {
-        return code;
-    }
+    // 线上位置（选填）
+    private String toSite;
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+    // 状态（选填）
+    private String status;
 
     public String getModelCode() {
         return modelCode;
@@ -37,5 +32,21 @@ public class XN601043Req {
 
     public void setToLevel(String toLevel) {
         this.toLevel = toLevel;
+    }
+
+    public String getToSite() {
+        return toSite;
+    }
+
+    public void setToSite(String toSite) {
+        this.toSite = toSite;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

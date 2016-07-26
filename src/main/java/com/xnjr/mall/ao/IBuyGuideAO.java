@@ -14,13 +14,22 @@ public interface IBuyGuideAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
     /**
-     * 新增
+     * 上架
      * @param data
      * @return 
      * @create: 2015年8月27日 下午2:22:02 xieyj
      * @history:
      */
     public String addBuyGuide(BuyGuide data);
+
+    /**
+     * 下架
+     * @param data
+     * @return 
+     * @create: 2015年8月27日 下午2:22:25 xieyj
+     * @history:
+     */
+    public int offBuyGuide(BuyGuide data);
 
     /**
      * 修改

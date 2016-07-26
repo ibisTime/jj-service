@@ -31,9 +31,10 @@ public class XN601042 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         BuyGuide condition = new BuyGuide();
-        condition.setCode(req.getCode());
         condition.setModelCode(req.getModelCode());
         condition.setToLevel(req.getToLevel());
+        condition.setToSite(req.getToSite());
+        condition.setStatus(req.getStatus());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = IBuyGuideAO.DEFAULT_ORDER_COLUMN;

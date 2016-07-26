@@ -23,6 +23,7 @@ public class ProductConverter {
         data.setHighlightPic(data.getHighlightPic());
         data.setHighlightText(req.getHighlightText());
         data.setUpdater(req.getUpdater());
+        data.setRemark(req.getRemark());
         return data;
     }
 

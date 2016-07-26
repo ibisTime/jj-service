@@ -10,7 +10,7 @@ package com.xnjr.mall.api.impl;
 
 import com.xnjr.mall.ao.IUserAO;
 import com.xnjr.mall.api.AProcessor;
-import com.xnjr.mall.api.converter.JfUserConverter;
+import com.xnjr.mall.api.converter.UserConverter;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.dto.req.XN602600Req;
@@ -36,7 +36,7 @@ public class XN602600 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        XN805042Req data = JfUserConverter.converter(req);
+        XN805042Req data = UserConverter.converter(req);
         String userId = userAO.doAddJfUser(data);
         return new XN805042Res(userId);
     }

@@ -55,6 +55,9 @@ public class BuyGuide extends ABaseDO {
     // 线上位置
     private String toSite;
 
+    // 状态
+    private String status;
+
     // *************db properties**************
     // 型号名称
     private String modelName;
@@ -169,5 +172,13 @@ public class BuyGuide extends ABaseDO {
 
     public void setToSite(String toSite) {
         this.toSite = toSite;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -8,6 +8,7 @@
  */
 package com.xnjr.mall.api.converter;
 
+import com.xnjr.mall.dto.req.XN602200Req;
 import com.xnjr.mall.dto.req.XN602600Req;
 import com.xnjr.mall.dto.req.XN805042Req;
 
@@ -16,10 +17,23 @@ import com.xnjr.mall.dto.req.XN805042Req;
  * @since: 2016年7月26日 上午11:41:54 
  * @history:
  */
-public class JfUserConverter {
+public class UserConverter {
 
-    // 入驻
+    // 积分商入驻
     public static XN805042Req converter(XN602600Req req) {
+        XN805042Req resultReq = new XN805042Req();
+        resultReq.setLoginName(req.getLoginName());
+        resultReq.setMobile(req.getMobile());
+        resultReq.setIdKind(req.getIdKind());
+        resultReq.setIdNo(req.getIdNo());
+        resultReq.setRealName(req.getRealName());
+        resultReq.setUserReferee(req.getUserReferee());
+        resultReq.setPdf(req.getPdf());
+        return resultReq;
+    }
+
+    // 货品商入驻
+    public static XN805042Req converter(XN602200Req req) {
         XN805042Req resultReq = new XN805042Req();
         resultReq.setLoginName(req.getLoginName());
         resultReq.setMobile(req.getMobile());

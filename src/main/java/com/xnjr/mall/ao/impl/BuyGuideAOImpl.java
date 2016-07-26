@@ -22,6 +22,7 @@ import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.enums.EPutStatus;
+import com.xnjr.mall.enums.ETypeStatus;
 import com.xnjr.mall.enums.EUserLevel;
 import com.xnjr.mall.exception.BizException;
 
@@ -44,10 +45,11 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     @Override
     public String addBuyGuide(BuyGuide data) {
         String result = null;
-        Model model = modelBO.getModel(data.getModelCode());
         BuyGuide condition = new BuyGuide();
         condition.setModelCode(data.getModelCode());
         List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
+        // 设置状态为启用
+        data.setStatus(ETypeStatus.ONLINE.getCode());
         // 默认等级设置
         if (StringUtils.isBlank(data.getToLevel())) {
             data.setToLevel(EUserLevel.ZERO.getCode());
@@ -64,6 +66,11 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
             result = buyGuideBO.saveBuyGuide(data);
         }
         return result;
+    }
+
+    public int offBuyGuide(BuyGuide data) {
+        data.setStatus(ETypeStatus.OFFLINE.getCode());
+        return buyGuideBO.refreshBuyGuide(data);
     }
 
     /** 

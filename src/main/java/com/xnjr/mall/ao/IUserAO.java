@@ -18,4 +18,6 @@ import com.xnjr.mall.dto.req.XN805042Req;
 public interface IUserAO {
 
     public String doAddJfUser(XN805042Req data);
+
+    public String doAddHpUser(XN805042Req data);
 }
