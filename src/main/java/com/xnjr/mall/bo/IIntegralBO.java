@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.xnjr.mall.bo.base.IPaginableBO;
 import com.xnjr.mall.domain.Integral;
-import com.xnjr.mall.enums.EIntegralStatus;
+import com.xnjr.mall.enums.EBoolean;
 
 /** 
  * @author: xieyj 
@@ -17,10 +17,12 @@ public interface IIntegralBO extends IPaginableBO<Integral> {
 
     public void isExistIntegral(String code);
 
+    public int removeIntegral(String code);
+
     public List<Integral> queryIntegralList(Integral condition);
 
     public Integral getIntegral(String code);
 
-    public int refreshIntegralStatus(String code, EIntegralStatus status,
+    public int refreshIntegralStatus(String code, EBoolean status,
             String updater, String remark);
 }

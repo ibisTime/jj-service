@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.domain.User;
+import com.xnjr.mall.dto.req.XN805042Req;
 import com.xnjr.mall.dto.req.XN805901Req;
 import com.xnjr.mall.dto.req.XN805902Req;
+import com.xnjr.mall.dto.res.XN805042Res;
 import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.http.BizConnecter;
@@ -19,6 +21,16 @@ import com.xnjr.mall.http.JsonUtils;
  */
 @Component
 public class UserBOImpl extends PaginableBOImpl<User> implements IUserBO {
+
+    /** 
+     * @see com.xnjr.mall.bo.IUserBO#doSaveUser(com.xnjr.mall.domain.User)
+     */
+    @Override
+    public String doSaveUser(XN805042Req req) {
+        XN805042Res res = BizConnecter.getBizData("805042",
+            JsonUtils.object2Json(req), XN805042Res.class);
+        return res.getUserId();
+    }
 
     /** 
      * @see com.xnjr.mall.bo.IUserBO#getRemoteUser(java.lang.String)

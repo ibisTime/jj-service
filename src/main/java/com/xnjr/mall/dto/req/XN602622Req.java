@@ -6,7 +6,7 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年7月20日 下午5:38:20 
  * @history:
  */
-public class XN602105Req {
+public class XN602622Req {
 
     // 编号(必填)
     private String integralCode;

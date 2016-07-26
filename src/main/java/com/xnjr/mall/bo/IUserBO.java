@@ -2,6 +2,7 @@ package com.xnjr.mall.bo;
 
 import com.xnjr.mall.bo.base.IPaginableBO;
 import com.xnjr.mall.domain.User;
+import com.xnjr.mall.dto.req.XN805042Req;
 import com.xnjr.mall.dto.res.XN805901Res;
 
 /**
@@ -10,6 +11,16 @@ import com.xnjr.mall.dto.res.XN805901Res;
  * @history:
  */
 public interface IUserBO extends IPaginableBO<User> {
+
+    /**
+     *  新增用户
+     * @param req
+     * @return 
+     * @create: 2016年7月26日 下午12:48:52 xieyj
+     * @history:
+     */
+    public String doSaveUser(XN805042Req req);
+
     /**
      * 获取远程用户信息
      * @param tokenId

@@ -1,17 +1,12 @@
 package com.xnjr.mall.dto.req;
 
 /**
- * 积分块分页查询
+ * 积分块列表查询
  * @author: xieyj 
  * @since: 2016年7月20日 下午5:38:20 
  * @history:
  */
-public class XN602101Req extends APageReq {
-    /** 
-     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-     */
-    private static final long serialVersionUID = 1L;
-
+public class XN602628Req {
     // 用户编号(必填)
     private String userId;
 

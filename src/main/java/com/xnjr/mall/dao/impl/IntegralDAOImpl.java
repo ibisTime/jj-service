@@ -37,8 +37,7 @@ public class IntegralDAOImpl extends AMybatisTemplate implements IIntegralDAO {
      */
     @Override
     public int delete(Integral data) {
-        // TODO Auto-generated method stub
-        return 0;
+        return super.delete("delete_integral", data);
     }
 
     /** 
