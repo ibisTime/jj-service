@@ -146,7 +146,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
             approveNote = "管理端取消订单";
         }
         return invoiceBO.cancelInvoice(code, approveUser, approveNote,
-            EInvoiceStatus.FINISH.getCode());
+            EInvoiceStatus.NO_SEND.getCode());
     }
 
     /** 
