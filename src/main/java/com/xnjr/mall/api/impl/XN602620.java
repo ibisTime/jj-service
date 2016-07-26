@@ -5,24 +5,24 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Integral;
-import com.xnjr.mall.dto.req.XN602100Req;
+import com.xnjr.mall.dto.req.XN602620Req;
 import com.xnjr.mall.dto.res.PKCodeRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 形成积分块
+ * 形成积分二维码
  * @author: xieyj 
  * @since: 2016年7月21日 上午11:00:45 
  * @history:
  */
-public class XN602100 extends AProcessor {
+public class XN602620 extends AProcessor {
 
     private IIntegralAO integralAO = SpringContextHolder
         .getBean(IIntegralAO.class);
 
-    private XN602100Req req = null;
+    private XN602620Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
@@ -43,7 +43,7 @@ public class XN602100 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602100Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN602620Req.class);
         StringValidater.validateAmount(req.getQuantity(), req.getPrice());
         StringValidater.validateBlank(req.getUserId(), req.getIsApprove());
     }

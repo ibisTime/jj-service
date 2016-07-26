@@ -1,13 +1,13 @@
 package com.xnjr.mall.dto.req;
 
 /**
- * 积分块详情查询
+ * 删除积分二维码
  * @author: xieyj 
- * @since: 2016年7月20日 下午5:38:20 
+ * @since: 2016年7月26日 下午1:25:34 
  * @history:
  */
-public class XN602103Req {
-    // 编号(必填)
+public class XN602621Req {
+    // 编号
     private String code;
 
     public String getCode() {

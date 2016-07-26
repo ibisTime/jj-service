@@ -14,13 +14,45 @@ public interface IIntegralAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
     /**
-     * 添加积分块
+     * 添加积分二维码
      * @param data
      * @return 
      * @create: 2016年7月20日 下午6:23:49 xieyj
      * @history:
      */
     public String addIntegral(Integral data);
+
+    /**
+     * 删除积分二维码
+     * @param code
+     * @return 
+     * @create: 2016年7月26日 下午1:22:41 xieyj
+     * @history:
+     */
+    public int dropIntegral(String code);
+
+    /**
+     * 上架/下架积分二维码
+     * @param code
+     * @param updater
+     * @param updateResult
+     * @param remark
+     * @return 
+     * @create: 2016年7月22日 上午10:55:10 xieyj
+     * @history:
+     */
+    public int approveIntegral(String code, String updater,
+            String updateResult, String remark);
+
+    /**
+     * 扫一扫加积分二维码
+     * @param code
+     * @param userId
+     * @return 
+     * @create: 2016年7月21日 上午8:57:18 xieyj
+     * @history:
+     */
+    public void bugIntegral(String code, String userId);
 
     /**
      * 积分分页查询
@@ -49,48 +81,4 @@ public interface IIntegralAO {
      * @history:
      */
     public Integral getIntegral(String code);
-
-    /**
-     * 扫描积分
-     * @param code
-     * @param userId
-     * @return 
-     * @create: 2016年7月21日 上午8:57:18 xieyj
-     * @history:
-     */
-    public void scannIntegral(String code, String userId);
-
-    /**
-     * 上架/下架积分二维码
-     * @param code
-     * @param updater
-     * @param updateResult
-     * @param remark
-     * @return 
-     * @create: 2016年7月22日 上午10:55:10 xieyj
-     * @history:
-     */
-    public int approveIntegral(String code, String updater,
-            String updateResult, String remark);
-
-    /**
-     * 购买上架积分二维码
-     * @param code
-     * @param userId
-     * @return 
-     * @create: 2016年7月21日 上午8:57:18 xieyj
-     * @history:
-     */
-    public void bugIntegral(String code, String userId);
-
-    /**
-     * 失效积分二维码
-     * @param code
-     * @param updater
-     * @param remark
-     * @return 
-     * @create: 2016年7月22日 上午10:55:10 xieyj
-     * @history:
-     */
-    public int invalidIntegral(String code, String updater, String remark);
 }

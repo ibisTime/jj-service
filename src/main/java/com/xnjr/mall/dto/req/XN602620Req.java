@@ -1,12 +1,12 @@
 package com.xnjr.mall.dto.req;
 
 /**
- * 形成积分块
+ * 形成积分二维码
  * @author: xieyj 
  * @since: 2016年7月20日 下午5:38:20 
  * @history:
  */
-public class XN602100Req {
+public class XN602620Req {
     // 用户编号(必填)
     private String userId;
 

@@ -3,33 +3,34 @@ package com.xnjr.mall.api.impl;
 import com.xnjr.mall.ao.IIntegralAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
-import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.dto.req.XN602105Req;
-import com.xnjr.mall.dto.res.BooleanRes;
+import com.xnjr.mall.domain.Integral;
+import com.xnjr.mall.dto.req.XN602628Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 上架/下架积分二维码
+ * 积分块列表查询
  * @author: xieyj 
- * @since: 2016年7月21日 下午12:30:35 
+ * @since: 2016年7月21日 上午11:10:20 
  * @history:
  */
-public class XN602105 extends AProcessor {
+public class XN602628 extends AProcessor {
     private IIntegralAO integralAO = SpringContextHolder
         .getBean(IIntegralAO.class);
 
-    private XN602105Req req = null;
+    private XN602628Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        integralAO.approveIntegral(req.getIntegralCode(), req.getUpdater(),
-            req.getUpdateResult(), req.getRemark());
-        return new BooleanRes(true);
+        Integral condition = new Integral();
+        condition.setUserId(req.getUserId());
+        condition.setIsApprove(req.getIsApprove());
+        condition.setStatus(req.getStatus());
+        return integralAO.queryIntegralList(condition);
     }
 
     /** 
@@ -37,9 +38,6 @@ public class XN602105 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602105Req.class);
-        StringValidater.validateBlank(req.getIntegralCode(), req.getUpdater(),
-            req.getUpdateResult(), req.getRemark());
+        req = JsonUtil.json2Bean(inputparams, XN602628Req.class);
     }
-
 }

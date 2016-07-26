@@ -21,7 +21,7 @@ import com.xnjr.mall.core.EGeneratePrefix;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IIntegralDAO;
 import com.xnjr.mall.domain.Integral;
-import com.xnjr.mall.enums.EIntegralStatus;
+import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -45,7 +45,6 @@ public class IntegralBOImpl extends PaginableBOImpl<Integral> implements
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.JF.getCode());
             data.setCode(code);
-            data.setStatus(EIntegralStatus.TO_PUT.getCode());
             data.setUpdater(data.getUserId());
             data.setUpdateDatetime(new Date());
             integralDAO.insert(data);
@@ -97,7 +96,7 @@ public class IntegralBOImpl extends PaginableBOImpl<Integral> implements
      * @see com.xnjr.mall.bo.IIntegralBO#approveIntegral(java.lang.String, java.lang.String, java.lang.String, com.xnjr.mall.enums.EIntegralStatus)
      */
     @Override
-    public int refreshIntegralStatus(String code, EIntegralStatus status,
+    public int refreshIntegralStatus(String code, EBoolean status,
             String updater, String remark) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
@@ -108,6 +107,20 @@ public class IntegralBOImpl extends PaginableBOImpl<Integral> implements
             data.setUpdateDatetime(new Date());
             data.setRemark(remark);
             count = integralDAO.updateStatus(data);
+        }
+        return count;
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IIntegralBO#removeIntegral(java.lang.String)
+     */
+    @Override
+    public int removeIntegral(String code) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Integral data = new Integral();
+            data.setCode(code);
+            count = integralDAO.delete(data);
         }
         return count;
     }
