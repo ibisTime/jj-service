@@ -29,6 +29,7 @@ public class XN601043 extends AProcessor {
     public Object doBusiness() throws BizException {
         BuyGuide condition = new BuyGuide();
         condition.setModelCode(req.getModelCode());
+        condition.setModelNameForQuery(req.getModelName());
         condition.setToLevel(req.getToLevel());
         condition.setToSite(req.getToSite());
         condition.setStatus(req.getStatus());

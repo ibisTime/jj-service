@@ -60,7 +60,14 @@ public class BuyGuide extends ABaseDO {
     private String status;
 
     // *************db properties**************
+    // 型号列表信息
     private Model model;
+
+    // 型号名称
+    private String modelNameForQuery;
+
+    // 型号名称
+    private String modelName;
 
     private List<ModelSpecs> modelSpecsList;
 
@@ -184,11 +191,27 @@ public class BuyGuide extends ABaseDO {
         this.model = model;
     }
 
+    public String getModelNameForQuery() {
+        return modelNameForQuery;
+    }
+
+    public void setModelNameForQuery(String modelNameForQuery) {
+        this.modelNameForQuery = modelNameForQuery;
+    }
+
     public List<ModelSpecs> getModelSpecsList() {
         return modelSpecsList;
     }
 
     public void setModelSpecsList(List<ModelSpecs> modelSpecsList) {
         this.modelSpecsList = modelSpecsList;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }

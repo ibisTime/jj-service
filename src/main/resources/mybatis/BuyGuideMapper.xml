@@ -9,12 +9,13 @@
 		<result column="to_level" property="toLevel" />
 		<result column="model_code" property="modelCode" />
 		
+		<result column="model_name" property="modelName" />
 	    <result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
 		<result column="status" property="status" />
-		<result column="from_user" property="fromUser" />
 		
+		<result column="from_user" property="fromUser" />
 		<result column="from_quantity" property="fromQuantity" />
 		<result column="from_site" property="fromSite" />
 		<result column="cost_price" property="costPrice" />
@@ -30,6 +31,9 @@
 			</if>
 			<if test="modelCode != null and modelCode != '' ">
 				AND t.model_code = #{modelCode}
+			</if>
+			<if test="modelNameForQuery != null and modelNameForQuery != '' ">
+				AND tm.name like "%"#{modelNameForQuery}"%"
 			</if>
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
@@ -59,18 +63,19 @@
 		,t.to_level
 		,t.model_code
 		
+		,tm.name as model_name
 		,t.updater
 		,t.update_datetime
 		,t.remark
 		,t.status
-		,t.from_user
 		
+		,t.from_user
 		,t.from_quantity
 		,t.from_site
 		,t.cost_price
 		,t.to_site
 		FROM
-		tmall_buy_guide t
+		tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">

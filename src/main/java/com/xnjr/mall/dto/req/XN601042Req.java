@@ -15,6 +15,9 @@ public class XN601042Req extends APageReq {
     // 型号编号（选填）
     private String modelCode;
 
+    // 型号名称（选填）
+    private String modelName;
+
     // 受众（选填）
     private String toLevel;
 
@@ -54,5 +57,13 @@ public class XN601042Req extends APageReq {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }

@@ -32,6 +32,12 @@
 			<if test="productName != null and productName != '' ">
 				AND p.name like "%"#{productName}"%"
 			</if>
+			<if test="category != null and category != '' ">
+				AND p.category = #{category}
+			</if>
+			<if test="type != null and type != '' ">
+				AND p.type = #{type}
+			</if>
 			<choose>
 				 <when test="status == '13'">
 				  AND (t.status = 1 or t.status = 3)
