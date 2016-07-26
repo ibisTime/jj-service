@@ -62,6 +62,7 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
             BuyGuide buyGuide = list.get(0);
             data.setCode(buyGuide.getCode());
             buyGuideBO.refreshBuyGuide(data);
+            result = data.getCode();
         } else {
             result = buyGuideBO.saveBuyGuide(data);
         }
