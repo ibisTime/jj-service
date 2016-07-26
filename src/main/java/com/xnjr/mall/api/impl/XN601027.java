@@ -32,6 +32,7 @@ public class XN601027 extends AProcessor {
         Model condition = new Model();
         condition.setCategory(req.getCategory());
         condition.setType(req.getType());
+        condition.setProductCode(req.getCode());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = IModelAO.DEFAULT_ORDER_COLUMN;

@@ -18,6 +18,9 @@ public class XN601027Req extends APageReq {
     // 小类(选填)
     private String type;
 
+    // 产品编号（选填）
+    private String code;
+
     public String getCategory() {
         return category;
     }
@@ -32,6 +35,14 @@ public class XN601027Req extends APageReq {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
 }
