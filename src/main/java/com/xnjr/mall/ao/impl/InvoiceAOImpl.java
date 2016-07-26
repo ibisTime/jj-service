@@ -149,9 +149,6 @@ public class InvoiceAOImpl implements IInvoiceAO {
             EInvoiceStatus.FINISH.getCode());
     }
 
-    /** 
-     * @see com.xnjr.mall.ao.IInvoiceAO#payInvoice(com.xnjr.mall.domain.Invoice)
-     */
     @Override
     @Transactional
     public void payInvoice(String code, Long amount, String fromType,
@@ -165,7 +162,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
                 throw new BizException("xn0000", "首款金额不能为空");
             }
             invoiceBO.refreshInvoiceStatus(code,
-                EInvoiceStatus.PAY_YES.getCode());
+                EInvoiceStatus.PAY_END.getCode());
             payAmount = amount;
         } else {
             amount = invoice.getTotalAmount() - invoice.getPayAmount();
