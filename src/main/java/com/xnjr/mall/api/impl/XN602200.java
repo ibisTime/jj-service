@@ -12,6 +12,12 @@ import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
+/** 
+ * 货品商入驻
+ * @author: zuixian 
+ * @since: 2016年7月26日 下午4:36:56 
+ * @history:
+ */
 public class XN602200 extends AProcessor {
 
     private IUserAO userAO = SpringContextHolder.getBean(IUserAO.class);

@@ -8,14 +8,21 @@
  */
 package com.xnjr.mall.ao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xnjr.mall.ao.IUserAO;
+import com.xnjr.mall.bo.IBuyGuideBO;
+import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.ISaleGuideBO;
 import com.xnjr.mall.bo.IUserBO;
+import com.xnjr.mall.domain.BuyGuide;
+import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.dto.req.XN805042Req;
 import com.xnjr.mall.enums.EUserKind;
+import com.xnjr.mall.enums.EUserLevel;
 
 /** 
  * 用户AO
@@ -32,6 +39,12 @@ public class UserAOImpl implements IUserAO {
     @Autowired
     ISaleGuideBO saleGuideBO;
 
+    @Autowired
+    IBuyGuideBO buyGuideBO;
+
+    @Autowired
+    IModelBO modelBO;
+
     /** 
      * @see com.xnjr.mall.ao.IUserAO#doAddJfUser(com.xnjr.mall.domain.User)
      */
@@ -46,12 +59,26 @@ public class UserAOImpl implements IUserAO {
 
     @Override
     public String doAddHpUser(XN805042Req data) {
-        // TODO
-        // 未自动添加仓库
         // 设置更新人为推荐人
         data.setUpdater(data.getUserReferee());
-        // 设置积分商身份
+        // 设置货品商身份
         data.setKind(EUserKind.Goods.getCode());
-        return userBO.doSaveUser(data);
+        String userId = userBO.doSaveUser(data);
+        Model condition = new Model();
+        List<Model> list = modelBO.queryModelList(condition);
+        BuyGuide buyGuide = new BuyGuide();
+        for (Model model : list) {
+            buyGuide.setModelCode(model.getCode());
+            buyGuide.setFromUser(userId);
+            buyGuide.setFromQuantity("0");
+            Long price = saleGuideBO.getSaleGuide(model.getCode(),
+                EUserLevel.ZERO, Long.valueOf(buyGuide.getFromQuantity()))
+                .getPrice();
+            if (price != null) {
+                buyGuide.setCostPrice(price);
+            }
+            buyGuideBO.saveBuyGuide(buyGuide);
+        }
+        return userId;
     }
 }

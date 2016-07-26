@@ -17,6 +17,7 @@ import com.xnjr.mall.bo.ISaleGuideBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.dao.ISaleGuideDAO;
 import com.xnjr.mall.domain.SaleGuide;
+import com.xnjr.mall.enums.EUserLevel;
 
 /** 
  * @author: haiqingzheng 
@@ -35,6 +36,16 @@ public class SaleGuideBOImpl extends PaginableBOImpl<SaleGuide> implements
     @Override
     public List<SaleGuide> querySaleGuideList(SaleGuide data) {
         return saleGuideDAO.selectList(data);
+    }
+
+    @Override
+    public SaleGuide getSaleGuide(String modelCode, EUserLevel toLevel,
+            Long quantity) {
+        SaleGuide condition = new SaleGuide();
+        condition.setModelCode(modelCode);
+        condition.setToLevel(toLevel.getCode());
+        condition.setQuantity(quantity);
+        return saleGuideDAO.select(condition);
     }
 
 }
