@@ -29,6 +29,15 @@ public interface IInvoiceDAO extends IBaseDAO<Invoice> {
      */
     public int updateInvoiceCancel(Invoice data);
 
+    /** 
+     * Oss取消订单
+     * @param data
+     * @return 
+     * @create: 2016年7月26日 下午8:05:29 zuixian
+     * @history: 
+     */
+    public int updateInvoiceCancelOss(Invoice data);
+
     /**
      * 订单发货
      * @param data
@@ -46,4 +55,6 @@ public interface IInvoiceDAO extends IBaseDAO<Invoice> {
      * @history:
      */
     public int updateInvoicePayAmount(Invoice data);
+
+    public int doFirstPay(Invoice data);
 }

@@ -9,24 +9,34 @@ import java.util.List;
  * @history:
  */
 public class XN602021Req {
+    // 收件编号（必填）
+    private String addressCode;
 
     // 申请人（必填）
     private String applyUser;
 
-    // 购物车列表（必填）
-    private List<String> cartCodeList;
-
     // 申请备注（选填）
     private String applyNote;
-
-    // 收件编号（必填）
-    private String addressCode;
 
     // 发票类型（必填）
     private String receiptType;
 
     // 发票抬头（必填）
     private String receiptTitle;
+
+    // 对应货品商（必填）
+    private String toUser;
+
+    // 购物车列表（必填）
+    private List<String> cartCodeList;
+
+    public String getAddressCode() {
+        return addressCode;
+    }
+
+    public void setAddressCode(String addressCode) {
+        this.addressCode = addressCode;
+    }
 
     public String getApplyUser() {
         return applyUser;
@@ -36,28 +46,12 @@ public class XN602021Req {
         this.applyUser = applyUser;
     }
 
-    public List<String> getCartCodeList() {
-        return cartCodeList;
-    }
-
-    public void setCartCodeList(List<String> cartCodeList) {
-        this.cartCodeList = cartCodeList;
-    }
-
     public String getApplyNote() {
         return applyNote;
     }
 
     public void setApplyNote(String applyNote) {
         this.applyNote = applyNote;
-    }
-
-    public String getAddressCode() {
-        return addressCode;
-    }
-
-    public void setAddressCode(String addressCode) {
-        this.addressCode = addressCode;
     }
 
     public String getReceiptType() {
@@ -75,4 +69,21 @@ public class XN602021Req {
     public void setReceiptTitle(String receiptTitle) {
         this.receiptTitle = receiptTitle;
     }
+
+    public String getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(String toUser) {
+        this.toUser = toUser;
+    }
+
+    public List<String> getCartCodeList() {
+        return cartCodeList;
+    }
+
+    public void setCartCodeList(List<String> cartCodeList) {
+        this.cartCodeList = cartCodeList;
+    }
+
 }

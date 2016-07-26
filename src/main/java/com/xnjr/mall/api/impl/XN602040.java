@@ -32,33 +32,24 @@ public class XN602040 extends AProcessor {
 
     private XN602040Req req = null;
 
-    /** 
-     * @see com.xnjr.mall.api.IProcessor#doBusiness()
-     */
     @Override
     public Object doBusiness() throws BizException {
         Logistics logistics = new Logistics();
-        logistics.setCode(req.getCode());
         logistics.setInvoiceCode(req.getInvoiceCode());
         logistics.setCompany(req.getCompany());
+        logistics.setCode(req.getCode());
+        logistics.setDeliverer(req.getDeliverer());
         logistics.setDeliveryDatetime(DateUtil.strToDate(
             req.getDeliveryDatetime(), DateUtil.DATA_TIME_PATTERN_1));
-        logistics.setDeliverer(req.getDeliverer());
         logistics.setUpdater(req.getUpdater());
         logistics.setRemark(req.getRemark());
-        return new PKCodeRes(logisticsAO.addLogistics(logistics,
-            req.getGoodsList()));
+        return new PKCodeRes(logisticsAO.addLogistics(logistics));
     }
 
-    /** 
-     * @see com.xnjr.mall.api.IProcessor#doCheck(java.lang.String)
-     */
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602040Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getInvoiceCode(),
-            req.getCompany(), req.getDeliveryDatetime(), req.getDeliverer(),
-            req.getUpdater());
+        StringValidater.validateBlank(req.getInvoiceCode(), req.getUpdater());
     }
 
 }

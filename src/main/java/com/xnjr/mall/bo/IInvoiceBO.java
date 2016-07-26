@@ -41,14 +41,14 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
     public int refreshInvoiceStatus(String code, String status);
 
     /**
-     * 取消发货单（前端）
+     * 不支付发货单（前端）
      * @param code
      * @param applyNote
      * @return 
      * @create: 2016年5月25日 上午8:18:57 xieyj
      * @history:
      */
-    public int cancelInvoice(String code, String applyNote);
+    public int cancelInvoice(String code);
 
     /**
      * 取消发货单，分强制取消(支付待确认)和系统自动取消(未支付)
@@ -86,6 +86,8 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
      */
     public int refreshInvoicePayAmount(String code, Long payAmount);
 
+    public int doFirstPay(String code, Long amount);
+
     /**
      * 查询发货单列表
      * @param data
@@ -103,4 +105,5 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
      * @history:
      */
     public Invoice getInvoice(String code);
+
 }

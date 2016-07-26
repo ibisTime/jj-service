@@ -11,7 +11,7 @@ import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 立即购买
+ * 3.1、 单种型号购买
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
@@ -23,9 +23,6 @@ public class XN602020 extends AProcessor {
 
     private XN602020Req req = null;
 
-    /** 
-     * @see com.xnjr.mall.api.IProcessor#doBusiness()
-     */
     @Override
     public Object doBusiness() throws BizException {
         Invoice data = new Invoice();
@@ -36,19 +33,15 @@ public class XN602020 extends AProcessor {
         data.setReceiptTitle(req.getReceiptTitle());
         data.setToUser(req.getToUser());
         return invoiceAO.commitInvoice(req.getModelCode(),
-            Integer.valueOf(req.getQuantity()),
-            Long.valueOf(req.getSalePrice()), data);
+            Integer.valueOf(req.getQuantity()), data);
     }
 
-    /** 
-     * @see com.xnjr.mall.api.IProcessor#doCheck(java.lang.String)
-     */
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602020Req.class);
         StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode(),
-            req.getModelCode());
+            req.getModelCode(), req.getToUser());
         StringValidater.validateNumber(req.getQuantity());
-        StringValidater.validateAmount(req.getSalePrice());
+
     }
 }

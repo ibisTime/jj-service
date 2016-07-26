@@ -8,28 +8,25 @@ package com.xnjr.mall.dto.req;
  */
 public class XN602020Req {
 
-    // 申请人（必填）
-    private String applyUser;
-
     // 型号编号（必填）
     private String modelCode;
 
     // 数量（必填）
     private String quantity;
 
-    // 单价（必填）
-    private String salePrice;
-
     // 收件编号（必填）
     private String addressCode;
+
+    // 申请人（必填）
+    private String applyUser;
 
     // 申请备注（选填）
     private String applyNote;
 
-    // 发票类型（必填）
+    // 发票类型（选填）
     private String receiptType;
 
-    // 发票抬头（必填）
+    // 发票抬头（选填）
     private String receiptTitle;
 
     // 对应货品商（必填）
@@ -57,14 +54,6 @@ public class XN602020Req {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
-    }
-
-    public String getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(String salePrice) {
-        this.salePrice = salePrice;
     }
 
     public String getApplyNote() {

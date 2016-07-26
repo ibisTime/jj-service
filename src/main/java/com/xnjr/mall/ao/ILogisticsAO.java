@@ -8,10 +8,7 @@
  */
 package com.xnjr.mall.ao;
 
-import java.util.List;
-
 import com.xnjr.mall.bo.base.Paginable;
-import com.xnjr.mall.domain.Goods;
 import com.xnjr.mall.domain.Logistics;
 
 /** 
@@ -25,13 +22,12 @@ public interface ILogisticsAO {
 
     /**
      * 物流信息录入
-     * @param logistics 物流单信息
-     * @param goods 货物信息
+     * @param logistics
      * @return 
-     * @create: 2016年5月29日 下午1:19:14 haiqingzheng
+     * @create: 2016年7月26日 下午4:49:03 myb858
      * @history:
      */
-    public String addLogistics(Logistics logistics, List<Goods> goods);
+    public String addLogistics(Logistics logistics);
 
     /**
      * 确认物流单
@@ -42,7 +38,7 @@ public interface ILogisticsAO {
      * @create: 2016年6月12日 上午8:42:43 xieyj
      * @history:
      */
-    public int confirmLogistics(String code, String updater, String remark);
+    public boolean confirmLogistics(String code, String updater, String remark);
 
     /**
      * 获取物流单信息（将对应的货物信息查询出来）

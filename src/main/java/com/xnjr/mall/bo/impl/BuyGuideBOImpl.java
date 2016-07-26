@@ -22,6 +22,7 @@ import com.xnjr.mall.core.EGeneratePrefix;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IBuyGuideDAO;
 import com.xnjr.mall.domain.BuyGuide;
+import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -135,6 +136,24 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
     }
 
     @Override
+    public BuyGuide getOnlineModel(String modelCode, String level,
+            String fromUser) {
+        BuyGuide buyGuide = null;
+        if (StringUtils.isNotBlank(modelCode) && StringUtils.isNotBlank(level)) {
+            BuyGuide condition = new BuyGuide();
+            condition.setModelCode(modelCode);
+            condition.setToLevel(String.valueOf(level));
+            condition.setFromUser(fromUser);
+            condition.setStatus(EBoolean.YES.getCode());
+            List<BuyGuide> list = buyGuideDAO.selectList(condition);
+            if (!CollectionUtils.sizeIsEmpty(list)) {
+                buyGuide = list.get(0);
+            }
+        }
+        return buyGuide;
+    }
+
+    @Override
     public int refreshBuyGuideStatus(BuyGuide data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
@@ -143,4 +162,5 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
         }
         return count;
     }
+
 }

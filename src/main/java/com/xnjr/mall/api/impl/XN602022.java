@@ -11,7 +11,7 @@ import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 提交支付待确认订单
+ * 支付首款
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
@@ -28,8 +28,9 @@ public class XN602022 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        invoiceAO.toPayInvoice(req.getCode(), req.getTradePwd());
-        return new BooleanRes(true);
+
+        return new BooleanRes(invoiceAO.doFirstPay(req.getCode(),
+            StringValidater.toLong(req.getAmount()), req.getTradePwd()));
     }
 
     /** 
@@ -38,6 +39,7 @@ public class XN602022 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602022Req.class);
-        StringValidater.validateBlank(req.getCode());
+        StringValidater.validateBlank(req.getCode(), req.getTradePwd());
+        StringValidater.validateAmount(req.getAmount());
     }
 }
