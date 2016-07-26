@@ -50,7 +50,7 @@ public class BuyGuide extends ABaseDO {
     private String fromSite;
 
     // 成本价
-    private Date costPrice;
+    private Long costPrice;
 
     // 线上位置
     private String toSite;
@@ -158,14 +158,6 @@ public class BuyGuide extends ABaseDO {
         this.fromSite = fromSite;
     }
 
-    public Date getCostPrice() {
-        return costPrice;
-    }
-
-    public void setCostPrice(Date costPrice) {
-        this.costPrice = costPrice;
-    }
-
     public String getToSite() {
         return toSite;
     }
@@ -180,5 +172,13 @@ public class BuyGuide extends ABaseDO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(Long costPrice) {
+        this.costPrice = costPrice;
     }
 }
