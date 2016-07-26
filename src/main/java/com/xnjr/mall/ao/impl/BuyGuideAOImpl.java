@@ -23,8 +23,8 @@ import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.domain.ModelSpecs;
+import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EPutStatus;
-import com.xnjr.mall.enums.ETypeStatus;
 import com.xnjr.mall.enums.EUserLevel;
 import com.xnjr.mall.exception.BizException;
 
@@ -44,9 +44,6 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     @Autowired
     private IModelSpecsBO modelSpecsBO;
 
-    /** 
-     * @see com.xnjr.mall.ao.IBuyGuideAO#addBuyGuide(com.xnjr.mall.domain.BuyGuide)
-     */
     @Override
     public String addBuyGuide(BuyGuide data) {
         String result = null;
@@ -54,7 +51,7 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
         condition.setModelCode(data.getModelCode());
         List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
         // 设置状态为启用
-        data.setStatus(ETypeStatus.ONLINE.getCode());
+        data.setStatus(EBoolean.YES.getCode());
         // 默认等级设置
         if (StringUtils.isBlank(data.getToLevel())) {
             data.setToLevel(EUserLevel.ZERO.getCode());
@@ -75,7 +72,7 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     }
 
     public int offBuyGuide(BuyGuide data) {
-        data.setStatus(ETypeStatus.OFFLINE.getCode());
+        data.setStatus(EBoolean.NO.getCode());
         return buyGuideBO.refreshBuyGuideStatus(data);
     }
 

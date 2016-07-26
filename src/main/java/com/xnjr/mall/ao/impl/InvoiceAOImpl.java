@@ -146,12 +146,9 @@ public class InvoiceAOImpl implements IInvoiceAO {
             approveNote = "管理端取消订单";
         }
         return invoiceBO.cancelInvoice(code, approveUser, approveNote,
-            EInvoiceStatus.FINISH.getCode());
+            EInvoiceStatus.NO_SEND.getCode());
     }
 
-    /** 
-     * @see com.xnjr.mall.ao.IInvoiceAO#payInvoice(com.xnjr.mall.domain.Invoice)
-     */
     @Override
     @Transactional
     public void payInvoice(String code, Long amount, String fromType,
@@ -165,7 +162,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
                 throw new BizException("xn0000", "首款金额不能为空");
             }
             invoiceBO.refreshInvoiceStatus(code,
-                EInvoiceStatus.PAY_YES.getCode());
+                EInvoiceStatus.PAY_END.getCode());
             payAmount = amount;
         } else {
             amount = invoice.getTotalAmount() - invoice.getPayAmount();
