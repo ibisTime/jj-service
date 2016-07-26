@@ -27,6 +27,15 @@ public class XN601042Req extends APageReq {
     // 状态（选填）
     private String status;
 
+    // 产品编号（选填）
+    private String productCode;
+
+    // 大类（选填）
+    private String category;
+
+    // 小类（选填）
+    private String type;
+
     public String getModelCode() {
         return modelCode;
     }
@@ -65,5 +74,29 @@ public class XN601042Req extends APageReq {
 
     public void setModelName(String modelName) {
         this.modelName = modelName;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

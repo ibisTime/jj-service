@@ -3,7 +3,6 @@ package com.xnjr.mall.api.impl;
 import com.xnjr.mall.ao.IBuyGuideAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
-import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.dto.req.XN601044Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
@@ -27,9 +26,7 @@ public class XN601044 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        BuyGuide condition = new BuyGuide();
-        condition.setCode(req.getCode());
-        return buyGuideAO.queryBuyGuideList(condition);
+        return buyGuideAO.getBuyGuide(req.getCode());
     }
 
     /** 

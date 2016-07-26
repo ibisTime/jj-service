@@ -53,6 +53,15 @@
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
+			<if test="productCode != null and productCode != '' ">
+				AND tm.product_code = #{productCode}
+			</if>
+			<if test="category != null and category != '' ">
+				AND tp.category = #{category}
+			</if>
+			<if test="type != null and type != '' ">
+				AND tp.type = #{type}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_buyGuide" parameterType="buyGuide" resultMap="buyGuide_DB_Result">
@@ -75,7 +84,7 @@
 		,t.cost_price
 		,t.to_site
 		FROM
-		tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code
+		tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code inner join tmall_product tp on tm.product_code = tp.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -86,7 +95,7 @@
 
 	<select id="select_buyGuide_count" parameterType="buyGuide"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code
+		SELECT count(1) FROM tmall_buy_guide t inner join tmall_model tm on t.model_code = tm.code inner join tmall_product tp on tm.product_code = tp.code
 		<include refid="where_condition" />
 	</select>
 
