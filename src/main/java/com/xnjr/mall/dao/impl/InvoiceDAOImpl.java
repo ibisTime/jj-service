@@ -104,4 +104,9 @@ public class InvoiceDAOImpl extends AMybatisTemplate implements IInvoiceDAO {
     public int updateInvoicePayAmount(Invoice data) {
         return super.update("update_invoicePayAmount", data);
     }
+
+    @Override
+    public int doFirstPay(Invoice data) {
+        return super.update("update_doFirstPay", data);
+    }
 }

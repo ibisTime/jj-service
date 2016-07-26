@@ -8,9 +8,6 @@
  */
 package com.xnjr.mall.dto.req;
 
-import java.util.List;
-
-import com.xnjr.mall.domain.Goods;
 
 /** 
  * @author: haiqingzheng 
@@ -19,28 +16,25 @@ import com.xnjr.mall.domain.Goods;
  */
 public class XN602040Req {
 
-    // 物流单号
-    private String code;
-
-    // 关联的发货单号
+    // 关联的发货单号（必填）
     private String invoiceCode;
 
-    // 物流公司
+    // 物流公司（选填）
     private String company;
 
-    // 发货时间
-    private String deliveryDatetime;
+    // 物流单号（选填）
+    private String code;
 
-    // 发货人
+    // 发货人（选填）
     private String deliverer;
 
-    // 货品信息
-    private List<Goods> goodsList;
+    // 发货时间（选填）
+    private String deliveryDatetime;
 
-    // 更新人
+    // 更新人（必填）
     private String updater;
 
-    // 备注
+    // 备注（选填）
     private String remark;
 
     public String getInvoiceCode() {
@@ -81,14 +75,6 @@ public class XN602040Req {
 
     public void setDeliverer(String deliverer) {
         this.deliverer = deliverer;
-    }
-
-    public List<Goods> getGoodsList() {
-        return goodsList;
-    }
-
-    public void setGoodsList(List<Goods> goodsList) {
-        this.goodsList = goodsList;
     }
 
     public String getUpdater() {

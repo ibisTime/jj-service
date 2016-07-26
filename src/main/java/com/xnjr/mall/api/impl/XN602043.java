@@ -22,23 +22,15 @@ public class XN602043 extends AProcessor {
 
     private XN602043Req req = null;
 
-    /** 
-     * @see com.xnjr.mall.api.IProcessor#doBusiness()
-     */
     @Override
     public Object doBusiness() throws BizException {
-        int count = logisticsAO.confirmLogistics(req.getCode(),
-            req.getUpdater(), req.getRemark());
-        return new BooleanRes(count > 0 ? true : false);
+        return new BooleanRes(logisticsAO.confirmLogistics(req.getCode(),
+            req.getUpdater(), req.getRemark()));
     }
 
-    /** 
-     * @see com.xnjr.mall.api.IProcessor#doCheck(java.lang.String)
-     */
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN602043Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getUpdater(),
-            req.getRemark());
+        StringValidater.validateBlank(req.getCode(), req.getUpdater());
     }
 }
