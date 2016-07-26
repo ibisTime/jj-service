@@ -47,6 +47,7 @@ CREATE TABLE `tmall_buy_guide` (
   `original_price` bigint(20) DEFAULT NULL COMMENT '原价',
   `discount_price` bigint(20) DEFAULT NULL COMMENT '折扣价',
   `to_site` varchar(4) DEFAULT NULL COMMENT '线上位置',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态',
   `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
