@@ -12,9 +12,9 @@ import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 修改购买引导
- * @author: xieyj 
- * @since: 2016年5月23日 上午9:11:37 
+ * 上架
+ * @author: myb858 
+ * @since: 2016年7月26日 下午4:38:36 
  * @history:
  */
 public class XN601041 extends AProcessor {
