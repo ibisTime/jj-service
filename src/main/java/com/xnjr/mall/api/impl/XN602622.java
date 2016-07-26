@@ -41,5 +41,4 @@ public class XN602622 extends AProcessor {
         StringValidater.validateBlank(req.getIntegralCode(), req.getUpdater(),
             req.getUpdateResult(), req.getRemark());
     }
-
 }

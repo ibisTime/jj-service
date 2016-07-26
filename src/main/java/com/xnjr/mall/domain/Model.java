@@ -73,6 +73,12 @@ public class Model extends ABaseDO {
 
     private String productName;
 
+    // 大类
+    private String category;
+
+    // 小类
+    private String type;
+
     public String getProductName() {
         return productName;
     }
@@ -200,4 +206,21 @@ public class Model extends ABaseDO {
     public void setDiscountPrice(Long discountPrice) {
         this.discountPrice = discountPrice;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 }
