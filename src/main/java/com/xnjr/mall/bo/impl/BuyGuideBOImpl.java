@@ -133,4 +133,14 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
         }
         return salePrice;
     }
+
+    @Override
+    public int refreshBuyGuideStatus(BuyGuide data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            data.setUpdateDatetime(new Date());
+            count = buyGuideDAO.updateStatus(data);
+        }
+        return count;
+    }
 }

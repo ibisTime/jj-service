@@ -71,7 +71,7 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
 
     public int offBuyGuide(BuyGuide data) {
         data.setStatus(ETypeStatus.OFFLINE.getCode());
-        return buyGuideBO.refreshBuyGuide(data);
+        return buyGuideBO.refreshBuyGuideStatus(data);
     }
 
     /** 

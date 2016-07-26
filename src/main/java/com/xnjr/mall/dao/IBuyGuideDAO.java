@@ -19,4 +19,6 @@ public interface IBuyGuideDAO extends IBaseDAO<BuyGuide> {
      * @history:
      */
     public int update(BuyGuide data);
+
+    public int updateStatus(BuyGuide data);
 }

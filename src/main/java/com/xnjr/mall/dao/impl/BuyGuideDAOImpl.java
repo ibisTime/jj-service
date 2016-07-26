@@ -75,4 +75,9 @@ public class BuyGuideDAOImpl extends AMybatisTemplate implements IBuyGuideDAO {
     public int update(BuyGuide data) {
         return super.update(NAMESPACE.concat("update_buyGuide"), data);
     }
+
+    @Override
+    public int updateStatus(BuyGuide data) {
+        return super.update(NAMESPACE.concat("update_buyGuide_status"), data);
+    }
 }

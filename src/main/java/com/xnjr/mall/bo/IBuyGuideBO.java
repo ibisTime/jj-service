@@ -56,6 +56,15 @@ public interface IBuyGuideBO extends IPaginableBO<BuyGuide> {
      */
     public int refreshBuyGuide(BuyGuide data);
 
+    /** 
+     * 更新状态
+     * @param data
+     * @return 
+     * @create: 2016年7月26日 下午3:37:03 zuixian
+     * @history: 
+     */
+    public int refreshBuyGuideStatus(BuyGuide data);
+
     /**
      * 查询
      * @param data

@@ -141,6 +141,16 @@
 		WHERE code = #{code}
 	</update>
 	
+	<update id="update_buyGuide_status" parameterType="buyGuide">
+		UPDATE tmall_buy_guide
+		SET
+		status = ${status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
 	<delete id="delete_buyGuide" parameterType="buyGuide">
 		DELETE FROM
 		tmall_buy_guide
