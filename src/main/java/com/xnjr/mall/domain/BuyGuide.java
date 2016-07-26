@@ -1,6 +1,7 @@
 package com.xnjr.mall.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.xnjr.mall.dao.base.ABaseDO;
 
@@ -60,6 +61,8 @@ public class BuyGuide extends ABaseDO {
 
     // *************db properties**************
     private Model model;
+
+    private List<ModelSpecs> modelSpecsList;
 
     public String getCode() {
         return code;
@@ -179,5 +182,13 @@ public class BuyGuide extends ABaseDO {
 
     public void setModel(Model model) {
         this.model = model;
+    }
+
+    public List<ModelSpecs> getModelSpecsList() {
+        return modelSpecsList;
+    }
+
+    public void setModelSpecsList(List<ModelSpecs> modelSpecsList) {
+        this.modelSpecsList = modelSpecsList;
     }
 }

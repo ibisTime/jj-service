@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 import com.xnjr.mall.ao.IBuyGuideAO;
 import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.IModelBO;
+import com.xnjr.mall.bo.IModelSpecsBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
+import com.xnjr.mall.domain.ModelSpecs;
 import com.xnjr.mall.enums.EPutStatus;
 import com.xnjr.mall.enums.ETypeStatus;
 import com.xnjr.mall.enums.EUserLevel;
@@ -38,6 +40,9 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
 
     @Autowired
     private IModelBO modelBO;
+
+    @Autowired
+    private IModelSpecsBO modelSpecsBO;
 
     /** 
      * @see com.xnjr.mall.ao.IBuyGuideAO#addBuyGuide(com.xnjr.mall.domain.BuyGuide)
@@ -104,10 +109,19 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     public List<BuyGuide> queryBuyGuideList(BuyGuide condition) {
         List<BuyGuide> list = buyGuideBO.queryBuyGuideList(condition);
         for (BuyGuide buyGuide : list) {
-            Model model = modelBO.getModel(buyGuide.getModelCode());
-            buyGuide.setModel(model);
+            addModelAndSpecs(buyGuide);
         }
         return list;
+    }
+
+    private void addModelAndSpecs(BuyGuide buyGuide) {
+        Model model = modelBO.getModel(buyGuide.getModelCode());
+        buyGuide.setModel(model);
+        ModelSpecs msCondition = new ModelSpecs();
+        msCondition.setModelCode(model.getCode());
+        List<ModelSpecs> modelSpecsList = modelSpecsBO
+            .queryModelSpecsList(msCondition);
+        buyGuide.setModelSpecsList(modelSpecsList);
     }
 
     /** 
@@ -120,8 +134,7 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
             condition);
         if (page != null && page.getList() != null) {
             for (BuyGuide buyGuide : page.getList()) {
-                Model model = modelBO.getModel(buyGuide.getModelCode());
-                buyGuide.setModel(model);
+                addModelAndSpecs(buyGuide);
             }
         }
         return page;
@@ -134,8 +147,7 @@ public class BuyGuideAOImpl implements IBuyGuideAO {
     public BuyGuide getBuyGuide(String code) {
         BuyGuide buyGuide = buyGuideBO.getBuyGuide(code);
         if (buyGuide != null) {
-            Model model = modelBO.getModel(buyGuide.getModelCode());
-            buyGuide.setModel(model);
+            addModelAndSpecs(buyGuide);
         }
         return buyGuide;
     }
