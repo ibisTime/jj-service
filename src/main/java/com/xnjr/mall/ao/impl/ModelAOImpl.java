@@ -21,7 +21,6 @@ import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.IModelSpecsBO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.base.Paginable;
-import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.domain.ModelSpecs;
 import com.xnjr.mall.enums.EBoolean;
@@ -112,17 +111,17 @@ public class ModelAOImpl implements IModelAO {
                 List<ModelSpecs> list = modelSpecsBO
                     .queryModelSpecsList(specsCondition);
                 model.setModelSpecsList(list);
-                // 购买引导
-                BuyGuide buyGuide = new BuyGuide();
-                buyGuide.setModelCode(model.getCode());
-                List<BuyGuide> buyGuideList = buyGuideBO
-                    .queryBuyGuideList(buyGuide);
-                model.setBuyGuideList(buyGuideList);
-                if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
-                    BuyGuide data = buyGuideList.get(0);
-                    model.setOriginalPrice(data.getOriginalPrice());
-                    model.setDiscountPrice(data.getDiscountPrice());
-                }
+                // // 购买引导
+                // BuyGuide buyGuide = new BuyGuide();
+                // buyGuide.setModelCode(model.getCode());
+                // List<BuyGuide> buyGuideList = buyGuideBO
+                // .queryBuyGuideList(buyGuide);
+                // model.setBuyGuideList(buyGuideList);
+                // if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
+                // BuyGuide data = buyGuideList.get(0);
+                // model.setOriginalPrice(data.getOriginalPrice());
+                // model.setDiscountPrice(data.getDiscountPrice());
+                // }
             }
         }
         return page;
@@ -141,16 +140,16 @@ public class ModelAOImpl implements IModelAO {
                 List<ModelSpecs> list = modelSpecsBO
                     .queryModelSpecsList(specsCondition);
                 model.setModelSpecsList(list);
-                BuyGuide buyGuide = new BuyGuide();
-                buyGuide.setModelCode(model.getCode());
-                List<BuyGuide> buyGuideList = buyGuideBO
-                    .queryBuyGuideList(buyGuide);
-                model.setBuyGuideList(buyGuideList);
-                if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
-                    BuyGuide data = buyGuideList.get(0);
-                    model.setOriginalPrice(data.getOriginalPrice());
-                    model.setDiscountPrice(data.getDiscountPrice());
-                }
+                // BuyGuide buyGuide = new BuyGuide();
+                // buyGuide.setModelCode(model.getCode());
+                // List<BuyGuide> buyGuideList = buyGuideBO
+                // .queryBuyGuideList(buyGuide);
+                // model.setBuyGuideList(buyGuideList);
+                // if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
+                // BuyGuide data = buyGuideList.get(0);
+                // model.setOriginalPrice(data.getOriginalPrice());
+                // model.setDiscountPrice(data.getDiscountPrice());
+                // }
             }
         }
         return modelList;
@@ -168,16 +167,16 @@ public class ModelAOImpl implements IModelAO {
         List<ModelSpecs> list = modelSpecsBO
             .queryModelSpecsList(specsCondition);
         model.setModelSpecsList(list);
-        // 购买引导
-        BuyGuide buyGuide = new BuyGuide();
-        buyGuide.setModelCode(model.getCode());
-        List<BuyGuide> buyGuideList = buyGuideBO.queryBuyGuideList(buyGuide);
-        model.setBuyGuideList(buyGuideList);
-        if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
-            BuyGuide data = buyGuideList.get(0);
-            model.setOriginalPrice(data.getOriginalPrice());
-            model.setDiscountPrice(data.getDiscountPrice());
-        }
+        // // 购买引导
+        // BuyGuide buyGuide = new BuyGuide();
+        // buyGuide.setModelCode(model.getCode());
+        // List<BuyGuide> buyGuideList = buyGuideBO.queryBuyGuideList(buyGuide);
+        // model.setBuyGuideList(buyGuideList);
+        // if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
+        // BuyGuide data = buyGuideList.get(0);
+        // model.setOriginalPrice(data.getOriginalPrice());
+        // model.setDiscountPrice(data.getDiscountPrice());
+        // }
         return model;
     }
 
