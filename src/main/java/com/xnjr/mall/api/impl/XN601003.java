@@ -19,7 +19,7 @@ import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /** 
- * 上架/下架产品
+ * 上架/下架产品（弃用）
  * @author: haiqingzheng 
  * @since: 2016年5月17日 上午9:06:30 
  * @history:
