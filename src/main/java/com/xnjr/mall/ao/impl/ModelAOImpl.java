@@ -77,22 +77,15 @@ public class ModelAOImpl implements IModelAO {
         }
         int count = 0;
         if (data != null) {
-            Model dbModel = modelBO.getModel(data.getCode());
-            // 只有待审核和审核不通过的产品可进行修改
-            if (EPutStatus.todoAPPROVE.getCode().equals(dbModel.getStatus())
-                    || EPutStatus.APPROVE_NO.getCode().equals(
-                        dbModel.getStatus())) {
-                count = modelBO.refreshModel(data);
-                // 型号规格表数据先删除，后增加
-                modelSpecsBO.removeModelSpecsByModeCode(data.getCode());
-                int k = 1;
-                for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
-                    modelSpecs.setModelCode(data.getCode());
-                    modelSpecs.setOrderNum(k++);
-                    modelSpecsBO.saveModelSpecs(modelSpecs);
-                }
-            } else {
-                throw new BizException("xn0000", "只有待审核和审核不通过的型号可进行修改");
+            count = modelBO.refreshModel(data);
+            // 型号规格表数据先删除，后增加
+            modelSpecsBO.removeModelSpecsByModeCode(data.getCode());
+            int k = 1;
+            for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
+                modelSpecs.setModelCode(data.getCode());
+                modelSpecs.setOrderNum(k++);
+                modelSpecsBO.saveModelSpecs(modelSpecs);
+
             }
         }
         return count;

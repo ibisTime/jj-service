@@ -26,6 +26,9 @@ public class XN601021Req {
     // pic3（必填）
     private String pic3;
 
+    // 状态（必填）
+    private String status;
+
     // 描述（必填）
     private String description;
 
@@ -108,5 +111,13 @@ public class XN601021Req {
 
     public void setUpdater(String updater) {
         this.updater = updater;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
