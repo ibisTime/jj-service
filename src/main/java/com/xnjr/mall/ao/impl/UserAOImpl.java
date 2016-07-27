@@ -21,6 +21,7 @@ import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.dto.req.XN805042Req;
+import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EUserKind;
 import com.xnjr.mall.enums.EUserLevel;
 
@@ -77,6 +78,7 @@ public class UserAOImpl implements IUserAO {
             buyGuide.setModelCode(model.getCode());
             buyGuide.setFromUser(userId);
             buyGuide.setFromQuantity("0");
+            buyGuide.setStatus(EBoolean.NO.getCode());
             Long price = saleGuideBO.getSaleGuide(model.getCode(),
                 EUserLevel.ZERO, Long.valueOf(buyGuide.getFromQuantity()))
                 .getPrice();
