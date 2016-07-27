@@ -18,6 +18,9 @@ public class XN601043Req {
     // 线上位置（选填）
     private String toSite;
 
+    // 对应货品商
+    private String fromUser;
+
     // 状态（选填）
     private String status;
 
@@ -92,5 +95,13 @@ public class XN601043Req {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
     }
 }

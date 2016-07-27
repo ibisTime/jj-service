@@ -57,10 +57,9 @@ public class ModelAOImpl implements IModelAO {
             throw new BizException("xn0000", "产品编号不存在");
         }
         String code = modelBO.saveModel(data);
-        int k = 1;
         for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
             modelSpecs.setModelCode(code);
-            modelSpecs.setOrderNum(k++);
+            modelSpecs.setOrderNum(modelSpecs.getOrderNum());
             modelSpecsBO.saveModelSpecs(modelSpecs);
         }
         return code;
@@ -80,12 +79,10 @@ public class ModelAOImpl implements IModelAO {
             count = modelBO.refreshModel(data);
             // 型号规格表数据先删除，后增加
             modelSpecsBO.removeModelSpecsByModeCode(data.getCode());
-            int k = 1;
             for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
                 modelSpecs.setModelCode(data.getCode());
-                modelSpecs.setOrderNum(k++);
+                modelSpecs.setOrderNum(modelSpecs.getOrderNum());
                 modelSpecsBO.saveModelSpecs(modelSpecs);
-
             }
         }
         return count;
@@ -104,17 +101,6 @@ public class ModelAOImpl implements IModelAO {
                 List<ModelSpecs> list = modelSpecsBO
                     .queryModelSpecsList(specsCondition);
                 model.setModelSpecsList(list);
-                // // 购买引导
-                // BuyGuide buyGuide = new BuyGuide();
-                // buyGuide.setModelCode(model.getCode());
-                // List<BuyGuide> buyGuideList = buyGuideBO
-                // .queryBuyGuideList(buyGuide);
-                // model.setBuyGuideList(buyGuideList);
-                // if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
-                // BuyGuide data = buyGuideList.get(0);
-                // model.setOriginalPrice(data.getOriginalPrice());
-                // model.setDiscountPrice(data.getDiscountPrice());
-                // }
             }
         }
         return page;
@@ -133,16 +119,6 @@ public class ModelAOImpl implements IModelAO {
                 List<ModelSpecs> list = modelSpecsBO
                     .queryModelSpecsList(specsCondition);
                 model.setModelSpecsList(list);
-                // BuyGuide buyGuide = new BuyGuide();
-                // buyGuide.setModelCode(model.getCode());
-                // List<BuyGuide> buyGuideList = buyGuideBO
-                // .queryBuyGuideList(buyGuide);
-                // model.setBuyGuideList(buyGuideList);
-                // if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
-                // BuyGuide data = buyGuideList.get(0);
-                // model.setOriginalPrice(data.getOriginalPrice());
-                // model.setDiscountPrice(data.getDiscountPrice());
-                // }
             }
         }
         return modelList;
@@ -160,16 +136,6 @@ public class ModelAOImpl implements IModelAO {
         List<ModelSpecs> list = modelSpecsBO
             .queryModelSpecsList(specsCondition);
         model.setModelSpecsList(list);
-        // // 购买引导
-        // BuyGuide buyGuide = new BuyGuide();
-        // buyGuide.setModelCode(model.getCode());
-        // List<BuyGuide> buyGuideList = buyGuideBO.queryBuyGuideList(buyGuide);
-        // model.setBuyGuideList(buyGuideList);
-        // if (!CollectionUtils.sizeIsEmpty(buyGuideList)) {
-        // BuyGuide data = buyGuideList.get(0);
-        // model.setOriginalPrice(data.getOriginalPrice());
-        // model.setDiscountPrice(data.getDiscountPrice());
-        // }
         return model;
     }
 
@@ -217,5 +183,4 @@ public class ModelAOImpl implements IModelAO {
         }
         return count;
     }
-
 }
