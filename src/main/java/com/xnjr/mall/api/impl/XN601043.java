@@ -33,6 +33,9 @@ public class XN601043 extends AProcessor {
         condition.setToLevel(req.getToLevel());
         condition.setToSite(req.getToSite());
         condition.setStatus(req.getStatus());
+        condition.setCategory(req.getCategory());
+        condition.setType(req.getType());
+        condition.setProductCode(req.getProductCode());
         return buyGuideAO.queryBuyGuideList(condition);
     }
 
