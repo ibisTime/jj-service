@@ -105,7 +105,6 @@ public class ModelBOImpl extends PaginableBOImpl<Model> implements IModelBO {
     @Override
     public List<Model> queryModelList(Model condition) {
         return modelDAO.selectList(condition);
-
     }
 
     /** 

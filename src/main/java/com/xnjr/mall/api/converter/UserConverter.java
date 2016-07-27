@@ -10,6 +10,7 @@ package com.xnjr.mall.api.converter;
 
 import com.xnjr.mall.dto.req.XN602200Req;
 import com.xnjr.mall.dto.req.XN602600Req;
+import com.xnjr.mall.dto.req.XN602601Req;
 import com.xnjr.mall.dto.req.XN805042Req;
 
 /** 
@@ -19,7 +20,7 @@ import com.xnjr.mall.dto.req.XN805042Req;
  */
 public class UserConverter {
 
-    // 积分商入驻
+    // 终端入驻
     public static XN805042Req converter(XN602600Req req) {
         XN805042Req resultReq = new XN805042Req();
         resultReq.setLoginName(req.getLoginName());
@@ -29,6 +30,14 @@ public class UserConverter {
         resultReq.setRealName(req.getRealName());
         resultReq.setUserReferee(req.getUserReferee());
         resultReq.setPdf(req.getPdf());
+        return resultReq;
+    }
+
+    // 积分商入驻
+    public static XN805042Req converter(XN602601Req req) {
+        XN805042Req resultReq = new XN805042Req();
+        resultReq.setMobile(req.getMobile());
+        resultReq.setUserReferee(req.getUserReferee());
         return resultReq;
     }
 
