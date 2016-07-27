@@ -32,6 +32,7 @@ public class XN602026 extends AProcessor {
         condition.setLoginName(req.getLoginName());
         condition.setApplyUser(req.getApplyUser());
         condition.setStatus(req.getStatus());
+        condition.setMobile(req.getMobile());
         return invoiceAO.queryInvoiceList(condition);
     }
 

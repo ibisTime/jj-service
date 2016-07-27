@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.ISaleGuideBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
+import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.ISaleGuideDAO;
 import com.xnjr.mall.domain.SaleGuide;
 import com.xnjr.mall.enums.EUserLevel;
@@ -46,6 +47,17 @@ public class SaleGuideBOImpl extends PaginableBOImpl<SaleGuide> implements
         condition.setToLevel(toLevel.getCode());
         condition.setQuantity(quantity);
         return saleGuideDAO.select(condition);
+    }
+
+    @Override
+    public String saveSaleGuide(SaleGuide data) {
+        String code = null;
+        if (data != null) {
+            code = OrderNoGenerater.generateME("SG");
+            data.setCode(code);
+            saleGuideDAO.insert(data);
+        }
+        return code;
     }
 
 }

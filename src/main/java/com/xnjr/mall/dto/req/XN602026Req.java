@@ -16,6 +16,9 @@ public class XN602026Req {
     // 用户名（选填）
     private String loginName;
 
+    // 手机号（选填）
+    private String mobile;
+
     // 状态（选填）
     private String status;
 
@@ -49,5 +52,13 @@ public class XN602026Req {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

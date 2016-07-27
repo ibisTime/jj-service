@@ -80,6 +80,9 @@ public class Invoice extends ABaseDO {
     // 下单人用户名
     private String loginName;
 
+    // 下单人手机号
+    private String mobile;
+
     List<InvoiceModel> invoiceModelList;
 
     // 是否二次支付
@@ -266,4 +269,11 @@ public class Invoice extends ABaseDO {
         this.toUser = toUser;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }

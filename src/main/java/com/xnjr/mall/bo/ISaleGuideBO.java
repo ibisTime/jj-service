@@ -21,6 +21,15 @@ import com.xnjr.mall.enums.EUserLevel;
  */
 public interface ISaleGuideBO extends IPaginableBO<SaleGuide> {
 
+    /** 
+     * 新增分销引导表
+     * @param data
+     * @return 
+     * @create: 2016年7月27日 下午9:50:42 zuixian
+     * @history: 
+     */
+    public String saveSaleGuide(SaleGuide data);
+
     /**
      * 列表查询
      * @param data
