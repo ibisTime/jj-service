@@ -35,6 +35,7 @@ public class XN601020 extends AProcessor {
         data.setPic1(req.getPic1());
         data.setPic2(req.getPic2());
         data.setPic3(req.getPic3());
+        data.setStatus(req.getStatus());
         data.setDescription(req.getDescription());
         data.setModelSpecsList(req.getModelSpecsList());
         data.setProductCode(req.getProductCode());

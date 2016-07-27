@@ -57,8 +57,10 @@ public class ModelBOImpl extends PaginableBOImpl<Model> implements IModelBO {
             code = OrderNoGenerater.generateM("MM");
             data.setCode(code);
             data.setUpdateDatetime(new Date());
-            data.setStatus(EPutStatus.todoAPPROVE.getCode());
-            data.setRemark("型号新增");
+            if (data.getRemark() == null
+                    || "".equalsIgnoreCase(data.getRemark())) {
+                data.setRemark("型号新增");
+            }
             modelDAO.insert(data);
         }
         return code;
