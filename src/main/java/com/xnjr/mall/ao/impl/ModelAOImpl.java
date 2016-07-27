@@ -29,6 +29,7 @@ import com.xnjr.mall.domain.ModelSpecs;
 import com.xnjr.mall.domain.SaleGuide;
 import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EPutStatus;
+import com.xnjr.mall.enums.EUser;
 import com.xnjr.mall.enums.EUserLevel;
 import com.xnjr.mall.exception.BizException;
 
@@ -84,7 +85,14 @@ public class ModelAOImpl implements IModelAO {
         BuyGuide buyGuide = new BuyGuide();
         buyGuide.setModelCode(code);
         buyGuide.setCostPrice(Long.valueOf(0));
-        buyGuide.setFromUser();
+        buyGuide.setFromUser(EUser.Top_Model.getCode());
+        buyGuide.setFromQuantity("0");
+        buyGuide.setStatus(EBoolean.NO.getCode());
+        buyGuide.setUpdater("admin");
+        buyGuide.setUpdateDatetime(new Date());
+        buyGuide.setRemark("型号新增");
+        buyGuideBO.saveBuyGuide(buyGuide);
+
         return code;
     }
 
