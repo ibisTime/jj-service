@@ -21,6 +21,9 @@ public class XN601004Req extends APageReq {
     private static final long serialVersionUID = 7405232977567267123L;
 
     // 产品大类
+    private String category;
+
+    // 产品小类
     private String type;
 
     // 产品名称
@@ -64,4 +67,11 @@ public class XN601004Req extends APageReq {
         this.updater = updater;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }

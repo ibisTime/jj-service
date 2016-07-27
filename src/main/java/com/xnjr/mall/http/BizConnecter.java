@@ -32,6 +32,7 @@ public class BizConnecter {
 
     public static <T> T getBizData(String code, String json, Class<T> clazz) {
         String data = getBizData(code, json);
+        System.out.println(data);
         return JsonUtils.json2Bean(data, clazz);
     }
 

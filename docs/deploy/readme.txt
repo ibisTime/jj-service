@@ -22,7 +22,6 @@ C，程序升级/检验
   
 4. 已备份配置文件放回原处,启停tomcat 
   mv -f application.properties ./xn-mall/WEB-INF/classes/
-  mv -f config.properties ./xn-mall/WEB-INF/classes/
   ../bin/shutdown.sh
   ../bin/startup.sh
   

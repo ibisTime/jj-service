@@ -45,9 +45,15 @@ public class UserAOImpl implements IUserAO {
     @Autowired
     IModelBO modelBO;
 
-    /** 
-     * @see com.xnjr.mall.ao.IUserAO#doAddJfUser(com.xnjr.mall.domain.User)
-     */
+    @Override
+    public String doAddZdUser(XN805042Req data) {
+        // 设置更新人为推荐人
+        data.setUpdater(data.getUserReferee());
+        // 设置积分商身份
+        data.setKind(EUserKind.F1.getCode());
+        return userBO.doSaveUser(data);
+    }
+
     @Override
     public String doAddJfUser(XN805042Req data) {
         // 设置更新人为推荐人

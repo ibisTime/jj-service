@@ -35,8 +35,9 @@ public class XN601042 extends AProcessor {
         condition.setModelNameForQuery(req.getModelName());
         condition.setToLevel(req.getToLevel());
         condition.setToSite(req.getToSite());
-        condition.setStatus(req.getStatus());
+        condition.setFromUser(req.getFromUser());
 
+        condition.setStatus(req.getStatus());
         condition.setCategory(req.getCategory());
         condition.setType(req.getType());
         condition.setProductCode(req.getProductCode());

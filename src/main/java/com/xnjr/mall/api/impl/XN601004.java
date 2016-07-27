@@ -39,6 +39,8 @@ public class XN601004 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Product condition = new Product();
+        condition.setCategory(req.getCategory());
+        condition.setType(req.getType());
         condition.setName(req.getName());
         condition.setType(req.getType());
         condition.setStatus(req.getStatus());

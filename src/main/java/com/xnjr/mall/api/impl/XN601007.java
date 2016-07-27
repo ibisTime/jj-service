@@ -4,6 +4,7 @@ import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
+import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.dto.req.XN601007Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
@@ -18,8 +19,9 @@ public class XN601007 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-
-        return null;
+        Product condition = new Product();
+        condition.setCategory(req.getCategory());
+        return productAO.queryProductList(condition);
     }
 
     @Override

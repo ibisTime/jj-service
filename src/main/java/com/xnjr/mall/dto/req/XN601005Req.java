@@ -16,6 +16,9 @@ package com.xnjr.mall.dto.req;
 public class XN601005Req {
 
     // 产品大类
+    private String category;
+
+    // 产品小类
     private String type;
 
     // 产品名称
@@ -26,6 +29,14 @@ public class XN601005Req {
 
     // 更新人
     private String updater;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getType() {
         return type;
