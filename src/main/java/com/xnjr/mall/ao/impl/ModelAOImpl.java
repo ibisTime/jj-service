@@ -8,6 +8,7 @@
  */
 package com.xnjr.mall.ao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -20,11 +21,16 @@ import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.IModelSpecsBO;
 import com.xnjr.mall.bo.IProductBO;
+import com.xnjr.mall.bo.ISaleGuideBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Model;
 import com.xnjr.mall.domain.ModelSpecs;
+import com.xnjr.mall.domain.SaleGuide;
 import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EPutStatus;
+import com.xnjr.mall.enums.EUser;
+import com.xnjr.mall.enums.EUserLevel;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -47,6 +53,9 @@ public class ModelAOImpl implements IModelAO {
     @Autowired
     private IBuyGuideBO buyGuideBO;
 
+    @Autowired
+    private ISaleGuideBO saleGuideBO;
+
     /** 
      * @see com.xnjr.mall.ao.IModelAO#addModel(com.xnjr.mall.domain.Model)
      */
@@ -62,6 +71,28 @@ public class ModelAOImpl implements IModelAO {
             modelSpecs.setOrderNum(modelSpecs.getOrderNum());
             modelSpecsBO.saveModelSpecs(modelSpecs);
         }
+
+        SaleGuide saleGuide = new SaleGuide();
+        saleGuide.setModelCode(code);
+        saleGuide.setToLevel(EUserLevel.ZERO.getCode());
+        saleGuide.setQuantity(Long.valueOf(0));
+        saleGuide.setPrice(Long.valueOf(0));
+        saleGuide.setUpdater("admin");
+        saleGuide.setUpdateDatetime(new Date());
+        saleGuide.setRemark("型号新增");
+        saleGuideBO.saveSaleGuide(saleGuide);
+
+        BuyGuide buyGuide = new BuyGuide();
+        buyGuide.setModelCode(code);
+        buyGuide.setCostPrice(Long.valueOf(0));
+        buyGuide.setFromUser(EUser.Top_Model.getCode());
+        buyGuide.setFromQuantity("0");
+        buyGuide.setStatus(EBoolean.NO.getCode());
+        buyGuide.setUpdater("admin");
+        buyGuide.setUpdateDatetime(new Date());
+        buyGuide.setRemark("型号新增");
+        buyGuideBO.saveBuyGuide(buyGuide);
+
         return code;
     }
 
