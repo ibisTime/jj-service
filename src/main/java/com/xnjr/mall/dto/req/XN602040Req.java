@@ -8,7 +8,6 @@
  */
 package com.xnjr.mall.dto.req;
 
-
 /** 
  * @author: haiqingzheng 
  * @since: 2016年5月29日 下午3:21:20 
@@ -33,6 +32,9 @@ public class XN602040Req {
 
     // 更新人（必填）
     private String updater;
+
+    // pdf（选填）
+    private String pdf;
 
     // 备注（选填）
     private String remark;
@@ -91,5 +93,13 @@ public class XN602040Req {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(String pdf) {
+        this.pdf = pdf;
     }
 }

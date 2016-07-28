@@ -15,23 +15,23 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
-  <!--   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
        <property name="triggers">  
            <list>
-              <ref bean="projectTrigger"/> 
+              <ref bean="orderTrigger"/> 
            </list>  
        </property>  
        <property name="autoStartup" value="true"/>  
-    </bean> 
+    </bean>  
 	
-	<bean id="projectTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
-       <property name="jobDetail" ref="projectJobDetail"/>  
-       <property name="cronExpression" value="0 0 0/1 * * ?"/>每隔1个小时
+     <bean id="orderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail" ref="changeInvoiceJobDetail"/>  
+       <property name="cronExpression" value="0 0/10 * * * ?"/><!-- 每隔十分钟 -->
 	</bean>
-	<bean id="projectJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
-	        <property name="targetObject" ref="projectAOImpl"/>  
-	        <property name="targetMethod" value="changeDaily"/>  
-	        <property name="concurrent" value="true"/>  是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程  
-	</bean>   -->
+	<bean id="changeInvoiceJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+	        <property name="targetObject" ref="invoiceAOImpl"/>  
+	        <property name="targetMethod" value="changeInvoiceStatusDaily"/>  
+	        <property name="concurrent" value="true"/>  <!--  是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程-->  
+	</bean>
 	
 </beans>

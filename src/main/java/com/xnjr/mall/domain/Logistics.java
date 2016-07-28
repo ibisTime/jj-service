@@ -9,7 +9,6 @@
 package com.xnjr.mall.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.xnjr.mall.dao.base.ABaseDO;
 
@@ -38,6 +37,9 @@ public class Logistics extends ABaseDO {
 
     // 发货人
     private String deliverer;
+
+    // 物流单
+    private String pdf;
 
     // 下单用户
     private String userId;
@@ -69,7 +71,8 @@ public class Logistics extends ABaseDO {
     private Date deliveryDatetimeEnd;
 
     /***** 关联信息 *****/
-    private List<Goods> goodsList;
+
+    private Invoice invoice;
 
     public String getCode() {
         return code;
@@ -135,14 +138,6 @@ public class Logistics extends ABaseDO {
         this.deliveryDatetimeEnd = deliveryDatetimeEnd;
     }
 
-    public List<Goods> getGoodsList() {
-        return goodsList;
-    }
-
-    public void setGoodsList(List<Goods> goodsList) {
-        this.goodsList = goodsList;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -189,5 +184,21 @@ public class Logistics extends ABaseDO {
 
     public void setInvoiceCodeForLikeQuery(String invoiceCodeForLikeQuery) {
         this.invoiceCodeForLikeQuery = invoiceCodeForLikeQuery;
+    }
+
+    public String getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(String pdf) {
+        this.pdf = pdf;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }

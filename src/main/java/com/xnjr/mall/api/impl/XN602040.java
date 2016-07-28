@@ -41,6 +41,7 @@ public class XN602040 extends AProcessor {
         logistics.setDeliverer(req.getDeliverer());
         logistics.setDeliveryDatetime(DateUtil.strToDate(
             req.getDeliveryDatetime(), DateUtil.DATA_TIME_PATTERN_1));
+        logistics.setPdf(req.getPdf());
         logistics.setUpdater(req.getUpdater());
         logistics.setRemark(req.getRemark());
         return new PKCodeRes(logisticsAO.addLogistics(logistics));
