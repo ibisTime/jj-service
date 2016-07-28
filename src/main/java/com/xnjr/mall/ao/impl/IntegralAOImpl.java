@@ -85,7 +85,8 @@ public class IntegralAOImpl implements IIntegralAO {
      * @see com.xnjr.mall.ao.IIntegralAO#bugIntegral(java.lang.String, java.lang.String)
      */
     @Override
-    public void bugIntegral(String code, String userId) {
+    public String bugIntegral(String code, String userId) {
+        String count = null;
         // 判断用户是否存在
         XN805901Res user = userBO.getRemoteUser(userId, userId);
         if (user == null) {
@@ -116,13 +117,16 @@ public class IntegralAOImpl implements IIntegralAO {
                 user.getUserId(), String.valueOf(integral.getQuantity()),
                 String.valueOf(integral.getPrice()), type.getCode(), "无", "系统",
                 "扫一下，直接送积分", integral.getCode());
+            count = "1";
         } else {
             // 需审批送积分
             accountBO.doChargeOfflineJf(integral.getUserId(), user.getUserId(),
                 String.valueOf(integral.getQuantity()),
                 String.valueOf(integral.getPrice()), type.getCode(), "无",
                 integral.getCode(), user.getUserId());
+            count = "0";
         }
+        return count;
     }
 
     /** 
