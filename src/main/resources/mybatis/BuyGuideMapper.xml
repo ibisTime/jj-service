@@ -73,6 +73,7 @@
 		,t.model_code
 		
 		,tm.name as model_name
+		,tp.type as type
 		,t.updater
 		,t.update_datetime
 		,t.remark
