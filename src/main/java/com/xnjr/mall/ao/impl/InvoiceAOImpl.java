@@ -8,6 +8,7 @@
  */
 package com.xnjr.mall.ao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -254,4 +255,33 @@ public class InvoiceAOImpl implements IInvoiceAO {
         }
         return invoice;
     }
+
+    /** 
+     *  每隔十分将订单状态为已收货的自动变为已完成状态
+     * @create: 2016年7月28日 下午4:17:42 zuixian
+     * @history: 
+     */
+    public void changeInvoiceStatusDaily() {
+        System.out.println(new Date());
+        Invoice conditionRecevie = new Invoice();
+        Invoice conditionNoPay = new Invoice();
+        conditionRecevie.setStatus(EInvoiceStatus.RECEIVE.getCode());
+        conditionNoPay.setStatus(EInvoiceStatus.NO_PAY.getCode());
+        List<Invoice> listRecevie = invoiceBO
+            .queryInvoiceList(conditionRecevie);
+        List<Invoice> listNoPay = invoiceBO.queryInvoiceList(conditionNoPay);
+        if (listRecevie != null && listRecevie.size() > 0) {
+            for (Invoice invoice : listRecevie) {
+                invoiceBO.refreshInvoiceStatus(invoice.getCode(),
+                    EInvoiceStatus.FINISH.getCode());
+            }
+        }
+        if (listNoPay != null && listNoPay.size() > 0) {
+            for (Invoice invoice : listNoPay) {
+                invoiceBO.refreshInvoiceStatus(invoice.getCode(),
+                    EInvoiceStatus.FINISH.getCode());
+            }
+        }
+    }
+
 }
