@@ -59,7 +59,6 @@ public class ModelBOImpl extends PaginableBOImpl<Model> implements IModelBO {
             data.setUpdateDatetime(new Date());
             if (data.getRemark() == null
                     || "".equalsIgnoreCase(data.getRemark())) {
-                data.setRemark("型号新增");
             }
             modelDAO.insert(data);
         }
@@ -94,8 +93,6 @@ public class ModelBOImpl extends PaginableBOImpl<Model> implements IModelBO {
                 throw new BizException("xn000000", "型号编号不存在");
             }
             data.setUpdateDatetime(new Date());
-            data.setStatus(EPutStatus.todoAPPROVE.getCode());
-            data.setRemark("型号信息被编辑，重新提交审核");
             count = modelDAO.updateModel(data);
         }
         return count;

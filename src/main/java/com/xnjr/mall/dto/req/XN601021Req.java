@@ -41,6 +41,9 @@ public class XN601021Req {
     // 更新人（必填）
     private String updater;
 
+    // 备注
+    private String remark;
+
     public String getCode() {
         return code;
     }
@@ -119,5 +122,13 @@ public class XN601021Req {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

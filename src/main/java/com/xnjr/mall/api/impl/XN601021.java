@@ -41,6 +41,7 @@ public class XN601021 extends AProcessor {
         data.setModelSpecsList(req.getModelSpecsList());
         data.setProductCode(req.getProductCode());
         data.setUpdater(req.getUpdater());
+        data.setRemark(req.getRemark());
         int count = modelAO.editModel(data);
         return new BooleanRes(count > 0 ? true : false);
     }
