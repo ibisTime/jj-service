@@ -160,6 +160,7 @@ CREATE TABLE `tmall_logistics` (
   `company` varchar(32) DEFAULT NULL COMMENT '物流公司编号',
   `deliverer` varchar(32) DEFAULT NULL COMMENT '发货人编号',
   `delivery_datetime` datetime DEFAULT NULL COMMENT '发货时间',
+  `pdf` varchar(255) DEFAULT NULL COMMENT '物流单',
   `user_id` varchar(32) DEFAULT NULL COMMENT '物流单关联的用户ID',
   `status` varchar(4) DEFAULT NULL COMMENT '状态（1 发货中，2 确认收货）',
   `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
