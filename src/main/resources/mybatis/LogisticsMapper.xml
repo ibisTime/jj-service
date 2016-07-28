@@ -9,6 +9,7 @@
 		<result column="delivery_datetime" property="deliveryDatetime" />
 		<result column="deliverer" property="deliverer" />
 		
+		<result column="pdf" property="pdf" />
 		<result column="user_id" property="userId" />
 		<result column="status" property="status" />
 		<result column="update_datetime" property="updateDatetime" />
@@ -57,6 +58,7 @@
 		,delivery_datetime
 		,deliverer
 		
+		,pdf
 		,user_id
 		,status	
 		,update_datetime
@@ -87,6 +89,7 @@
 		,delivery_datetime
 		,deliverer
 		
+		,pdf
 		,user_id
 		,status	
 		,update_datetime
@@ -100,6 +103,7 @@
 		,#{deliveryDatetime}
 		,#{deliverer}
 		
+		,#{pdf}
 		,#{userId}
 		,#{status}
 		,#{updateDatetime}

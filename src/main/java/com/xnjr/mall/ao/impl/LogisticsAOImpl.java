@@ -8,18 +8,18 @@
  */
 package com.xnjr.mall.ao.impl;
 
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xnjr.mall.ao.ILogisticsAO;
-import com.xnjr.mall.bo.IGoodsBO;
+import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.IInvoiceBO;
+import com.xnjr.mall.bo.IInvoiceModelBO;
 import com.xnjr.mall.bo.ILogisticsBO;
 import com.xnjr.mall.bo.IModelBO;
+import com.xnjr.mall.bo.IModelSpecsBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Invoice;
 import com.xnjr.mall.domain.Logistics;
@@ -39,13 +39,19 @@ public class LogisticsAOImpl implements ILogisticsAO {
     ILogisticsBO logisticsBO;
 
     @Autowired
-    IGoodsBO goodsBO;
-
-    @Autowired
     IModelBO modelBO;
 
     @Autowired
+    private IBuyGuideBO buyGuideBO;
+
+    @Autowired
     IInvoiceBO invoiceBO;
+
+    @Autowired
+    IInvoiceModelBO invoiceModelBO;
+
+    @Autowired
+    private IModelSpecsBO modelSpecsBO;
 
     @Override
     @Transactional
@@ -92,7 +98,8 @@ public class LogisticsAOImpl implements ILogisticsAO {
         Logistics logistics = null;
         if (StringUtils.isNotBlank(code)) {
             logistics = logisticsBO.getLogistics(code);
-            logistics.setGoodsList(goodsBO.queryGoodsInLogistics(code));
+            Invoice invoice = invoiceBO.getInvoice(logistics.getInvoiceCode());
+            logistics.setInvoice(invoice);
         }
         return logistics;
     }
@@ -106,13 +113,14 @@ public class LogisticsAOImpl implements ILogisticsAO {
         return logisticsBO.getPaginable(start, limit, condition);
     }
 
-    private static boolean checkAdded(List<String> addedList, String modelCode) {
-        for (String string : addedList) {
-            if (string.equals(modelCode)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // private static boolean checkAdded(List<String> addedList, String
+    // modelCode) {
+    // for (String string : addedList) {
+    // if (string.equals(modelCode)) {
+    // return true;
+    // }
+    // }
+    // return false;
+    // }
 
 }
