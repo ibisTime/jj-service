@@ -36,7 +36,9 @@ import com.xnjr.mall.dto.res.XN802012Res;
 import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.enums.EDirection;
 import com.xnjr.mall.enums.EInvoiceStatus;
+import com.xnjr.mall.enums.EInvoiceType;
 import com.xnjr.mall.enums.ESysAccount;
+import com.xnjr.mall.enums.EUserKind;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -74,10 +76,14 @@ public class InvoiceAOImpl implements IInvoiceAO {
     @Override
     @Transactional
     public String commitInvoice(String modelCode, Integer quantity, Invoice data) {
-        String code = invoiceBO.saveInvoice(data);
-        // 获取销售价格
         String userId = data.getApplyUser();
         XN805901Res user = userBO.getRemoteUser(userId, userId);
+        // 设置订单类型
+        if (EUserKind.F1.getCode().equals(user.getKind())) {
+            data.setType(EInvoiceType.SH_SALE.getCode());
+        }
+        String code = invoiceBO.saveInvoice(data);
+        // 获取销售价格
         BuyGuide model = buyGuideBO.getOnlineModel(modelCode, user.getLevel(),
             data.getToUser());
         // 存入DB
@@ -89,10 +95,14 @@ public class InvoiceAOImpl implements IInvoiceAO {
     @Override
     @Transactional
     public String commitInvoice(List<String> cartCodeList, Invoice data) {
-        String code = invoiceBO.saveInvoice(data);
-        // 获取销售价格
         String userId = data.getApplyUser();
         XN805901Res user = userBO.getRemoteUser(userId, userId);
+        // 设置订单类型
+        if (EUserKind.F1.getCode().equals(user.getKind())) {
+            data.setType(EInvoiceType.SH_SALE.getCode());
+        }
+        String code = invoiceBO.saveInvoice(data);
+        // 获取销售价格
         for (String cartCode : cartCodeList) {
             Cart cart = cartBO.getCart(cartCode);
             BuyGuide model = buyGuideBO.getOnlineModel(cart.getModelCode(),

@@ -27,6 +27,9 @@ public class Invoice extends ABaseDO {
     // 编号
     private String code;
 
+    // 类型
+    private String type;
+
     // 申请人
     private String applyUser;
 
@@ -275,5 +278,13 @@ public class Invoice extends ABaseDO {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

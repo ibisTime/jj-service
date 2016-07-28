@@ -4,6 +4,7 @@
 <mapper namespace="com.xnjr.mall.dao.IInvoiceDAO">
 	<resultMap id="invoice_DB_Result" type="invoice">
 		<result column="code" property="code" />
+		<result column="type" property="type" />
 		<result column="apply_user" property="applyUser" />
 		<result column="login_name" property="loginName" />
 		<result column="apply_datetime" property="applyDatetime" />
@@ -22,6 +23,9 @@
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
 			</if>
 			<if test="codeForQuery != null and codeForQuery != '' ">
 				AND t.code like "%"#{codeForQuery}"%"
@@ -55,6 +59,7 @@
 	<select id="select_invoice" parameterType="invoice" resultMap="invoice_DB_Result">
 		SELECT
 		code
+		,t.type
 		,t.apply_user
 		,tu.login_name
 		,tu.mobile
@@ -88,6 +93,7 @@
 	<insert id="insert_invoice" parameterType="invoice">
 		INSERT INTO tmall_invoice(
 		code
+		,type
 		,apply_user
 		,apply_datetime
 		,apply_note
@@ -100,6 +106,7 @@
 		)
 		VALUES(
 		#{code}
+		,#{type}
 		,#{applyUser}
 		,#{applyDatetime}
 		,#{applyNote}
@@ -166,6 +173,5 @@
 		WHERE
 		code = #{code}
 	</update>
-	
 	
 </mapper>
