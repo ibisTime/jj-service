@@ -10,9 +10,10 @@ import java.util.Map;
  */
 public enum EChargeType {
     UNDERUSER("1", "下家"), ENDUSER("2", "终端用户");
+
     public static Map<String, EChargeType> getBooleanResultMap() {
         Map<String, EChargeType> map = new HashMap<String, EChargeType>();
-        for (EChargeType status : EChargeType.values()) {
+        for (EChargeType status : map.values()) {
             map.put(status.getCode(), status);
         }
         return map;

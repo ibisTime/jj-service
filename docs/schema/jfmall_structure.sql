@@ -122,6 +122,7 @@ CREATE TABLE `tmall_integral` (
 DROP TABLE IF EXISTS `tmall_invoice`;
 CREATE TABLE `tmall_invoice` (
   `code` varchar(32) NOT NULL COMMENT '编号',
+  `type` varchar(4) DEFAULT NULL COMMENT '类型',
   `apply_user` varchar(32) DEFAULT NULL COMMENT '下单人',
   `address_code` varchar(32) DEFAULT NULL COMMENT '收货信息编号',
   `apply_note` varchar(255) DEFAULT NULL COMMENT '下单备注',

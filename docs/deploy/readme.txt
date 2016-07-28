@@ -14,7 +14,7 @@ C，程序升级/检验
   
 
 3. 备份原先配置(如果第一次部署，跳过此步骤)
-  cd /mnt/wwwroot/tomcat_JY_mall/webapps
+  cd /mnt/wwwroot/caigo/tomcat_JY_mall/webapps
   cp ./xn-mall/WEB-INF/classes/application.properties .
   rm -rf xn-mall.war
   rm -rf xn-mall
