@@ -83,8 +83,7 @@
 	<update id="update_saleGuide" parameterType="saleGuide">
 		UPDATE tmall_sale_guide
 		SET
-		to_level = #{toLevel}
-		,quantity = #{quantity}
+		quantity = #{quantity}
 		,price = #{price}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}

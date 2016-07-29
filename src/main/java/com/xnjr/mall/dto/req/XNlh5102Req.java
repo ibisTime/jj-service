@@ -6,7 +6,7 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年5月23日 上午8:46:53 
  * @history:
  */
-public class XN602222Req {
+public class XNlh5102Req {
     // 编号(必填)
     private String code;
 
@@ -19,7 +19,7 @@ public class XN602222Req {
     // 更新人(必填)
     private String updater;
 
-    // 备注(必填)
+    // 备注(选填)
     private String remark;
 
     public String getCode() {

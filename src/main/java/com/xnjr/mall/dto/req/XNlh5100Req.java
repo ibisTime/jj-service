@@ -6,7 +6,7 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年7月29日 下午1:05:36 
  * @history:
  */
-public class XN602220Req {
+public class XNlh5100Req {
 
     // 型号编号(必填)
     private String modelCode;

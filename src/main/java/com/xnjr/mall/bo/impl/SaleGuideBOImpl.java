@@ -8,6 +8,7 @@
  */
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,7 @@ public class SaleGuideBOImpl extends PaginableBOImpl<SaleGuide> implements
     public int refreshSaleGuide(SaleGuide data) {
         int count = 0;
         if (data.getCode() != null) {
+            data.setUpdateDatetime(new Date());
             count = saleGuideDAO.update(data);
         }
         return count;

@@ -78,5 +78,9 @@
 	
 	<bean id="goodsOrderBO" class="com.xnjr.mall.bo.impl.GoodsOrderBOImpl">
 		<property name="paginableDAO" ref="goodsOrderDAOImpl"/>
+	</bean>
+	
+	<bean id="saleGuideBO" class="com.xnjr.mall.bo.impl.SaleGuideBOImpl">
+		<property name="paginableDAO" ref="saleGuideDAOImpl"/>
 	</bean>	
 </beans>

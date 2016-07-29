@@ -1,5 +1,7 @@
 package com.xnjr.mall.ao;
 
+import java.util.List;
+
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.SaleGuide;
 
@@ -24,6 +26,15 @@ public interface ISaleGuideAO {
      */
     public Paginable<SaleGuide> querySaleGuidePage(int start, int limit,
             SaleGuide condition);
+
+    /** 
+     * 列表查询
+     * @param condition
+     * @return 
+     * @create: 2016年7月29日 下午1:14:40 zuixian
+     * @history: 
+     */
+    public List<SaleGuide> querySaleGuideList(SaleGuide condition);
 
     /** 
      * 详情查询

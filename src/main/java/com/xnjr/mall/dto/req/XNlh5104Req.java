@@ -6,14 +6,14 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年5月23日 上午8:46:53 
  * @history:
  */
-public class XN602224Req {
-    // 型号编号(必填)
+public class XNlh5104Req {
+    // 型号编号(选填)
     private String modelCode;
 
-    // 用户等级(必填)
+    // 用户等级(选填)
     private String toLevel;
 
-    // 更新人(必填)
+    // 更新人(选填)
     private String updater;
 
     public String getModelCode() {
