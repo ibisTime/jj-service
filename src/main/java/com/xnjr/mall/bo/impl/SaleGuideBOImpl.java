@@ -60,4 +60,24 @@ public class SaleGuideBOImpl extends PaginableBOImpl<SaleGuide> implements
         return code;
     }
 
+    @Override
+    public int refreshSaleGuide(SaleGuide data) {
+        int count = 0;
+        if (data.getCode() != null) {
+            count = saleGuideDAO.update(data);
+        }
+        return count;
+    }
+
+    @Override
+    public SaleGuide getSaleGuide(String code) {
+        SaleGuide saleGuide = null;
+        if (code != null) {
+            SaleGuide data = new SaleGuide();
+            data.setCode(code);
+            saleGuide = saleGuideDAO.select(data);
+        }
+        return saleGuide;
+    }
+
 }
