@@ -1,0 +1,48 @@
+package com.xnjr.mall.dto.req;
+
+/**
+ * 分页查询分销引导表Req
+ * @author: xieyj 
+ * @since: 2016年5月23日 上午8:46:53 
+ * @history:
+ */
+public class XN602223Req extends APageReq {
+
+    /** 
+     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+     */
+    private static final long serialVersionUID = -5329405364861942907L;
+
+    // 型号编号(必填)
+    private String modelCode;
+
+    // 用户等级(必填)
+    private String toLevel;
+
+    // 更新人(必填)
+    private String updater;
+
+    public String getModelCode() {
+        return modelCode;
+    }
+
+    public void setModelCode(String modelCode) {
+        this.modelCode = modelCode;
+    }
+
+    public String getToLevel() {
+        return toLevel;
+    }
+
+    public void setToLevel(String toLevel) {
+        this.toLevel = toLevel;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+}
