@@ -79,7 +79,7 @@ public class ModelAOImpl implements IModelAO {
         saleGuide.setPrice(Long.valueOf(0));
         saleGuide.setUpdater("admin");
         saleGuide.setUpdateDatetime(new Date());
-        saleGuide.setRemark("型号新增");
+        saleGuide.setRemark(data.getRemark());
         saleGuideBO.saveSaleGuide(saleGuide);
 
         BuyGuide buyGuide = new BuyGuide();
@@ -90,7 +90,7 @@ public class ModelAOImpl implements IModelAO {
         buyGuide.setStatus(EBoolean.NO.getCode());
         buyGuide.setUpdater("admin");
         buyGuide.setUpdateDatetime(new Date());
-        buyGuide.setRemark("型号新增");
+        buyGuide.setRemark(data.getRemark());
         buyGuideBO.saveBuyGuide(buyGuide);
 
         return code;

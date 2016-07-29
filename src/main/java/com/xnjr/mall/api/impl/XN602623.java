@@ -5,7 +5,7 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.dto.req.XN602623Req;
-import com.xnjr.mall.dto.res.BooleanRes;
+import com.xnjr.mall.dto.res.XN602623Res;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -27,8 +27,9 @@ public class XN602623 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        integralAO.bugIntegral(req.getIntegralCode(), req.getUserId());
-        return new BooleanRes(true);
+        String count = integralAO.bugIntegral(req.getIntegralCode(),
+            req.getUserId());
+        return new XN602623Res(count);
     }
 
     /** 

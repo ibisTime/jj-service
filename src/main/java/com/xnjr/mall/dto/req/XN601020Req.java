@@ -38,6 +38,9 @@ public class XN601020Req {
     // 更新人（必填）
     private String updater;
 
+    // 备注
+    private String remark;
+
     public String getName() {
         return name;
     }
@@ -108,5 +111,13 @@ public class XN601020Req {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

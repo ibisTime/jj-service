@@ -52,7 +52,7 @@ public interface IIntegralAO {
      * @create: 2016年7月21日 上午8:57:18 xieyj
      * @history:
      */
-    public void bugIntegral(String code, String userId);
+    public String bugIntegral(String code, String userId);
 
     /**
      * 积分分页查询

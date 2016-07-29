@@ -40,6 +40,7 @@ public class XN601020 extends AProcessor {
         data.setModelSpecsList(req.getModelSpecsList());
         data.setProductCode(req.getProductCode());
         data.setUpdater(req.getUpdater());
+        data.setRemark(req.getRemark());
         return new PKCodeRes(modelAO.addModel(data));
     }
 
