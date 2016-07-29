@@ -8,6 +8,8 @@
  */
 package com.xnjr.mall.ao.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,9 @@ import com.xnjr.mall.bo.ILogisticsBO;
 import com.xnjr.mall.bo.IModelBO;
 import com.xnjr.mall.bo.IModelSpecsBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Invoice;
+import com.xnjr.mall.domain.InvoiceModel;
 import com.xnjr.mall.domain.Logistics;
 import com.xnjr.mall.enums.EInvoiceStatus;
 import com.xnjr.mall.enums.ELogisticsStatus;
@@ -100,6 +104,15 @@ public class LogisticsAOImpl implements ILogisticsAO {
             logistics = logisticsBO.getLogistics(code);
             Invoice invoice = invoiceBO.getInvoice(logistics.getInvoiceCode());
             logistics.setInvoice(invoice);
+            List<InvoiceModel> imList = invoice.getInvoiceModelList();
+            for (InvoiceModel invoiceModel : imList) {
+                BuyGuide conBuyGuide = new BuyGuide();
+                conBuyGuide.setModelCode(invoiceModel.getModelCode());
+                List<BuyGuide> bgList = buyGuideBO
+                    .queryBuyGuideList(conBuyGuide);
+                BuyGuide bgBuyGuide = bgList.get(0);
+                invoiceModel.setCostPrice(bgBuyGuide.getCostPrice());
+            }
         }
         return logistics;
     }

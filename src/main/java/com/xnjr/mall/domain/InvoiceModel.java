@@ -56,6 +56,9 @@ public class InvoiceModel extends ABaseDO {
     // pic3
     private String pic3;
 
+    // 成本价
+    private Long costPrice;
+
     public String getCode() {
         return code;
     }
@@ -142,5 +145,13 @@ public class InvoiceModel extends ABaseDO {
 
     public void setPic3(String pic3) {
         this.pic3 = pic3;
+    }
+
+    public Long getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(Long costPrice) {
+        this.costPrice = costPrice;
     }
 }
