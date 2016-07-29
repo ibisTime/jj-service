@@ -270,14 +270,14 @@ CREATE TABLE `tmall_repair_order` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tmall_sale_guide`;
 CREATE TABLE `tmall_sale_guide` (
-  `code` varchar(32) NOT NULL,
-  `model_code` varchar(32) NOT NULL,
-  `to_level` varchar(4) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `price` bigint(20) NOT NULL,
-  `updater` varchar(45) NOT NULL,
-  `update_datetime` datetime NOT NULL,
-  `remark` varchar(255) DEFAULT NULL,
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `model_code` varchar(32) DEFAULT NULL COMMENT '型号编号',
+  `to_level` varchar(4) DEFAULT NULL COMMENT '用户等级',
+  `quantity` int(11) DEFAULT NULL COMMENT '数量',
+  `price` bigint(20) DEFAULT NULL COMMENT '价格',
+  `updater` varchar(45) DEFAULT NULL COMMENT '更新人',
+  `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
