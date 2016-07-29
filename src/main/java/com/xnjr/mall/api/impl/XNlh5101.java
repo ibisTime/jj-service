@@ -2,19 +2,19 @@ package com.xnjr.mall.api.impl;
 
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
-import com.xnjr.mall.dto.req.XN602223Req;
+import com.xnjr.mall.dto.req.XNlh5101Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 
 /**
- * 分页查询分销引导表
+ * 删除分销引导记录
  * @author: xieyj 
- * @since: 2016年7月29日 下午1:23:25 
+ * @since: 2016年7月29日 下午1:21:14 
  * @history:
  */
-public class XN602223 extends AProcessor {
+public class XNlh5101 extends AProcessor {
 
-    private XN602223Req req = null;
+    private XNlh5101Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
@@ -23,6 +23,6 @@ public class XN602223 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602223Req.class);
+        req = JsonUtil.json2Bean(inputparams, XNlh5101Req.class);
     }
 }

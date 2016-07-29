@@ -8,6 +8,7 @@
  */
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,27 @@ public class SaleGuideBOImpl extends PaginableBOImpl<SaleGuide> implements
             saleGuideDAO.insert(data);
         }
         return code;
+    }
+
+    @Override
+    public int refreshSaleGuide(SaleGuide data) {
+        int count = 0;
+        if (data.getCode() != null) {
+            data.setUpdateDatetime(new Date());
+            count = saleGuideDAO.update(data);
+        }
+        return count;
+    }
+
+    @Override
+    public SaleGuide getSaleGuide(String code) {
+        SaleGuide saleGuide = null;
+        if (code != null) {
+            SaleGuide data = new SaleGuide();
+            data.setCode(code);
+            saleGuide = saleGuideDAO.select(data);
+        }
+        return saleGuide;
     }
 
 }

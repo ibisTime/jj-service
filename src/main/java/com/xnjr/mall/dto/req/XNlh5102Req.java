@@ -1,18 +1,14 @@
 package com.xnjr.mall.dto.req;
 
 /**
- * 新增分销引导表Req
+ * 修改分销引导表Req
  * @author: xieyj 
- * @since: 2016年7月29日 下午1:05:36 
+ * @since: 2016年5月23日 上午8:46:53 
  * @history:
  */
-public class XN602220Req {
-
-    // 型号编号(必填)
-    private String modelCode;
-
-    // 用户等级(必填)
-    private String toLevel;
+public class XNlh5102Req {
+    // 编号(必填)
+    private String code;
 
     // 数量(必填)
     private String quantity;
@@ -23,23 +19,15 @@ public class XN602220Req {
     // 更新人(必填)
     private String updater;
 
-    // 备注(必填)
+    // 备注(选填)
     private String remark;
 
-    public String getModelCode() {
-        return modelCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setModelCode(String modelCode) {
-        this.modelCode = modelCode;
-    }
-
-    public String getToLevel() {
-        return toLevel;
-    }
-
-    public void setToLevel(String toLevel) {
-        this.toLevel = toLevel;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getQuantity() {

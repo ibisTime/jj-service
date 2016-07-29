@@ -6,20 +6,20 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年5月23日 上午8:46:53 
  * @history:
  */
-public class XN602223Req extends APageReq {
+public class XNlh5103Req extends APageReq {
 
     /** 
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
      */
     private static final long serialVersionUID = -5329405364861942907L;
 
-    // 型号编号(必填)
+    // 型号编号(选填)
     private String modelCode;
 
-    // 用户等级(必填)
+    // 用户等级(选填)
     private String toLevel;
 
-    // 更新人(必填)
+    // 更新人(选填)
     private String updater;
 
     public String getModelCode() {
