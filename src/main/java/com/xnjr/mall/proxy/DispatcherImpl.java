@@ -39,12 +39,13 @@ public class DispatcherImpl implements IDispatcher {
                 rm.setData("");
             } else if (e instanceof NullPointerException) {
                 rm.setErrorCode(EErrorCode.OTHER_ERR.getCode());
-                rm.setErrorInfo("NPE");
+                // rm.setErrorInfo("NPE");
+                rm.setErrorInfo("系统错误，请联系管理员");
                 rm.setData("");
             } else {
                 rm.setErrorCode(EErrorCode.OTHER_ERR.getCode());
-                rm.setErrorInfo(e.getMessage());
-                // rm.setErrorInfo("系统错误，请联系客服");
+                // rm.setErrorInfo(e.getMessage());
+                rm.setErrorInfo("系统错误，请联系管理员");
                 rm.setData("");
             }
         } finally {

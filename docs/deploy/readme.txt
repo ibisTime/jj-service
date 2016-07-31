@@ -8,13 +8,10 @@ C，程序升级/检验
 1，eclipse导出war包
 
 2. 本地war包上传至服务器
-  scp -P 57652 xn-mall.war root@120.26.222.73:/home  
-  
-    scp -P 57652 xn-mall.war root@121.43.101.148:/home  
-  
+  scp -P 57652 xn-mall.war root@121.43.101.148:/home  
 
 3. 备份原先配置(如果第一次部署，跳过此步骤)
-  cd /mnt/wwwroot/caigo/tomcat_JY_mall/webapps
+  cd /home/wwwroot/caigo/tomcat_jfmall_biz/webapps
   cp ./xn-mall/WEB-INF/classes/application.properties .
   rm -rf xn-mall.war
   rm -rf xn-mall
@@ -26,12 +23,9 @@ C，程序升级/检验
   ../bin/startup.sh
   
 6. 验证程序
-  http://121.43.101.148:6202/xn-mall/api
-  
+  http://121.43.101.148:5302/xn-mall/api
   
 D,运营测试
   D1索取运营测试权限
   D2运营测试
   D3权限归还
-
-
