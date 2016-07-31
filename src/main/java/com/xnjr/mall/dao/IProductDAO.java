@@ -8,6 +8,8 @@
  */
 package com.xnjr.mall.dao;
 
+import java.util.List;
+
 import com.xnjr.mall.dao.base.IBaseDAO;
 import com.xnjr.mall.domain.Product;
 
@@ -22,4 +24,6 @@ public interface IProductDAO extends IBaseDAO<Product> {
     public int updateProduct(Product product);
 
     public int updateStatus(Product product);
+
+    public List<Product> selectProductType(Product condition);
 }

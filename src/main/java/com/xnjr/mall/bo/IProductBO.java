@@ -32,6 +32,8 @@ public interface IProductBO extends IPaginableBO<Product> {
 
     public Product getProduct(String code);
 
+    public List<Product> queryProductType(Product condition);
+
     /**
      * 审核产品通过
      * @param code

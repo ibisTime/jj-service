@@ -181,4 +181,9 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
         return count;
     }
 
+    @Override
+    public List<Product> queryProductType(Product condition) {
+        return productDAO.selectProductType(condition);
+    }
+
 }

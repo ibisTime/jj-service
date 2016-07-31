@@ -35,6 +35,8 @@ public interface IProductAO {
 
     public Product getProduct(String code);
 
+    public List<Product> queryProductType(Product condition);
+
     /**
      * 审核产品
      * @param code

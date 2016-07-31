@@ -27,6 +27,9 @@
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
 			</if>
+			<if test="modelName != null and modelName != '' ">
+				AND tm.name like "%"#{modelName}"%"
+			</if>
 		</trim>
 	</sql>
 	<select id="select_saleGuide" parameterType="saleGuide" resultMap="saleGuide_DB_Result">

@@ -21,7 +21,7 @@ public class XN601007 extends AProcessor {
     public Object doBusiness() throws BizException {
         Product condition = new Product();
         condition.setCategory(req.getCategory());
-        return productAO.queryProductList(condition);
+        return productAO.queryProductType(condition);
     }
 
     @Override

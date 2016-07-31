@@ -16,6 +16,9 @@ public class XNlh5103Req extends APageReq {
     // 型号编号(选填)
     private String modelCode;
 
+    // 型号名称(选填)
+    private String modelName;
+
     // 用户等级(选填)
     private String toLevel;
 
@@ -44,5 +47,13 @@ public class XNlh5103Req extends APageReq {
 
     public void setUpdater(String updater) {
         this.updater = updater;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }

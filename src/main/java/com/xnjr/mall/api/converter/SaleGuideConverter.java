@@ -22,6 +22,7 @@ public class SaleGuideConverter {
     public static SaleGuide converter(XNlh5103Req req) {
         SaleGuide data = new SaleGuide();
         data.setModelCode(req.getModelCode());
+        data.setModelName(req.getModelName());
         data.setToLevel(req.getToLevel());
         data.setUpdater(req.getUpdater());
         return data;

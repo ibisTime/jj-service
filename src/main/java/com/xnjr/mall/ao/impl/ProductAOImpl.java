@@ -144,4 +144,9 @@ public class ProductAOImpl implements IProductAO {
         }
         return count;
     }
+
+    @Override
+    public List<Product> queryProductType(Product condition) {
+        return productBO.queryProductType(condition);
+    }
 }

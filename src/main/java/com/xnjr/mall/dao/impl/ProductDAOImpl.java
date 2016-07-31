@@ -86,4 +86,10 @@ public class ProductDAOImpl extends AMybatisTemplate implements IProductDAO {
         return super.update("update_productStatus", product);
     }
 
+    @Override
+    public List<Product> selectProductType(Product condition) {
+        return super
+            .selectList("select_product_type", condition, Product.class);
+    }
+
 }

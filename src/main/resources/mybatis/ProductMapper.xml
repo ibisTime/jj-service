@@ -48,7 +48,7 @@
 		SELECT
 		code
 		,category
-		,type
+		,distinct(type)
 		,type_pic
 		,order_no
 		,name
@@ -78,6 +78,12 @@
 		resultType="java.lang.Long">
 		SELECT count(1) FROM tmall_product t
 		<include refid="where_condition" />
+	</select>
+	
+	<select id="select_product_type" parameterType="product"
+		resultMap="product_DB_Result">
+		select distinct type,type_pic from tmall_product where category = #{category}
+		GROUP BY type
 	</select>
 
 	<insert id="insert_product" parameterType="product">
