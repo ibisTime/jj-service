@@ -48,7 +48,7 @@
 		SELECT
 		code
 		,category
-		,distinct(type)
+		,type
 		,type_pic
 		,order_no
 		,name
