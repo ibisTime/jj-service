@@ -69,13 +69,6 @@ public class ProductAOImpl implements IProductAO {
      */
     @Override
     public int editProduct(Product product) {
-        Product condition = new Product();
-        condition.setName(product.getName());
-        List<Product> list = productBO.queryProductList(condition);
-        if (!CollectionUtils.sizeIsEmpty(list)) {
-            throw new BizException("jd00001", "产品名称不存在");
-        }
-
         int count = 0;
         count = productBO.refreshProduct(product);
         return count;
