@@ -69,12 +69,10 @@ public class ProductAOImpl implements IProductAO {
      */
     @Override
     public int editProduct(Product product) {
-        Product dbProduct = productBO.getProduct(product.getCode());
         Product condition = new Product();
         condition.setName(product.getName());
         List<Product> list = productBO.queryProductList(condition);
-        if (!CollectionUtils.sizeIsEmpty(list)
-                && !dbProduct.getName().equals(list.get(0).getName())) {
+        if (!CollectionUtils.sizeIsEmpty(list)) {
             throw new BizException("jd00001", "产品名称不存在");
         }
 
