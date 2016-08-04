@@ -66,10 +66,13 @@ public class ModelAOImpl implements IModelAO {
             throw new BizException("xn0000", "产品编号不存在");
         }
         String code = modelBO.saveModel(data);
-        for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
-            modelSpecs.setModelCode(code);
-            modelSpecs.setOrderNum(modelSpecs.getOrderNum());
-            modelSpecsBO.saveModelSpecs(modelSpecs);
+        List<ModelSpecs> modelSpecsList = data.getModelSpecsList();
+        if (CollectionUtils.isNotEmpty(modelSpecsList)) {
+            for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
+                modelSpecs.setModelCode(data.getCode());
+                modelSpecs.setOrderNum(modelSpecs.getOrderNum());
+                modelSpecsBO.saveModelSpecs(modelSpecs);
+            }
         }
 
         SaleGuide saleGuide = new SaleGuide();
@@ -110,10 +113,13 @@ public class ModelAOImpl implements IModelAO {
             count = modelBO.refreshModel(data);
             // 型号规格表数据先删除，后增加
             modelSpecsBO.removeModelSpecsByModeCode(data.getCode());
-            for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
-                modelSpecs.setModelCode(data.getCode());
-                modelSpecs.setOrderNum(modelSpecs.getOrderNum());
-                modelSpecsBO.saveModelSpecs(modelSpecs);
+            List<ModelSpecs> modelSpecsList = data.getModelSpecsList();
+            if (CollectionUtils.isNotEmpty(modelSpecsList)) {
+                for (ModelSpecs modelSpecs : data.getModelSpecsList()) {
+                    modelSpecs.setModelCode(data.getCode());
+                    modelSpecs.setOrderNum(modelSpecs.getOrderNum());
+                    modelSpecsBO.saveModelSpecs(modelSpecs);
+                }
             }
         }
         return count;

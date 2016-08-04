@@ -4,8 +4,8 @@ LIMIT 0, 50000
 
 -- Date: 2016-06-13 13:44
 */
-INSERT INTO `tsys_config` (`to_system`,`ckey`,`cvalue`,`note`,`updater`,`update_datetime`,`remark`) VALUES ('8','USER_URL','http://120.26.222.73:5305/std-user/api','用户模块biz地址','admin',now(),'');
-INSERT INTO `tsys_config` (`to_system`,`ckey`,`cvalue`,`note`,`updater`,`update_datetime`,`remark`) VALUES ('8','ACCOUNT_URL','http://120.26.222.73:5306/std-account/api','账户模块biz地址','admin',now(),'');
+INSERT INTO `tsys_config` (`to_system`,`ckey`,`cvalue`,`note`,`updater`,`update_datetime`,`remark`) VALUES ('8','USER_URL','http://121.43.101.148:5305/std-user/api','用户模块biz地址','admin',now(),'');
+INSERT INTO `tsys_config` (`to_system`,`ckey`,`cvalue`,`note`,`updater`,`update_datetime`,`remark`) VALUES ('8','ACCOUNT_URL','http://121.43.101.148:5306/std-account/api','账户模块biz地址','admin',now(),'');
 INSERT INTO `tsys_config` (`to_system`,`ckey`,`cvalue`,`note`,`updater`,`update_datetime`,`remark`) VALUES ('8','USER_DB','jf_std_user','用户数据库名称','admin',now(),'');
 INSERT INTO `tsys_config` (`to_system`,`ckey`,`cvalue`,`note`,`updater`,`update_datetime`,`remark`) VALUES ('8','ACCOUNT_DB','jf_std_account','账户数据库名称','admin',now(),'');
 
