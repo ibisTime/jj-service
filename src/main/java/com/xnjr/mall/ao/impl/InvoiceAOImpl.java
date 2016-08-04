@@ -294,4 +294,15 @@ public class InvoiceAOImpl implements IInvoiceAO {
         }
     }
 
+    // 现场发货
+    @Override
+    public boolean doFinishInvoice(String code) {
+        Invoice invoice = invoiceBO.getInvoice(code);
+        if (!invoice.getStatus().equals(EInvoiceStatus.PAY_START.getCode())) {
+            throw new BizException("xn0000", "该订单状态不是已支付状态");
+        }
+        int count = invoiceBO.refreshInvoiceStatus(code,
+            EInvoiceStatus.FINISH.getCode());
+        return count > 0 ? true : false;
+    }
 }

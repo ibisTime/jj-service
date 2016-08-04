@@ -46,6 +46,15 @@ public interface IInvoiceAO {
 
     public boolean doFirstPay(String code, Long amount, String tradePwd);
 
+    /** 
+     * 现场发货
+     * @param code
+     * @return 
+     * @create: 2016年8月4日 下午2:07:28 zuixian
+     * @history: 
+     */
+    public boolean doFinishInvoice(String code);
+
     /**
      * 不支付
      * @param code
