@@ -31,6 +31,9 @@ public class XN602025Req extends APageReq {
     // 是否二次付款（选填）
     private String isSecondPay;
 
+    // 向谁要货（选填）
+    private String toUser;
+
     public String getCode() {
         return code;
     }
@@ -77,5 +80,13 @@ public class XN602025Req extends APageReq {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(String toUser) {
+        this.toUser = toUser;
     }
 }

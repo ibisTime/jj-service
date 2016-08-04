@@ -1,7 +1,5 @@
 package com.xnjr.mall.api.impl;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import com.xnjr.mall.ao.IModelAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
@@ -55,8 +53,8 @@ public class XN601021 extends AProcessor {
         StringValidater.validateBlank(req.getCode(), req.getName(),
             req.getPic1(), req.getPic2(), req.getPic3(), req.getDescription(),
             req.getProductCode(), req.getUpdater());
-        if (CollectionUtils.isEmpty(req.getModelSpecsList())) {
-            throw new BizException("xn702000", "必填型入参，请按要求填写完整");
-        }
+        // if (CollectionUtils.isEmpty(req.getModelSpecsList())) {
+        // throw new BizException("xn702000", "必填型入参，请按要求填写完整");
+        // }
     }
 }

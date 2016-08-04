@@ -38,6 +38,7 @@ public class XN602025 extends AProcessor {
         condition.setStatus(req.getStatus());
         condition.setIsSecondPay(req.getIsSecondPay());
         condition.setMobile(req.getMobile());
+        condition.setToUser(req.getToUser());
         condition.setApplyDatetimeStart(DateUtil.strToDate(req.getDateStart(),
             DateUtil.DATA_TIME_PATTERN_1));
         condition.setApplyDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),

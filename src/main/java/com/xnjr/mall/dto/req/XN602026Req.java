@@ -22,6 +22,9 @@ public class XN602026Req {
     // 状态（选填）
     private String status;
 
+    // 向谁要货（选填）
+    private String toUser;
+
     public String getCode() {
         return code;
     }
@@ -60,5 +63,13 @@ public class XN602026Req {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(String toUser) {
+        this.toUser = toUser;
     }
 }
