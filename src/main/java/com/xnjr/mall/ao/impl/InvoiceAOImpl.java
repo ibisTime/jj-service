@@ -302,7 +302,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
             throw new BizException("xn0000", "该订单状态不是已支付状态");
         }
         int count = invoiceBO.refreshInvoiceStatus(code,
-            EInvoiceStatus.FINISH.getCode());
+            EInvoiceStatus.RECEIVE.getCode());
         return count > 0 ? true : false;
     }
 }
