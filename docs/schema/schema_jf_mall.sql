@@ -295,7 +295,7 @@ CREATE TABLE `tsys_config` (
   `update_datetime` datetime NOT NULL COMMENT '更新时间',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `tsys_contract_template`
@@ -329,7 +329,7 @@ CREATE TABLE `tsys_dict` (
   `update_datetime` datetime NOT NULL COMMENT '更新时间',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `tsys_log`
