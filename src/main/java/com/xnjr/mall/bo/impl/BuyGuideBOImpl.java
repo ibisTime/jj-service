@@ -23,6 +23,7 @@ import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IBuyGuideDAO;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.enums.EBoolean;
+import com.xnjr.mall.enums.EUser;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -125,7 +126,7 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
             BuyGuide condition = new BuyGuide();
             condition.setModelCode(modelCode);
             condition.setToLevel(String.valueOf(level));
-            condition.setFromUser(fromUser);
+            condition.setFromUser(EUser.Top_Model.getCode());
             condition.setStatus(EBoolean.YES.getCode());
             List<BuyGuide> list = buyGuideDAO.selectList(condition);
             if (!CollectionUtils.sizeIsEmpty(list)) {
