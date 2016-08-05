@@ -22,4 +22,6 @@ public interface IUserAO {
     public String doAddJfUser(XN805042Req data);
 
     public String doAddHpUser(XN805042Req data);
+
+    public String doAddJmsUser(XN805042Req data);
 }

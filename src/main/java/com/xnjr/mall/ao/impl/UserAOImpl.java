@@ -89,4 +89,30 @@ public class UserAOImpl implements IUserAO {
         }
         return userId;
     }
+
+    @Override
+    public String doAddJmsUser(XN805042Req data) {
+        // 设置更新人为推荐人
+        data.setUpdater(data.getUserReferee());
+        // 设置货品商身份
+        data.setKind(EUserKind.CaiGo.getCode());
+        String userId = userBO.doSaveUser(data);
+        Model condition = new Model();
+        List<Model> list = modelBO.queryModelList(condition);
+        BuyGuide buyGuide = new BuyGuide();
+        for (Model model : list) {
+            buyGuide.setModelCode(model.getCode());
+            buyGuide.setFromUser(userId);
+            buyGuide.setFromQuantity("0");
+            buyGuide.setStatus(EBoolean.NO.getCode());
+            Long price = saleGuideBO.getSaleGuide(model.getCode(),
+                EUserLevel.ZERO, Long.valueOf(buyGuide.getFromQuantity()))
+                .getPrice();
+            if (price != null) {
+                buyGuide.setCostPrice(price);
+            }
+            buyGuideBO.saveBuyGuide(buyGuide);
+        }
+        return userId;
+    }
 }

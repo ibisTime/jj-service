@@ -9,6 +9,7 @@
 package com.xnjr.mall.api.converter;
 
 import com.xnjr.mall.dto.req.XN602200Req;
+import com.xnjr.mall.dto.req.XN602220Req;
 import com.xnjr.mall.dto.req.XN602600Req;
 import com.xnjr.mall.dto.req.XN602601Req;
 import com.xnjr.mall.dto.req.XN805042Req;
@@ -43,6 +44,19 @@ public class UserConverter {
 
     // 货品商入驻
     public static XN805042Req converter(XN602200Req req) {
+        XN805042Req resultReq = new XN805042Req();
+        resultReq.setLoginName(req.getLoginName());
+        resultReq.setMobile(req.getMobile());
+        resultReq.setIdKind(req.getIdKind());
+        resultReq.setIdNo(req.getIdNo());
+        resultReq.setRealName(req.getRealName());
+        resultReq.setUserReferee(req.getUserReferee());
+        resultReq.setPdf(req.getPdf());
+        return resultReq;
+    }
+
+    // 加盟商入驻
+    public static XN805042Req converter(XN602220Req req) {
         XN805042Req resultReq = new XN805042Req();
         resultReq.setLoginName(req.getLoginName());
         resultReq.setMobile(req.getMobile());
