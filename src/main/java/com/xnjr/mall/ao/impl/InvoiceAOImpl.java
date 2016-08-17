@@ -86,6 +86,10 @@ public class InvoiceAOImpl implements IInvoiceAO {
         // 获取销售价格
         BuyGuide model = buyGuideBO.getOnlineModel(modelCode, user.getLevel(),
             data.getToUser());
+        // 判断是否已下架
+        if (model == null) {
+            throw new BizException("xn000000", "该商品已下架，无法提交");
+        }
         // 存入DB
         invoiceModelBO.saveInvoiceModel(code, modelCode, quantity,
             model.getDiscountPrice());
@@ -107,6 +111,10 @@ public class InvoiceAOImpl implements IInvoiceAO {
             Cart cart = cartBO.getCart(cartCode);
             BuyGuide model = buyGuideBO.getOnlineModel(cart.getModelCode(),
                 user.getLevel(), data.getToUser());
+            // 判断是否已下架
+            if (model == null) {
+                throw new BizException("xn000000", "购物车中存在已下架商品，请删除后重新提交");
+            }
             invoiceModelBO.saveInvoiceModel(code, cart.getModelCode(),
                 cart.getQuantity(), model.getDiscountPrice());
         }

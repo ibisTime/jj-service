@@ -64,7 +64,7 @@ public class LogisticsAOImpl implements ILogisticsAO {
         Invoice invoice = invoiceBO.getInvoice(logistics.getInvoiceCode());
         if (!EInvoiceStatus.PAY_START.getCode().equalsIgnoreCase(
             invoice.getStatus())) {
-            throw new BizException("xn000000", "发货单未支付，不能发货");
+            throw new BizException("xn000000", "发货单状态不是支付状态，无法发货");
         }
         // 无物流信息时，就不存物流信息。
         if (StringUtils.isNotBlank(logistics.getCode())) {

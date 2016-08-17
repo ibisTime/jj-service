@@ -24,6 +24,7 @@ import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.BuyGuide;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.dto.res.XN805901Res;
+import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EUser;
 import com.xnjr.mall.exception.BizException;
 
@@ -112,10 +113,14 @@ public class CartAOImpl implements ICartAO {
         Paginable<Cart> page = cartBO.getPaginable(start, limit, condition);
         if (page != null && page.getList() != null) {
             for (Cart cart : page.getList()) {
-                BuyGuide buyGuide = buyGuideBO.getOnlineModel(
-                    cart.getModelCode(), user.getLevel(),
-                    EUser.Top_Model.getCode());
+                BuyGuide buyGuide = buyGuideBO.getModel(cart.getModelCode(),
+                    user.getLevel(), EUser.Top_Model.getCode());
                 cart.setSalePrice(buyGuide.getDiscountPrice());
+                if (EBoolean.YES.getCode().equals(buyGuide.getStatus())) {
+                    cart.setStatus(EBoolean.YES.getCode());
+                } else {
+                    cart.setStatus(EBoolean.NO.getCode());
+                }
             }
         }
         return page;
@@ -132,11 +137,14 @@ public class CartAOImpl implements ICartAO {
         List<Cart> list = cartBO.queryCartList(condition);
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
-
-                BuyGuide buyGuide = buyGuideBO.getOnlineModel(
-                    cart.getModelCode(), user.getLevel(),
-                    EUser.Top_Model.getCode());
+                BuyGuide buyGuide = buyGuideBO.getModel(cart.getModelCode(),
+                    user.getLevel(), EUser.Top_Model.getCode());
                 cart.setSalePrice(buyGuide.getDiscountPrice());
+                if (EBoolean.YES.getCode().equals(buyGuide.getStatus())) {
+                    cart.setStatus(EBoolean.YES.getCode());
+                } else {
+                    cart.setStatus(EBoolean.NO.getCode());
+                }
             }
         }
         return list;
@@ -152,9 +160,9 @@ public class CartAOImpl implements ICartAO {
         String userId = cart.getUserId();
         XN805901Res user = userBO.getRemoteUser(userId, userId);
         // 获取价格
-        BuyGuide buyGuide = buyGuideBO.getOnlineModel(cart.getModelCode(),
+        BuyGuide model = buyGuideBO.getModel(cart.getModelCode(),
             user.getLevel(), EUser.Top_Model.getCode());
-        cart.setSalePrice(buyGuide.getDiscountPrice());
+        cart.setSalePrice(model.getDiscountPrice());
         return cart;
     }
 }

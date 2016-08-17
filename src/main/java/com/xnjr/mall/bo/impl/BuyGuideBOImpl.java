@@ -137,6 +137,22 @@ public class BuyGuideBOImpl extends PaginableBOImpl<BuyGuide> implements
     }
 
     @Override
+    public BuyGuide getModel(String modelCode, String level, String fromUser) {
+        BuyGuide buyGuide = null;
+        if (StringUtils.isNotBlank(modelCode) && StringUtils.isNotBlank(level)) {
+            BuyGuide condition = new BuyGuide();
+            condition.setModelCode(modelCode);
+            condition.setToLevel(String.valueOf(level));
+            condition.setFromUser(EUser.Top_Model.getCode());
+            List<BuyGuide> list = buyGuideDAO.selectList(condition);
+            if (!CollectionUtils.sizeIsEmpty(list)) {
+                buyGuide = list.get(0);
+            }
+        }
+        return buyGuide;
+    }
+
+    @Override
     public int refreshBuyGuideStatus(BuyGuide data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {

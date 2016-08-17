@@ -95,4 +95,15 @@ public interface IBuyGuideBO extends IPaginableBO<BuyGuide> {
     public BuyGuide getOnlineModel(String modelCode, String level,
             String fromUser);
 
+    /**
+     * 获取销售价格
+     * @param modelCode
+     * @param level
+     * @param fromUser
+     * @return 
+     * @create: 2016年7月26日 下午5:58:26 myb858
+     * @history:
+     */
+    public BuyGuide getModel(String modelCode, String level, String fromUser);
+
 }
