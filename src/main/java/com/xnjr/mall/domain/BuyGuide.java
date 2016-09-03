@@ -23,6 +23,9 @@ public class BuyGuide extends ABaseDO {
     // 原价
     private Long originalPrice;
 
+    // 积分价格
+    private Long xnbPrice;
+
     // 折扣价
     private Long discountPrice;
 
@@ -246,5 +249,13 @@ public class BuyGuide extends ABaseDO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Long getXnbPrice() {
+        return xnbPrice;
+    }
+
+    public void setXnbPrice(Long xnbPrice) {
+        this.xnbPrice = xnbPrice;
     }
 }

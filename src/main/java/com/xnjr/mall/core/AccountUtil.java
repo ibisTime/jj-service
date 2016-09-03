@@ -36,4 +36,11 @@ public class AccountUtil {
         return today + String.valueOf(random);
     }
 
+    public static String prefixAccount(String userId, String prefix) {
+        return prefix + userId.substring(1);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(prefixAccount("U2016082509333332516", "C"));
+    }
 }
