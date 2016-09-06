@@ -23,11 +23,11 @@ public class BuyGuide extends ABaseDO {
     // 原价
     private Long originalPrice;
 
-    // 积分价格
-    private Long xnbPrice;
-
     // 折扣价
     private Long discountPrice;
+
+    // 人民币价格
+    private Long cnyPrice;
 
     // 受众
     private String toLevel;
@@ -251,11 +251,11 @@ public class BuyGuide extends ABaseDO {
         this.type = type;
     }
 
-    public Long getXnbPrice() {
-        return xnbPrice;
+    public Long getCnyPrice() {
+        return cnyPrice;
     }
 
-    public void setXnbPrice(Long xnbPrice) {
-        this.xnbPrice = xnbPrice;
+    public void setCnyPrice(Long cnyPrice) {
+        this.cnyPrice = cnyPrice;
     }
 }

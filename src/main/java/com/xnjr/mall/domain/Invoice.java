@@ -54,6 +54,9 @@ public class Invoice extends ABaseDO {
     // 支付金额
     private Long payAmount;
 
+    // 支付人民币金额
+    private Long payCnyAmount;
+
     // 审核人
     private String approveUser;
 
@@ -286,5 +289,13 @@ public class Invoice extends ABaseDO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Long getPayCnyAmount() {
+        return payCnyAmount;
+    }
+
+    public void setPayCnyAmount(Long payCnyAmount) {
+        this.payCnyAmount = payCnyAmount;
     }
 }

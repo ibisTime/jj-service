@@ -92,7 +92,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
         }
         // 存入DB
         invoiceModelBO.saveInvoiceModel(code, modelCode, quantity,
-            model.getDiscountPrice());
+            model.getDiscountPrice(), model.getCnyPrice());
         return code;
     }
 
@@ -116,7 +116,8 @@ public class InvoiceAOImpl implements IInvoiceAO {
                 throw new BizException("xn000000", "购物车中存在已下架商品，请删除后重新提交");
             }
             invoiceModelBO.saveInvoiceModel(code, cart.getModelCode(),
-                cart.getQuantity(), model.getDiscountPrice());
+                cart.getQuantity(), model.getDiscountPrice(),
+                model.getCnyPrice());
         }
         // 删除购物车选中记录
         for (String cartCode : cartCodeList) {
@@ -127,19 +128,23 @@ public class InvoiceAOImpl implements IInvoiceAO {
 
     @Override
     @Transactional
-    public boolean doFirstPay(String code, Long amount, String tradePwd) {
+    public boolean doFirstPay(String code, Long amount, Long cnyAmount,
+            String tradePwd) {
         Invoice invoice = invoiceBO.getInvoice(code);
         if (!EInvoiceStatus.TO_PAY.getCode().equals(invoice.getStatus())) {
             throw new BizException("xn000000", "订单不处于待支付状态");
         }
-        // 支付人减钱
-        accountBO.doTransferOss(invoice.getApplyUser(),
-            EDirection.MINUS.getCode(), amount, 0L, "购买商品");
-        // 货品商加钱
-        accountBO.doTransferOss(invoice.getToUser(), EDirection.PLUS.getCode(),
-            amount, 0L, "卖出商品");
+        // // 支付人减钱
+        // accountBO.doTransferOss(invoice.getApplyUser(),
+        // EDirection.MINUS.getCode(), amount, 0L, "购买商品");
+        // // 货品商加钱
+        // accountBO.doTransferOss(invoice.getToUser(),
+        // EDirection.PLUS.getCode(),
+        // amount, 0L, "卖出商品");
+        accountBO.doTransferUsers(invoice.getApplyUser(), invoice.getToUser(),
+            EDirection.PLUS.getCode(), amount, cnyAmount, 0L, "商品交易");
         // 第一次支付
-        invoiceBO.doFirstPay(code, amount);
+        invoiceBO.doFirstPay(code, amount, cnyAmount);
         return true;
     }
 
@@ -158,11 +163,17 @@ public class InvoiceAOImpl implements IInvoiceAO {
     public int cancelInvoiceOss(String code, String approveUser,
             String approveNote) {
         Invoice data = invoiceBO.getInvoice(code);
-        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单状态不是待支付状态");
+        if (!EInvoiceStatus.TO_PAY.getCode().equals(data.getStatus())
+                && !EInvoiceStatus.PAY_START.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "订单状态不是待支付或者已支付,无法取消");
         }
         if (StringUtils.isBlank(approveNote)) {
             approveNote = "管理端取消订单";
+        }
+        if (EInvoiceStatus.PAY_START.getCode().equals(data.getStatus())) {
+            accountBO.doTransferUsers(data.getApplyUser(), data.getToUser(),
+                EDirection.MINUS.getCode(), data.getPayAmount(),
+                data.getPayCnyAmount(), 0L, "取消已支付订单");
         }
         return invoiceBO.cancelInvoice(code, approveUser, approveNote,
             EInvoiceStatus.NO_SEND.getCode());

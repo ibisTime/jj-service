@@ -34,7 +34,7 @@ public class XN601040 extends AProcessor {
         BuyGuide data = new BuyGuide();
         data.setModelCode(req.getModelCode());
         data.setOriginalPrice(Long.valueOf(req.getOriginalPrice()));
-        data.setXnbPrice(Long.valueOf(req.getXnbPrice()));
+        data.setCnyPrice(Long.valueOf(req.getCnyPrice()));
         if (StringUtils.isNotBlank(req.getDiscountPrice())) {
             data.setDiscountPrice(Long.valueOf(req.getDiscountPrice()));
         }
@@ -53,6 +53,6 @@ public class XN601040 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN601040Req.class);
         StringValidater.validateBlank(req.getModelCode(), req.getUpdater());
         StringValidater.validateAmount(req.getOriginalPrice(),
-            req.getXnbPrice());
+            req.getCnyPrice());
     }
 }

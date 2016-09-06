@@ -86,7 +86,16 @@ public interface IInvoiceBO extends IPaginableBO<Invoice> {
      */
     public int refreshInvoicePayAmount(String code, Long payAmount);
 
-    public int doFirstPay(String code, Long amount);
+    /**
+     * 更新发货单金额
+     * @param code
+     * @param amount
+     * @param cnyAmount
+     * @return 
+     * @create: 2016年9月5日 下午9:07:54 xieyj
+     * @history:
+     */
+    public int doFirstPay(String code, Long amount, Long cnyAmount);
 
     /**
      * 查询发货单列表

@@ -10,14 +10,14 @@ public class XN601040Req {
     // 型号编号（必填）
     private String modelCode;
 
-    // 人民币原价（必填）
+    // 原价（必填）
     private String originalPrice;
-
-    // 虚拟币价格（必填）
-    private String xnbPrice;
 
     // 折扣价（必填）
     private String discountPrice;
+
+    // 人民币价格（必填）
+    private String cnyPrice;
 
     // 受众（必填）
     private String toLevel;
@@ -87,11 +87,11 @@ public class XN601040Req {
         this.toSite = toSite;
     }
 
-    public String getXnbPrice() {
-        return xnbPrice;
+    public String getCnyPrice() {
+        return cnyPrice;
     }
 
-    public void setXnbPrice(String xnbPrice) {
-        this.xnbPrice = xnbPrice;
+    public void setCnyPrice(String cnyPrice) {
+        this.cnyPrice = cnyPrice;
     }
 }

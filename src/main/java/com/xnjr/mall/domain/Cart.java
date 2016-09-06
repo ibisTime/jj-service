@@ -48,6 +48,9 @@ public class Cart extends ABaseDO {
     // 价格
     private Long salePrice;
 
+    // 人民币价格
+    private Long saleCnyPrice;
+
     // 型号购买是否上架
     private String status;
 
@@ -145,5 +148,13 @@ public class Cart extends ABaseDO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getSaleCnyPrice() {
+        return saleCnyPrice;
+    }
+
+    public void setSaleCnyPrice(Long saleCnyPrice) {
+        this.saleCnyPrice = saleCnyPrice;
     }
 }

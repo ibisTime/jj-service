@@ -81,6 +81,23 @@ public interface IAccountBO {
             Long amount, Long fee, String remark);
 
     /**
+     * 用户间划账
+     * @param fromUserId
+     * @param toUserId
+     * @param direction
+     * @param amount
+     * @param cnyAmount
+     * @param fee
+     * @param remark
+     * @return 
+     * @create: 2016年9月6日 上午7:19:59 xieyj
+     * @history:
+     */
+    public void doTransferUsers(String fromUserId, String toUserId,
+            String direction, Long amount, Long cnyAmount, Long fee,
+            String remark);
+
+    /**
      * @param userId
      * @return 
      * @create: 2016年6月12日 下午9:14:13 xieyj

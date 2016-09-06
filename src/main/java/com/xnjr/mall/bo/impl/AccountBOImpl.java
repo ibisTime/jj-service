@@ -9,6 +9,7 @@ import com.xnjr.mall.dto.req.XN802112Req;
 import com.xnjr.mall.dto.req.XN802120Req;
 import com.xnjr.mall.dto.req.XN802122Req;
 import com.xnjr.mall.dto.req.XN802310Req;
+import com.xnjr.mall.dto.req.XN802313Req;
 import com.xnjr.mall.dto.res.XN802012Res;
 import com.xnjr.mall.dto.res.XN802013Res;
 import com.xnjr.mall.dto.res.XN802112Res;
@@ -128,5 +129,24 @@ public class AccountBOImpl implements IAccountBO {
         req.setCurrency(ECurrency.CNY.getCode());
         return BizConnecter.getBizData("802013", JsonUtils.object2Json(req),
             XN802013Res.class);
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IAccountBO#doTransferUsers(java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.Long, java.lang.String)
+     */
+    @Override
+    public void doTransferUsers(String fromUserId, String toUserId,
+            String direction, Long amount, Long cnyAmount, Long fee,
+            String remark) {
+        XN802313Req req = new XN802313Req();
+        req.setFromUserId(fromUserId);
+        req.setToUserId(toUserId);
+        req.setDirection(direction);
+        req.setAmount(String.valueOf(amount));
+        req.setCnyAmount(String.valueOf(cnyAmount));
+        req.setFee(String.valueOf(fee));
+        req.setRemark(remark);
+        BizConnecter.getBizData("802313", JsonUtils.object2Json(req),
+            Object.class);
     }
 }

@@ -38,13 +38,12 @@ public interface IInvoiceAO {
      * 支付首款
      * @param code
      * @param amount
-     * @param tradePwd
      * @return 
-     * @create: 2016年7月26日 下午7:36:58 myb858
+     * @create: 2016年9月5日 下午9:06:28 xieyj
      * @history:
      */
-
-    public boolean doFirstPay(String code, Long amount, String tradePwd);
+    public boolean doFirstPay(String code, Long amount, Long cnyAmount,
+            String tradePwd);
 
     /** 
      * 现场发货

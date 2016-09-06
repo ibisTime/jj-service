@@ -36,6 +36,9 @@ public class InvoiceModel extends ABaseDO {
     // 单价
     private Long salePrice;
 
+    // 销售人民币价格
+    private Long saleCnyPrice;
+
     // **************db properties
 
     // 型号名称
@@ -153,5 +156,13 @@ public class InvoiceModel extends ABaseDO {
 
     public void setCostPrice(Long costPrice) {
         this.costPrice = costPrice;
+    }
+
+    public Long getSaleCnyPrice() {
+        return saleCnyPrice;
+    }
+
+    public void setSaleCnyPrice(Long saleCnyPrice) {
+        this.saleCnyPrice = saleCnyPrice;
     }
 }

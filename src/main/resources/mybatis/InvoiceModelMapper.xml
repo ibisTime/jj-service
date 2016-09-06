@@ -12,6 +12,7 @@
 		<result column="product_name" property="productName" />
 		<result column="quantity" property="quantity" />
 		<result column="sale_price" property="salePrice" />
+		<result column="sale_cny_price" property="saleCnyPrice" />
 		<result column="pic1" property="pic1" />
 		<result column="pic2" property="pic2" />
 		<result column="pic3" property="pic3" />
@@ -40,6 +41,7 @@
 		,tp.name product_name
 		,t.quantity
 		,t.sale_price
+		,t.sale_cny_price
 		,tm.pic1
 		,tm.pic2
 		,tm.pic3
@@ -66,6 +68,7 @@
 		,model_code
 		,quantity
 		,sale_price
+		,sale_cny_price
 		)
 		VALUES(
 		#{code}
@@ -73,6 +76,7 @@
 		,#{modelCode}
 		,#{quantity}
 		,#{salePrice}
+		,#{saleCnyPrice}
 		)
 	</insert>
 </mapper>

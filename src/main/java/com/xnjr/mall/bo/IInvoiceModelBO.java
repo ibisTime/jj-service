@@ -18,12 +18,13 @@ public interface IInvoiceModelBO extends IPaginableBO<InvoiceModel> {
      * @param modelCode
      * @param quantity
      * @param salePrice
+     * @param saleCnyPrice
      * @return 
-     * @create: 2016年5月25日 上午10:26:32 xieyj
+     * @create: 2016年9月5日 下午8:46:12 xieyj
      * @history:
      */
     public String saveInvoiceModel(String invoiceCode, String modelCode,
-            Integer quantity, Long salePrice);
+            Integer quantity, Long salePrice, Long saleCnyPrice);
 
     /**
      * 查询发货单型号列表

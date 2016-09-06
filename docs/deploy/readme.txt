@@ -11,6 +11,8 @@ C，程序升级/检验
   scp -P 57652 xn-mall.war root@121.43.101.148:/home  
 
 3. 备份原先配置(如果第一次部署，跳过此步骤)
+  ssh root@121.43.101.148 -p 57652
+
   cd /home/wwwroot/caigo/tomcat_jfmall_biz/webapps
   cp ./xn-mall/WEB-INF/classes/application.properties .
   rm -rf xn-mall.war

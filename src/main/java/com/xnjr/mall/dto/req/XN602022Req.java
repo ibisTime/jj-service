@@ -14,6 +14,9 @@ public class XN602022Req {
     // 首款金额（必填）
     private String amount;
 
+    // 人民币首款金额（必填）
+    private String cnyAmount;
+
     // 交易密码（必填）
     private String tradePwd;
 
@@ -27,6 +30,14 @@ public class XN602022Req {
 
     public String getAmount() {
         return amount;
+    }
+
+    public String getCnyAmount() {
+        return cnyAmount;
+    }
+
+    public void setCnyAmount(String cnyAmount) {
+        this.cnyAmount = cnyAmount;
     }
 
     public void setAmount(String amount) {

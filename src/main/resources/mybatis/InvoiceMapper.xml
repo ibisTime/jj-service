@@ -13,6 +13,7 @@
 		<result column="receipt_type" property="receiptType" />
 		<result column="receipt_title" property="receiptTitle" />
 		<result column="pay_amount" property="payAmount" />
+		<result column="pay_cny_amount" property="payCnyAmount" />
 		<result column="status" property="status" />
 		<result column="approve_user" property="approveUser" />
 		<result column="approve_datetime" property="approveDatetime" />
@@ -69,6 +70,7 @@
 		,t.receipt_type
 		,t.receipt_title
 		,t.pay_amount
+		,t.pay_cny_amount
 		,t.status
 		,t.approve_user
 		,t.approve_datetime
@@ -101,6 +103,7 @@
 		,receipt_type
 		,receipt_title
 		,pay_amount
+		,pay_cny_amount
 		,status
 		,to_user
 		)
@@ -114,6 +117,7 @@
 		,#{receiptType}
 		,#{receiptTitle}
 		,#{payAmount}
+		,#{payCnyAmount}
 		,#{status}
 		,#{toUser}
 		)
@@ -161,6 +165,7 @@
 		UPDATE tmall_invoice
 		SET
 		pay_amount = #{payAmount}
+		,pay_cny_amount = #{payCnyAmount}
 		WHERE
 		code = #{code}
 	</update>
@@ -169,6 +174,7 @@
 		UPDATE tmall_invoice
 		SET
 		pay_amount = #{payAmount}
+		,pay_cny_amount = #{payCnyAmount}
 		,status = #{status}
 		WHERE
 		code = #{code}

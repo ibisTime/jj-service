@@ -5,8 +5,8 @@
 	<resultMap id="buyGuide_DB_Result" type="buyGuide">
 		<result column="code" property="code" />
 		<result column="original_price" property="originalPrice" />
-		<result column="xnb_price" property="xnbPrice" />
 		<result column="discount_price" property="discountPrice" />
+		<result column="cny_price" property="cnyPrice" />
 		<result column="to_level" property="toLevel" />
 		<result column="model_code" property="modelCode" />
 		
@@ -69,8 +69,8 @@
 		SELECT
 		t.code
 		,t.original_price
-		,t.xnb_price
 		,t.discount_price
+		,t.cny_price
 		,t.to_level
 		,t.model_code
 		
@@ -107,8 +107,8 @@
 		tmall_buy_guide(
 		code
 		,original_price
-		,xnb_price
 		,discount_price
+		,cny_price
 		,to_level
 		,model_code
 		
@@ -126,8 +126,8 @@
 		VALUES(
 		#{code}
 		,#{originalPrice}
-		,#{xnbPrice}
 		,#{discountPrice}
+		,#{cnyPrice}
 		,#{toLevel}
 		,#{modelCode}
 		
@@ -148,8 +148,8 @@
 		UPDATE tmall_buy_guide
 		SET
 		original_price = #{originalPrice}
-		,xnb_price = #{xnbPrice}
 		,discount_price = #{discountPrice}
+		,cny_price = #{cnyPrice}
 		,to_level = #{toLevel}
 		,updater = #{updater}
 		,to_site = #{toSite}

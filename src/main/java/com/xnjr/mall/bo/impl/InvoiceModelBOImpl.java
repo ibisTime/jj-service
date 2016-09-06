@@ -39,7 +39,7 @@ public class InvoiceModelBOImpl extends PaginableBOImpl<InvoiceModel> implements
      */
     @Override
     public String saveInvoiceModel(String invoiceCode, String modelCode,
-            Integer quantity, Long salePrice) {
+            Integer quantity, Long salePrice, Long saleCnyPrice) {
         String code = OrderNoGenerater.generateM(EGeneratePrefix.IM.getCode());
         InvoiceModel data = new InvoiceModel();
         data.setCode(code);
@@ -47,6 +47,7 @@ public class InvoiceModelBOImpl extends PaginableBOImpl<InvoiceModel> implements
         data.setModelCode(modelCode);
         data.setQuantity(quantity);
         data.setSalePrice(salePrice);
+        data.setSaleCnyPrice(saleCnyPrice);
         invoiceModelDAO.insert(data);
         return code;
     }

@@ -116,6 +116,7 @@ public class CartAOImpl implements ICartAO {
                 BuyGuide buyGuide = buyGuideBO.getModel(cart.getModelCode(),
                     user.getLevel(), EUser.Top_Model.getCode());
                 cart.setSalePrice(buyGuide.getDiscountPrice());
+                cart.setSaleCnyPrice(buyGuide.getCnyPrice());
                 if (EBoolean.YES.getCode().equals(buyGuide.getStatus())) {
                     cart.setStatus(EBoolean.YES.getCode());
                 } else {
@@ -140,6 +141,7 @@ public class CartAOImpl implements ICartAO {
                 BuyGuide buyGuide = buyGuideBO.getModel(cart.getModelCode(),
                     user.getLevel(), EUser.Top_Model.getCode());
                 cart.setSalePrice(buyGuide.getDiscountPrice());
+                cart.setSaleCnyPrice(buyGuide.getCnyPrice());
                 if (EBoolean.YES.getCode().equals(buyGuide.getStatus())) {
                     cart.setStatus(EBoolean.YES.getCode());
                 } else {
