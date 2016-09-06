@@ -37,20 +37,21 @@ CREATE TABLE `tmall_address` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tmall_buy_guide`;
 CREATE TABLE `tmall_buy_guide` (
-  `code` varchar(32) NOT NULL COMMENT '编号',
-  `model_code` varchar(32) DEFAULT NULL COMMENT '型号编号',
-  `cost_price` bigint(20) DEFAULT NULL COMMENT '成本价',
-  `from_user` varchar(32) DEFAULT NULL COMMENT '对应货品商',
-  `from_quantity` int(11) DEFAULT NULL COMMENT '仓库数量',
-  `from_site` varchar(4) DEFAULT NULL COMMENT '仓库位置（预留）',
-  `to_level` varchar(4) DEFAULT NULL COMMENT '针对用户等级',
-  `original_price` bigint(20) DEFAULT NULL COMMENT '原价',
-  `discount_price` bigint(20) DEFAULT NULL COMMENT '折扣价',
-  `to_site` varchar(4) DEFAULT NULL COMMENT '线上位置',
-  `status` varchar(4) DEFAULT NULL COMMENT '状态',
-  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
-  `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `code` VARCHAR(32) NOT NULL COMMENT '编号',
+  `model_code` VARCHAR(32) NULL DEFAULT NULL COMMENT '型号编号',
+  `cost_price` BIGINT(20) NULL DEFAULT NULL COMMENT '成本价',
+  `from_user` VARCHAR(32) NULL DEFAULT NULL COMMENT '对应货品商',
+  `from_quantity` INT(11) NULL DEFAULT NULL COMMENT '仓库数量',
+  `from_site` VARCHAR(4) NULL DEFAULT NULL COMMENT '仓库位置（预留）',
+  `to_level` VARCHAR(4) NULL DEFAULT NULL COMMENT '针对用户等级',
+  `original_price` BIGINT(20) NULL DEFAULT NULL COMMENT '原价',
+  `discount_price` BIGINT(20) NULL DEFAULT NULL COMMENT '折扣价',
+  `cny_price` BIGINT(20) NULL DEFAULT NULL COMMENT '人民币价格',
+  `to_site` VARCHAR(4) NULL DEFAULT NULL COMMENT '线上位置',
+  `status` VARCHAR(4) NULL DEFAULT NULL COMMENT '状态',
+  `updater` VARCHAR(32) NULL DEFAULT NULL COMMENT '更新人',
+  `update_datetime` DATETIME NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` VARCHAR(255) NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -121,20 +122,21 @@ CREATE TABLE `tmall_integral` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tmall_invoice`;
 CREATE TABLE `tmall_invoice` (
-  `code` varchar(32) NOT NULL COMMENT '编号',
-  `type` varchar(4) DEFAULT NULL COMMENT '类型',
-  `apply_user` varchar(32) DEFAULT NULL COMMENT '下单人',
-  `address_code` varchar(32) DEFAULT NULL COMMENT '收货信息编号',
-  `apply_note` varchar(255) DEFAULT NULL COMMENT '下单备注',
-  `apply_datetime` datetime DEFAULT NULL COMMENT '下单时间',
-  `receipt_type` varchar(4) DEFAULT NULL COMMENT '发票类型(1 个人，2 企业)',
-  `receipt_title` varchar(32) DEFAULT NULL COMMENT '发票抬头',
-  `pay_amount` bigint(20) DEFAULT NULL COMMENT '实际支付金额',
-  `status` varchar(4) DEFAULT NULL COMMENT '状态',
-  `approve_user` varchar(32) DEFAULT NULL COMMENT '反馈人',
-  `approve_datetime` datetime DEFAULT NULL COMMENT '反馈时间',
-  `approve_note` varchar(255) DEFAULT NULL COMMENT '反馈说明',
-  `to_user` varchar(32) DEFAULT NULL COMMENT '向谁要货',
+  `code` VARCHAR(32) NOT NULL COMMENT '编号',
+  `type` VARCHAR(4) NULL DEFAULT NULL COMMENT '类型',
+  `apply_user` VARCHAR(32) NULL DEFAULT NULL COMMENT '下单人',
+  `address_code` VARCHAR(32) NULL DEFAULT NULL COMMENT '收货信息编号',
+  `apply_note` VARCHAR(255) NULL DEFAULT NULL COMMENT '下单备注',
+  `apply_datetime` DATETIME NULL DEFAULT NULL COMMENT '下单时间',
+  `receipt_type` VARCHAR(4) NULL DEFAULT NULL COMMENT '发票类型(1 个人，2 企业)',
+  `receipt_title` VARCHAR(32) NULL DEFAULT NULL COMMENT '发票抬头',
+  `pay_amount` BIGINT(20) NULL DEFAULT NULL COMMENT '实际支付金额',
+  `pay_cny_amount` BIGINT(20) NULL DEFAULT NULL COMMENT '实际支付人民币金额',
+  `status` VARCHAR(4) NULL DEFAULT NULL COMMENT '状态',
+  `approve_user` VARCHAR(32) NULL DEFAULT NULL COMMENT '反馈人',
+  `approve_datetime` DATETIME NULL DEFAULT NULL COMMENT '反馈时间',
+  `approve_note` VARCHAR(255) NULL DEFAULT NULL COMMENT '反馈说明',
+  `to_user` VARCHAR(32) NULL DEFAULT NULL COMMENT '向谁要货',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -143,11 +145,12 @@ CREATE TABLE `tmall_invoice` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tmall_invoice_model`;
 CREATE TABLE `tmall_invoice_model` (
-  `code` varchar(32) NOT NULL,
-  `invoice_code` varchar(32) DEFAULT NULL COMMENT '发货单号',
-  `model_code` varchar(32) DEFAULT NULL COMMENT '型号编号',
-  `quantity` int(11) DEFAULT NULL COMMENT '数量',
-  `sale_price` bigint(20) DEFAULT NULL COMMENT '零售价',
+  `code` VARCHAR(32) NOT NULL COMMENT '',
+  `invoice_code` VARCHAR(32) NULL DEFAULT NULL COMMENT '发货单号',
+  `model_code` VARCHAR(32) NULL DEFAULT NULL COMMENT '型号编号',
+  `quantity` INT(11) NULL DEFAULT NULL COMMENT '数量',
+  `sale_price` BIGINT(20) NULL DEFAULT NULL COMMENT '零售价',
+  `sale_cny_price` BIGINT(20) NULL DEFAULT NULL COMMENT '人民币价格',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
