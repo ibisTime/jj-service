@@ -28,7 +28,6 @@ public class XN602022 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-
         return new BooleanRes(invoiceAO.doFirstPay(req.getCode(),
             StringValidater.toLong(req.getAmount()),
             StringValidater.toLong(req.getCnyAmount()), req.getTradePwd()));
