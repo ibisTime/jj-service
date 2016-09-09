@@ -65,6 +65,7 @@ public class UserConverter {
         resultReq.setRealName(req.getRealName());
         resultReq.setUserReferee(req.getUserReferee());
         resultReq.setPdf(req.getPdf());
+        resultReq.setRemark(req.getRemark());
         return resultReq;
     }
 }
