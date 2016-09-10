@@ -169,13 +169,23 @@ public class InvoiceBOImpl extends PaginableBOImpl<Invoice> implements
             imCondition.setInvoiceCode(code);
             List<InvoiceModel> invoiceModelList = invoiceModelDAO
                 .selectList(imCondition);
+            data.setInvoiceModelList(invoiceModelList);
+
             Long totalAmount = 0L;
+            Long totalCnyAmount = 0L;
             for (InvoiceModel invoiceModel : invoiceModelList) {
-                totalAmount += invoiceModel.getQuantity()
-                        * invoiceModel.getSalePrice();
+                if (invoiceModel.getSalePrice() != null) {
+                    totalAmount = totalAmount + invoiceModel.getQuantity()
+                            * invoiceModel.getSalePrice();
+                }
+                if (invoiceModel.getSaleCnyPrice() != null) {
+                    totalCnyAmount = totalCnyAmount
+                            + invoiceModel.getQuantity()
+                            * invoiceModel.getSaleCnyPrice();
+                }
             }
             data.setTotalAmount(totalAmount);
-            data.setInvoiceModelList(invoiceModelList);
+            data.setTotalCnyAmount(totalCnyAmount);
         }
         return data;
     }

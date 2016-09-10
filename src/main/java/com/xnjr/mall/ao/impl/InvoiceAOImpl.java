@@ -225,17 +225,7 @@ public class InvoiceAOImpl implements IInvoiceAO {
             condition);
         if (page != null && CollectionUtils.isNotEmpty(page.getList())) {
             for (Invoice invoice : page.getList()) {
-                InvoiceModel imCondition = new InvoiceModel();
-                imCondition.setInvoiceCode(invoice.getCode());
-                List<InvoiceModel> invoiceModelList = invoiceModelBO
-                    .queryInvoiceModelList(imCondition);
-                invoice.setInvoiceModelList(invoiceModelList);
-                Long totalAmount = 0L;
-                for (InvoiceModel invoiceModel : invoiceModelList) {
-                    totalAmount += invoiceModel.getQuantity()
-                            * invoiceModel.getSalePrice();
-                }
-                invoice.setTotalAmount(totalAmount);
+                totalModelAmount(invoice);
             }
         }
         return page;
@@ -249,20 +239,32 @@ public class InvoiceAOImpl implements IInvoiceAO {
         List<Invoice> list = invoiceBO.queryInvoiceList(condition);
         if (CollectionUtils.isNotEmpty(list)) {
             for (Invoice invoice : list) {
-                InvoiceModel imCondition = new InvoiceModel();
-                imCondition.setInvoiceCode(invoice.getCode());
-                List<InvoiceModel> invoiceModelList = invoiceModelBO
-                    .queryInvoiceModelList(imCondition);
-                invoice.setInvoiceModelList(invoiceModelList);
-                Long totalAmount = 0L;
-                for (InvoiceModel invoiceModel : invoiceModelList) {
-                    totalAmount += invoiceModel.getQuantity()
-                            * invoiceModel.getSalePrice();
-                }
-                invoice.setTotalAmount(totalAmount);
+                totalModelAmount(invoice);
             }
         }
         return list;
+    }
+
+    private void totalModelAmount(Invoice invoice) {
+        InvoiceModel imCondition = new InvoiceModel();
+        imCondition.setInvoiceCode(invoice.getCode());
+        List<InvoiceModel> invoiceModelList = invoiceModelBO
+            .queryInvoiceModelList(imCondition);
+        invoice.setInvoiceModelList(invoiceModelList);
+        Long totalAmount = 0L;
+        Long totalCnyAmount = 0L;
+        for (InvoiceModel invoiceModel : invoiceModelList) {
+            if (invoiceModel.getSalePrice() != null) {
+                totalAmount = totalAmount + invoiceModel.getQuantity()
+                        * invoiceModel.getSalePrice();
+            }
+            if (invoiceModel.getSaleCnyPrice() != null) {
+                totalCnyAmount = totalCnyAmount + invoiceModel.getQuantity()
+                        * invoiceModel.getSaleCnyPrice();
+            }
+        }
+        invoice.setTotalAmount(totalAmount);
+        invoice.setTotalCnyAmount(totalCnyAmount);
     }
 
     /** 

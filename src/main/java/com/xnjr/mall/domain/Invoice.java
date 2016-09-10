@@ -71,8 +71,11 @@ public class Invoice extends ABaseDO {
 
     // *************dp properties **************
 
-    // 订单总金额
+    // 总金额
     private Long totalAmount;
+
+    // 人民币总金额
+    private Long totalCnyAmount;
 
     // 申请开始时间起
     private Date applyDatetimeStart;
@@ -297,5 +300,13 @@ public class Invoice extends ABaseDO {
 
     public void setPayCnyAmount(Long payCnyAmount) {
         this.payCnyAmount = payCnyAmount;
+    }
+
+    public Long getTotalCnyAmount() {
+        return totalCnyAmount;
+    }
+
+    public void setTotalCnyAmount(Long totalCnyAmount) {
+        this.totalCnyAmount = totalCnyAmount;
     }
 }
