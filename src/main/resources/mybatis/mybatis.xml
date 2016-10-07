@@ -7,8 +7,10 @@
 		<typeAlias alias="serveCp" type="com.cdkj.service.domain.ServeCp" />
 		<typeAlias alias="serveCyy" type="com.cdkj.service.domain.ServeCyy" />
 		<typeAlias alias="serveKfwb" type="com.cdkj.service.domain.ServeKfwb" />
+		
 		<typeAlias alias="servePhoto" type="com.cdkj.service.domain.ServePhoto" />
 		<typeAlias alias="serveShop" type="com.cdkj.service.domain.ServeShop" />
 		<typeAlias alias="serveTrain" type="com.cdkj.service.domain.ServeTrain" />
+		<typeAlias alias="demand" type="com.cdkj.service.domain.Demand" />
 	</typeAliases>	
 </configuration>

@@ -12,7 +12,7 @@
 		<result column="status" property="status" />
 		<result column="publisher" property="publisher" />
 		<result column="publish_datetime" property="publishDatetime" />
-		<result column="deal_user" property="dealUser" />
+		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
 		<result column="deal_note" property="dealNote" />
 	</resultMap>
@@ -39,8 +39,8 @@
 			<if test="publishDatetimeEnd != null and publishDatetimeEnd != '' ">
 				<![CDATA[AND t.publish_datetime <= #{publishDatetimeEnd}]]>
 			</if>
-			<if test="dealUser != null and dealUser != '' ">
-				AND t.deal_user = #{dealUser}
+			<if test="dealer != null and dealer != '' ">
+				AND t.dealer = #{dealer}
 			</if>
 		</trim>
 	</sql>
@@ -55,7 +55,7 @@
 		,t.status
 		,t.publisher
 		,t.publish_datetime
-		,t.deal_user
+		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
 		FROM
@@ -117,7 +117,7 @@
 		UPDATE tcp_demand
 		SET
 		status = #{status}
-		,deal_user = #{dealUser}
+		,dealer = #{dealer}
 		,deal_datetime = #{dealDatetime}
 		,deal_note = #{dealNote}
 		WHERE code = #{code}

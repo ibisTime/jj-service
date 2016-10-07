@@ -52,4 +52,12 @@ public class DemandDAOImpl extends AMybatisTemplate implements IDemandDAO {
     public int update(Demand data) {
         return super.update(NAMESPACE.concat("update_demand"), data);
     }
+
+    /** 
+     * @see com.cdkj.service.dao.IDemandDAO#updateStatus(com.cdkj.service.domain.Demand)
+     */
+    @Override
+    public int updateStatus(Demand data) {
+        return super.update(NAMESPACE.concat("update_demand_status"), data);
+    }
 }

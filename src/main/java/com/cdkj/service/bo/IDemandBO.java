@@ -20,6 +20,8 @@ public interface IDemandBO extends IPaginableBO<Demand> {
 
     public int refreshDemand(Demand data);
 
+    public int refreshDemandStatus(String code, String dealer, String dealNote);
+
     public List<Demand> queryDemandList(Demand condition);
 
     public Demand getDemand(String code);

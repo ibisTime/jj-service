@@ -10,4 +10,6 @@ import com.cdkj.service.domain.Demand;
  */
 public interface IDemandDAO extends IBaseDAO<Demand> {
     String NAMESPACE = IDemandDAO.class.getName().concat(".");
+
+    public int updateStatus(Demand data);
 }

@@ -1,5 +1,6 @@
 package com.cdkj.service.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,7 @@ import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IDemandDAO;
 import com.cdkj.service.domain.Demand;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 /**
@@ -41,6 +43,8 @@ public class DemandBOImpl extends PaginableBOImpl<Demand> implements IDemandBO {
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.XQ.getCode());
             data.setCode(code);
+            data.setStatus(EBoolean.YES.getCode());
+            data.setPublishDatetime(new Date());
             demandDAO.insert(data);
         }
         return code;
@@ -79,9 +83,27 @@ public class DemandBOImpl extends PaginableBOImpl<Demand> implements IDemandBO {
             condition.setCode(code);
             data = demandDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn000000", "需求不存在");
             }
         }
         return data;
+    }
+
+    /** 
+     * @see com.cdkj.service.bo.IDemandBO#refreshDemandStatus(java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public int refreshDemandStatus(String code, String dealer, String dealNote) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Demand data = new Demand();
+            data.setCode(code);
+            data.setStatus(EBoolean.NO.getCode());
+            data.setDealer(dealer);
+            data.setDealNote(dealNote);
+            data.setDealDatetime(new Date());
+            count = demandDAO.updateStatus(data);
+        }
+        return count;
     }
 }

@@ -42,13 +42,20 @@ public class Demand extends ABaseDO {
     private Date publishDatetime;
 
     // 处理人
-    private String dealUser;
+    private String dealer;
 
     // 处理时间
     private Date dealDatetime;
 
     // 处理意见
     private String dealNote;
+
+    // ****************db properties ******************
+    private Date publishDatetimeStart;
+
+    private Date publishDatetimeEnd;
+
+    private String mobile;
 
     public String getCode() {
         return code;
@@ -122,12 +129,12 @@ public class Demand extends ABaseDO {
         this.publishDatetime = publishDatetime;
     }
 
-    public String getDealUser() {
-        return dealUser;
+    public String getDealer() {
+        return dealer;
     }
 
-    public void setDealUser(String dealUser) {
-        this.dealUser = dealUser;
+    public void setDealer(String dealer) {
+        this.dealer = dealer;
     }
 
     public Date getDealDatetime() {
@@ -144,5 +151,29 @@ public class Demand extends ABaseDO {
 
     public void setDealNote(String dealNote) {
         this.dealNote = dealNote;
+    }
+
+    public Date getPublishDatetimeStart() {
+        return publishDatetimeStart;
+    }
+
+    public void setPublishDatetimeStart(Date publishDatetimeStart) {
+        this.publishDatetimeStart = publishDatetimeStart;
+    }
+
+    public Date getPublishDatetimeEnd() {
+        return publishDatetimeEnd;
+    }
+
+    public void setPublishDatetimeEnd(Date publishDatetimeEnd) {
+        this.publishDatetimeEnd = publishDatetimeEnd;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }
