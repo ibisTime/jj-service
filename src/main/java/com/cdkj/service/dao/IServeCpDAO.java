@@ -5,6 +5,4 @@ import com.cdkj.service.domain.ServeCp;
 
 public interface IServeCpDAO extends IBaseDAO<ServeCp> {
     String NAMESPACE = IServeCpDAO.class.getName().concat(".");
-
-    public int update(ServeCp data);
 }

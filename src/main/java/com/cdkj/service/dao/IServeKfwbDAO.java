@@ -5,6 +5,4 @@ import com.cdkj.service.domain.ServeKfwb;
 
 public interface IServeKfwbDAO extends IBaseDAO<ServeKfwb> {
     String NAMESPACE = IServeKfwbDAO.class.getName().concat(".");
-
-    public int update(ServeKfwb data);
 }

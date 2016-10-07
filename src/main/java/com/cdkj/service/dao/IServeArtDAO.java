@@ -5,6 +5,4 @@ import com.cdkj.service.domain.ServeArt;
 
 public interface IServeArtDAO extends IBaseDAO<ServeArt> {
     String NAMESPACE = IServeArtDAO.class.getName().concat(".");
-
-    public int update(ServeArt data);
 }

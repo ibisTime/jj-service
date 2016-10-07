@@ -27,7 +27,7 @@ CREATE TABLE `tcp_demand` (
   `urgent_level` varchar(4) DEFAULT NULL COMMENT '紧急程度(1 紧急 0 不紧急)',
   `description` text COMMENT '需求说明',
   `status` varchar(4) DEFAULT NULL COMMENT '状态(1 正常 0 违规)',
-  `publisher` varchar(32) DEFAULT NULL COMMENT '申请用户编号',
+  `publisher` varchar(32) DEFAULT NULL COMMENT '发布用户编号',
   `publish_datetime` datetime DEFAULT NULL COMMENT '发布时间',
   `deal_user` varchar(32) DEFAULT NULL COMMENT '处理人',
   `deal_datetime` datetime DEFAULT NULL COMMENT '处理时间',
