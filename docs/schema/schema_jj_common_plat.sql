@@ -27,9 +27,9 @@ CREATE TABLE `tcp_demand` (
   `urgent_level` varchar(4) DEFAULT NULL COMMENT '紧急程度(1 紧急 0 不紧急)',
   `description` text COMMENT '需求说明',
   `status` varchar(4) DEFAULT NULL COMMENT '状态(1 正常 0 违规)',
-  `publisher` varchar(32) DEFAULT NULL COMMENT '申请用户编号',
+  `publisher` varchar(32) DEFAULT NULL COMMENT '发布用户编号',
   `publish_datetime` datetime DEFAULT NULL COMMENT '发布时间',
-  `deal_user` varchar(32) DEFAULT NULL COMMENT '处理人',
+  `dealer` varchar(32) DEFAULT NULL COMMENT '处理人',
   `deal_datetime` datetime DEFAULT NULL COMMENT '处理时间',
   `deal_note` varchar(255) DEFAULT NULL COMMENT '处理意见',
   PRIMARY KEY (`code`)
@@ -47,7 +47,7 @@ CREATE TABLE `tcp_intention` (
   `from_user` varchar(32) DEFAULT NULL COMMENT '申请人',
   `from_role` varchar(32) DEFAULT NULL COMMENT '用什么东西申请(简历)',
   `from_datetime` datetime DEFAULT NULL COMMENT '申请时间',
-  `deal_user` varchar(32) DEFAULT NULL COMMENT '处理人',
+  `dealer` varchar(32) DEFAULT NULL COMMENT '处理人',
   `deal_datetime` datetime DEFAULT NULL COMMENT '处理时间',
   `deal_note` varchar(255) DEFAULT NULL COMMENT '处理意见',
   PRIMARY KEY (`code`)
@@ -187,7 +187,6 @@ CREATE TABLE `tcp_serve_cyy` (
   `yh_policy` text COMMENT '优惠政策',
   `pic1` varchar(255) DEFAULT NULL COMMENT '产业园照片1',
   `pic2` varchar(255) DEFAULT NULL COMMENT '产业园照片2',
-  `description` text COMMENT '详细描述',
   PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

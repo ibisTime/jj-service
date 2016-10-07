@@ -20,6 +20,8 @@ public interface IBaseDAO<T> {
 
     public int delete(T data);
 
+    public int update(T data);
+
     public T select(T condition);
 
     public Long selectTotalCount(T condition);

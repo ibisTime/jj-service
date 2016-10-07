@@ -43,4 +43,8 @@
 		<property name="paginableDAO" ref="serveTrainDAOImpl" />
 	</bean>
 	
+	<bean id="demandBO" class="com.cdkj.service.bo.impl.DemandBOImpl">
+		<property name="paginableDAO" ref="demandDAOImpl" />
+	</bean>
+	
 </beans>
