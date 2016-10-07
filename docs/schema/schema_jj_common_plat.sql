@@ -9,7 +9,7 @@
  Target Server Version : 50545
  File Encoding         : utf-8
 
- Date: 10/07/2016 11:59:24 AM
+ Date: 10/07/2016 15:10:56 PM
 */
 
 SET NAMES utf8;
@@ -144,7 +144,7 @@ CREATE TABLE `tcp_serve` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tcp_serve_art`;
 CREATE TABLE `tcp_serve_art` (
-  `service_code` varchar(32) NOT NULL COMMENT '编号',
+  `serve_code` varchar(32) NOT NULL COMMENT '编号',
   `design_num` int(11) DEFAULT NULL COMMENT '设计师人数',
   `sclm` varchar(255) DEFAULT NULL COMMENT '擅长类目',
   `home_days` int(11) DEFAULT NULL COMMENT '首页天数',
@@ -156,7 +156,7 @@ CREATE TABLE `tcp_serve_art` (
   `all_days` int(11) DEFAULT NULL COMMENT '全店设计天数',
   `all_price` bigint(20) DEFAULT NULL COMMENT '全店设计价格',
   `works` varchar(255) DEFAULT NULL COMMENT '作品案例',
-  PRIMARY KEY (`service_code`)
+  PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -164,12 +164,12 @@ CREATE TABLE `tcp_serve_art` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tcp_serve_cp`;
 CREATE TABLE `tcp_serve_cp` (
-  `service_code` varchar(32) NOT NULL COMMENT '编号',
+  `serve_code` varchar(32) NOT NULL COMMENT '编号',
   `ck_num` int(11) DEFAULT NULL COMMENT '仓库个数',
   `ck_area` varchar(255) DEFAULT NULL COMMENT '仓库面积',
   `goods_kind` varchar(4) DEFAULT NULL COMMENT '支持货品种类(1食物 2海鲜 3生活用品)',
   `dsend_num` int(11) DEFAULT NULL COMMENT '日平均发货能力（单）',
-  PRIMARY KEY (`service_code`)
+  PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -177,7 +177,7 @@ CREATE TABLE `tcp_serve_cp` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tcp_serve_cyy`;
 CREATE TABLE `tcp_serve_cyy` (
-  `service_code` varchar(32) NOT NULL COMMENT '编号',
+  `serve_code` varchar(32) NOT NULL COMMENT '编号',
   `bg_area` bigint(20) DEFAULT NULL COMMENT '办公面积',
   `avail_bg_area` bigint(20) DEFAULT NULL COMMENT '剩余办公面积',
   `cc_area` bigint(20) DEFAULT NULL COMMENT '仓储总面积',
@@ -188,7 +188,7 @@ CREATE TABLE `tcp_serve_cyy` (
   `pic1` varchar(255) DEFAULT NULL COMMENT '产业园照片1',
   `pic2` varchar(255) DEFAULT NULL COMMENT '产业园照片2',
   `description` text COMMENT '详细描述',
-  PRIMARY KEY (`service_code`)
+  PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -196,12 +196,12 @@ CREATE TABLE `tcp_serve_cyy` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tcp_serve_kfwb`;
 CREATE TABLE `tcp_serve_kfwb` (
-  `service_code` varchar(32) NOT NULL COMMENT '编号',
+  `serve_code` varchar(32) NOT NULL COMMENT '编号',
   `kf_num` int(11) DEFAULT NULL COMMENT '设计师人数',
   `mtrade_amount` varchar(255) DEFAULT NULL COMMENT '线上月均交易额',
   `business` varchar(4) DEFAULT NULL COMMENT '客服业务(1 售前 2售后)',
   `fee_mode` varchar(4) DEFAULT NULL COMMENT '收费模式(1 服务费+提成 2 服务费 3 提成)',
-  PRIMARY KEY (`service_code`)
+  PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -209,13 +209,13 @@ CREATE TABLE `tcp_serve_kfwb` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tcp_serve_photo`;
 CREATE TABLE `tcp_serve_photo` (
-  `service_code` varchar(32) NOT NULL COMMENT '服务编号',
+  `serve_code` varchar(32) NOT NULL COMMENT '服务编号',
   `py_num` int(11) DEFAULT NULL COMMENT '棚影数量',
   `sys_num` int(11) DEFAULT NULL COMMENT '摄影师数量',
   `is_dz` varchar(4) DEFAULT NULL COMMENT '是否定制需求(1 是 0 否)',
   `scpslm` varchar(255) DEFAULT NULL COMMENT '擅长拍摄类目',
   `works` varchar(255) DEFAULT NULL COMMENT '上传代表作品',
-  PRIMARY KEY (`service_code`)
+  PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -223,15 +223,13 @@ CREATE TABLE `tcp_serve_photo` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tcp_serve_shop`;
 CREATE TABLE `tcp_serve_shop` (
-  `service_code` varchar(32) NOT NULL COMMENT '编号',
-  `lector_num` int(11) DEFAULT NULL COMMENT '讲师总人数',
-  `mtrain_times` int(11) DEFAULT NULL COMMENT '月均培训场次',
-  `mtrain_num` int(11) DEFAULT NULL COMMENT '月均培训人数',
-  `resume1` varchar(255) DEFAULT NULL COMMENT '第一位讲师简历',
-  `resume2` varchar(255) DEFAULT NULL COMMENT '第二位讲师简历',
-  `resume3` varchar(255) DEFAULT NULL COMMENT '第三位讲师简历',
-  `course` varchar(255) DEFAULT NULL COMMENT '培训课程',
-  PRIMARY KEY (`service_code`)
+  `serve_code` varchar(32) NOT NULL COMMENT '编号',
+  `tgfw` varchar(32) DEFAULT NULL COMMENT '提供服务',
+  `fee_mode` varchar(4) DEFAULT NULL COMMENT '收费模式',
+  `pay_cycle` varchar(4) DEFAULT NULL COMMENT '付款周期',
+  `scyylm` varchar(255) DEFAULT NULL COMMENT '擅长运营类目',
+  `suc_case` varchar(255) DEFAULT NULL COMMENT '成功案例展示',
+  PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -239,7 +237,7 @@ CREATE TABLE `tcp_serve_shop` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tcp_serve_train`;
 CREATE TABLE `tcp_serve_train` (
-  `service_code` varchar(32) NOT NULL COMMENT '编号',
+  `serve_code` varchar(32) NOT NULL COMMENT '编号',
   `lector_num` int(11) DEFAULT NULL COMMENT '讲师总人数',
   `mtrain_times` int(11) DEFAULT NULL COMMENT '月均培训场次',
   `mtrain_num` int(11) DEFAULT NULL COMMENT '月均培训人数',
@@ -247,7 +245,7 @@ CREATE TABLE `tcp_serve_train` (
   `resume2` varchar(255) DEFAULT NULL COMMENT '第二位讲师简历',
   `resume3` varchar(255) DEFAULT NULL COMMENT '第三位讲师简历',
   `course` varchar(255) DEFAULT NULL COMMENT '培训课程',
-  PRIMARY KEY (`service_code`)
+  PRIMARY KEY (`serve_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;
