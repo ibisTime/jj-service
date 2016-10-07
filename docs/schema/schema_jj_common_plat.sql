@@ -117,10 +117,10 @@ CREATE TABLE `tcp_resume` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service`
+--  Table structure for `tcp_serve`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service`;
-CREATE TABLE `tcp_service` (
+DROP TABLE IF EXISTS `tcp_serve`;
+CREATE TABLE `tcp_serve` (
   `code` varchar(32) NOT NULL COMMENT '编号',
   `name` varchar(64) DEFAULT NULL COMMENT '服务名称',
   `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
@@ -140,10 +140,10 @@ CREATE TABLE `tcp_service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service_art`
+--  Table structure for `tcp_serve_art`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service_art`;
-CREATE TABLE `tcp_service_art` (
+DROP TABLE IF EXISTS `tcp_serve_art`;
+CREATE TABLE `tcp_serve_art` (
   `service_code` varchar(32) NOT NULL COMMENT '编号',
   `design_num` int(11) DEFAULT NULL COMMENT '设计师人数',
   `sclm` varchar(255) DEFAULT NULL COMMENT '擅长类目',
@@ -160,10 +160,10 @@ CREATE TABLE `tcp_service_art` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service_cp`
+--  Table structure for `tcp_serve_cp`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service_cp`;
-CREATE TABLE `tcp_service_cp` (
+DROP TABLE IF EXISTS `tcp_serve_cp`;
+CREATE TABLE `tcp_serve_cp` (
   `service_code` varchar(32) NOT NULL COMMENT '编号',
   `ck_num` int(11) DEFAULT NULL COMMENT '仓库个数',
   `ck_area` varchar(255) DEFAULT NULL COMMENT '仓库面积',
@@ -173,10 +173,10 @@ CREATE TABLE `tcp_service_cp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service_cyy`
+--  Table structure for `tcp_serve_cyy`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service_cyy`;
-CREATE TABLE `tcp_service_cyy` (
+DROP TABLE IF EXISTS `tcp_serve_cyy`;
+CREATE TABLE `tcp_serve_cyy` (
   `service_code` varchar(32) NOT NULL COMMENT '编号',
   `bg_area` bigint(20) DEFAULT NULL COMMENT '办公面积',
   `avail_bg_area` bigint(20) DEFAULT NULL COMMENT '剩余办公面积',
@@ -192,10 +192,10 @@ CREATE TABLE `tcp_service_cyy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service_kfwb`
+--  Table structure for `tcp_serve_kfwb`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service_kfwb`;
-CREATE TABLE `tcp_service_kfwb` (
+DROP TABLE IF EXISTS `tcp_serve_kfwb`;
+CREATE TABLE `tcp_serve_kfwb` (
   `service_code` varchar(32) NOT NULL COMMENT '编号',
   `kf_num` int(11) DEFAULT NULL COMMENT '设计师人数',
   `mtrade_amount` varchar(255) DEFAULT NULL COMMENT '线上月均交易额',
@@ -205,10 +205,10 @@ CREATE TABLE `tcp_service_kfwb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service_photo`
+--  Table structure for `tcp_serve_photo`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service_photo`;
-CREATE TABLE `tcp_service_photo` (
+DROP TABLE IF EXISTS `tcp_serve_photo`;
+CREATE TABLE `tcp_serve_photo` (
   `service_code` varchar(32) NOT NULL COMMENT '服务编号',
   `py_num` int(11) DEFAULT NULL COMMENT '棚影数量',
   `sys_num` int(11) DEFAULT NULL COMMENT '摄影师数量',
@@ -219,10 +219,10 @@ CREATE TABLE `tcp_service_photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service_shop`
+--  Table structure for `tcp_serve_shop`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service_shop`;
-CREATE TABLE `tcp_service_shop` (
+DROP TABLE IF EXISTS `tcp_serve_shop`;
+CREATE TABLE `tcp_serve_shop` (
   `service_code` varchar(32) NOT NULL COMMENT '编号',
   `lector_num` int(11) DEFAULT NULL COMMENT '讲师总人数',
   `mtrain_times` int(11) DEFAULT NULL COMMENT '月均培训场次',
@@ -235,10 +235,10 @@ CREATE TABLE `tcp_service_shop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tcp_service_train`
+--  Table structure for `tcp_serve_train`
 -- ----------------------------
-DROP TABLE IF EXISTS `tcp_service_train`;
-CREATE TABLE `tcp_service_train` (
+DROP TABLE IF EXISTS `tcp_serve_train`;
+CREATE TABLE `tcp_serve_train` (
   `service_code` varchar(32) NOT NULL COMMENT '编号',
   `lector_num` int(11) DEFAULT NULL COMMENT '讲师总人数',
   `mtrain_times` int(11) DEFAULT NULL COMMENT '月均培训场次',
