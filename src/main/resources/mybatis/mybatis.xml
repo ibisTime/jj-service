@@ -2,27 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>	
-	    <typeAlias alias="sysLog" type="com.xnjr.mall.domain.SYSLog" />
-	    <typeAlias alias="sysDict" type="com.xnjr.mall.domain.SYSDict" />
-	    <typeAlias alias="sysConfig" type="com.xnjr.mall.domain.SYSConfig" />
-		<typeAlias alias="product" type="com.xnjr.mall.domain.Product" />
-		<typeAlias alias="model" type="com.xnjr.mall.domain.Model" />
-		
-		<typeAlias alias="modelSpecs" type="com.xnjr.mall.domain.ModelSpecs" />
-		<typeAlias alias="address" type="com.xnjr.mall.domain.Address" />
-		<typeAlias alias="buyGuide" type="com.xnjr.mall.domain.BuyGuide" />
-		<typeAlias alias="cart" type="com.xnjr.mall.domain.Cart" />
-		<typeAlias alias="invoice" type="com.xnjr.mall.domain.Invoice" />
-		
-		<typeAlias alias="invoiceModel" type="com.xnjr.mall.domain.InvoiceModel" />
-		<typeAlias alias="logistics" type="com.xnjr.mall.domain.Logistics" />
-		<typeAlias alias="goods" type="com.xnjr.mall.domain.Goods" />
-		<typeAlias alias="repairOrder" type="com.xnjr.mall.domain.RepairOrder" />
-		<typeAlias alias="merCard" type="com.xnjr.mall.domain.MerCard" />
-		
-		<typeAlias alias="integral" type="com.xnjr.mall.domain.Integral" />
-		<typeAlias alias="goodsOrder" type="com.xnjr.mall.domain.GoodsOrder" />
-		<typeAlias alias="saleGuide" type="com.xnjr.mall.domain.SaleGuide" />
 	</typeAliases>	
 </configuration>
 

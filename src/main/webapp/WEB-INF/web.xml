@@ -71,7 +71,7 @@
   </filter-mapping>
   <servlet>
     <servlet-name>api</servlet-name>
-    <servlet-class>com.xnjr.mall.APIServlet</servlet-class>
+    <servlet-class>com.cdkj.service.APIServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>api</servlet-name>

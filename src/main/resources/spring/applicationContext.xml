@@ -13,7 +13,7 @@
 
 	<!-- 注解注入 -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.xnjr" />
+	<context:component-scan base-package="com.cdkj" />
 	
 	<!-- 使用annotation定义事务 -->
   	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
@@ -21,7 +21,7 @@
   	<!-- 定义aspectj -->
   	<aop:aspectj-autoproxy proxy-target-class="true"/>
  
-    <bean id="springContextHolder" class="com.xnjr.mall.spring.SpringContextHolder"></bean>
+    <bean id="springContextHolder" class="com.cdkj.service.spring.SpringContextHolder"></bean>
     
     <!-- 参数验证 -->
     <!-- <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -32,21 +32,21 @@
     <bean id="sqlSessionFactoryMaster" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis/mybatis.xml" />
-		<property name="typeHandlersPackage" value="com.xnjr.mall.dao.base.handler" />
+		<property name="typeHandlersPackage" value="com.cdkj.service.dao.base.handler" />
 		<property name="mapperLocations" value="classpath*:mybatis/*Mapper.xml" />
 	</bean>
 	<!-- mybatis读 -->
 	<bean id="sqlSessionFactorySlave" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis/mybatis.xml" />
-		<property name="typeHandlersPackage" value="com.xnjr.mall.dao.base.handler" />
+		<property name="typeHandlersPackage" value="com.cdkj.service.dao.base.handler" />
 		<property name="mapperLocations" value="classpath*:mybatis/*Mapper.xml" />
 		<property name="plugins">
 			<array>
 				<bean
-					class="com.xnjr.mall.dao.base.interceptor.PaginationInterceptor">
+					class="com.cdkj.service.dao.base.interceptor.PaginationInterceptor">
 					<property name="dialect">
-						<bean class="com.xnjr.mall.dao.base.dialect.MySQLDialect" />
+						<bean class="com.cdkj.service.dao.base.dialect.MySQLDialect" />
 					</property>
 				</bean>
 			</array>
