@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IServeShopDAO">
+	<resultMap id="serveShop_DB_Result" type="serveShop">
+		<result column="serve_code" property="serveCode" />
+		<result column="tgfw" property="tgfw" />
+		<result column="fee_mode" property="feeMode" />
+		<result column="pay_cycle" property="payCycle" />
+		<result column="scyylm" property="scyylm" />
+		<result column="suc_case" property="sucCase" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="serveCode != null and serveCode != '' ">
+				AND t.serve_code = #{serveCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_serveShop" parameterType="serveShop" resultMap="serveShop_DB_Result">
+		SELECT
+		t.serve_code
+		,t.tgfw
+		,t.fee_mode
+		,t.pay_cycle
+		,t.scyylm
+		,t.suc_case
+		FROM
+		tcp_serve_shop t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_serveShop_count" parameterType="serveShop"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_serve_shop t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_serveShop" parameterType="serveShop">
+		INSERT INTO
+		tcp_serve_shop(
+		serve_code
+		,tgfw
+		,fee_mode
+		,pay_cycle
+		,scyylm
+		,suc_case
+		)
+		VALUES(
+		#{serveCode}
+		,#{tgfw}
+		,#{feeMode}
+		,#{payCycle}
+		,#{scyylm}
+		,#{sucCase}
+		)
+	</insert>
+
+	<update id="update_serveShop" parameterType="serveShop">
+		UPDATE tcp_serve_shop
+		SET
+		tgfw = #{tgfw}
+		,fee_mode = #{feeMode}
+		,pay_cycle = #{payCycle}
+		,scyylm = #{scyylm}
+		,suc_case = #{sucCase}
+		WHERE serve_code = #{serveCode}
+	</update>
+	
+	<delete id="delete_serveShop" parameterType="serveShop">
+		DELETE FROM
+		tcp_serve_shop
+		WHERE
+		serve_code = #{serveCode}
+	</delete>
+
+
+</mapper>

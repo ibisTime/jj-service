@@ -2,7 +2,13 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>	
+		<typeAlias alias="serve" type="com.cdkj.service.domain.Serve" />
+		<typeAlias alias="serveArt" type="com.cdkj.service.domain.ServeArt" />
+		<typeAlias alias="serveCp" type="com.cdkj.service.domain.ServeCp" />
+		<typeAlias alias="serveCyy" type="com.cdkj.service.domain.ServeCyy" />
+		<typeAlias alias="serveKfwb" type="com.cdkj.service.domain.ServeKfwb" />
+		<typeAlias alias="servePhoto" type="com.cdkj.service.domain.ServePhoto" />
+		<typeAlias alias="serveShop" type="com.cdkj.service.domain.ServeShop" />
+		<typeAlias alias="serveTrain" type="com.cdkj.service.domain.ServeTrain" />
 	</typeAliases>	
 </configuration>
-
-

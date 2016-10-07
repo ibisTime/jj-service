@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IServeArtDAO">
+	<resultMap id="serveArt_DB_Result" type="serveArt">
+		<result column="serve_code" property="serveCode" />
+		<result column="design_num" property="designNum" />
+		<result column="sclm" property="sclm" />
+		<result column="home_days" property="homeDays" />
+		<result column="home_price" property="homePrice" />
+		<result column="detail_days" property="detailDays" />
+		<result column="detail_price" property="detailPrice" />
+		<result column="banner_days" property="bannerDays" />
+		<result column="banner_price" property="bannerPrice" />
+		<result column="all_days" property="allDays" />
+		<result column="all_price" property="allPrice" />
+		<result column="works" property="works" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="serveCode != null and serveCode != '' ">
+				AND t.serve_code = #{serveCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_serveArt" parameterType="serveArt" resultMap="serveArt_DB_Result">
+		SELECT
+		t.serve_code
+		,t.design_num
+		,t.sclm
+		,t.home_days
+		,t.home_price
+		,t.detail_days
+		,t.detail_price
+		,t.banner_days
+		,t.banner_price
+		,t.all_days
+		,t.all_price
+		,t.works
+		FROM
+		tcp_serve_art t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_serveArt_count" parameterType="serveArt"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_serve_art t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_serveArt" parameterType="serveArt">
+		INSERT INTO
+		tcp_serve_art(
+		serve_code
+		,design_num
+		,sclm
+		,home_days
+		,home_price
+		,detail_days
+		,detail_price
+		,banner_days
+		,banner_price
+		,all_days
+		,all_price
+		,works
+		)
+		VALUES(
+		#{serveCode}
+		,#{designNum}
+		,#{sclm}
+		,#{homeDays}
+		,#{homePrice}
+		,#{detailDays}
+		,#{detailPrice}
+		,#{bannerDays}
+		,#{bannerPrice}
+		,#{allDays}
+		,#{allPrice}
+		,#{works}
+		)
+	</insert>
+
+	<update id="update_serveArt" parameterType="serveArt">
+		UPDATE tcp_serve_art
+		SET
+		design_num = #{designNum}
+		,sclm = #{sclm}
+		,home_days = #{homeDays}
+		,home_price = #{homePrice}
+		,detail_days = #{detailDays}
+		,detail_price = #{detailPrice}
+		,banner_days = #{bannerDays}
+		,banner_price = #{bannerPrice}
+		,all_days = #{allDays}
+		,all_price = #{allPrice}
+		,works = #{works}
+		WHERE serve_code = #{serveCode}
+	</update>
+
+	<delete id="delete_serveArt" parameterType="serveArt">
+		DELETE FROM
+		tcp_serve_art
+		WHERE
+		serve_code = #{serveCode}
+	</delete>
+
+</mapper>

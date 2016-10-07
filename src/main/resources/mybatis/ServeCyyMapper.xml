@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IServeCyyDAO">
+	<resultMap id="serveCyy_DB_Result" type="serveCyy">
+		<result column="serve_code" property="serveCode" />
+		<result column="bg_area" property="bgArea" />
+		<result column="avail_bg_area" property="availBgArea" />
+		<result column="cc_area" property="ccArea" />
+		<result column="avail_cc_area" property="availCcArea" />
+		<result column="zzfw" property="zzfw" />
+		<result column="introduce" property="introduce" />
+		<result column="yh_policy" property="yhPolicy" />
+		<result column="pic1" property="pic1" />
+		<result column="pic2" property="pic2" />
+		<result column="description" property="description" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="serveCode != null and serveCode != '' ">
+				AND t.serve_code = #{serveCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_serveCyy" parameterType="serveCyy" resultMap="serveCyy_DB_Result">
+		SELECT
+		t.serve_code
+		,t.bg_area
+		,t.avail_bg_area
+		,t.cc_area
+		,t.avail_cc_area
+		,t.zzfw
+		,t.introduce
+		,t.yh_policy
+		,t.pic1
+		,t.pic2
+		,t.description
+		FROM
+		tcp_serve_cyy t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_serveCyy_count" parameterType="serveCyy"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_serve_cyy t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_serveCyy" parameterType="serveCyy">
+		INSERT INTO
+		tcp_serve_cyy(
+		serve_code
+		,bg_area
+		,avail_bg_area
+		,cc_area
+		,avail_cc_area
+		,zzfw
+		,introduce
+		,yh_policy
+		,pic1
+		,pic2
+		,description
+		)
+		VALUES(
+		#{serveCode}
+		,#{bgArea}
+		,#{availBgArea}
+		,#{ccArea}
+		,#{availCcArea}
+		,#{zzfw}
+		,#{introduce}
+		,#{yhPolicy}
+		,#{pic1}
+		,#{pic2}
+		,#{description}
+		)
+	</insert>
+
+	<update id="update_serveCyy" parameterType="serveCyy">
+		UPDATE tcp_serve_cyy
+		SET
+		bg_area = #{bgArea}
+		,avail_bg_area = #{availBgArea}
+		,cc_area = #{ccArea}
+		,avail_cc_area = #{availCcArea}
+		,zzfw = #{zzfw}
+		,introduce = #{introduce}
+		,yh_policy = #{yhPolicy}
+		,pic1 = #{pic1}
+		,pic2 = #{pic2}
+		,description = #{description}
+		WHERE serve_code = #{serveCode}
+	</update>
+
+	<delete id="delete_serveCyy" parameterType="serveCyy">
+		DELETE FROM
+		tcp_serve_cyy
+		WHERE
+		serve_code = #{serveCode}
+	</delete>
+
+</mapper>

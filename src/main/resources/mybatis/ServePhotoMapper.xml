@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IServePhotoDAO">
+	<resultMap id="servePhoto_DB_Result" type="servePhoto">
+		<result column="serve_code" property="serveCode" />
+		<result column="py_num" property="pyNum" />
+		<result column="sys_num" property="sysNum" />
+		<result column="is_dz" property="isDz" />
+		<result column="scpslm" property="scpslm" />
+		<result column="works" property="works" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="serveCode != null and serveCode != '' ">
+				AND t.serve_code = #{serveCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_servePhoto" parameterType="servePhoto" resultMap="servePhoto_DB_Result">
+		SELECT
+		t.serve_code
+		,t.py_num
+		,t.sys_num
+		,t.is_dz
+		,t.scpslm
+		,t.works
+		FROM
+		tcp_serve_photo t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_servePhoto_count" parameterType="servePhoto"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_serve_photo t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_servePhoto" parameterType="servePhoto">
+		INSERT INTO
+		tcp_serve_photo(
+		serve_code
+		,py_num
+		,sys_num
+		,is_dz
+		,scpslm
+		,works
+		)
+		VALUES(
+		#{serveCode}
+		,#{pyNum}
+		,#{sysNum}
+		,#{isDz}
+		,#{scpslm}
+		,#{works}
+		)
+	</insert>
+
+	<update id="update_servePhoto" parameterType="servePhoto">
+		UPDATE tcp_serve_photo
+		SET
+		py_num = #{pyNum}
+		,sys_num = #{sysNum}
+		,is_dz = #{isDz}
+		,scpslm = #{scpslm}
+		,works = #{works}
+		WHERE serve_code = #{serveCode}
+	</update>
+
+	<delete id="delete_servePhoto" parameterType="servePhoto">
+		DELETE FROM
+		tcp_serve_photo
+		WHERE
+		serve_code = #{serveCode}
+	</delete>
+
+</mapper>

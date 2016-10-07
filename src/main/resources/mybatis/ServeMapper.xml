@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IServeDAO">
+	<resultMap id="serve_DB_Result" type="serve">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="company_code" property="companyCode" />
+		<result column="quote_min" property="quoteMin" />
+		<result column="quote_max" property="quoteMax" />
+		<result column="quality_code" property="qualityCode" />
+		<result column="description" property="description" />
+		<result column="is_hot" property="isHot" />
+		<result column="order_no" property="orderNo" />
+		<result column="status" property="status" />
+		<result column="publisher" property="publisher" />
+		<result column="publish_datetime" property="publishDatetime" />
+		<result column="dealer" property="dealer" />
+		<result column="deal_datetime" property="dealDatetime" />
+		<result column="deal_note" property="dealNote" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_serve" parameterType="serve" resultMap="serve_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.company_code
+		,t.quote_min
+		,t.quote_max
+		,t.quality_code
+		,t.description
+		,t.is_hot
+		,t.order_no
+		,t.status
+		,t.publisher
+		,t.publish_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		FROM
+		tcp_serve t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_serve_count" parameterType="serve"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_serve t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_serve" parameterType="serve">
+		INSERT INTO
+		tcp_serve(
+		code
+		,name
+		,company_code
+		,quote_min
+		,quote_max
+		,quality_code
+		,description
+		,is_hot
+		,order_no
+		,status
+		,publisher
+		,publish_datetime
+		,dealer
+		,deal_datetime
+		,deal_note
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{companyCode}
+		,#{quoteMin}
+		,#{quoteMax}
+		,#{qualityCode}
+		,#{description}
+		,#{isHot}
+		,#{orderNo}
+		,#{status}
+		,#{publisher}
+		,#{publishDatetime}
+		,#{dealer}
+		,#{dealDatetime}
+		,#{dealNote}
+		)
+	</insert>
+
+	<update id="update_serve" parameterType="serve">
+		UPDATE tcp_serve
+		SET
+		name = #{name}
+		,company_code = #{companyCode}
+		,quote_min = #{quoteMin}
+		,quote_max = #{quoteMax}
+		,quality_code = #{qualityCode}
+		,description = #{description}
+		,is_hot = #{isHot}
+		,order_no = #{orderNo}
+		,status = #{status}
+		,publisher = #{publisher}
+		,publish_datetime = #{publishDatetime}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+
+	<delete id="delete_serve" parameterType="serve">
+		DELETE FROM
+		tcp_serve
+		WHERE
+		code = #{code}
+	</delete>
+
+</mapper>

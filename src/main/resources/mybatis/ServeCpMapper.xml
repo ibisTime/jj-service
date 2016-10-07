@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IServeCpDAO">
+	<resultMap id="serveCp_DB_Result" type="serveCp">
+		<result column="serve_code" property="serveCode" />
+		<result column="ck_num" property="ckNum" />
+		<result column="ck_area" property="ckArea" />
+		<result column="goods_kind" property="goodsKind" />
+		<result column="dsend_num" property="dsendNum" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="serveCode != null and serveCode != '' ">
+				AND t.serve_code = #{serveCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_serveCp" parameterType="serveCp" resultMap="serveCp_DB_Result">
+		SELECT
+		t.serve_code
+		,t.ck_num
+		,t.ck_area
+		,t.goods_kind
+		,t.dsend_num
+		FROM
+		tcp_serve_cp t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_serveCp_count" parameterType="serveCp"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_serve_cp t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_serveCp" parameterType="serveCp">
+		INSERT INTO
+		tcp_serve_cp(
+		serve_code
+		,ck_num
+		,ck_area
+		,goods_kind
+		,dsend_num
+		)
+		VALUES(
+		#{serveCode}
+		,#{ckNum}
+		,#{ckArea}
+		,#{goodsKind}
+		,#{dsendNum}
+		)
+	</insert>
+
+	<update id="update_serveCp" parameterType="serveCp">
+		UPDATE tcp_serve_cp
+		SET
+		ck_num = #{ckNum}
+		,ck_area = #{ckArea}
+		,goods_kind = #{goodsKind}
+		,dsend_num = #{dsendNum}
+		WHERE serve_code = #{serveCode}
+	</update>
+	
+	<delete id="delete_serveCp" parameterType="serveCp">
+		DELETE FROM
+		tcp_serve_cp
+		WHERE
+		serve_code = #{serveCode}
+	</delete>
+
+
+</mapper>

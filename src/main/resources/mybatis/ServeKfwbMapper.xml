@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IServeKfwbDAO">
+	<resultMap id="serveKfwb_DB_Result" type="serveKfwb">
+		<result column="serve_code" property="serveCode" />
+		<result column="kf_num" property="kfNum" />
+		<result column="mtrade_amount" property="mtradeAmount" />
+		<result column="business" property="business" />
+		<result column="fee_mode" property="feeMode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="serveCode != null and serveCode != '' ">
+				AND t.serve_code = #{serveCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_serveKfwb" parameterType="serveKfwb" resultMap="serveKfwb_DB_Result">
+		SELECT
+		t.serve_code
+		,t.kf_num
+		,t.mtrade_amount
+		,t.business
+		,t.fee_mode
+		FROM
+		tcp_serve_kfwb t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_serveKfwb_count" parameterType="serveKfwb"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_serve_kfwb t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_serveKfwb" parameterType="serveKfwb">
+		INSERT INTO
+		tcp_serve_kfwb(
+		serve_code
+		,kf_num
+		,mtrade_amount
+		,business
+		,fee_mode
+		)
+		VALUES(
+		#{serveCode}
+		,#{kfNum}
+		,#{mtradeAmount}
+		,#{business}
+		,#{feeMode}
+		)
+	</insert>
+
+	<update id="update_serveKfwb" parameterType="serveKfwb">
+		UPDATE tcp_serve_kfwb
+		SET
+		kf_num = #{kfNum}
+		,mtrade_amount = #{mtradeAmount}
+		,business = #{business}
+		,fee_mode = #{feeMode}
+		WHERE serve_code = #{serveCode}
+	</update>
+
+	<delete id="delete_serveKfwb" parameterType="serveKfwb">
+		DELETE FROM
+		tcp_serve_kfwb
+		WHERE
+		serve_code = #{serveCode}
+	</delete>
+
+</mapper>
