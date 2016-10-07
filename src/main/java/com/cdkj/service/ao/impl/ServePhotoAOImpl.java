@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IServePhotoAO;
 import com.cdkj.service.bo.IServeBO;
@@ -21,6 +22,7 @@ public class ServePhotoAOImpl implements IServePhotoAO {
     @Autowired
     private IServePhotoBO servePhotoBO;
 
+    @Transactional
     @Override
     public String addServePhoto(ServePhoto data) {
         String code = serveBO.saveServe(data.getServe());
@@ -29,11 +31,13 @@ public class ServePhotoAOImpl implements IServePhotoAO {
         return code;
     }
 
+    @Transactional
     @Override
     public int editServePhoto(ServePhoto data) {
         if (!servePhotoBO.isServePhotoExist(data.getServeCode())) {
             throw new BizException("xn0000", "该编号不存在");
         }
+        serveBO.refreshServe(data.getServe());
         return servePhotoBO.refreshServePhoto(data);
     }
 

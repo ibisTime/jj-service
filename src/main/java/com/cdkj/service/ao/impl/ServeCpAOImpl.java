@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IServeCpAO;
+import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeCpBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.ServeCp;
@@ -15,18 +17,27 @@ import com.cdkj.service.exception.BizException;
 public class ServeCpAOImpl implements IServeCpAO {
 
     @Autowired
+    private IServeBO serveBO;
+
+    @Autowired
     private IServeCpBO serveCpBO;
 
+    @Transactional
     @Override
     public String addServeCp(ServeCp data) {
-        return serveCpBO.saveServeCp(data);
+        String code = serveBO.saveServe(data.getServe());
+        data.setServeCode(code);
+        serveCpBO.saveServeCp(data);
+        return code;
     }
 
+    @Transactional
     @Override
     public int editServeCp(ServeCp data) {
         if (!serveCpBO.isServeCpExist(data.getServeCode())) {
             throw new BizException("xn0000", "改编号不存在");
         }
+        serveBO.refreshServe(data.getServe());
         return serveCpBO.refreshServeCp(data);
     }
 

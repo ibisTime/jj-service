@@ -18,6 +18,8 @@ public class ServeShop extends ABaseDO {
 
     private String sucCase;
 
+    private Serve serve;
+
     public String getServeCode() {
         return serveCode;
     }
@@ -64,5 +66,13 @@ public class ServeShop extends ABaseDO {
 
     public void setSucCase(String sucCase) {
         this.sucCase = sucCase;
+    }
+
+    public Serve getServe() {
+        return serve;
+    }
+
+    public void setServe(Serve serve) {
+        this.serve = serve;
     }
 }

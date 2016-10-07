@@ -101,16 +101,18 @@
 		UPDATE tcp_serve
 		SET
 		name = #{name}
-		,company_code = #{companyCode}
 		,quote_min = #{quoteMin}
 		,quote_max = #{quoteMax}
-		,quality_code = #{qualityCode}
 		,description = #{description}
-		,is_hot = #{isHot}
-		,order_no = #{orderNo}
-		,status = #{status}
 		,publisher = #{publisher}
 		,publish_datetime = #{publishDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_serve_status" parameterType="serve">
+		UPDATE tcp_serve
+		SET
+		status = #{status}
 		,dealer = #{dealer}
 		,deal_datetime = #{dealDatetime}
 		,deal_note = #{dealNote}

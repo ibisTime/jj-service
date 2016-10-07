@@ -1,6 +1,6 @@
 package com.cdkj.service.dto.req;
 
-public class XN612000Req {
+public class CD612008Req {
 
     // 服务名称 (必填)
     private String name;
@@ -17,20 +17,17 @@ public class XN612000Req {
     // 资质编号(必填)
     private String qualityCode;
 
-    // 棚影数量(必填)
-    private String pyNum;
+    // 客服人数(必填)
+    private String kfNum;
 
-    // 摄影师数量(必填)
-    private String sysNum;
+    // 月均交易额(必填)
+    private String mtradeAmount;
 
-    // 是否接受定制需求(必填)
-    private String isDz;
+    // 客服业务(必填)
+    private String business;
 
-    // 擅长拍摄类目(必填)
-    private String scpslm;
-
-    // 代表作品(必填)
-    private String works;
+    // 收费模式(必填)
+    private String feeMode;
 
     // 详细描述(选填)
     private String description;
@@ -60,30 +57,6 @@ public class XN612000Req {
 
     public void setQualityCode(String qualityCode) {
         this.qualityCode = qualityCode;
-    }
-
-    public String getIsDz() {
-        return isDz;
-    }
-
-    public void setIsDz(String isDz) {
-        this.isDz = isDz;
-    }
-
-    public String getScpslm() {
-        return scpslm;
-    }
-
-    public void setScpslm(String scpslm) {
-        this.scpslm = scpslm;
-    }
-
-    public String getWorks() {
-        return works;
-    }
-
-    public void setWorks(String works) {
-        this.works = works;
     }
 
     public String getDescription() {
@@ -118,19 +91,35 @@ public class XN612000Req {
         this.quoteMax = quoteMax;
     }
 
-    public String getPyNum() {
-        return pyNum;
+    public String getKfNum() {
+        return kfNum;
     }
 
-    public void setPyNum(String pyNum) {
-        this.pyNum = pyNum;
+    public void setKfNum(String kfNum) {
+        this.kfNum = kfNum;
     }
 
-    public String getSysNum() {
-        return sysNum;
+    public String getMtradeAmount() {
+        return mtradeAmount;
     }
 
-    public void setSysNum(String sysNum) {
-        this.sysNum = sysNum;
+    public void setMtradeAmount(String mtradeAmount) {
+        this.mtradeAmount = mtradeAmount;
+    }
+
+    public String getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(String business) {
+        this.business = business;
+    }
+
+    public String getFeeMode() {
+        return feeMode;
+    }
+
+    public void setFeeMode(String feeMode) {
+        this.feeMode = feeMode;
     }
 }

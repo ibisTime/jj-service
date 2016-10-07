@@ -13,7 +13,6 @@
 		<result column="yh_policy" property="yhPolicy" />
 		<result column="pic1" property="pic1" />
 		<result column="pic2" property="pic2" />
-		<result column="description" property="description" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -34,7 +33,6 @@
 		,t.yh_policy
 		,t.pic1
 		,t.pic2
-		,t.description
 		FROM
 		tcp_serve_cyy t
 		<include refid="where_condition" />
@@ -64,7 +62,6 @@
 		,yh_policy
 		,pic1
 		,pic2
-		,description
 		)
 		VALUES(
 		#{serveCode}
@@ -77,7 +74,6 @@
 		,#{yhPolicy}
 		,#{pic1}
 		,#{pic2}
-		,#{description}
 		)
 	</insert>
 
@@ -93,7 +89,6 @@
 		,yh_policy = #{yhPolicy}
 		,pic1 = #{pic1}
 		,pic2 = #{pic2}
-		,description = #{description}
 		WHERE serve_code = #{serveCode}
 	</update>
 

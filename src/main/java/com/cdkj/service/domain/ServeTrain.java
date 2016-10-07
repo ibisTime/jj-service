@@ -22,6 +22,8 @@ public class ServeTrain extends ABaseDO {
 
     private String course;
 
+    private Serve serve;
+
     public String getServeCode() {
         return serveCode;
     }
@@ -84,5 +86,13 @@ public class ServeTrain extends ABaseDO {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    public Serve getServe() {
+        return serve;
+    }
+
+    public void setServe(Serve serve) {
+        this.serve = serve;
     }
 }
