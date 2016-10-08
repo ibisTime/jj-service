@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IServeShopAO;
+import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeShopBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.ServeShop;
@@ -15,18 +17,27 @@ import com.cdkj.service.exception.BizException;
 public class ServeShopAOImpl implements IServeShopAO {
 
     @Autowired
+    private IServeBO serveBO;
+
+    @Autowired
     private IServeShopBO serveShopBO;
 
+    @Transactional
     @Override
     public String addServeShop(ServeShop data) {
-        return serveShopBO.saveServeShop(data);
+        String code = serveBO.saveServe(data.getServe());
+        data.setServeCode(code);
+        serveShopBO.saveServeShop(data);
+        return code;
     }
 
+    @Transactional
     @Override
     public int editServeShop(ServeShop data) {
         if (!serveShopBO.isServeShopExist(data.getServeCode())) {
             throw new BizException("xn0000", "该编号不存在");
         }
+        serveBO.refreshServe(data.getServe());
         return serveShopBO.refreshServeShop(data);
     }
 

@@ -26,7 +26,7 @@ public class ServeCyy extends ABaseDO {
 
     private String pic2;
 
-    private String description;
+    private Serve serve;
 
     public String getServeCode() {
         return serveCode;
@@ -108,11 +108,11 @@ public class ServeCyy extends ABaseDO {
         this.pic2 = pic2;
     }
 
-    public String getDescription() {
-        return description;
+    public Serve getServe() {
+        return serve;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setServe(Serve serve) {
+        this.serve = serve;
     }
 }

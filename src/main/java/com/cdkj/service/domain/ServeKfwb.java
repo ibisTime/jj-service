@@ -16,6 +16,8 @@ public class ServeKfwb extends ABaseDO {
 
     private String feeMode;
 
+    private Serve serve;
+
     public String getServeCode() {
         return serveCode;
     }
@@ -54,5 +56,13 @@ public class ServeKfwb extends ABaseDO {
 
     public void setFeeMode(String feeMode) {
         this.feeMode = feeMode;
+    }
+
+    public Serve getServe() {
+        return serve;
+    }
+
+    public void setServe(Serve serve) {
+        this.serve = serve;
     }
 }

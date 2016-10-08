@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IServeArtBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IServeArtDAO;
 import com.cdkj.service.domain.ServeArt;
 import com.cdkj.service.exception.BizException;
@@ -35,8 +33,6 @@ public class ServeArtBOImpl extends PaginableBOImpl<ServeArt> implements
     public String saveServeArt(ServeArt data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.FW.getCode());
-            data.setServeCode(code);
             serveArtDAO.insert(data);
         }
         return code;

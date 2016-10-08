@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IServeTrainBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IServeTrainDAO;
 import com.cdkj.service.domain.ServeTrain;
 import com.cdkj.service.exception.BizException;
@@ -36,8 +34,6 @@ public class ServeTrainBOImpl extends PaginableBOImpl<ServeTrain> implements
     public String saveServeTrain(ServeTrain data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.FW.getCode());
-            data.setServeCode(code);
             serveTrainDAO.insert(data);
         }
         return code;

@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IServeKfwbBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IServeKfwbDAO;
 import com.cdkj.service.domain.ServeKfwb;
 import com.cdkj.service.exception.BizException;
@@ -35,8 +33,6 @@ public class ServeKfwbBOImpl extends PaginableBOImpl<ServeKfwb> implements
     public String saveServeKfwb(ServeKfwb data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.FW.getCode());
-            data.setServeCode(code);
             serveKfwbDAO.insert(data);
         }
         return code;

@@ -58,6 +58,7 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
     public int refreshServe(Serve data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
+            data.setPublishDatetime(new Date());
             count = serveDAO.update(data);
         }
         return count;
