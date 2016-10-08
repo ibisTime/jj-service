@@ -12,7 +12,6 @@ import com.cdkj.service.dao.IServeShopDAO;
 import com.cdkj.service.domain.ServeShop;
 import com.cdkj.service.exception.BizException;
 
-//CHECK ��鲢��ע�� 
 @Component
 public class ServeShopBOImpl extends PaginableBOImpl<ServeShop> implements
         IServeShopBO {

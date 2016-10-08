@@ -12,7 +12,6 @@ import com.cdkj.service.dao.IServeCpDAO;
 import com.cdkj.service.domain.ServeCp;
 import com.cdkj.service.exception.BizException;
 
-//CHECK ��鲢��ע�� 
 @Component
 public class ServeCpBOImpl extends PaginableBOImpl<ServeCp> implements
         IServeCpBO {

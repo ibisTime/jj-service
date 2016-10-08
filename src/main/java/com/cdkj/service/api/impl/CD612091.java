@@ -1,34 +1,35 @@
 package com.cdkj.service.api.impl;
 
-import com.cdkj.service.ao.IServeAO;
+import com.cdkj.service.ao.IPositionAO;
 import com.cdkj.service.api.AProcessor;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.dto.req.CD612031Req;
+import com.cdkj.service.dto.req.CD612091Req;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
 /** 
- * 详情查询服务
+ * 详情查询职位
  * @author: zuixian 
  * @since: 2016年10月7日 下午4:06:14 
  * @history:
  */
-public class CD612031 extends AProcessor {
+public class CD612091 extends AProcessor {
 
-    private IServeAO serveAO = SpringContextHolder.getBean(IServeAO.class);
+    private IPositionAO positionAO = SpringContextHolder
+        .getBean(IPositionAO.class);
 
-    private CD612031Req req = null;
+    private CD612091Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
-        return serveAO.getServe(req.getCode());
+        return positionAO.getPosition(req.getCode());
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, CD612031Req.class);
+        req = JsonUtil.json2Bean(inputparams, CD612091Req.class);
         StringValidater.validateBlank(req.getCode());
     }
 }

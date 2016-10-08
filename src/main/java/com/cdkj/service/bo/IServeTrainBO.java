@@ -5,28 +5,18 @@ import java.util.List;
 import com.cdkj.service.bo.base.IPaginableBO;
 import com.cdkj.service.domain.ServeTrain;
 
-
-
-//CHECK ¼ì²é²¢¼Ó×¢ÊÍ 
 public interface IServeTrainBO extends IPaginableBO<ServeTrain> {
 
+    public boolean isServeTrainExist(String code);
 
-	public boolean isServeTrainExist(String code);
+    public String saveServeTrain(ServeTrain data);
 
+    public int removeServeTrain(String code);
 
-	public String saveServeTrain(ServeTrain data);
+    public int refreshServeTrain(ServeTrain data);
 
+    public List<ServeTrain> queryServeTrainList(ServeTrain condition);
 
-	public int removeServeTrain(String code);
-
-
-	public int refreshServeTrain(ServeTrain data);
-
-
-	public List<ServeTrain> queryServeTrainList(ServeTrain condition);
-
-
-	public ServeTrain getServeTrain(String code);
-
+    public ServeTrain getServeTrain(String code);
 
 }

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IResumeDAO">
+	<resultMap id="resume_DB_Result" type="resume">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="is_work" property="isWork" />
+		<result column="pre_comp_name" property="preCompName" />
+		<result column="pre_pos_name" property="prePosName" />
+		<result column="pre_work_time" property="preWorkTime" />
+		<result column="pre_msalary" property="preMsalary" />
+		<result column="pre_description" property="preDescription" />
+		<result column="education" property="education" />
+		<result column="is_tz" property="isTz" />
+		<result column="study_time" property="studyTime" />
+		<result column="school" property="school" />
+		<result column="profession" property="profession" />
+		<result column="type" property="type" />
+		<result column="exp_position" property="expPosition" />
+		<result column="exp_msalary" property="expMsalary" />
+		<result column="exp_province" property="expProvince" />
+		<result column="exp_city" property="expCity" />
+		<result column="work_status" property="workStatus" />
+		<result column="is_open" property="isOpen" />
+		<result column="use_times" property="useTimes" />
+		<result column="status" property="status" />
+		<result column="publisher" property="publisher" />
+		<result column="publish_datetime" property="publishDatetime" />
+		<result column="dealer" property="dealer" />
+		<result column="deal_datetime" property="dealDatetime" />
+		<result column="deal_note" property="dealNote" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="expPosition != null and expPosition != '' ">
+				AND t.exp_position = #{expPosition}
+			</if>
+			<if test="expProvince != null and expProvince != '' ">
+				AND t.exp_province = #{expProvince}
+			</if>
+			<if test="expCity != null and expCity != '' ">
+				AND t.exp_city = #{expCity}
+			</if>
+			<if test="publisher != null and publisher != '' ">
+				AND t.publisher = #{publisher}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_resume" parameterType="resume" resultMap="resume_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.is_work
+		,t.pre_comp_name
+		,t.pre_pos_name
+		,t.pre_work_time
+		,t.pre_msalary
+		,t.pre_description
+		,t.education
+		,t.is_tz
+		,t.study_time
+		,t.school
+		,t.profession
+		,t.type
+		,t.exp_position
+		,t.exp_msalary
+		,t.exp_province
+		,t.exp_city
+		,t.work_status
+		,t.is_open
+		,t.use_times
+		,t.status
+		,t.publisher
+		,t.publish_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		FROM
+		tcp_resume t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_resume_count" parameterType="resume"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_resume t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_resume" parameterType="resume">
+		INSERT INTO
+		tcp_resume(
+		code
+		,name
+		,is_work
+		,pre_comp_name
+		,pre_pos_name
+		,pre_work_time
+		,pre_msalary
+		,pre_description
+		,education
+		,is_tz
+		,study_time
+		,school
+		,profession
+		,type
+		,exp_position
+		,exp_msalary
+		,exp_province
+		,exp_city
+		,work_status
+		,is_open
+		,use_times
+		,status
+		,publisher
+		,publish_datetime
+		,dealer
+		,deal_datetime
+		,deal_note
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{isWork}
+		,#{preCompName}
+		,#{prePosName}
+		,#{preWorkTime}
+		,#{preMsalary}
+		,#{preDescription}
+		,#{education}
+		,#{isTz}
+		,#{studyTime}
+		,#{school}
+		,#{profession}
+		,#{type}
+		,#{expPosition}
+		,#{expMsalary}
+		,#{expProvince}
+		,#{expCity}
+		,#{workStatus}
+		,#{isOpen}
+		,#{useTimes}
+		,#{status}
+		,#{publisher}
+		,#{publishDatetime}
+		,#{dealer}
+		,#{dealDatetime}
+		,#{dealNote}
+		)
+	</insert>
+
+	<update id="update_resume" parameterType="resume">
+		UPDATE tcp_resume
+		SET
+		name = #{name}
+		,is_work = #{isWork}
+		,pre_comp_name = #{preCompName}
+		,pre_pos_name = #{prePosName}
+		,pre_work_time = #{preWorkTime}
+		,pre_msalary = #{preMsalary}
+		,pre_description = #{preDescription}
+		,education = #{education}
+		,is_tz = #{isTz}
+		,study_time = #{studyTime}
+		,school = #{school}
+		,profession = #{profession}
+		,type = #{type}
+		,exp_position = #{expPosition}
+		,exp_msalary = #{expMsalary}
+		,exp_province = #{expProvince}
+		,exp_city = #{expCity}
+		,work_status = #{workStatus}
+		,is_open = #{isOpen}
+		,publisher = #{publisher}
+		,publish_datetime = #{publishDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	
+	<update id="update_resume_status" parameterType="resume">
+		UPDATE tcp_resume
+		SET
+		status = #{status}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+
+	<delete id="delete_resume" parameterType="resume">
+	DELETE FROM
+	tcp_resume
+	WHERE
+	code = #{code}
+	</delete>
+	
+	
+</mapper>

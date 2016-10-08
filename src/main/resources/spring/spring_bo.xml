@@ -51,4 +51,12 @@
 		<property name="paginableDAO" ref="intentionDAOImpl" />
 	</bean>
 	
+	<bean id="resumeBO" class="com.cdkj.service.bo.impl.ResumeBOImpl">
+		<property name="paginableDAO" ref="resumeDAOImpl" />
+	</bean>
+	
+	<bean id="positionBO" class="com.cdkj.service.bo.impl.PositionBOImpl">
+		<property name="paginableDAO" ref="positionDAOImpl" />
+	</bean>
+	
 </beans>

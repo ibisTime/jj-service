@@ -12,7 +12,6 @@ import com.cdkj.service.dao.IServePhotoDAO;
 import com.cdkj.service.domain.ServePhoto;
 import com.cdkj.service.exception.BizException;
 
-//CHECK ��鲢��ע�� 
 @Component
 public class ServePhotoBOImpl extends PaginableBOImpl<ServePhoto> implements
         IServePhotoBO {

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IPositionDAO">
+	<resultMap id="position_DB_Result" type="position">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="kind" property="kind" />
+		<result column="province" property="province" />
+		<result column="city" property="city" />
+		<result column="experience" property="experience" />
+		<result column="education" property="education" />
+		<result column="type" property="type" />
+		<result column="job_num" property="jobNum" />
+		<result column="msalary" property="msalary" />
+		<result column="description" property="description" />
+		<result column="company_code" property="companyCode" />
+		<result column="is_hot" property="isHot" />
+		<result column="order_no" property="orderNo" />
+		<result column="status" property="status" />
+		<result column="publisher" property="publisher" />
+		<result column="publish_datetime" property="publishDatetime" />
+		<result column="dealer" property="dealer" />
+		<result column="deal_datetime" property="dealDatetime" />
+		<result column="deal_note" property="dealNote" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name like '%'#{name}'%'
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_position" parameterType="position" resultMap="position_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.kind
+		,t.province
+		,t.city
+		,t.experience
+		,t.education
+		,t.type
+		,t.job_num
+		,t.msalary
+		,t.description
+		,t.company_code
+		,t.is_hot
+		,t.order_no
+		,t.status
+		,t.publisher
+		,t.publish_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		FROM
+		tcp_position t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_position_count" parameterType="position"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_position t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_position" parameterType="position">
+		INSERT INTO
+		tcp_position(
+		code
+		,name
+		,kind
+		,province
+		,city
+		,experience
+		,education
+		,type
+		,job_num
+		,msalary
+		,description
+		,company_code
+		,is_hot
+		,order_no
+		,status
+		,publisher
+		,publish_datetime
+		,dealer
+		,deal_datetime
+		,deal_note
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{kind}
+		,#{province}
+		,#{city}
+		,#{experience}
+		,#{education}
+		,#{type}
+		,#{jobNum}
+		,#{msalary}
+		,#{description}
+		,#{companyCode}
+		,#{isHot}
+		,#{orderNo}
+		,#{status}
+		,#{publisher}
+		,#{publishDatetime}
+		,#{dealer}
+		,#{dealDatetime}
+		,#{dealNote}
+		)
+	</insert>
+
+	<update id="update_position" parameterType="position">
+		UPDATE tcp_position
+		SET
+		name = #{name}
+		,kind = #{kind}
+		,province = #{province}
+		,city = #{city}
+		,experience = #{experience}
+		,education = #{education}
+		,type = #{type}
+		,job_num = #{jobNum}
+		,msalary = #{msalary}
+		,description = #{description}
+		,company_code = #{companyCode}
+		,publisher = #{publisher}
+		,publish_datetime = #{publishDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_position_status" parameterType="position">
+		UPDATE tcp_position
+		SET
+		status = #{status}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_position_hot" parameterType="position">
+		UPDATE tcp_position
+		SET
+		is_hot = #{isHot}
+		,order_no = #{orderNo}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		WHERE code = #{code}
+	</update>
+
+	<delete id="delete_position" parameterType="position">
+	DELETE FROM
+	tcp_position
+	WHERE
+	code = #{code}
+	</delete>
+
+</mapper>
