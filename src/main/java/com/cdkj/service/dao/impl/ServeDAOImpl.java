@@ -49,4 +49,14 @@ public class ServeDAOImpl extends AMybatisTemplate implements IServeDAO {
     public int update(Serve data) {
         return super.update(NAMESPACE.concat("update_serve"), data);
     }
+
+    @Override
+    public int updateStatus(Serve data) {
+        return super.update(NAMESPACE.concat("update_serve_status"), data);
+    }
+
+    @Override
+    public int updateHot(Serve data) {
+        return super.update(NAMESPACE.concat("update_serve_hot"), data);
+    }
 }

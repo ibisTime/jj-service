@@ -38,6 +38,11 @@ public class Serve extends ABaseDO {
 
     private String dealNote;
 
+    // ****************db properties ******************
+    private Date publishDatetimeStart;
+
+    private Date publishDatetimeEnd;
+
     public String getCode() {
         return code;
     }
@@ -156,5 +161,21 @@ public class Serve extends ABaseDO {
 
     public void setDealDatetime(Date dealDatetime) {
         this.dealDatetime = dealDatetime;
+    }
+
+    public Date getPublishDatetimeStart() {
+        return publishDatetimeStart;
+    }
+
+    public void setPublishDatetimeStart(Date publishDatetimeStart) {
+        this.publishDatetimeStart = publishDatetimeStart;
+    }
+
+    public Date getPublishDatetimeEnd() {
+        return publishDatetimeEnd;
+    }
+
+    public void setPublishDatetimeEnd(Date publishDatetimeEnd) {
+        this.publishDatetimeEnd = publishDatetimeEnd;
     }
 }

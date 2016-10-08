@@ -24,6 +24,30 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+			<if test="qualityCode != null and qualityCode != '' ">
+				AND t.quality_code = #{qualityCode}
+			</if>
+			<if test="isHot != null and isHot != '' ">
+				AND t.is_hot = #{isHot}
+			</if>
+			<if test="pubisher != null and pubisher != '' ">
+				AND t.pubisher = #{pubisher}
+			</if>
+			<if test="dealer != null and dealer != '' ">
+				AND t.dealer = #{dealer}
+			</if>
+			<if test="publishDatetimeStart != null and publishDatetimeStart != '' ">
+				<![CDATA[AND t.publish_datetime >= #{publishDatetimeStart}]]>
+			</if>
+			<if test="publishDatetimeEnd != null and publishDatetimeEnd != '' ">
+				<![CDATA[AND t.publish_datetime <= #{publishDatetimeEnd}]]>
+			</if>
 		</trim>
 	</sql>
 	<select id="select_serve" parameterType="serve" resultMap="serve_DB_Result">
@@ -116,6 +140,16 @@
 		,dealer = #{dealer}
 		,deal_datetime = #{dealDatetime}
 		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_serve_hot" parameterType="serve">
+		UPDATE tcp_serve
+		SET
+		is_hot = #{isHot}
+		,order_no = #{orderNo}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
 		WHERE code = #{code}
 	</update>
 

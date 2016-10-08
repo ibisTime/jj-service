@@ -15,6 +15,10 @@ public interface IServeBO extends IPaginableBO<Serve> {
 
     public int refreshServe(Serve data);
 
+    public int refreshServeStatus(Serve data);
+
+    public int refreshServeHot(Serve data);
+
     public List<Serve> queryServeList(Serve condition);
 
     public Serve getServe(String code);

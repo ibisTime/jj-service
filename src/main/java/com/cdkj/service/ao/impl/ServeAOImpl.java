@@ -17,6 +17,7 @@ import com.cdkj.service.bo.IServeShopBO;
 import com.cdkj.service.bo.IServeTrainBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Serve;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -99,5 +100,26 @@ public class ServeAOImpl implements IServeAO {
     @Override
     public Serve getServe(String code) {
         return serveBO.getServe(code);
+    }
+
+    @Override
+    public int editServeStatus(String code, String dealNote, String dealer) {
+        Serve data = new Serve();
+        data.setStatus(EBoolean.NO.getCode());
+        data.setCode(code);
+        data.setDealNote(dealNote);
+        data.setDealer(dealer);
+        return serveBO.refreshServeStatus(data);
+    }
+
+    @Override
+    public int editServeHot(String code, String isHot, String orderNo,
+            String dealer) {
+        Serve data = new Serve();
+        data.setCode(code);
+        data.setIsHot(isHot);
+        data.setOrderNo(Integer.valueOf(orderNo));
+        data.setDealer(dealer);
+        return serveBO.refreshServeHot(data);
     }
 }

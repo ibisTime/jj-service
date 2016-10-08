@@ -1,5 +1,6 @@
 package com.cdkj.service.api.converter;
 
+import com.cdkj.service.common.DateUtil;
 import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeArt;
 import com.cdkj.service.domain.ServeCp;
@@ -24,6 +25,7 @@ import com.cdkj.service.dto.req.CD612012Req;
 import com.cdkj.service.dto.req.CD612013Req;
 import com.cdkj.service.dto.req.CD612014Req;
 import com.cdkj.service.dto.req.CD612015Req;
+import com.cdkj.service.dto.req.CD612030Req;
 
 public class ServeConverter {
 
@@ -97,6 +99,7 @@ public class ServeConverter {
         serve.setName(req.getName());
         serve.setQuoteMin(Long.valueOf(req.getQuoteMin()));
         serve.setQuoteMax(Long.valueOf(req.getQuoteMax()));
+        result.setServeCode(req.getCode());
         result.setLectorNum(Integer.valueOf(req.getLectorNum()));
         result.setMtrainTimes(Integer.valueOf(req.getMtrainTimes()));
         result.setMtrainNum(Integer.valueOf(req.getMtrainNum()));
@@ -138,6 +141,7 @@ public class ServeConverter {
         serve.setName(req.getName());
         serve.setQuoteMin(Long.valueOf(req.getQuoteMin()));
         serve.setQuoteMax(Long.valueOf(req.getQuoteMax()));
+        result.setServeCode(req.getCode());
         result.setTgfw(req.getTgfw());
         result.setFeeMode(req.getFeeMode());
         result.setPayCycle(req.getPayCycle());
@@ -183,6 +187,7 @@ public class ServeConverter {
         serve.setName(req.getName());
         serve.setQuoteMin(Long.valueOf(req.getQuoteMin()));
         serve.setQuoteMax(Long.valueOf(req.getQuoteMax()));
+        result.setServeCode(req.getCode());
         result.setDesignNum(Integer.valueOf(req.getDesignNum()));
         result.setSclm(req.getSclm());
         result.setHomeDays(Integer.valueOf(req.getHomeDays()));
@@ -227,6 +232,7 @@ public class ServeConverter {
         serve.setName(req.getName());
         serve.setQuoteMin(Long.valueOf(req.getQuoteMin()));
         serve.setQuoteMax(Long.valueOf(req.getQuoteMax()));
+        result.setServeCode(req.getCode());
         result.setKfNum(Integer.valueOf(req.getKfNum()));
         result.setMtradeAmount(req.getMtradeAmount());
         result.setBusiness(req.getBusiness());
@@ -346,5 +352,22 @@ public class ServeConverter {
         serve.setPublisher(req.getPublisher());
         result.setServe(serve);
         return result;
+    }
+
+    // 分页查询服务
+    public static Serve converter(CD612030Req req) {
+        Serve serve = new Serve();
+        serve.setName(req.getName());
+        serve.setCompanyCode(req.getCompanyCode());
+        serve.setStatus(req.getStatus());
+        serve.setQualityCode(req.getQualityCode());
+        serve.setIsHot(req.getIsHot());
+        serve.setPublisher(req.getPubisher());
+        serve.setPublishDatetimeStart(DateUtil.strToDate(req.getDateStart(),
+            DateUtil.DATA_TIME_PATTERN_1));
+        serve.setPublishDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),
+            DateUtil.DATA_TIME_PATTERN_1));
+        serve.setDealer(req.getDealer());
+        return serve;
     }
 }

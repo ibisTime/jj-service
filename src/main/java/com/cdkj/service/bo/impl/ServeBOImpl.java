@@ -82,4 +82,24 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
         }
         return data;
     }
+
+    @Override
+    public int refreshServeStatus(Serve data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            data.setDealDatetime(new Date());
+            count = serveDAO.updateStatus(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshServeHot(Serve data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            data.setDealDatetime(new Date());
+            count = serveDAO.updateHot(data);
+        }
+        return count;
+    }
 }
