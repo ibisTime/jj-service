@@ -13,6 +13,7 @@ import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IServeDAO;
 import com.cdkj.service.domain.Serve;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 @Component
@@ -37,6 +38,8 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.FW.getCode());
             data.setCode(code);
+            data.setStatus(EBoolean.YES.getCode());
+            data.setIsHot(EBoolean.NO.getCode());
             data.setPublishDatetime(new Date());
             serveDAO.insert(data);
         }

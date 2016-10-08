@@ -27,6 +27,9 @@
 			<if test="name != null and name != '' ">
 				AND t.name = #{name}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
@@ -36,8 +39,8 @@
 			<if test="isHot != null and isHot != '' ">
 				AND t.is_hot = #{isHot}
 			</if>
-			<if test="pubisher != null and pubisher != '' ">
-				AND t.pubisher = #{pubisher}
+			<if test="publisher != null and publisher != '' ">
+				AND t.publisher = #{publisher}
 			</if>
 			<if test="dealer != null and dealer != '' ">
 				AND t.dealer = #{dealer}

@@ -4,28 +4,28 @@ public class CD612030Req extends APageReq {
 
     private static final long serialVersionUID = 1L;
 
-    // 服务名称 (必填)
+    // 服务名称 (选填)
     private String name;
 
-    // 状态 (必填)
+    // 状态 (选填)
     private String status;
 
-    // 公司编号 (必填)
+    // 公司编号 (选填)
     private String companyCode;
 
-    // 公司名称 (必填)
+    // 公司名称 (选填)
     private String companyName;
 
-    // 资质编号(必填)
+    // 资质编号(选填)
     private String qualityCode;
 
-    // 是否热门(必填)
+    // 是否热门(选填)
     private String isHot;
 
-    // 发布人 (必填)
-    private String pubisher;
+    // 发布人 (选填)
+    private String publisher;
 
-    // 处理人 (必填)
+    // 处理人 (选填)
     private String dealer;
 
     public String getName() {
@@ -76,19 +76,19 @@ public class CD612030Req extends APageReq {
         this.isHot = isHot;
     }
 
-    public String getPubisher() {
-        return pubisher;
-    }
-
-    public void setPubisher(String pubisher) {
-        this.pubisher = pubisher;
-    }
-
     public String getDealer() {
         return dealer;
     }
 
     public void setDealer(String dealer) {
         this.dealer = dealer;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }
