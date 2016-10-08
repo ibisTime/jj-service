@@ -44,6 +44,10 @@ public class Intention extends ABaseDO {
     // 处理意见
     private String dealNote;
 
+    // ****************db properties ******************
+
+    private String companyCode;
+
     public String getCode() {
         return code;
     }
@@ -122,5 +126,13 @@ public class Intention extends ABaseDO {
 
     public void setDealNote(String dealNote) {
         this.dealNote = dealNote;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
     }
 }

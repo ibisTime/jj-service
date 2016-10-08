@@ -13,6 +13,7 @@
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
 		<result column="deal_note" property="dealNote" />
+		<result column="company_code" property="companyCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -34,6 +35,9 @@
 			<if test="fromRole != null and fromRole != '' ">
 				AND t.from_role = #{fromRole}
 			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND ts.company_code = #{companyCode}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_intention" parameterType="intention" resultMap="intention_DB_Result">
@@ -41,6 +45,7 @@
 		t.code
 		,t.type
 		,t.status
+		,ts.company_code
 		,t.to_code
 		,t.from_user
 		,t.from_role
@@ -49,7 +54,7 @@
 		,t.deal_datetime
 		,t.deal_note
 		FROM
-		tcp_intention t
+		tcp_intention t inner join tcp_serve ts on t.to_code = ts.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -60,7 +65,7 @@
 
 	<select id="select_intention_count" parameterType="intention"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_intention t
+		SELECT count(1) FROM tcp_intention t inner join tcp_serve ts on t.to_code = ts.code
 		<include refid="where_condition" />
 	</select>
 
@@ -87,7 +92,7 @@
 	</insert>
 	
 	<update id="update_intention_status" parameterType="intention">
-		UPDATE tcp_demand
+		UPDATE tcp_intention
 		SET
 		status = #{status}
 		,dealer = #{dealer}
@@ -95,4 +100,11 @@
 		,deal_note = #{dealNote}
 		WHERE code = #{code}
 	</update>
+	
+	<delete id="delete_intention" parameterType="intention">
+	DELETE FROM
+	tcp_intention
+	WHERE
+	code = #{code}
+	</delete>
 </mapper>

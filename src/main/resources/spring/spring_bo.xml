@@ -47,4 +47,8 @@
 		<property name="paginableDAO" ref="demandDAOImpl" />
 	</bean>
 	
+	<bean id="intentionBO" class="com.cdkj.service.bo.impl.IntentionBOImpl">
+		<property name="paginableDAO" ref="intentionDAOImpl" />
+	</bean>
+	
 </beans>
