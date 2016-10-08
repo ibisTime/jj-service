@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IIntentionDAO">
+	<resultMap id="intention_DB_Result" type="intention">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="status" property="status" />
+		<result column="to_code" property="toCode" />
+		<result column="from_user" property="fromUser" />
+		<result column="from_role" property="fromRole" />
+		<result column="from_datetime" property="fromDatetime" />
+		<result column="dealer" property="dealer" />
+		<result column="deal_datetime" property="dealDatetime" />
+		<result column="deal_note" property="dealNote" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="toCode != null and toCode != '' ">
+				AND t.to_code = #{toCode}
+			</if>
+			<if test="fromUser != null and fromUser != '' ">
+				AND t.from_user = #{fromUser}
+			</if>
+			<if test="fromRole != null and fromRole != '' ">
+				AND t.from_role = #{fromRole}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_intention" parameterType="intention" resultMap="intention_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.status
+		,t.to_code
+		,t.from_user
+		,t.from_role
+		,t.from_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		FROM
+		tcp_intention t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_intention_count" parameterType="intention"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_intention t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_intention" parameterType="intention">
+		INSERT INTO
+		tcp_intention(
+		code
+		,type
+		,status
+		,to_code
+		,from_user
+		,from_role
+		,from_datetime
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{status}
+		,#{toCode}
+		,#{fromUser}
+		,#{fromRole}
+		,#{fromDatetime}
+		)
+	</insert>
+	
+	<update id="update_intention_status" parameterType="intention">
+		UPDATE tcp_demand
+		SET
+		status = #{status}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+</mapper>
