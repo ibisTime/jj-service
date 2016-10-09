@@ -15,6 +15,7 @@
 		<result column="msalary" property="msalary" />
 		<result column="description" property="description" />
 		<result column="company_code" property="companyCode" />
+		<result column="company_name" property="companyName" />
 		<result column="is_hot" property="isHot" />
 		<result column="order_no" property="orderNo" />
 		<result column="status" property="status" />
@@ -30,10 +31,13 @@
 				AND t.code = #{code}
 			</if>
 			<if test="name != null and name != '' ">
-				AND t.name like '%'#{name}'%'
+				AND t.name like "%"#{name}"%"
 			</if>
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
+			</if>
+			<if test="companyName != null and companyName != '' ">
+				AND jc.name like "%"#{companyName}"%"
 			</if>
 		</trim>
 	</sql>
@@ -51,6 +55,7 @@
 		,t.msalary
 		,t.description
 		,t.company_code
+		,jc.name as company_name
 		,t.is_hot
 		,t.order_no
 		,t.status
@@ -60,7 +65,7 @@
 		,t.deal_datetime
 		,t.deal_note
 		FROM
-		tcp_position t
+		tcp_position t inner join ${userDB}.tstd_company jc on t.company_code = jc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -71,7 +76,7 @@
 
 	<select id="select_position_count" parameterType="position"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_position t
+		SELECT count(1) FROM tcp_position t inner join ${userDB}.tstd_company jc on t.company_code = jc.code
 		<include refid="where_condition" />
 	</select>
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.cdkj.service.common.PropertiesUtil;
 import com.cdkj.service.dao.IPositionDAO;
 import com.cdkj.service.dao.base.support.AMybatisTemplate;
 import com.cdkj.service.domain.Position;
@@ -23,24 +24,28 @@ public class PositionDAOImpl extends AMybatisTemplate implements IPositionDAO {
 
     @Override
     public Position select(Position condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.select(NAMESPACE.concat("select_position"), condition,
             Position.class);
     }
 
     @Override
     public Long selectTotalCount(Position condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectTotalCount(
             NAMESPACE.concat("select_position_count"), condition);
     }
 
     @Override
     public List<Position> selectList(Position condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_position"), condition,
             Position.class);
     }
 
     @Override
     public List<Position> selectList(Position condition, int start, int count) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_position"), start,
             count, condition, Position.class);
     }

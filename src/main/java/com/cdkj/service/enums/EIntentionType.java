@@ -1,7 +1,7 @@
 package com.cdkj.service.enums;
 
 public enum EIntentionType {
-    ZW("1", "职位申请"), XQ("2", "感兴趣关系");
+    ZW("1", "职位申请"), FW("2", "对服务感兴趣"), XQ("3", "对需求感兴趣"), JL("4", "对简历感兴趣");
 
     EIntentionType(String code, String value) {
         this.code = code;

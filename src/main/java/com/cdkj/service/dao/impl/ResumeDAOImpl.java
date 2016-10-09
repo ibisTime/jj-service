@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.cdkj.service.common.PropertiesUtil;
 import com.cdkj.service.dao.IResumeDAO;
 import com.cdkj.service.dao.base.support.AMybatisTemplate;
 import com.cdkj.service.domain.Resume;
@@ -23,24 +24,28 @@ public class ResumeDAOImpl extends AMybatisTemplate implements IResumeDAO {
 
     @Override
     public Resume select(Resume condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.select(NAMESPACE.concat("select_resume"), condition,
             Resume.class);
     }
 
     @Override
     public Long selectTotalCount(Resume condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectTotalCount(NAMESPACE.concat("select_resume_count"),
             condition);
     }
 
     @Override
     public List<Resume> selectList(Resume condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_resume"), condition,
             Resume.class);
     }
 
     @Override
     public List<Resume> selectList(Resume condition, int start, int count) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_resume"), start,
             count, condition, Resume.class);
     }

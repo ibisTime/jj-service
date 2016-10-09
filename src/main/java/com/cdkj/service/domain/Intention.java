@@ -46,7 +46,41 @@ public class Intention extends ABaseDO {
 
     // ****************db properties ******************
 
+    // 服务名称
+    private String serveName;
+
+    // 需求名称
+    private String demandName;
+
+    // 需求名称
+    private String resumeName;
+
+    // 职位名称
+    private String positionName;
+
+    // 发布人编号
+    private String publisher;
+
+    // 发布公司编号
+    private String fromCompany;
+
+    // 公司编号
     private String companyCode;
+
+    // 公司联系人
+    private String companyUser;
+
+    // 公司联系方式
+    private String companyMobile;
+
+    // 用户昵称
+    private String userNickname;
+
+    // 用户姓名
+    private String userName;
+
+    // 用户联系方式
+    private String userMobile;
 
     public String getCode() {
         return code;
@@ -134,5 +168,93 @@ public class Intention extends ABaseDO {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getCompanyUser() {
+        return companyUser;
+    }
+
+    public void setCompanyUser(String companyUser) {
+        this.companyUser = companyUser;
+    }
+
+    public String getCompanyMobile() {
+        return companyMobile;
+    }
+
+    public void setCompanyMobile(String companyMobile) {
+        this.companyMobile = companyMobile;
+    }
+
+    public String getUserNickname() {
+        return userNickname;
+    }
+
+    public void setUserNickname(String userNickname) {
+        this.userNickname = userNickname;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
+    }
+
+    public String getServeName() {
+        return serveName;
+    }
+
+    public void setServeName(String serveName) {
+        this.serveName = serveName;
+    }
+
+    public String getDemandName() {
+        return demandName;
+    }
+
+    public void setDemandName(String demandName) {
+        this.demandName = demandName;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getFromCompany() {
+        return fromCompany;
+    }
+
+    public void setFromCompany(String fromCompany) {
+        this.fromCompany = fromCompany;
+    }
+
+    public String getResumeName() {
+        return resumeName;
+    }
+
+    public void setResumeName(String resumeName) {
+        this.resumeName = resumeName;
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 }

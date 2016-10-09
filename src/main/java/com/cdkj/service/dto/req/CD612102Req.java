@@ -1,6 +1,6 @@
 package com.cdkj.service.dto.req;
 
-public class CD612033Req {
+public class CD612102Req {
 
     // 感兴趣编号 (必填)
     private String code;

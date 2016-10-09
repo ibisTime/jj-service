@@ -45,5 +45,6 @@ public class PropertiesUtil {
         public static String CUSTOMER_TELEPHONE = props
             .getProperty("CUSTOMER_TELEPHONE");
 
+        public static String USER_DB = props.getProperty("USER_DB");
     }
 }

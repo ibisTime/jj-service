@@ -26,6 +26,7 @@
 		<result column="use_times" property="useTimes" />
 		<result column="status" property="status" />
 		<result column="publisher" property="publisher" />
+		<result column="mobile" property="mobile" />
 		<result column="publish_datetime" property="publishDatetime" />
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
@@ -47,6 +48,9 @@
 			</if>
 			<if test="publisher != null and publisher != '' ">
 				AND t.publisher = #{publisher}
+			</if>
+			<if test="mobile != null and mobile != '' ">
+				AND ju.mobile = #{mobile}
 			</if>
 		</trim>
 	</sql>
@@ -75,12 +79,13 @@
 		,t.use_times
 		,t.status
 		,t.publisher
+		,ju.mobile
 		,t.publish_datetime
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
 		FROM
-		tcp_resume t
+		tcp_resume t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -91,7 +96,7 @@
 
 	<select id="select_resume_count" parameterType="resume"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_resume t
+		SELECT count(1) FROM tcp_resume t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id
 		<include refid="where_condition" />
 	</select>
 

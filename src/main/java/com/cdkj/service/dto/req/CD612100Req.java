@@ -1,12 +1,15 @@
 package com.cdkj.service.dto.req;
 
-public class CD612032Req {
+public class CD612100Req {
 
     // 需求方编号(必填)
     private String fromUser;
 
     // 服务编号 (必填)
     private String toCode;
+
+    // 类型 (必填)
+    private String type;
 
     public String getFromUser() {
         return fromUser;
@@ -22,5 +25,13 @@ public class CD612032Req {
 
     public void setToCode(String toCode) {
         this.toCode = toCode;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

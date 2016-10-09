@@ -41,7 +41,7 @@ CREATE TABLE `tcp_demand` (
 DROP TABLE IF EXISTS `tcp_intention`;
 CREATE TABLE `tcp_intention` (
   `code` varchar(32) NOT NULL COMMENT '编号',
-  `type` varchar(4) DEFAULT NULL COMMENT '类型(1 职位申请 2 感兴趣关系)',
+  `type` varchar(4) DEFAULT NULL COMMENT '类型(1 职位申请 2 对服务感兴趣 3 对需求感兴趣 4 对简历感兴趣)',
   `status` varchar(4) DEFAULT NULL COMMENT '状态(1 已申请 2 已完成)',
   `to_code` varchar(32) DEFAULT NULL COMMENT '服务编号',
   `from_user` varchar(32) DEFAULT NULL COMMENT '申请人',

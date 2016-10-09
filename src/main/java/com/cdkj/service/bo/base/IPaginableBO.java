@@ -32,4 +32,5 @@ public interface IPaginableBO<T extends ABaseDO> {
      */
     public Paginable<T> getPaginable(int start, int pageSize, T condition);
 
+
 }

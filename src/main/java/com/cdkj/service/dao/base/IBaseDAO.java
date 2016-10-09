@@ -29,5 +29,4 @@ public interface IBaseDAO<T> {
     public List<T> selectList(T condition);
 
     public List<T> selectList(T condition, int start, int count);
-
 }

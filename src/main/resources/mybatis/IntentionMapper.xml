@@ -8,14 +8,75 @@
 		<result column="status" property="status" />
 		<result column="to_code" property="toCode" />
 		<result column="from_user" property="fromUser" />
+		<result column="from_company" property="fromCompany" />
 		<result column="from_role" property="fromRole" />
 		<result column="from_datetime" property="fromDatetime" />
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
 		<result column="deal_note" property="dealNote" />
+		<result column="serve_name" property="serveName" />
+		<result column="demand_name" property="demandName" />
+		<result column="resume_name" property="resumeName" />
+		<result column="position_name" property="positionName" />
+		<result column="publisher" property="publisher" />
 		<result column="company_code" property="companyCode" />
+		<result column="company_user" property="companyUser" />
+		<result column="company_mobile" property="companyMobile" />
+		<result column="user_nickname" property="userNickname" />
+		<result column="user_name" property="userName" />
+		<result column="user_mobile" property="userMobile" />
 	</resultMap>
 	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="toCode != null and toCode != '' ">
+				AND t.to_code = #{toCode}
+			</if>
+			<if test="fromUser != null and fromUser != '' ">
+				AND t.from_user = #{fromUser}
+			</if>
+			<if test="fromRole != null and fromRole != '' ">
+				AND t.from_role = #{fromRole}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_intention" parameterType="intention" resultMap="intention_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.status
+		,t.to_code
+		,t.from_user
+		,t.from_role
+		,t.from_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		FROM
+		tcp_intention t 
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_intention_count" parameterType="intention"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_intention t
+		<include refid="where_condition" />
+	</select>
+	
+	<sql id="where_condition_fw">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
@@ -40,12 +101,11 @@
 			</if>
 		</trim>
 	</sql>
-	<select id="select_intention" parameterType="intention" resultMap="intention_DB_Result">
+	<select id="select_intention_fw" parameterType="intention" resultMap="intention_DB_Result">
 		SELECT
 		t.code
 		,t.type
 		,t.status
-		,ts.company_code
 		,t.to_code
 		,t.from_user
 		,t.from_role
@@ -53,9 +113,18 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
+		,ts.company_code
+		,ts.name as serve_name
+		,jc.contacts as company_user
+		,jc.mobile as company_mobile
+		,ju.nickname as user_nickname
+		,ju.real_name as user_name
+		,ju.mobile as user_mobile
 		FROM
-		tcp_intention t inner join tcp_serve ts on t.to_code = ts.code
-		<include refid="where_condition" />
+		((tcp_intention t inner join tcp_serve ts on t.to_code = ts.code)
+		INNER JOIN ${userDB}.tstd_company jc on ts.company_code = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id
+		<include refid="where_condition_fw" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
 				t.${order}
@@ -63,10 +132,204 @@
 		</trim>
 	</select>
 
-	<select id="select_intention_count" parameterType="intention"
+	<select id="select_intention_count_fw" parameterType="intention"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_intention t inner join tcp_serve ts on t.to_code = ts.code
-		<include refid="where_condition" />
+		SELECT count(1) FROM ((tcp_intention t inner join tcp_serve ts on t.to_code = ts.code)
+		INNER JOIN ${userDB}.tstd_company jc on ts.company_code = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id
+		<include refid="where_condition_fw" />
+	</select>
+	
+	<sql id="where_condition_xq">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="toCode != null and toCode != '' ">
+				AND t.to_code = #{toCode}
+			</if>
+			<if test="fromUser != null and fromUser != '' ">
+				AND t.from_user = #{fromUser}
+			</if>
+			<if test="fromRole != null and fromRole != '' ">
+				AND t.from_role = #{fromRole}
+			</if>
+			<if test="publisher != null and publisher != '' ">
+				AND td.publisher = #{publisher}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_intention_xq" parameterType="intention" resultMap="intention_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.status
+		,t.to_code
+		,t.from_user as from_company
+		,t.from_role
+		,t.from_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		,td.publisher
+		,td.name as demand_name
+		,jc.contacts as company_user
+		,jc.mobile as company_mobile
+		,ju.nickname as user_nickname
+		,ju.real_name as user_name
+		,ju.mobile as user_mobile
+		FROM
+		((tcp_intention t inner join tcp_demand td on t.to_code = td.code)
+		INNER JOIN ${userDB}.tstd_company jc on t.from_user = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON td.publisher = ju.user_id
+		<include refid="where_condition_xq" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_intention_count_xq" parameterType="intention"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM ((tcp_intention t inner join tcp_demand td on t.to_code = td.code)
+		INNER JOIN ${userDB}.tstd_company jc on t.from_user = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON td.publisher = ju.user_id
+		<include refid="where_condition_xq" />
+	</select>
+	
+	<sql id="where_condition_jl">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="toCode != null and toCode != '' ">
+				AND t.to_code = #{toCode}
+			</if>
+			<if test="fromUser != null and fromUser != '' ">
+				AND t.from_user = #{fromUser}
+			</if>
+			<if test="fromRole != null and fromRole != '' ">
+				AND t.from_role = #{fromRole}
+			</if>
+			<if test="publisher != null and publisher != '' ">
+				AND tr.publisher = #{publisher}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_intention_jl" parameterType="intention" resultMap="intention_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.status
+		,t.to_code
+		,t.from_user as from_company
+		,t.from_role
+		,t.from_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		,tr.publisher
+		,tr.name as resume_name
+		,jc.contacts as company_user
+		,jc.mobile as company_mobile
+		,ju.nickname as user_nickname
+		,ju.real_name as user_name
+		,ju.mobile as user_mobile
+		FROM
+		((tcp_intention t inner join tcp_resume tr on t.to_code = tr.code)
+		INNER JOIN ${userDB}.tstd_company jc on t.from_user = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON tr.publisher = ju.user_id
+		<include refid="where_condition_jl" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_intention_count_jl" parameterType="intention"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM ((tcp_intention t inner join tcp_resume tr on t.to_code = tr.code)
+		INNER JOIN ${userDB}.tstd_company jc on t.from_user = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON tr.publisher = ju.user_id
+		<include refid="where_condition_jl" />
+	</select>
+	
+	<sql id="where_condition_zw">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="toCode != null and toCode != '' ">
+				AND t.to_code = #{toCode}
+			</if>
+			<if test="fromUser != null and fromUser != '' ">
+				AND t.from_user = #{fromUser}
+			</if>
+			<if test="fromRole != null and fromRole != '' ">
+				AND t.from_role = #{fromRole}
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND tp.company_code = #{companyCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_intention_zw" parameterType="intention" resultMap="intention_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.status
+		,t.to_code
+		,t.from_user
+		,t.from_role
+		,t.from_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		,tp.company_code
+		,tp.name as position_name
+		,jc.contacts as company_user
+		,jc.mobile as company_mobile
+		,ju.nickname as user_nickname
+		,ju.real_name as user_name
+		,ju.mobile as user_mobile
+		FROM
+		((tcp_intention t inner join tcp_position tp on t.to_code = tp.code)
+		INNER JOIN ${userDB}.tstd_company jc on tp.company_code = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id
+		<include refid="where_condition_zw" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_intention_count_zw" parameterType="intention"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM ((tcp_intention t inner join tcp_position tp on t.to_code = tp.code)
+		INNER JOIN ${userDB}.tstd_company jc on tp.company_code = jc.code)
+		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id
+		<include refid="where_condition_zw" />
 	</select>
 
 	<insert id="insert_intention" parameterType="intention">

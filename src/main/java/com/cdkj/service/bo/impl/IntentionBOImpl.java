@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IIntentionBO;
+import com.cdkj.service.bo.base.Page;
+import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
@@ -57,8 +59,8 @@ public class IntentionBOImpl extends PaginableBOImpl<Intention> implements
     }
 
     @Override
-    public int refreshIntentionStatus(String code, String dealer,
-            String dealNote) {
+    public int refreshIntentionStatus(String code, String dealNote,
+            String dealer) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
             Intention data = new Intention();
@@ -89,5 +91,53 @@ public class IntentionBOImpl extends PaginableBOImpl<Intention> implements
             }
         }
         return data;
+    }
+
+    @Override
+    public Paginable<Intention> getFWPaginable(int start, int pageSize,
+            Intention condition) {
+        long totalCount = intentionDAO.selectFWTotalCount(condition);
+        Paginable<Intention> page = new Page<Intention>(start, pageSize,
+            totalCount);
+        List<Intention> dataList = intentionDAO.selectFWList(condition,
+            page.getStart(), page.getPageSize());
+        page.setList(dataList);
+        return page;
+    }
+
+    @Override
+    public Paginable<Intention> getXQPaginable(int start, int pageSize,
+            Intention condition) {
+        long totalCount = intentionDAO.selectXQTotalCount(condition);
+        Paginable<Intention> page = new Page<Intention>(start, pageSize,
+            totalCount);
+        List<Intention> dataList = intentionDAO.selectXQList(condition,
+            page.getStart(), page.getPageSize());
+        page.setList(dataList);
+        return page;
+    }
+
+    @Override
+    public Paginable<Intention> getJLPaginable(int start, int pageSize,
+            Intention condition) {
+        long totalCount = intentionDAO.selectJLTotalCount(condition);
+        Paginable<Intention> page = new Page<Intention>(start, pageSize,
+            totalCount);
+        List<Intention> dataList = intentionDAO.selectJLList(condition,
+            page.getStart(), page.getPageSize());
+        page.setList(dataList);
+        return page;
+    }
+
+    @Override
+    public Paginable<Intention> getZWPaginable(int start, int pageSize,
+            Intention condition) {
+        long totalCount = intentionDAO.selectZWTotalCount(condition);
+        Paginable<Intention> page = new Page<Intention>(start, pageSize,
+            totalCount);
+        List<Intention> dataList = intentionDAO.selectZWList(condition,
+            page.getStart(), page.getPageSize());
+        page.setList(dataList);
+        return page;
     }
 }
