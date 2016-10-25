@@ -12,7 +12,6 @@ import com.cdkj.service.dao.IServeTrainDAO;
 import com.cdkj.service.domain.ServeTrain;
 import com.cdkj.service.exception.BizException;
 
-//CHECK ��鲢��ע�� 
 @Component
 public class ServeTrainBOImpl extends PaginableBOImpl<ServeTrain> implements
         IServeTrainBO {
