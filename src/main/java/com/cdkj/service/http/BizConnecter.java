@@ -63,7 +63,7 @@ public class BizConnecter {
         String postUrl = POST_URL;
         if (code.contains("799")) {
             postUrl = SMS_URL;
-        } else if (code.contains("805")) {
+        } else if (code.contains("805") || code.contains("806")) {
             postUrl = USER_URL;
         } else if (code.startsWith("802")) {
             postUrl = ACCOUNT_URL;

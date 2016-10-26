@@ -36,9 +36,14 @@
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
-			
 			<if test="isHot != null and isHot != '' ">
 				AND t.is_hot = #{isHot}
+			</if>
+			<if test="kind != null and kind != '' ">
+				AND t.kind = #{kind}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
 			</if>
 			<if test="companyName != null and companyName != '' ">
 				AND jc.name like "%"#{companyName}"%"

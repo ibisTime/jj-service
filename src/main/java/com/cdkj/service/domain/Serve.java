@@ -3,6 +3,7 @@ package com.cdkj.service.domain;
 import java.util.Date;
 
 import com.cdkj.service.dao.base.ABaseDO;
+import com.cdkj.service.dto.res.XN806010Res;
 
 public class Serve extends ABaseDO {
 
@@ -42,6 +43,8 @@ public class Serve extends ABaseDO {
     private Date publishDatetimeStart;
 
     private Date publishDatetimeEnd;
+
+    private XN806010Res company;
 
     public String getCode() {
         return code;
@@ -177,5 +180,13 @@ public class Serve extends ABaseDO {
 
     public void setPublishDatetimeEnd(Date publishDatetimeEnd) {
         this.publishDatetimeEnd = publishDatetimeEnd;
+    }
+
+    public XN806010Res getCompany() {
+        return company;
+    }
+
+    public void setCompany(XN806010Res company) {
+        this.company = company;
     }
 }

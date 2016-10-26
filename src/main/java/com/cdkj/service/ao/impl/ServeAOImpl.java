@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IServeAO;
+import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IServeArtBO;
 import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeCpBO;
@@ -17,6 +18,7 @@ import com.cdkj.service.bo.IServeShopBO;
 import com.cdkj.service.bo.IServeTrainBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Serve;
+import com.cdkj.service.dto.res.XN806010Res;
 import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
@@ -46,6 +48,9 @@ public class ServeAOImpl implements IServeAO {
 
     @Autowired
     private IServeTrainBO serveTrainBO;
+
+    @Autowired
+    private ICompanyBO companyBO;
 
     @Override
     public String addServe(Serve data) {
@@ -89,7 +94,13 @@ public class ServeAOImpl implements IServeAO {
 
     @Override
     public Paginable<Serve> queryServePage(int start, int limit, Serve condition) {
-        return serveBO.getPaginable(start, limit, condition);
+        Paginable<Serve> page = serveBO.getPaginable(start, limit, condition);
+        List<Serve> list = page.getList();
+        for (Serve serve : list) {
+            XN806010Res res = companyBO.getCompany(serve.getCompanyCode());
+            serve.setCompany(res);
+        }
+        return page;
     }
 
     @Override
