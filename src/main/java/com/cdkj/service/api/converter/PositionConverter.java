@@ -49,6 +49,7 @@ public class PositionConverter {
     public static Position converter(CD612090Req req) {
         Position result = new Position();
         result.setName(req.getName());
+        result.setIsHot(req.getIsHot());
         result.setCompanyCode(req.getCompanyCode());
         result.setCompanyName(req.getCompanyName());
         return result;

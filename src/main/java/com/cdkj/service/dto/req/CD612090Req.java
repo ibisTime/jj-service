@@ -4,10 +4,13 @@ public class CD612090Req extends APageReq {
 
     private static final long serialVersionUID = 1L;
 
-    // 职位名称(必填)
+    // 职位名称(选填)
     private String name;
 
-    // 公司编号(必填)
+    // 是否热门(选填)
+    private String isHot;
+
+    // 公司编号(选填)
     private String companyCode;
 
     // 公司名称(选填)
@@ -35,5 +38,13 @@ public class CD612090Req extends APageReq {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(String isHot) {
+        this.isHot = isHot;
     }
 }
