@@ -65,6 +65,8 @@ public class Resume extends ABaseDO {
     // ****************db properties ******************
     private String mobile;
 
+    private String workTime;
+
     public String getCode() {
         return code;
     }
@@ -287,5 +289,13 @@ public class Resume extends ABaseDO {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(String workTime) {
+        this.workTime = workTime;
     }
 }

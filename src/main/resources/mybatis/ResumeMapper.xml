@@ -27,6 +27,7 @@
 		<result column="status" property="status" />
 		<result column="publisher" property="publisher" />
 		<result column="mobile" property="mobile" />
+		<result column="work_time" property="workTime" />
 		<result column="publish_datetime" property="publishDatetime" />
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
@@ -80,12 +81,14 @@
 		,t.status
 		,t.publisher
 		,ju.mobile
+		,jue.work_time
 		,t.publish_datetime
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
 		FROM
-		tcp_resume t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id
+		(tcp_resume t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id)
+		inner join ${userDB}.tstd_user_ext jue on ju.user_id = jue.user_id 
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -96,7 +99,8 @@
 
 	<select id="select_resume_count" parameterType="resume"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_resume t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id
+		SELECT count(1) FROM (tcp_resume t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id)
+		inner join ${userDB}.tstd_user_ext jue on ju.user_id = jue.user_id
 		<include refid="where_condition" />
 	</select>
 

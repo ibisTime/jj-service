@@ -22,6 +22,9 @@ public class CD612050Req extends APageReq {
     // 手机号(选填)
     private String mobile;
 
+    // 发布者(选填)
+    private String publisher;
+
     // 资质编号(选填)
     private String qualityCode;
 
@@ -61,5 +64,13 @@ public class CD612050Req extends APageReq {
 
     public void setDealer(String dealer) {
         this.dealer = dealer;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }

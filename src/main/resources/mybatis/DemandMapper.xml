@@ -30,8 +30,8 @@
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
-			<if test="status != null and status != '' ">
-				AND t.status = #{status}
+			<if test="publisher != null and publisher != '' ">
+				AND t.publisher = #{publisher}
 			</if>
 			<if test="publishDatetimeStart != null and publishDatetimeStart != '' ">
 				<![CDATA[AND t.publish_datetime >= #{publishDatetimeStart}]]>

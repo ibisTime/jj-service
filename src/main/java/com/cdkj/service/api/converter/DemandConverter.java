@@ -56,6 +56,7 @@ public class DemandConverter {
     public static Demand converter(CD612050Req req) {
         Demand result = new Demand();
         result.setMobile(req.getMobile());
+        result.setPublisher(req.getPublisher());
         result.setQualityCode(req.getQualityCode());
         result.setUrgentLevel(req.getUrgentLevel());
         result.setPublishDatetimeStart(DateUtil.getFrontDate(
