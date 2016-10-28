@@ -19,6 +19,8 @@ public interface IServeAO {
     public int editServeHot(String code, String isHot, String orderNo,
             String dealer);
 
+    public int editServeHotLocation(String code, String action);
+
     public Paginable<Serve> queryServePage(int start, int limit, Serve condition);
 
     public List<Serve> queryServeList(Serve condition);

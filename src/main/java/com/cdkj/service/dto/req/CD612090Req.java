@@ -16,6 +16,15 @@ public class CD612090Req extends APageReq {
     // 公司名称(选填)
     private String companyName;
 
+    // 公司-省(选填)
+    private String gsProvince;
+
+    // 公司-市(选填)
+    private String gsCity;
+
+    // 公司-区(选填)
+    private String gsArea;
+
     public String getName() {
         return name;
     }
@@ -46,5 +55,29 @@ public class CD612090Req extends APageReq {
 
     public void setIsHot(String isHot) {
         this.isHot = isHot;
+    }
+
+    public String getGsProvince() {
+        return gsProvince;
+    }
+
+    public void setGsProvince(String gsProvince) {
+        this.gsProvince = gsProvince;
+    }
+
+    public String getGsCity() {
+        return gsCity;
+    }
+
+    public void setGsCity(String gsCity) {
+        this.gsCity = gsCity;
+    }
+
+    public String getGsArea() {
+        return gsArea;
+    }
+
+    public void setGsArea(String gsArea) {
+        this.gsArea = gsArea;
     }
 }

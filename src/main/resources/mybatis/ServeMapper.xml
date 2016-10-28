@@ -39,6 +39,9 @@
 			<if test="isHot != null and isHot != '' ">
 				AND t.is_hot = #{isHot}
 			</if>
+			<if test="orderNo != null and orderNo != '' ">
+				AND t.order_no = #{orderNo}
+			</if>
 			<if test="publisher != null and publisher != '' ">
 				AND t.publisher = #{publisher}
 			</if>
@@ -50,6 +53,15 @@
 			</if>
 			<if test="publishDatetimeEnd != null and publishDatetimeEnd != '' ">
 				<![CDATA[AND t.publish_datetime <= #{publishDatetimeEnd}]]>
+			</if>
+			<if test="province != null and province != '' ">
+				AND jc.province = #{province}
+			</if>
+			<if test="city != null and city != '' ">
+				AND jc.city = #{city}
+			</if>
+			<if test="area != null and area != '' ">
+				AND jc.area = #{area}
 			</if>
 		</trim>
 	</sql>
@@ -70,8 +82,11 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
+		,jc.province
+		,jc.city
+		,jc.area
 		FROM
-		tcp_serve t
+		tcp_serve t inner join ${userDB}.tstd_company jc on t.company_code = jc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -82,7 +97,7 @@
 
 	<select id="select_serve_count" parameterType="serve"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_serve t
+		SELECT count(1) FROM tcp_serve t inner join ${userDB}.tstd_company jc on t.company_code = jc.code
 		<include refid="where_condition" />
 	</select>
 

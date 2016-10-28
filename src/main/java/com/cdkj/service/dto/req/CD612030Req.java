@@ -4,6 +4,9 @@ public class CD612030Req extends APageReq {
 
     private static final long serialVersionUID = 1L;
 
+    // 服务类型
+    private String type;
+
     // 服务名称 (选填)
     private String name;
 
@@ -27,6 +30,15 @@ public class CD612030Req extends APageReq {
 
     // 处理人 (选填)
     private String dealer;
+
+    // 省 (选填)
+    private String province;
+
+    // 市 (选填)
+    private String city;
+
+    // 区(选填)
+    private String area;
 
     public String getName() {
         return name;
@@ -90,5 +102,37 @@ public class CD612030Req extends APageReq {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

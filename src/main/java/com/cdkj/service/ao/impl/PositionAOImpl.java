@@ -9,6 +9,7 @@ import com.cdkj.service.ao.IPositionAO;
 import com.cdkj.service.bo.IPositionBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Position;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -69,5 +70,25 @@ public class PositionAOImpl implements IPositionAO {
             throw new BizException("xn0000", "该编号不存在");
         }
         return positionBO.refreshPositionHot(code, isHot, orderNo, dealer);
+    }
+
+    @Override
+    public int editPositionHotLocation(String code, String action) {
+        Position data = positionBO.getPosition(code);
+        Integer location = data.getOrderNo();
+        if (null == location) {
+            location = 2;
+        }
+        if (EBoolean.YES.getCode().equalsIgnoreCase(action)) {
+            if (location > 0) {
+                location--;
+            } else {
+                throw new BizException("xn0000", "次序不可小于零");
+            }
+        } else {
+            location++;
+        }
+        return positionBO.refreshPositionHot(data.getCode(), data.getIsHot(),
+            String.valueOf(location), data.getDealer());
     }
 }

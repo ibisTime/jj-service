@@ -44,7 +44,33 @@ public class Serve extends ABaseDO {
 
     private Date publishDatetimeEnd;
 
+    // 服务类型
+    private String type;
+
+    // 公司-省
+    private String province;
+
+    // 公司-市
+    private String city;
+
+    // 公司-区
+    private String area;
+
     private XN806010Res company;
+
+    private ServeArt serveArt;
+
+    private ServeCp serveCp;
+
+    private ServeCyy serveCyy;
+
+    private ServeKfwb serveKfwb;
+
+    private ServePhoto servePhoto;
+
+    private ServeShop serveShop;
+
+    private ServeTrain serveTrain;
 
     public String getCode() {
         return code;
@@ -188,5 +214,93 @@ public class Serve extends ABaseDO {
 
     public void setCompany(XN806010Res company) {
         this.company = company;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public ServeArt getServeArt() {
+        return serveArt;
+    }
+
+    public void setServeArt(ServeArt serveArt) {
+        this.serveArt = serveArt;
+    }
+
+    public ServeCp getServeCp() {
+        return serveCp;
+    }
+
+    public void setServeCp(ServeCp serveCp) {
+        this.serveCp = serveCp;
+    }
+
+    public ServeCyy getServeCyy() {
+        return serveCyy;
+    }
+
+    public void setServeCyy(ServeCyy serveCyy) {
+        this.serveCyy = serveCyy;
+    }
+
+    public ServeKfwb getServeKfwb() {
+        return serveKfwb;
+    }
+
+    public void setServeKfwb(ServeKfwb serveKfwb) {
+        this.serveKfwb = serveKfwb;
+    }
+
+    public ServePhoto getServePhoto() {
+        return servePhoto;
+    }
+
+    public void setServePhoto(ServePhoto servePhoto) {
+        this.servePhoto = servePhoto;
+    }
+
+    public ServeShop getServeShop() {
+        return serveShop;
+    }
+
+    public void setServeShop(ServeShop serveShop) {
+        this.serveShop = serveShop;
+    }
+
+    public ServeTrain getServeTrain() {
+        return serveTrain;
+    }
+
+    public void setServeTrain(ServeTrain serveTrain) {
+        this.serveTrain = serveTrain;
     }
 }

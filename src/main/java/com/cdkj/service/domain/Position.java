@@ -52,6 +52,15 @@ public class Position extends ABaseDO {
 
     private String companyName;
 
+    // 公司-省
+    private String gsProvince;
+
+    // 公司-市
+    private String gsCity;
+
+    // 公司-区
+    private String gsArea;
+
     public String getCode() {
         return code;
     }
@@ -218,5 +227,29 @@ public class Position extends ABaseDO {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getGsProvince() {
+        return gsProvince;
+    }
+
+    public void setGsProvince(String gsProvince) {
+        this.gsProvince = gsProvince;
+    }
+
+    public String getGsCity() {
+        return gsCity;
+    }
+
+    public void setGsCity(String gsCity) {
+        this.gsCity = gsCity;
+    }
+
+    public String getGsArea() {
+        return gsArea;
+    }
+
+    public void setGsArea(String gsArea) {
+        this.gsArea = gsArea;
     }
 }

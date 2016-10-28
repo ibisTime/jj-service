@@ -48,6 +48,15 @@
 			<if test="companyName != null and companyName != '' ">
 				AND jc.name like "%"#{companyName}"%"
 			</if>
+			<if test="gsProvince != null and gsProvince != '' ">
+				AND jc.province = #{gsProvince}
+			</if>
+			<if test="gsCity != null and gsCity != '' ">
+				AND jc.city = #{gsCity}
+			</if>
+			<if test="gsArea != null and gsArea != '' ">
+				AND jc.area = #{gsArea}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_position" parameterType="position" resultMap="position_DB_Result">
@@ -73,6 +82,9 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
+		,jc.province as gsProvince
+		,jc.city as gsCity
+		,jc.area as gsArea
 		FROM
 		tcp_position t inner join ${userDB}.tstd_company jc on t.company_code = jc.code
 		<include refid="where_condition" />

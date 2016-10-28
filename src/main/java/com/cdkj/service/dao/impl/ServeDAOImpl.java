@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.cdkj.service.common.PropertiesUtil;
 import com.cdkj.service.dao.IServeDAO;
 import com.cdkj.service.dao.base.support.AMybatisTemplate;
 import com.cdkj.service.domain.Serve;
@@ -23,24 +24,28 @@ public class ServeDAOImpl extends AMybatisTemplate implements IServeDAO {
 
     @Override
     public Serve select(Serve condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.select(NAMESPACE.concat("select_serve"), condition,
             Serve.class);
     }
 
     @Override
     public Long selectTotalCount(Serve condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectTotalCount(NAMESPACE.concat("select_serve_count"),
             condition);
     }
 
     @Override
     public List<Serve> selectList(Serve condition) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_serve"), condition,
             Serve.class);
     }
 
     @Override
     public List<Serve> selectList(Serve condition, int start, int count) {
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_serve"), start, count,
             condition, Serve.class);
     }

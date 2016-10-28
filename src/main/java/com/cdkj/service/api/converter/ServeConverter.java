@@ -358,12 +358,16 @@ public class ServeConverter {
     // 分页查询服务
     public static Serve converter(CD612030Req req) {
         Serve serve = new Serve();
+        serve.setType(req.getType());
         serve.setName(req.getName());
         serve.setCompanyCode(req.getCompanyCode());
         serve.setStatus(req.getStatus());
         serve.setQualityCode(req.getQualityCode());
         serve.setIsHot(req.getIsHot());
         serve.setPublisher(req.getPublisher());
+        serve.setProvince(req.getProvince());
+        serve.setCity(req.getCity());
+        serve.setArea(req.getArea());
         serve.setPublishDatetimeStart(DateUtil.strToDate(req.getDateStart(),
             DateUtil.DATA_TIME_PATTERN_1));
         serve.setPublishDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),

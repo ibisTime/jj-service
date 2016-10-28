@@ -52,6 +52,9 @@ public class PositionConverter {
         result.setIsHot(req.getIsHot());
         result.setCompanyCode(req.getCompanyCode());
         result.setCompanyName(req.getCompanyName());
+        result.setGsProvince(req.getGsProvince());
+        result.setGsCity(req.getGsCity());
+        result.setGsArea(req.getGsArea());
         return result;
     }
 }

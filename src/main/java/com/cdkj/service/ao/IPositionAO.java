@@ -19,6 +19,8 @@ public interface IPositionAO {
     public int editPositionHot(String code, String isHot, String orderNo,
             String dealer);
 
+    public int editPositionHotLocation(String code, String action);
+
     public Paginable<Position> queryPositionPage(int start, int limit,
             Position condition);
 
