@@ -57,6 +57,12 @@ public class Demand extends ABaseDO {
 
     private String mobile;
 
+    // 发布人姓名
+    private String publisherName;
+
+    // 公司联系人
+    private String comContacts;
+
     public String getCode() {
         return code;
     }
@@ -176,4 +182,21 @@ public class Demand extends ABaseDO {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+
+    public String getPublisherName() {
+        return publisherName;
+    }
+
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
+    }
+
+    public String getComContacts() {
+        return comContacts;
+    }
+
+    public void setComContacts(String comContacts) {
+        this.comContacts = comContacts;
+    }
+
 }

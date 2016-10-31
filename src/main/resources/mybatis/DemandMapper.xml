@@ -7,10 +7,12 @@
 		<result column="name" property="name" />
 		<result column="quality_code" property="qualityCode" />
 		<result column="exp_company" property="expCompany" />
+		<result column="com_contacts" property="comContacts" />
 		<result column="urgent_level" property="urgentLevel" />
 		<result column="description" property="description" />
 		<result column="status" property="status" />
 		<result column="publisher" property="publisher" />
+		<result column="publisher_name" property="publisherName" />
 		<result column="publish_datetime" property="publishDatetime" />
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
@@ -50,16 +52,19 @@
 		,t.name
 		,t.quality_code
 		,t.exp_company
+		,jc.contacts as com_contacts
 		,t.urgent_level
 		,t.description
 		,t.status
 		,t.publisher
+		,ju.real_name as publisher_name
 		,t.publish_datetime
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
 		FROM
-		tcp_demand t
+		(tcp_demand t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id)
+		inner join ${userDB}.tstd_company jc on t.exp_company = jc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -70,7 +75,8 @@
 
 	<select id="select_demand_count" parameterType="demand"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_demand t
+		SELECT count(1) FROM (tcp_demand t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id)
+		inner join ${userDB}.tstd_company jc on t.exp_company = jc.code
 		<include refid="where_condition" />
 	</select>
 
