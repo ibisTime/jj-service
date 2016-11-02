@@ -7,16 +7,13 @@ import java.io.IOException;
 
 public class SCDM_IDAO {
 
-    private static String key = "demand";
+    private static String key = "fieldTimes";
 
-    private static String packge = "com.cdkj.service.";
+    private static String packge = "com.std.user.";
 
-    private static String dbname = "tcp_demand";
+    private static String dbname = "tstd_field_times";
 
-    private static String[] DBwords = { "code", "name", "quality_code",
-            "exp_company", "urgent_level", "description", "status",
-            "publisher", "publish_datetime", "deal_user", "deal_datetime",
-            "deal_note" };
+    private static String[] DBwords = { "id", "type", "user_id", "times" };
 
     private static String[] DOwords = getDOwords();
 
