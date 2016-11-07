@@ -16,13 +16,22 @@
 		<result column="deal_note" property="dealNote" />
 		<result column="serve_name" property="serveName" />
 		<result column="demand_name" property="demandName" />
+		<result column="resume_code" property="resumeCode" />
 		<result column="resume_name" property="resumeName" />
+		<result column="exp_position" property="expPosition" />
+		<result column="exp_msalary" property="expMsalary" />
+		<result column="exp_province" property="expProvince" />
+		<result column="exp_city" property="expCity" />
+		<result column="position_code" property="positionCode" />
 		<result column="position_name" property="positionName" />
+		<result column="province" property="province" />
+		<result column="city" property="city" />
+		<result column="msalary" property="msalary" />
 		<result column="publisher" property="publisher" />
 		<result column="company_code" property="companyCode" />
+		<result column="company_name" property="companyName" />
 		<result column="company_user" property="companyUser" />
 		<result column="company_mobile" property="companyMobile" />
-		<result column="user_nickname" property="userNickname" />
 		<result column="user_name" property="userName" />
 		<result column="user_mobile" property="userMobile" />
 	</resultMap>
@@ -117,7 +126,6 @@
 		,ts.name as serve_name
 		,jc.contacts as company_user
 		,jc.mobile as company_mobile
-		,ju.nickname as user_nickname
 		,ju.real_name as user_name
 		,ju.mobile as user_mobile
 		FROM
@@ -181,7 +189,6 @@
 		,td.name as demand_name
 		,jc.contacts as company_user
 		,jc.mobile as company_mobile
-		,ju.nickname as user_nickname
 		,ju.real_name as user_name
 		,ju.mobile as user_mobile
 		FROM
@@ -245,7 +252,6 @@
 		,tr.name as resume_name
 		,jc.contacts as company_user
 		,jc.mobile as company_mobile
-		,ju.nickname as user_nickname
 		,ju.real_name as user_name
 		,ju.mobile as user_mobile
 		FROM
@@ -296,26 +302,33 @@
 	<select id="select_intention_zw" parameterType="intention" resultMap="intention_DB_Result">
 		SELECT
 		t.code
-		,t.type
 		,t.status
-		,t.to_code
 		,t.from_user
-		,t.from_role
+		,ju.real_name as user_name
+		,ju.mobile as user_mobile
+		,tr.code as resume_code
+		,tr.name as resume_name
+		,tr.exp_position
+		,tr.exp_msalary
+		,tr.exp_province
+		,tr.exp_city
+		,tp.company_code
+		,jc.name as company_name
+		,tp.code as position_code
+		,tp.name as position_name
+		,tp.province as province
+		,tp.city as city
+		,tp.msalary as msalary
+		,jc.contacts as company_user
+		,jc.mobile as company_mobile
 		,t.from_datetime
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
-		,tp.company_code
-		,tp.name as position_name
-		,jc.contacts as company_user
-		,jc.mobile as company_mobile
-		,ju.nickname as user_nickname
-		,ju.real_name as user_name
-		,ju.mobile as user_mobile
 		FROM
-		((tcp_intention t inner join tcp_position tp on t.to_code = tp.code)
-		INNER JOIN ${userDB}.tstd_company jc on tp.company_code = jc.code)
-		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id
+		tcp_intention t inner join tcp_position tp on t.to_code = tp.code
+		INNER JOIN ${userDB}.tstd_company jc on tp.company_code = jc.code
+		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id inner join tcp_resume tr on t.from_role = tr.code
 		<include refid="where_condition_zw" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -326,9 +339,9 @@
 
 	<select id="select_intention_count_zw" parameterType="intention"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM ((tcp_intention t inner join tcp_position tp on t.to_code = tp.code)
-		INNER JOIN ${userDB}.tstd_company jc on tp.company_code = jc.code)
-		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id
+		SELECT count(1) FROM tcp_intention t inner join tcp_position tp on t.to_code = tp.code
+		INNER JOIN ${userDB}.tstd_company jc on tp.company_code = jc.code
+		INNER JOIN ${userDB}.tstd_user ju ON t.from_user = ju.user_id inner join tcp_resume tr on t.from_role = tr.code
 		<include refid="where_condition_zw" />
 	</select>
 

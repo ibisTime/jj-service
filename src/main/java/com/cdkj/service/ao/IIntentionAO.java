@@ -13,6 +13,7 @@ public interface IIntentionAO {
     public String addZWIntention(String userId, String resumeCode,
             String positionCode);
 
+    // 删除关联关系
     public int dropIntention(String code);
 
     // 处理意向，状态更改为已完成(简单查看)

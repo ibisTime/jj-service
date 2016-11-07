@@ -52,12 +52,6 @@ public class Intention extends ABaseDO {
     // 需求名称
     private String demandName;
 
-    // 需求名称
-    private String resumeName;
-
-    // 职位名称
-    private String positionName;
-
     // 发布人编号
     private String publisher;
 
@@ -67,20 +61,53 @@ public class Intention extends ABaseDO {
     // 公司编号
     private String companyCode;
 
+    // 公司名称
+    private String companyName;
+
     // 公司联系人
     private String companyUser;
 
     // 公司联系方式
     private String companyMobile;
 
-    // 用户昵称
-    private String userNickname;
+    // 职位编号
+    private String positionCode;
+
+    // 职位名称
+    private String positionName;
+
+    // 省
+    private String province;
+
+    // 市
+    private String city;
+
+    // 月薪
+    private String msalary;
 
     // 用户姓名
     private String userName;
 
     // 用户联系方式
     private String userMobile;
+
+    // 简历编号
+    private String resumeCode;
+
+    // 简历名称
+    private String resumeName;
+
+    // 期望岗位
+    private String expPosition;
+
+    // 期望月薪
+    private String expMsalary;
+
+    // 期望省
+    private String expProvince;
+
+    // 期望市
+    private String expCity;
 
     public String getCode() {
         return code;
@@ -186,14 +213,6 @@ public class Intention extends ABaseDO {
         this.companyMobile = companyMobile;
     }
 
-    public String getUserNickname() {
-        return userNickname;
-    }
-
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -256,5 +275,85 @@ public class Intention extends ABaseDO {
 
     public void setPositionName(String positionName) {
         this.positionName = positionName;
+    }
+
+    public String getExpPosition() {
+        return expPosition;
+    }
+
+    public void setExpPosition(String expPosition) {
+        this.expPosition = expPosition;
+    }
+
+    public String getExpMsalary() {
+        return expMsalary;
+    }
+
+    public void setExpMsalary(String expMsalary) {
+        this.expMsalary = expMsalary;
+    }
+
+    public String getExpProvince() {
+        return expProvince;
+    }
+
+    public void setExpProvince(String expProvince) {
+        this.expProvince = expProvince;
+    }
+
+    public String getExpCity() {
+        return expCity;
+    }
+
+    public void setExpCity(String expCity) {
+        this.expCity = expCity;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getMsalary() {
+        return msalary;
+    }
+
+    public void setMsalary(String msalary) {
+        this.msalary = msalary;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getPositionCode() {
+        return positionCode;
+    }
+
+    public void setPositionCode(String positionCode) {
+        this.positionCode = positionCode;
+    }
+
+    public String getResumeCode() {
+        return resumeCode;
+    }
+
+    public void setResumeCode(String resumeCode) {
+        this.resumeCode = resumeCode;
     }
 }

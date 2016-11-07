@@ -14,7 +14,7 @@ import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
 /** 
- * 感兴趣分页查询简历
+ * 分页查询申请职位或者应聘简历信息
  * @author: zuixian 
  * @since: 2016年10月7日 下午4:06:14 
  * @history:
