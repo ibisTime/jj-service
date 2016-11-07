@@ -3,6 +3,7 @@ package com.cdkj.service.domain;
 import java.util.Date;
 
 import com.cdkj.service.dao.base.ABaseDO;
+import com.cdkj.service.dto.res.XN806010Res;
 
 public class Position extends ABaseDO {
 
@@ -12,6 +13,7 @@ public class Position extends ABaseDO {
 
     private String name;
 
+    // 种类
     private String kind;
 
     private String province;
@@ -22,6 +24,7 @@ public class Position extends ABaseDO {
 
     private String education;
 
+    // 类型(1 全职 2兼职 3实习)
     private String type;
 
     private Integer jobNum;
@@ -60,6 +63,8 @@ public class Position extends ABaseDO {
 
     // 公司-区
     private String gsArea;
+
+    private XN806010Res company;
 
     public String getCode() {
         return code;
@@ -251,5 +256,13 @@ public class Position extends ABaseDO {
 
     public void setGsArea(String gsArea) {
         this.gsArea = gsArea;
+    }
+
+    public XN806010Res getCompany() {
+        return company;
+    }
+
+    public void setCompany(XN806010Res company) {
+        this.company = company;
     }
 }

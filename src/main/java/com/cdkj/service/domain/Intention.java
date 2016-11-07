@@ -17,7 +17,7 @@ public class Intention extends ABaseDO {
     // 编号
     private String code;
 
-    // 类型
+    // 类型(1 职位申请 2 对服务感兴趣 3 对需求感兴趣 4 对简历感兴趣)
     private String type;
 
     // 状态

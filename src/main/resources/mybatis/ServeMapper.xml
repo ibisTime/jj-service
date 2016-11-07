@@ -6,9 +6,12 @@
 		<result column="code" property="code" />
 		<result column="name" property="name" />
 		<result column="company_code" property="companyCode" />
+		<result column="company_name" property="companyName" />
 		<result column="quote_min" property="quoteMin" />
 		<result column="quote_max" property="quoteMax" />
 		<result column="quality_code" property="qualityCode" />
+		<result column="quality_name" property="qualityName" />
+		<result column="type" property="type" />
 		<result column="description" property="description" />
 		<result column="is_hot" property="isHot" />
 		<result column="order_no" property="orderNo" />
@@ -54,14 +57,17 @@
 			<if test="publishDatetimeEnd != null and publishDatetimeEnd != '' ">
 				<![CDATA[AND t.publish_datetime <= #{publishDatetimeEnd}]]>
 			</if>
+			<if test="companyName != null and companyName != '' ">
+				AND tc.name like "%"#{companyName}"%" 
+			</if>
 			<if test="province != null and province != '' ">
-				AND jc.province = #{province}
+				AND tc.province = #{province}
 			</if>
 			<if test="city != null and city != '' ">
-				AND jc.city = #{city}
+				AND tc.city = #{city}
 			</if>
 			<if test="area != null and area != '' ">
-				AND jc.area = #{area}
+				AND tc.area = #{area}
 			</if>
 		</trim>
 	</sql>
@@ -73,6 +79,8 @@
 		,t.quote_min
 		,t.quote_max
 		,t.quality_code
+		,tsc.name as quality_name
+		,tsc.type
 		,t.description
 		,t.is_hot
 		,t.order_no
@@ -82,11 +90,11 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
-		,jc.province
-		,jc.city
-		,jc.area
+		,tc.province
+		,tc.city
+		,tc.area
 		FROM
-		tcp_serve t inner join ${userDB}.tstd_company jc on t.company_code = jc.code
+		tcp_serve t inner join ${userDB}.tstd_company tc on t.company_code = tc.code inner join ${userDB}.tstd_certificate tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -97,7 +105,7 @@
 
 	<select id="select_serve_count" parameterType="serve"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_serve t inner join ${userDB}.tstd_company jc on t.company_code = jc.code
+		SELECT count(1) FROM tcp_serve t inner join ${userDB}.tstd_company tc on t.company_code = tc.code inner join ${userDB}.tstd_certificate tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 

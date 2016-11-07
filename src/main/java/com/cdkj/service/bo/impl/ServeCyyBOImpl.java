@@ -10,7 +10,6 @@ import com.cdkj.service.bo.IServeCyyBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.dao.IServeCyyDAO;
 import com.cdkj.service.domain.ServeCyy;
-import com.cdkj.service.exception.BizException;
 
 @Component
 public class ServeCyyBOImpl extends PaginableBOImpl<ServeCyy> implements
@@ -70,9 +69,9 @@ public class ServeCyyBOImpl extends PaginableBOImpl<ServeCyy> implements
             ServeCyy condition = new ServeCyy();
             condition.setServeCode(code);
             data = serveCyyDAO.select(condition);
-            if (data == null) {
-                throw new BizException("xn0000", "该编号不存在");
-            }
+            // if (data == null) {
+            // throw new BizException("xn0000", "该编号不存在");
+            // }
         }
         return data;
     }

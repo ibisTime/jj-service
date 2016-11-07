@@ -10,7 +10,6 @@ import com.cdkj.service.bo.IServeArtBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.dao.IServeArtDAO;
 import com.cdkj.service.domain.ServeArt;
-import com.cdkj.service.exception.BizException;
 
 @Component
 public class ServeArtBOImpl extends PaginableBOImpl<ServeArt> implements
@@ -70,9 +69,9 @@ public class ServeArtBOImpl extends PaginableBOImpl<ServeArt> implements
             ServeArt condition = new ServeArt();
             condition.setServeCode(code);
             data = serveArtDAO.select(condition);
-            if (data == null) {
-                throw new BizException("xn0000", "该编号不存在");
-            }
+            // if (data == null) {
+            // throw new BizException("xn0000", "该编号不存在");
+            // }
         }
         return data;
     }

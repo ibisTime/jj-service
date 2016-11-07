@@ -10,7 +10,6 @@ import com.cdkj.service.bo.IServeTrainBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.dao.IServeTrainDAO;
 import com.cdkj.service.domain.ServeTrain;
-import com.cdkj.service.exception.BizException;
 
 @Component
 public class ServeTrainBOImpl extends PaginableBOImpl<ServeTrain> implements
@@ -70,9 +69,9 @@ public class ServeTrainBOImpl extends PaginableBOImpl<ServeTrain> implements
             ServeTrain condition = new ServeTrain();
             condition.setServeCode(code);
             data = serveTrainDAO.select(condition);
-            if (data == null) {
-                throw new BizException("xn0000", "该编号不存在");
-            }
+            // if (data == null) {
+            // throw new BizException("xn0000", "该编号不存在");
+            // }
         }
         return data;
     }

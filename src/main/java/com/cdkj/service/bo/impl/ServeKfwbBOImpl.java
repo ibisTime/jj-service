@@ -10,7 +10,6 @@ import com.cdkj.service.bo.IServeKfwbBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.dao.IServeKfwbDAO;
 import com.cdkj.service.domain.ServeKfwb;
-import com.cdkj.service.exception.BizException;
 
 @Component
 public class ServeKfwbBOImpl extends PaginableBOImpl<ServeKfwb> implements
@@ -70,9 +69,9 @@ public class ServeKfwbBOImpl extends PaginableBOImpl<ServeKfwb> implements
             ServeKfwb condition = new ServeKfwb();
             condition.setServeCode(code);
             data = serveKfwbDAO.select(condition);
-            if (data == null) {
-                throw new BizException("xn0000", "该编号不存在");
-            }
+            // if (data == null) {
+            // throw new BizException("xn0000", "该编号不存在");
+            // }
         }
         return data;
     }

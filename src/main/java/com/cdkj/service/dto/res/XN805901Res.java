@@ -1,28 +1,10 @@
-/**
- * @Title User.java 
- * @Package com.ibis.pz.domain 
- * @Description 
- * @author miyb  
- * @date 2015-2-6 上午10:31:01 
- * @version V1.0   
- */
-package com.cdkj.service.domain;
+package com.cdkj.service.dto.res;
 
 import java.util.Date;
 
-import com.cdkj.service.dao.base.ABaseDO;
+import com.cdkj.service.domain.UserExt;
 
-/** 
- * @author: miyb 
- * @since: 2015-2-6 上午10:31:01 
- * @history:
- */
-public class User extends ABaseDO {
-
-    /** 
-     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-     */
-    private static final long serialVersionUID = 1975331351390818527L;
+public class XN805901Res {
 
     // userId
     private String userId;
@@ -121,25 +103,6 @@ public class User extends ABaseDO {
     // 头像
     private String photo;
 
-    // 手机号和登录名都可登录(1 手机号 2 登录名，3 手机号和登录名)
-    private String loginType;
-
-    public String getLoginNameForLikeQuery() {
-        return loginNameForLikeQuery;
-    }
-
-    public void setLoginNameForLikeQuery(String loginNameForLikeQuery) {
-        this.loginNameForLikeQuery = loginNameForLikeQuery;
-    }
-
-    public String getMobileForLikeQuery() {
-        return mobileForLikeQuery;
-    }
-
-    public void setMobileForLikeQuery(String mobileForLikeQuery) {
-        this.mobileForLikeQuery = mobileForLikeQuery;
-    }
-
     public String getUserId() {
         return userId;
     }
@@ -154,6 +117,14 @@ public class User extends ABaseDO {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getLoginPwd() {
@@ -284,44 +255,12 @@ public class User extends ABaseDO {
         this.remark = remark;
     }
 
-    public String getRealNameForLikeQuery() {
-        return realNameForLikeQuery;
-    }
-
-    public void setRealNameForLikeQuery(String realNameForLikeQuery) {
-        this.realNameForLikeQuery = realNameForLikeQuery;
-    }
-
     public String getPdf() {
         return pdf;
     }
 
     public void setPdf(String pdf) {
         this.pdf = pdf;
-    }
-
-    public String getUserRefereeName() {
-        return userRefereeName;
-    }
-
-    public void setUserRefereeName(String userRefereeName) {
-        this.userRefereeName = userRefereeName;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public UserExt getUserExt() {
-        return userExt;
-    }
-
-    public void setUserExt(UserExt userExt) {
-        this.userExt = userExt;
     }
 
     public Long getAmount() {
@@ -340,6 +279,30 @@ public class User extends ABaseDO {
         this.ljAmount = ljAmount;
     }
 
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getLoginNameForLikeQuery() {
+        return loginNameForLikeQuery;
+    }
+
+    public void setLoginNameForLikeQuery(String loginNameForLikeQuery) {
+        this.loginNameForLikeQuery = loginNameForLikeQuery;
+    }
+
     public String getNicknameForLikeQuery() {
         return nicknameForLikeQuery;
     }
@@ -348,20 +311,44 @@ public class User extends ABaseDO {
         this.nicknameForLikeQuery = nicknameForLikeQuery;
     }
 
+    public String getMobileForLikeQuery() {
+        return mobileForLikeQuery;
+    }
+
+    public void setMobileForLikeQuery(String mobileForLikeQuery) {
+        this.mobileForLikeQuery = mobileForLikeQuery;
+    }
+
+    public String getRealNameForLikeQuery() {
+        return realNameForLikeQuery;
+    }
+
+    public void setRealNameForLikeQuery(String realNameForLikeQuery) {
+        this.realNameForLikeQuery = realNameForLikeQuery;
+    }
+
+    public String getUserRefereeName() {
+        return userRefereeName;
+    }
+
+    public void setUserRefereeName(String userRefereeName) {
+        this.userRefereeName = userRefereeName;
+    }
+
+    public UserExt getUserExt() {
+        return userExt;
+    }
+
+    public void setUserExt(UserExt userExt) {
+        this.userExt = userExt;
+    }
+
     public String getOssUserId() {
         return ossUserId;
     }
 
     public void setOssUserId(String ossUserId) {
         this.ossUserId = ossUserId;
-    }
-
-    public String getCompanyCode() {
-        return companyCode;
-    }
-
-    public void setCompanyCode(String companyCode) {
-        this.companyCode = companyCode;
     }
 
     public Long getTotalFollowNum() {
@@ -386,21 +373,5 @@ public class User extends ABaseDO {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getLoginType() {
-        return loginType;
-    }
-
-    public void setLoginType(String loginType) {
-        this.loginType = loginType;
     }
 }

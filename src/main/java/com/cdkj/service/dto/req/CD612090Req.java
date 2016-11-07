@@ -2,6 +2,22 @@ package com.cdkj.service.dto.req;
 
 public class CD612090Req extends APageReq {
 
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     private static final long serialVersionUID = 1L;
 
     // 职位名称(选填)
@@ -9,6 +25,12 @@ public class CD612090Req extends APageReq {
 
     // 是否热门(选填)
     private String isHot;
+
+    // 种类(选填)
+    private String kind;
+
+    // 类型(选填)
+    private String type;
 
     // 公司编号(选填)
     private String companyCode;

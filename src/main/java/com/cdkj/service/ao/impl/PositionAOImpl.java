@@ -2,13 +2,16 @@ package com.cdkj.service.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IPositionAO;
+import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IPositionBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Position;
+import com.cdkj.service.dto.res.XN806010Res;
 import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
@@ -17,6 +20,9 @@ public class PositionAOImpl implements IPositionAO {
 
     @Autowired
     private IPositionBO positionBO;
+
+    @Autowired
+    private ICompanyBO companyBO;
 
     @Override
     public String addPosition(Position data) {
@@ -42,17 +48,38 @@ public class PositionAOImpl implements IPositionAO {
     @Override
     public Paginable<Position> queryPositionPage(int start, int limit,
             Position condition) {
-        return positionBO.getPaginable(start, limit, condition);
+        Paginable<Position> page = positionBO.getPaginable(start, limit,
+            condition);
+        List<Position> list = page.getList();
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Position position : list) {
+                XN806010Res res = companyBO.getCompany(position
+                    .getCompanyCode());
+                position.setCompany(res);
+            }
+        }
+        return page;
     }
 
     @Override
     public List<Position> queryPositionList(Position condition) {
-        return positionBO.queryPositionList(condition);
+        List<Position> list = positionBO.queryPositionList(condition);
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Position position : list) {
+                XN806010Res res = companyBO.getCompany(position
+                    .getCompanyCode());
+                position.setCompany(res);
+            }
+        }
+        return list;
     }
 
     @Override
     public Position getPosition(String code) {
-        return positionBO.getPosition(code);
+        Position position = positionBO.getPosition(code);
+        XN806010Res res = companyBO.getCompany(position.getCompanyCode());
+        position.setCompany(res);
+        return position;
     }
 
     @Override

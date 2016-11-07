@@ -38,7 +38,6 @@ public class CD612080 extends AProcessor {
         StringValidater.validateBlank(req.getName(), req.getKind(),
             req.getProvince(), req.getCity(), req.getExperience(),
             req.getEducation(), req.getType(), req.getJobNum(),
-            req.getMsalary(), req.getDescription(), req.getCompanyCode(),
-            req.getPublisher());
+            req.getMsalary(), req.getDescription(), req.getCompanyCode());
     }
 }

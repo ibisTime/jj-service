@@ -8,7 +8,7 @@ public class CD612018Req {
     // 是否热门 (必填)
     private String isHot;
 
-    // 序号 (必填)
+    // 序号 (选填)
     private String orderNo;
 
     // 处理人 (必填)
@@ -30,6 +30,14 @@ public class CD612018Req {
         this.isHot = isHot;
     }
 
+    public String getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(String dealer) {
+        this.dealer = dealer;
+    }
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -38,11 +46,4 @@ public class CD612018Req {
         this.orderNo = orderNo;
     }
 
-    public String getDealer() {
-        return dealer;
-    }
-
-    public void setDealer(String dealer) {
-        this.dealer = dealer;
-    }
 }

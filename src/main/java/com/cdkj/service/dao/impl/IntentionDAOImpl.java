@@ -126,5 +126,4 @@ public class IntentionDAOImpl extends AMybatisTemplate implements IIntentionDAO 
         return super.selectList(NAMESPACE.concat("select_intention_zw"), start,
             count, condition, Intention.class);
     }
-
 }

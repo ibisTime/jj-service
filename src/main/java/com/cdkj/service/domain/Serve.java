@@ -15,6 +15,8 @@ public class Serve extends ABaseDO {
 
     private String companyCode;
 
+    private String companyName;
+
     private Long quoteMin;
 
     private Long quoteMax;
@@ -43,6 +45,8 @@ public class Serve extends ABaseDO {
     private Date publishDatetimeStart;
 
     private Date publishDatetimeEnd;
+
+    private String qualityName;
 
     // 服务类型
     private String type;
@@ -302,5 +306,21 @@ public class Serve extends ABaseDO {
 
     public void setServeTrain(ServeTrain serveTrain) {
         this.serveTrain = serveTrain;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getQualityName() {
+        return qualityName;
+    }
+
+    public void setQualityName(String qualityName) {
+        this.qualityName = qualityName;
     }
 }

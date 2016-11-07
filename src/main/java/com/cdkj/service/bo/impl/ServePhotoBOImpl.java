@@ -10,7 +10,6 @@ import com.cdkj.service.bo.IServePhotoBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.dao.IServePhotoDAO;
 import com.cdkj.service.domain.ServePhoto;
-import com.cdkj.service.exception.BizException;
 
 @Component
 public class ServePhotoBOImpl extends PaginableBOImpl<ServePhoto> implements
@@ -70,9 +69,9 @@ public class ServePhotoBOImpl extends PaginableBOImpl<ServePhoto> implements
             ServePhoto condition = new ServePhoto();
             condition.setServeCode(code);
             data = servePhotoDAO.select(condition);
-            if (data == null) {
-                throw new BizException("xn0000", "该编号不存在");
-            }
+            // if (data == null) {
+            // throw new BizException("xn0000", "该编号不存在");
+            // }
         }
         return data;
     }

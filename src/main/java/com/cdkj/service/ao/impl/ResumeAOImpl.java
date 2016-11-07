@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IResumeAO;
 import com.cdkj.service.bo.IResumeBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Resume;
+import com.cdkj.service.dto.res.XN805901Res;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -16,6 +18,9 @@ public class ResumeAOImpl implements IResumeAO {
 
     @Autowired
     private IResumeBO resumeBO;
+
+    @Autowired
+    private IUserBO userBO;
 
     @Override
     public String addResume(Resume data) {
@@ -51,7 +56,11 @@ public class ResumeAOImpl implements IResumeAO {
 
     @Override
     public Resume getResume(String code) {
-        return resumeBO.getResume(code);
+        Resume resume = resumeBO.getResume(code);
+        XN805901Res res = userBO.getRemoteUser(resume.getPublisher(),
+            resume.getPublisher());
+        resume.setUser(res);
+        return resume;
     }
 
     @Override

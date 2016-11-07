@@ -2,6 +2,8 @@ package com.cdkj.service.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -103,16 +105,12 @@ public class ServeAOImpl implements IServeAO {
     public Paginable<Serve> queryServePage(int start, int limit, Serve condition) {
         Paginable<Serve> page = serveBO.getPaginable(start, limit, condition);
         List<Serve> list = page.getList();
-        // 添加公司信息
-        if (null != condition.getCompanyCode()) {
+        if (CollectionUtils.isNotEmpty(list)) {
             for (Serve serve : list) {
                 XN806010Res res = companyBO.getCompany(serve.getCompanyCode());
                 serve.setCompany(res);
+                addServeExt(serve);
             }
-        }
-        // 添加服务详情信息
-        if (null != condition.getType()) {
-            addServeExt(condition);
         }
         return page;
     }
@@ -164,7 +162,11 @@ public class ServeAOImpl implements IServeAO {
 
     @Override
     public Serve getServe(String code) {
-        return serveBO.getServe(code);
+        Serve serve = serveBO.getServe(code);
+        XN806010Res res = companyBO.getCompany(serve.getCompanyCode());
+        serve.setCompany(res);
+        addServeExt(serve);
+        return serve;
     }
 
     @Override
@@ -183,7 +185,11 @@ public class ServeAOImpl implements IServeAO {
         Serve data = new Serve();
         data.setCode(code);
         data.setIsHot(isHot);
-        data.setOrderNo(Integer.valueOf(orderNo));
+        if (StringUtils.isNotBlank(orderNo)) {
+            data.setOrderNo(Integer.valueOf(orderNo));
+        } else {
+            data.setOrderNo(0);
+        }
         data.setDealer(dealer);
         return serveBO.refreshServeHot(data);
     }

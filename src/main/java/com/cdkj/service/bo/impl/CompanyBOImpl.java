@@ -23,5 +23,4 @@ public class CompanyBOImpl implements ICompanyBO {
         }
         return res;
     }
-
 }

@@ -17,6 +17,7 @@
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
 		<result column="deal_note" property="dealNote" />
+		<result column="mobile" property="mobile" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -44,6 +45,9 @@
 			<if test="dealer != null and dealer != '' ">
 				AND t.dealer = #{dealer}
 			</if>
+			<if test="mobile != null and mobile != '' ">
+				AND tu.mobile = #{mobile}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_demand" parameterType="demand" resultMap="demand_DB_Result">
@@ -52,19 +56,20 @@
 		,t.name
 		,t.quality_code
 		,t.exp_company
-		,jc.contacts as com_contacts
+		,tc.contacts as com_contacts
 		,t.urgent_level
 		,t.description
 		,t.status
 		,t.publisher
-		,ju.real_name as publisher_name
+		,tu.real_name as publisher_name
 		,t.publish_datetime
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
+		,tu.mobile
 		FROM
-		(tcp_demand t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id)
-		inner join ${userDB}.tstd_company jc on t.exp_company = jc.code
+		(tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id)
+		inner join ${userDB}.tstd_company tc on t.exp_company = tc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -75,8 +80,8 @@
 
 	<select id="select_demand_count" parameterType="demand"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM (tcp_demand t inner join ${userDB}.tstd_user ju on t.publisher = ju.user_id)
-		inner join ${userDB}.tstd_company jc on t.exp_company = jc.code
+		SELECT count(1) FROM (tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id)
+		inner join ${userDB}.tstd_company tc on t.exp_company = tc.code
 		<include refid="where_condition" />
 	</select>
 

@@ -3,6 +3,7 @@ package com.cdkj.service.domain;
 import java.util.Date;
 
 import com.cdkj.service.dao.base.ABaseDO;
+import com.cdkj.service.dto.res.XN805901Res;
 
 public class Resume extends ABaseDO {
 
@@ -66,6 +67,8 @@ public class Resume extends ABaseDO {
     private String mobile;
 
     private String workTime;
+
+    private XN805901Res user;
 
     public String getCode() {
         return code;
@@ -297,5 +300,13 @@ public class Resume extends ABaseDO {
 
     public void setWorkTime(String workTime) {
         this.workTime = workTime;
+    }
+
+    public XN805901Res getUser() {
+        return user;
+    }
+
+    public void setUser(XN805901Res user) {
+        this.user = user;
     }
 }
