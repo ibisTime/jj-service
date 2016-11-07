@@ -28,6 +28,9 @@ public class CD612050Req extends APageReq {
     // 资质编号(选填)
     private String qualityCode;
 
+    // 类型(选填)
+    private String type;
+
     // 紧急程度(选填)
     private String urgentLevel;
 
@@ -72,5 +75,13 @@ public class CD612050Req extends APageReq {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

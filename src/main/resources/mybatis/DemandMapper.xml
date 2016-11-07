@@ -6,7 +6,9 @@
 		<result column="code" property="code" />
 		<result column="name" property="name" />
 		<result column="quality_code" property="qualityCode" />
+		<result column="type" property="type" />
 		<result column="exp_company" property="expCompany" />
+		<result column="exp_company_name" property="expCompanyName" />
 		<result column="com_contacts" property="comContacts" />
 		<result column="urgent_level" property="urgentLevel" />
 		<result column="description" property="description" />
@@ -26,6 +28,9 @@
 			</if>
 			<if test="qualityCode != null and qualityCode != '' ">
 				AND t.quality_code = #{qualityCode}
+			</if>
+			<if test="type != null and type != '' ">
+				AND tcert.type = #{type}
 			</if>
 			<if test="urgentLevel != null and urgentLevel != '' ">
 				AND t.urgent_level = #{urgentLevel}
@@ -55,7 +60,9 @@
 		t.code
 		,t.name
 		,t.quality_code
+		,tcert.type
 		,t.exp_company
+		,tc.name as exp_company_name
 		,tc.contacts as com_contacts
 		,t.urgent_level
 		,t.description
@@ -68,8 +75,9 @@
 		,t.deal_note
 		,tu.mobile
 		FROM
-		(tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id)
+		tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
 		inner join ${userDB}.tstd_company tc on t.exp_company = tc.code
+		inner join ${userDB}.tstd_certificate tcert on tcert.code = t.quality_code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -80,8 +88,9 @@
 
 	<select id="select_demand_count" parameterType="demand"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM (tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id)
+		SELECT count(1) FROM tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
 		inner join ${userDB}.tstd_company tc on t.exp_company = tc.code
+		inner join ${userDB}.tstd_certificate tcert on tcert.code = t.quality_code
 		<include refid="where_condition" />
 	</select>
 

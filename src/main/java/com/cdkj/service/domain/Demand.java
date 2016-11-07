@@ -23,8 +23,14 @@ public class Demand extends ABaseDO {
     // 资质编号
     private String qualityCode;
 
+    // 类型
+    private String type;
+
     // 意向企业(空 所有公司，其他公司编号)
     private String expCompany;
+
+    // 意向企业(空 所有公司，其他公司编号)
+    private String expCompanyName;
 
     // 紧急程度(1 紧急 0 不紧急)
     private String urgentLevel;
@@ -199,4 +205,19 @@ public class Demand extends ABaseDO {
         this.comContacts = comContacts;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getExpCompanyName() {
+        return expCompanyName;
+    }
+
+    public void setExpCompanyName(String expCompanyName) {
+        this.expCompanyName = expCompanyName;
+    }
 }

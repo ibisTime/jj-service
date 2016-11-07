@@ -109,6 +109,12 @@ public class Intention extends ABaseDO {
     // 期望市
     private String expCity;
 
+    // 服务区间起
+    private Long quoteMin;
+
+    // 服务区间止
+    private Long quoteMax;
+
     public String getCode() {
         return code;
     }
@@ -355,5 +361,21 @@ public class Intention extends ABaseDO {
 
     public void setResumeCode(String resumeCode) {
         this.resumeCode = resumeCode;
+    }
+
+    public Long getQuoteMin() {
+        return quoteMin;
+    }
+
+    public void setQuoteMin(Long quoteMin) {
+        this.quoteMin = quoteMin;
+    }
+
+    public Long getQuoteMax() {
+        return quoteMax;
+    }
+
+    public void setQuoteMax(Long quoteMax) {
+        this.quoteMax = quoteMax;
     }
 }

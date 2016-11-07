@@ -34,6 +34,8 @@
 		<result column="company_mobile" property="companyMobile" />
 		<result column="user_name" property="userName" />
 		<result column="user_mobile" property="userMobile" />
+		<result column="quote_min" property="quoteMin" />
+		<result column="quote_max" property="quoteMax" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -123,6 +125,9 @@
 		,t.deal_datetime
 		,t.deal_note
 		,ts.company_code
+		,ts.quote_min
+		,ts.quote_max
+		,jc.name as company_name
 		,ts.name as serve_name
 		,jc.contacts as company_user
 		,jc.mobile as company_mobile
@@ -180,6 +185,7 @@
 		,t.status
 		,t.to_code
 		,t.from_user as from_company
+		,jc.name as company_name
 		,t.from_role
 		,t.from_datetime
 		,t.dealer
@@ -243,6 +249,7 @@
 		,t.status
 		,t.to_code
 		,t.from_user as from_company
+		,jc.name as company_name
 		,t.from_role
 		,t.from_datetime
 		,t.dealer

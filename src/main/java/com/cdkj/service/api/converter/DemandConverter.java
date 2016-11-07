@@ -58,6 +58,7 @@ public class DemandConverter {
         result.setMobile(req.getMobile());
         result.setPublisher(req.getPublisher());
         result.setQualityCode(req.getQualityCode());
+        result.setType(req.getType());
         result.setUrgentLevel(req.getUrgentLevel());
         result.setPublishDatetimeStart(DateUtil.getFrontDate(
             req.getDateStart(), false));
