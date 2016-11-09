@@ -76,7 +76,7 @@
 		,tu.mobile
 		FROM
 		tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
-		inner join ${userDB}.tstd_company tc on t.exp_company = tc.code
+		left join ${userDB}.tstd_company tc on t.exp_company = tc.code
 		inner join ${userDB}.tstd_certificate tcert on tcert.code = t.quality_code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
@@ -89,7 +89,7 @@
 	<select id="select_demand_count" parameterType="demand"
 		resultType="java.lang.Long">
 		SELECT count(1) FROM tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
-		inner join ${userDB}.tstd_company tc on t.exp_company = tc.code
+		left join ${userDB}.tstd_company tc on t.exp_company = tc.code
 		inner join ${userDB}.tstd_certificate tcert on tcert.code = t.quality_code
 		<include refid="where_condition" />
 	</select>
