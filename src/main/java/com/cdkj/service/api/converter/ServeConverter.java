@@ -358,9 +358,9 @@ public class ServeConverter {
     // 分页查询服务
     public static Serve converter(CD612030Req req) {
         Serve serve = new Serve();
-        serve.setType(req.getType());
         serve.setName(req.getName());
         serve.setCompanyCode(req.getCompanyCode());
+        serve.setCompanyName(req.getCompanyName());
         serve.setStatus(req.getStatus());
         serve.setQualityCode(req.getQualityCode());
         serve.setIsHot(req.getIsHot());
