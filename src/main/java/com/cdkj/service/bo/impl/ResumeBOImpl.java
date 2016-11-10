@@ -68,6 +68,17 @@ public class ResumeBOImpl extends PaginableBOImpl<Resume> implements IResumeBO {
     }
 
     @Override
+    public int refreshResumeUseTime(String code) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Resume data = new Resume();
+            data.setCode(code);
+            count = resumeDAO.updateUseTime(data);
+        }
+        return count;
+    }
+
+    @Override
     public List<Resume> queryResumeList(Resume condition) {
         return resumeDAO.selectList(condition);
     }

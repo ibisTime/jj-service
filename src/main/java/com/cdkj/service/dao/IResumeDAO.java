@@ -7,4 +7,6 @@ public interface IResumeDAO extends IBaseDAO<Resume> {
     String NAMESPACE = IResumeDAO.class.getName().concat(".");
 
     public int updateStatus(Resume data);
+
+    public int updateUseTime(Resume data);
 }

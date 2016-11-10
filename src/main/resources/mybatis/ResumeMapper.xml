@@ -206,6 +206,13 @@
 		,deal_note = #{dealNote}
 		WHERE code = #{code}
 	</update>
+	
+	<update id="update_resume_useTimes" parameterType="resume">
+		UPDATE tcp_resume
+		SET
+		use_times = use_times + 1
+		WHERE code = #{code}
+	</update>
 
 	<delete id="delete_resume" parameterType="resume">
 	DELETE FROM

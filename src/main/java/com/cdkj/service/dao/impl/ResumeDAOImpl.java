@@ -59,4 +59,12 @@ public class ResumeDAOImpl extends AMybatisTemplate implements IResumeDAO {
     public int updateStatus(Resume data) {
         return super.update(NAMESPACE.concat("update_resume_status"), data);
     }
+
+    /** 
+     * @see com.cdkj.service.dao.IResumeDAO#updateUseTime(com.cdkj.service.domain.Resume)
+     */
+    @Override
+    public int updateUseTime(Resume data) {
+        return super.update(NAMESPACE.concat("update_resume_useTimes"), data);
+    }
 }

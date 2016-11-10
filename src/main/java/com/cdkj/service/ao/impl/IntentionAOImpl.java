@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IIntentionAO;
 import com.cdkj.service.bo.IIntentionBO;
+import com.cdkj.service.bo.IResumeBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Intention;
 import com.cdkj.service.enums.EIntentionStatus;
@@ -19,6 +21,9 @@ public class IntentionAOImpl implements IIntentionAO {
 
     @Autowired
     private IIntentionBO intentionBO;
+
+    @Autowired
+    private IResumeBO resumeBO;
 
     @Override
     public String addIntention(String fromUser, String toCode, String type) {
@@ -47,6 +52,7 @@ public class IntentionAOImpl implements IIntentionAO {
     }
 
     @Override
+    @Transactional
     public String addZWIntention(String userId, String resumeCode,
             String positionCode) {
         Intention data = new Intention();
@@ -58,6 +64,7 @@ public class IntentionAOImpl implements IIntentionAO {
         data.setStatus(EIntentionStatus.APPLY.getCode());
         // 设置该意向的类型
         data.setType(EIntentionType.ZW.getCode());
+        resumeBO.refreshResumeUseTime(resumeCode);
         return intentionBO.saveIntention(data);
     }
 

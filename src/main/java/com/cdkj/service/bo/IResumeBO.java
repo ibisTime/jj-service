@@ -15,6 +15,8 @@ public interface IResumeBO extends IPaginableBO<Resume> {
 
     public int refreshResume(Resume data);
 
+    public int refreshResumeUseTime(String code);
+
     public int refreshResumeStatus(String code, String dealer, String dealNote);
 
     public List<Resume> queryResumeList(Resume condition);
