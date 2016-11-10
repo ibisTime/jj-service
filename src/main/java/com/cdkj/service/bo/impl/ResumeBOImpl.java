@@ -80,7 +80,7 @@ public class ResumeBOImpl extends PaginableBOImpl<Resume> implements IResumeBO {
             condition.setCode(code);
             data = resumeDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "该编号不存在");
+                throw new BizException("xn0000", "该简历不存在");
             }
         }
         return data;

@@ -24,15 +24,15 @@ public class CD612017 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        int count = serveAO.editServeStatus(req.getCode(), req.getDealNote(),
-            req.getDealer());
+        int count = serveAO.editServeStatus(req.getCode(), req.getDealer(),
+            req.getDealNote());
         return new BooleanRes(count > 0 ? true : false);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, CD612017Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getDealNote(),
-            req.getDealer());
+        StringValidater.validateBlank(req.getCode(), req.getDealer(),
+            req.getDealNote());
     }
 }

@@ -87,9 +87,14 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
     }
 
     @Override
-    public int refreshServeStatus(Serve data) {
+    public int refreshServeStatus(String code, String dealer, String dealNote) {
         int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
+        if (StringUtils.isNotBlank(code)) {
+            Serve data = new Serve();
+            data.setCode(code);
+            data.setStatus(EBoolean.NO.getCode());
+            data.setDealer(dealer);
+            data.setDealNote(dealNote);
             data.setDealDatetime(new Date());
             count = serveDAO.updateStatus(data);
         }

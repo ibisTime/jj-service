@@ -14,7 +14,7 @@ public interface IServeAO {
 
     public int editServe(Serve data);
 
-    public int editServeStatus(String code, String dealNote, String dealer);
+    public int editServeStatus(String code, String dealer, String dealNote);
 
     public int editServeHot(String code, String isHot, String orderNo,
             String dealer);

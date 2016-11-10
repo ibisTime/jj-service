@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IResumeAO;
 import com.cdkj.service.bo.IResumeBO;
+import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Resume;
@@ -21,6 +22,9 @@ public class ResumeAOImpl implements IResumeAO {
 
     @Autowired
     private IUserBO userBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     @Override
     public String addResume(Resume data) {
@@ -65,9 +69,11 @@ public class ResumeAOImpl implements IResumeAO {
 
     @Override
     public int editResumeStatus(String code, String dealer, String dealNote) {
-        if (!resumeBO.isResumeExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
-        }
+        Resume resume = resumeBO.getResume(code);
+        String publisher = resume.getPublisher();
+        smsOutBO.sentContent(publisher, publisher,
+            "尊敬的用户，您所发布的简历[" + resume.getName() + "]已做违规处理，违规原因[" + dealNote
+                    + "]。");
         return resumeBO.refreshResumeStatus(code, dealer, dealNote);
     }
 }

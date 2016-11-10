@@ -86,7 +86,7 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
             condition.setCode(code);
             data = positionDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "该编号不存在");
+                throw new BizException("xn0000", "该职位不存在");
             }
         }
         return data;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IDemandAO;
 import com.cdkj.service.bo.IDemandBO;
+import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Demand;
 import com.cdkj.service.exception.BizException;
@@ -21,6 +22,9 @@ public class DemandAOImpl implements IDemandAO {
 
     @Autowired
     private IDemandBO demandBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     @Override
     public String addDemand(Demand data) {
@@ -64,9 +68,12 @@ public class DemandAOImpl implements IDemandAO {
      */
     @Override
     public int violationDemand(String code, String dealer, String dealNote) {
-        if (!demandBO.isDemandExist(code)) {
-            throw new BizException("xn0000", "需求编号不存在");
-        }
+        Demand demand = demandBO.getDemand(code);
+        String publisher = demand.getPublisher();
+        smsOutBO.sentContent(publisher, publisher,
+            "尊敬的用户，您所发布的需求[" + demand.getName() + "]已做违规处理，违规原因[" + dealNote
+                    + "]。");
+        // 发送短信
         return demandBO.refreshDemandStatus(code, dealer, dealNote);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cdkj.service.ao.IPositionAO;
 import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IPositionBO;
+import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Position;
 import com.cdkj.service.dto.res.XN806010Res;
@@ -23,6 +24,9 @@ public class PositionAOImpl implements IPositionAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     @Override
     public String addPosition(Position data) {
@@ -84,9 +88,11 @@ public class PositionAOImpl implements IPositionAO {
 
     @Override
     public int editPositionStatus(String code, String dealer, String dealNote) {
-        if (!positionBO.isPositionExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
-        }
+        Position position = positionBO.getPosition(code);
+        String publisher = position.getPublisher();
+        smsOutBO.sentContent(publisher, publisher,
+            "尊敬的企业，您所发布的职位[" + position.getName() + "]已做违规处理，违规原因[" + dealNote
+                    + "]。");
         return positionBO.refreshPositionStatus(code, dealer, dealNote);
     }
 

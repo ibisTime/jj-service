@@ -18,6 +18,7 @@ import com.cdkj.service.bo.IServeKfwbBO;
 import com.cdkj.service.bo.IServePhotoBO;
 import com.cdkj.service.bo.IServeShopBO;
 import com.cdkj.service.bo.IServeTrainBO;
+import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeArt;
@@ -60,6 +61,9 @@ public class ServeAOImpl implements IServeAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     @Override
     public String addServe(Serve data) {
@@ -170,13 +174,13 @@ public class ServeAOImpl implements IServeAO {
     }
 
     @Override
-    public int editServeStatus(String code, String dealNote, String dealer) {
-        Serve data = new Serve();
-        data.setStatus(EBoolean.NO.getCode());
-        data.setCode(code);
-        data.setDealNote(dealNote);
-        data.setDealer(dealer);
-        return serveBO.refreshServeStatus(data);
+    public int editServeStatus(String code, String dealer, String dealNote) {
+        Serve serve = serveBO.getServe(code);
+        String publisher = serve.getPublisher();
+        smsOutBO.sentContent(publisher, publisher,
+            "尊敬的企业，您所发布的服务[" + serve.getName() + "]已做违规处理，违规原因[" + dealNote
+                    + "]。");
+        return serveBO.refreshServeStatus(code, dealer, dealNote);
     }
 
     @Override
