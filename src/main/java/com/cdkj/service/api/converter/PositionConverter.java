@@ -52,6 +52,7 @@ public class PositionConverter {
         result.setIsHot(req.getIsHot());
         result.setType(req.getType());
         result.setKind(req.getKind());
+        result.setStatus(req.getStatus());
         result.setCompanyCode(req.getCompanyCode());
         result.setCompanyName(req.getCompanyName());
         result.setGsProvince(req.getGsProvince());

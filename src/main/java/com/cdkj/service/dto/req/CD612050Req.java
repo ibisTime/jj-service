@@ -25,6 +25,9 @@ public class CD612050Req extends APageReq {
     // 发布者(选填)
     private String publisher;
 
+    // 状态(选填)
+    private String status;
+
     // 资质编号(选填)
     private String qualityCode;
 
@@ -84,4 +87,13 @@ public class CD612050Req extends APageReq {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

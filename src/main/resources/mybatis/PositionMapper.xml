@@ -45,6 +45,9 @@
 			<if test="type != null and type != '' ">
 				AND t.type = #{type}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 			<if test="companyName != null and companyName != '' ">
 				AND jc.name like "%"#{companyName}"%"
 			</if>

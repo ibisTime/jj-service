@@ -53,6 +53,9 @@
 			<if test="isOpen != null and isOpen != '' ">
 				AND t.is_open = #{isOpen}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 			<if test="mobile != null and mobile != '' ">
 				AND ju.mobile = #{mobile}
 			</if>
@@ -195,7 +198,6 @@
 		,publish_datetime = #{publishDatetime}
 		WHERE code = #{code}
 	</update>
-	
 	
 	<update id="update_resume_status" parameterType="resume">
 		UPDATE tcp_resume

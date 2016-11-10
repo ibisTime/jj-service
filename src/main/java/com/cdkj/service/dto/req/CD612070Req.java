@@ -22,6 +22,9 @@ public class CD612070Req extends APageReq {
     // 是否公共(选填)
     private String isOpen;
 
+    // 状态(选填)
+    private String status;
+
     public String getMobile() {
         return mobile;
     }
@@ -68,5 +71,13 @@ public class CD612070Req extends APageReq {
 
     public void setIsOpen(String isOpen) {
         this.isOpen = isOpen;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

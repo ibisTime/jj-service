@@ -57,6 +57,7 @@ public class DemandConverter {
         Demand result = new Demand();
         result.setMobile(req.getMobile());
         result.setPublisher(req.getPublisher());
+        result.setStatus(req.getStatus());
         result.setQualityCode(req.getQualityCode());
         result.setType(req.getType());
         result.setUrgentLevel(req.getUrgentLevel());

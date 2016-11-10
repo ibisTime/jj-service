@@ -47,6 +47,9 @@ public class CD612090Req extends APageReq {
     // 公司-区(选填)
     private String gsArea;
 
+    // 状态(选填)
+    private String status;
+
     public String getName() {
         return name;
     }
@@ -101,5 +104,13 @@ public class CD612090Req extends APageReq {
 
     public void setGsArea(String gsArea) {
         this.gsArea = gsArea;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
