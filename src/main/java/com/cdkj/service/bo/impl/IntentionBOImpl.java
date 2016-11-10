@@ -15,7 +15,7 @@ import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IIntentionDAO;
 import com.cdkj.service.domain.Intention;
-import com.cdkj.service.enums.EIntentStatus;
+import com.cdkj.service.enums.EIntentionStatus;
 import com.cdkj.service.exception.BizException;
 
 @Component
@@ -65,7 +65,7 @@ public class IntentionBOImpl extends PaginableBOImpl<Intention> implements
         if (StringUtils.isNotBlank(code)) {
             Intention data = new Intention();
             data.setCode(code);
-            data.setStatus(EIntentStatus.FINISH.getCode());
+            data.setStatus(EIntentionStatus.FINISH.getCode());
             data.setDealer(dealer);
             data.setDealNote(dealNote);
             data.setDealDatetime(new Date());
