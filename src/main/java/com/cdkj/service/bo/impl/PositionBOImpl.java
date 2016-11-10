@@ -109,6 +109,9 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
         Position data = new Position();
         data.setCode(code);
         data.setIsHot(isHot);
+        if (StringUtils.isBlank(orderNo)) {
+            orderNo = "0";
+        }
         data.setOrderNo(StringValidater.toInteger(orderNo));
         data.setDealer(dealer);
         data.setDealDatetime(new Date());

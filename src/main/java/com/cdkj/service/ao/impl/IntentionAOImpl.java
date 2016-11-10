@@ -1,5 +1,8 @@
 package com.cdkj.service.ao.impl;
 
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,10 @@ public class IntentionAOImpl implements IIntentionAO {
         Intention data = new Intention();
         data.setFromUser(fromUser);
         data.setToCode(toCode);
+        List<Intention> list = intentionBO.queryIntentionList(data);
+        if (CollectionUtils.isNotEmpty(list)) {
+            throw new BizException("xn0000", "该意向已经申请，无需再次操作");
+        }
         // 设置该意向的状态为申请中
         data.setStatus(EIntentionStatus.APPLY.getCode());
         // 设置该意向的类型

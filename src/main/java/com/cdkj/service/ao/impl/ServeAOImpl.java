@@ -123,6 +123,9 @@ public class ServeAOImpl implements IServeAO {
     private void addServeExt(Serve data) {
         switch (data.getType()) {
             case "1":
+                ServeTrain serveTrain = serveTrainBO.getServeTrain(data
+                    .getCode());
+                data.setServeTrain(serveTrain);
                 break;
             case "2":
                 ServePhoto servePhoto = servePhotoBO.getServePhoto(data
@@ -130,25 +133,22 @@ public class ServeAOImpl implements IServeAO {
                 data.setServePhoto(servePhoto);
                 break;
             case "3":
-                ServeTrain serveTrain = serveTrainBO.getServeTrain(data
-                    .getCode());
-                data.setServeTrain(serveTrain);
+                ServeArt serveArt = serveArtBO.getServeArt(data.getCode());
+                data.setServeArt(serveArt);
                 break;
             case "4":
                 ServeShop serveShop = serveShopBO.getServeShop(data.getCode());
                 data.setServeShop(serveShop);
                 break;
             case "5":
-                ServeArt serveArt = serveArtBO.getServeArt(data.getCode());
-                data.setServeArt(serveArt);
-                break;
-            case "6":
                 ServeKfwb serveKfwb = serveKfwbBO.getServeKfwb(data.getCode());
                 data.setServeKfwb(serveKfwb);
                 break;
-            case "7":
+            case "6":
                 ServeCp serveCp = serveCpBO.getServeCp(data.getCode());
                 data.setServeCp(serveCp);
+                break;
+            case "7":
                 break;
             case "8":
                 ServeCyy serveCyy = serveCyyBO.getServeCyy(data.getCode());
