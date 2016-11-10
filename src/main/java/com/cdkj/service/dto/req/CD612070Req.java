@@ -19,6 +19,9 @@ public class CD612070Req extends APageReq {
     // 发布人编号(选填)
     private String publisher;
 
+    // 是否公共(选填)
+    private String isOpen;
+
     public String getMobile() {
         return mobile;
     }
@@ -57,5 +60,13 @@ public class CD612070Req extends APageReq {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(String isOpen) {
+        this.isOpen = isOpen;
     }
 }

@@ -73,7 +73,7 @@ public class ServeAOImpl implements IServeAO {
     @Override
     public int editServe(Serve data) {
         if (!serveBO.isServeExist(data.getCode())) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "服务不存在");
         }
         return serveBO.refreshServe(data);
     }
@@ -83,7 +83,7 @@ public class ServeAOImpl implements IServeAO {
     public int dropServe(String code) {
         int count = 0;
         if (!serveBO.isServeExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "服务不存在");
         }
         count = serveBO.removeServe(code);
         // 扫描各子表，若存在该服务则删除

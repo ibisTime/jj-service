@@ -36,7 +36,7 @@ public class PositionAOImpl implements IPositionAO {
     @Override
     public int editPosition(Position data) {
         if (!positionBO.isPositionExist(data.getCode())) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "职位不存在");
         }
         return positionBO.refreshPosition(data);
     }
@@ -44,7 +44,7 @@ public class PositionAOImpl implements IPositionAO {
     @Override
     public int dropPosition(String code) {
         if (!positionBO.isPositionExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "职位不存在");
         }
         return positionBO.removePosition(code);
     }
@@ -100,7 +100,7 @@ public class PositionAOImpl implements IPositionAO {
     public int editPositionHot(String code, String isHot, String orderNo,
             String dealer) {
         if (!positionBO.isPositionExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "职位不存在");
         }
         return positionBO.refreshPositionHot(code, isHot, orderNo, dealer);
     }

@@ -50,6 +50,9 @@
 			<if test="publisher != null and publisher != '' ">
 				AND t.publisher = #{publisher}
 			</if>
+			<if test="isOpen != null and isOpen != '' ">
+				AND t.is_open = #{isOpen}
+			</if>
 			<if test="mobile != null and mobile != '' ">
 				AND ju.mobile = #{mobile}
 			</if>

@@ -34,7 +34,7 @@ public class ResumeAOImpl implements IResumeAO {
     @Override
     public int editResume(Resume data) {
         if (!resumeBO.isResumeExist(data.getCode())) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "简历不存在");
         }
         return resumeBO.refreshResume(data);
     }
@@ -42,7 +42,7 @@ public class ResumeAOImpl implements IResumeAO {
     @Override
     public int dropResume(String code) {
         if (!resumeBO.isResumeExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "简历不存在");
         }
         return resumeBO.removeResume(code);
     }

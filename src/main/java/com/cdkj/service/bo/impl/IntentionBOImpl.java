@@ -87,7 +87,7 @@ public class IntentionBOImpl extends PaginableBOImpl<Intention> implements
             condition.setCode(code);
             data = intentionDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "编号不存在");
+                throw new BizException("xn0000", "意向不存在");
             }
         }
         return data;

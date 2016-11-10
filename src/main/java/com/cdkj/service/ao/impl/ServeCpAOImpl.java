@@ -44,7 +44,7 @@ public class ServeCpAOImpl implements IServeCpAO {
     @Override
     public int dropServeCp(String code) {
         if (!serveCpBO.isServeCpExist(code)) {
-            throw new BizException("xn0000", "改编号不存在");
+            throw new BizException("xn0000", "该编号不存在");
         }
         return serveCpBO.removeServeCp(code);
     }

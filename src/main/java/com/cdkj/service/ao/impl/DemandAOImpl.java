@@ -34,7 +34,7 @@ public class DemandAOImpl implements IDemandAO {
     @Override
     public int editDemand(Demand data) {
         if (!demandBO.isDemandExist(data.getCode())) {
-            throw new BizException("xn0000", "需求编号不存在");
+            throw new BizException("xn0000", "需求不存在");
         }
         return demandBO.refreshDemand(data);
     }
@@ -42,7 +42,7 @@ public class DemandAOImpl implements IDemandAO {
     @Override
     public int dropDemand(String code) {
         if (!demandBO.isDemandExist(code)) {
-            throw new BizException("xn0000", "需求编号不存在");
+            throw new BizException("xn0000", "需求不存在");
         }
         return demandBO.removeDemand(code);
     }

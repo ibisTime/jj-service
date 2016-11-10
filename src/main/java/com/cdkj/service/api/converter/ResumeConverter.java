@@ -68,6 +68,7 @@ public class ResumeConverter {
         result.setExpProvince(req.getExpProvince());
         result.setExpCity(req.getExpCity());
         result.setPublisher(req.getPublisher());
+        result.setIsOpen(req.getIsOpen());
         return result;
     }
 }
