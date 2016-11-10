@@ -1,9 +1,9 @@
 package com.cdkj.service.enums;
 
-public enum EIntentStatus {
+public enum EIntentionStatus {
     APPLY("1", "申请中"), FINISH("2", "已完成");
 
-    EIntentStatus(String code, String value) {
+    EIntentionStatus(String code, String value) {
         this.code = code;
         this.value = value;
     }

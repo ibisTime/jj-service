@@ -7,7 +7,7 @@ import com.cdkj.service.ao.IIntentionAO;
 import com.cdkj.service.bo.IIntentionBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Intention;
-import com.cdkj.service.enums.EIntentStatus;
+import com.cdkj.service.enums.EIntentionStatus;
 import com.cdkj.service.enums.EIntentionType;
 import com.cdkj.service.exception.BizException;
 
@@ -23,7 +23,7 @@ public class IntentionAOImpl implements IIntentionAO {
         data.setFromUser(fromUser);
         data.setToCode(toCode);
         // 设置该意向的状态为申请中
-        data.setStatus(EIntentStatus.APPLY.getCode());
+        data.setStatus(EIntentionStatus.APPLY.getCode());
         // 设置该意向的类型
         switch (type) {
             case "2":
@@ -48,7 +48,7 @@ public class IntentionAOImpl implements IIntentionAO {
         // 设置简历编号
         data.setFromRole(resumeCode);
         // 设置该意向的状态为申请中
-        data.setStatus(EIntentStatus.APPLY.getCode());
+        data.setStatus(EIntentionStatus.APPLY.getCode());
         // 设置该意向的类型
         data.setType(EIntentionType.ZW.getCode());
         return intentionBO.saveIntention(data);
@@ -57,15 +57,16 @@ public class IntentionAOImpl implements IIntentionAO {
     @Override
     public int dropIntention(String code) {
         if (!intentionBO.isIntentionExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
+            throw new BizException("xn0000", "该意向不存在");
         }
         return intentionBO.removeIntention(code);
     }
 
     @Override
     public int editIntentionStatus(String code, String dealNote, String dealer) {
-        if (!intentionBO.isIntentionExist(code)) {
-            throw new BizException("xn0000", "该编号不存在");
+        Intention data = intentionBO.getIntention(code);
+        if (EIntentionStatus.FINISH.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "该意向已做处理，无需再次操作");
         }
         return intentionBO.refreshIntentionStatus(code, dealNote, dealer);
     }
