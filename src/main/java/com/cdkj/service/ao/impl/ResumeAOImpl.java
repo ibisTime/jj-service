@@ -1,7 +1,9 @@
 package com.cdkj.service.ao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,13 @@ public class ResumeAOImpl implements IResumeAO {
     @Override
     public Paginable<Resume> queryResumePage(int start, int limit,
             Resume condition) {
+        String expPosition = condition.getExpPosition();
+        if (StringUtils.isNotBlank(expPosition)) {
+            List<String> expPositionList = new ArrayList<String>();
+            for (int i = 0; i < expPosition.length(); i++) {
+                expPositionList.add(expPosition.substring(i, i + 1));
+            }
+        }
         return resumeBO.getPaginable(start, limit, condition);
     }
 

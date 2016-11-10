@@ -38,8 +38,11 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="expPosition != null and expPosition != '' ">
-				AND t.exp_position = #{expPosition}
+			<if test="expPositionList != null and expPositionList != '' ">
+				AND t.exp_position in 
+                <foreach item="item" index="index" collection="expPositionList" open="(" separator="," close=")">
+	            	#{item}
+                </foreach> 
 			</if>
 			<if test="expProvince != null and expProvince != '' ">
 				AND t.exp_province = #{expProvince}

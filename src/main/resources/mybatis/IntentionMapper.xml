@@ -92,9 +92,6 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="type != null and type != '' ">
-				AND t.type = #{type}
-			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
@@ -115,7 +112,6 @@
 	<select id="select_intention_fw" parameterType="intention" resultMap="intention_DB_Result">
 		SELECT
 		t.code
-		,t.type
 		,t.status
 		,t.to_code
 		,t.from_user
@@ -159,7 +155,7 @@
 				AND t.code = #{code}
 			</if>
 			<if test="type != null and type != '' ">
-				AND t.type = #{type}
+				AND td.type = #{type}
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
@@ -181,7 +177,7 @@
 	<select id="select_intention_xq" parameterType="intention" resultMap="intention_DB_Result">
 		SELECT
 		t.code
-		,t.type
+		,td.type
 		,t.status
 		,t.to_code
 		,t.from_user as from_company
@@ -223,7 +219,7 @@
 				AND t.code = #{code}
 			</if>
 			<if test="type != null and type != '' ">
-				AND t.type = #{type}
+				AND tr.type = #{type}
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
@@ -245,7 +241,7 @@
 	<select id="select_intention_jl" parameterType="intention" resultMap="intention_DB_Result">
 		SELECT
 		t.code
-		,t.type
+		,tr.type
 		,t.status
 		,t.to_code
 		,t.from_user as from_company
@@ -285,9 +281,6 @@
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
-			</if>
-			<if test="type != null and type != '' ">
-				AND t.type = #{type}
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
