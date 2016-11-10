@@ -26,6 +26,7 @@ public class CD612072 extends AProcessor {
     public Object doBusiness() throws BizException {
         Resume condition = new Resume();
         condition.setPublisher(req.getPublisher());
+        condition.setStatus(req.getStatus());
         return resumeAO.queryResumeList(condition);
     }
 
