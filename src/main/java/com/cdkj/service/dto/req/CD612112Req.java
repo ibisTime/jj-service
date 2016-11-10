@@ -10,6 +10,9 @@ public class CD612112Req extends APageReq {
     // 公司编号 (选填)
     private String companyCode;
 
+    // 类型 (选填)
+    private String type;
+
     public String getPublisher() {
         return publisher;
     }
@@ -24,5 +27,13 @@ public class CD612112Req extends APageReq {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

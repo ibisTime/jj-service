@@ -58,6 +58,7 @@ public class ResumeAOImpl implements IResumeAO {
             for (int i = 0; i < expPosition.length(); i++) {
                 expPositionList.add(expPosition.substring(i, i + 1));
             }
+            condition.setExpPositionList(expPositionList);
         }
         return resumeBO.getPaginable(start, limit, condition);
     }

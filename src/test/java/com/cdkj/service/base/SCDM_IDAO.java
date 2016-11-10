@@ -7,13 +7,15 @@ import java.io.IOException;
 
 public class SCDM_IDAO {
 
-    private static String key = "fieldTimes";
+    private static String key = "channelBank";
 
-    private static String packge = "com.std.user.";
+    private static String packge = "com.std.account.";
 
-    private static String dbname = "tstd_field_times";
+    private static String dbname = "tstd_company_channel";
 
-    private static String[] DBwords = { "id", "type", "user_id", "times" };
+    private static String[] DBwords = { "bank_code", "bank_name ",
+            " channel_type", "pay_type", "status", "paybank， max_order",
+            "order_amount", "day_amount", "month_amount", "remark" };
 
     private static String[] DOwords = getDOwords();
 

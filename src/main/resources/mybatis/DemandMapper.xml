@@ -53,6 +53,9 @@
 			<if test="mobile != null and mobile != '' ">
 				AND tu.mobile = #{mobile}
 			</if>
+			<if test="expCompany != null and expCompany != '' ">
+				AND (t.exp_company = #{expCompany} or t.exp_company = '0')
+			</if>
 		</trim>
 	</sql>
 	<select id="select_demand" parameterType="demand" resultMap="demand_DB_Result">

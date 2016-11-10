@@ -55,6 +55,9 @@ public class Intention extends ABaseDO {
     // 发布人编号
     private String publisher;
 
+    // 发布时间
+    private Date publishDatetime;
+
     // 发布公司编号
     private String fromCompany;
 
@@ -377,5 +380,13 @@ public class Intention extends ABaseDO {
 
     public void setQuoteMax(Long quoteMax) {
         this.quoteMax = quoteMax;
+    }
+
+    public Date getPublishDatetime() {
+        return publishDatetime;
+    }
+
+    public void setPublishDatetime(Date publishDatetime) {
+        this.publishDatetime = publishDatetime;
     }
 }

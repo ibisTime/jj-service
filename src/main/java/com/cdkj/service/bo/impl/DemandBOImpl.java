@@ -65,6 +65,7 @@ public class DemandBOImpl extends PaginableBOImpl<Demand> implements IDemandBO {
     public int refreshDemand(Demand data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
+            data.setPublishDatetime(new Date());
             count = demandDAO.update(data);
         }
         return count;

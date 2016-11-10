@@ -28,6 +28,7 @@
 		<result column="city" property="city" />
 		<result column="msalary" property="msalary" />
 		<result column="publisher" property="publisher" />
+		<result column="publish_datetime" property="publishDatetime" />
 		<result column="company_code" property="companyCode" />
 		<result column="company_name" property="companyName" />
 		<result column="company_user" property="companyUser" />
@@ -107,6 +108,9 @@
 			<if test="companyCode != null and companyCode != '' ">
 				AND ts.company_code = #{companyCode}
 			</if>
+			<if test="type != null and type != '' ">
+				AND ts.quality_code = #{type}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_intention_fw" parameterType="intention" resultMap="intention_DB_Result">
@@ -120,6 +124,7 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
+		,ts.quality_code as type
 		,ts.company_code
 		,ts.quote_min
 		,ts.quote_max
@@ -252,6 +257,7 @@
 		,t.deal_datetime
 		,t.deal_note
 		,tr.publisher
+		,tr.publish_datetime
 		,tr.name as resume_name
 		,jc.contacts as company_user
 		,jc.mobile as company_mobile
