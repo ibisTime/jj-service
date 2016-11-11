@@ -160,7 +160,7 @@
 				AND t.code = #{code}
 			</if>
 			<if test="type != null and type != '' ">
-				AND td.type = #{type}
+				AND td.quality_code = #{type}
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
@@ -182,7 +182,7 @@
 	<select id="select_intention_xq" parameterType="intention" resultMap="intention_DB_Result">
 		SELECT
 		t.code
-		,td.type
+		,td.quality_code as type
 		,t.status
 		,t.to_code
 		,t.from_user as from_company

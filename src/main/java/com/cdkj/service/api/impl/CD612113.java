@@ -8,7 +8,6 @@ import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Intention;
 import com.cdkj.service.dto.req.CD612113Req;
-import com.cdkj.service.enums.EIntentionType;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
@@ -31,7 +30,6 @@ public class CD612113 extends AProcessor {
         Intention condition = new Intention();
         condition.setFromUser(req.getFromUser());
         condition.setCompanyCode(req.getCompanyCode());
-        condition.setType(EIntentionType.ZW.getCode());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = IIntentionAO.DEFAULT_ORDER_COLUMN;

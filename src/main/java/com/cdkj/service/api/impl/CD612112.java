@@ -30,7 +30,7 @@ public class CD612112 extends AProcessor {
         Intention condition = new Intention();
         condition.setFromUser(req.getCompanyCode());
         condition.setPublisher(req.getPublisher());
-        condition.setType(req.getType());
+        // condition.setType(req.getType());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = IIntentionAO.DEFAULT_ORDER_COLUMN;
