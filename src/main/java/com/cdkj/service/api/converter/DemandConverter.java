@@ -59,6 +59,7 @@ public class DemandConverter {
         result.setPublisher(req.getPublisher());
         result.setStatus(req.getStatus());
         result.setQualityCode(req.getQualityCode());
+        result.setExpCompany(req.getCompanyCode());
         result.setType(req.getType());
         result.setUrgentLevel(req.getUrgentLevel());
         result.setPublishDatetimeStart(DateUtil.getFrontDate(

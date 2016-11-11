@@ -31,6 +31,9 @@ public class CD612050Req extends APageReq {
     // 资质编号(选填)
     private String qualityCode;
 
+    // 公司编号(选填)
+    private String companyCode;
+
     // 类型(选填)
     private String type;
 
@@ -39,6 +42,14 @@ public class CD612050Req extends APageReq {
 
     // 处理人(选填)
     private String dealer;
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
 
     public String getMobile() {
         return mobile;
