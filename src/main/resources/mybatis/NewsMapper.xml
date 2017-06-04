@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.INewsDAO">
+	<resultMap id="News_DB_Result" type="News">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="title" property="title" />
+		<result column="summary" property="summary" />
+		<result column="content" property="content" />
+		<result column="status" property="status" />
+		<result column="send_platform" property="sendPlatform" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="reamrk" property="reamrk" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_News" parameterType="News" resultMap="News_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.title
+		,t.summary
+		,t.content
+		,t.status
+		,t.send_platform
+		,t.updater
+		,t.update_datetime
+		,t.reamrk
+		FROM
+		tcp_news t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_News_count" parameterType="News"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_news t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_News" parameterType="News">
+		INSERT INTO
+		tcp_news(
+		code
+		,type
+		,title
+		,summary
+		,content
+		,status
+		,send_platform
+		,updater
+		,update_datetime
+		,reamrk
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{title}
+		,#{summary}
+		,#{content}
+		,#{status}
+		,#{sendPlatform}
+		,#{updater}
+		,#{updateDatetime}
+		,#{reamrk}
+		)
+	</insert>
+
+	<update id="update_News" parameterType="News">
+		UPDATE tcp_news
+		SET
+		type = #{type}
+		,title = #{title}
+		,summary = #{summary}
+		,content = #{content}
+		,status = #{status}
+		,send_platform = #{sendPlatform}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,reamrk = #{reamrk}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IFocusDAO">
+	<resultMap id="focus_DB_Result" type="focus">
+		<result column="code" property="code" />
+		<result column="company_code" property="companyCode" />
+		<result column="user_id" property="userId" />
+		<result column="group_code" property="groupCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_focus" parameterType="focus" resultMap="focus_DB_Result">
+		SELECT
+		t.code
+		,t.company_code
+		,t.user_id
+		,t.group_code
+		FROM
+		tcp_focus t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_focus_count" parameterType="focus"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_focus t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_focus" parameterType="focus">
+		INSERT INTO
+		tcp_focus(
+		code
+		,company_code
+		,user_id
+		,group_code
+		)
+		VALUES(
+		#{code}
+		,#{companyCode}
+		,#{userId}
+		,#{groupCode}
+		)
+	</insert>
+
+	<update id="update_focus" parameterType="focus">
+		UPDATE tcp_focus
+		SET
+		company_code = #{companyCode}
+		,user_id = #{userId}
+		,group_code = #{groupCode}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

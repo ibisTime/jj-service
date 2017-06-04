@@ -16,5 +16,10 @@
 		
 		<typeAlias alias="resume" type="com.cdkj.service.domain.Resume" />
 		<typeAlias alias="position" type="com.cdkj.service.domain.Position" />
+		<typeAlias alias="focus" type="com.cdkj.service.domain.Focus" />
+		<typeAlias alias="group" type="com.cdkj.service.domain.Group" />
+		<typeAlias alias="news" type="com.cdkj.service.domain.News" />
+		
+		<typeAlias alias="qualify" type="com.cdkj.service.domain.Qualify" />
 	</typeAliases>	
 </configuration>

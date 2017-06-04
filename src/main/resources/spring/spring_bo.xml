@@ -59,4 +59,19 @@
 		<property name="paginableDAO" ref="positionDAOImpl" />
 	</bean>
 	
+	<bean id="focusBO" class="com.cdkj.service.bo.impl.FocusBOImpl">
+		<property name="paginableDAO" ref="focusDAOImpl" />
+	</bean>
+	
+	<bean id="groupBO" class="com.cdkj.service.bo.impl.GroupBOImpl">
+		<property name="paginableDAO" ref="groupDAOImpl" />
+	</bean>
+	
+	<bean id="newsBO" class="com.cdkj.service.bo.impl.NewsBOImpl">
+		<property name="paginableDAO" ref="newsDAOImpl" />
+	</bean>
+	
+	<bean id="qualifyBO" class="com.cdkj.service.bo.impl.QualifyBOImpl">
+		<property name="paginableDAO" ref="qualifyDAOImpl" />
+	</bean>
 </beans>

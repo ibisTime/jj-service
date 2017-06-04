@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IGroupDAO">
+	<resultMap id="group_DB_Result" type="group">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="focus_num" property="focusNum" />
+		<result column="create_datetime" property="createDatetime" />
+		<result column="user_id" property="userId" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_group" parameterType="group" resultMap="group_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.focus_num
+		,t.create_datetime
+		,t.user_id
+		FROM
+		tcp_group t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_group_count" parameterType="group"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_group t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_group" parameterType="group">
+		INSERT INTO
+		tcp_group(
+		code
+		,name
+		,focus_num
+		,create_datetime
+		,user_id
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{focusNum}
+		,#{createDatetime}
+		,#{userId}
+		)
+	</insert>
+
+	<update id="update_group" parameterType="group">
+		UPDATE tcp_group
+		SET
+		name = #{name}
+		,focus_num = #{focusNum}
+		,create_datetime = #{createDatetime}
+		,user_id = #{userId}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

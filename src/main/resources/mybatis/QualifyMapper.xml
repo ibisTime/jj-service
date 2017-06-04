@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IQualifyDAO">
+	<resultMap id="qualify_DB_Result" type="qualify">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="name" property="name" />
+		<result column="description" property="description" />
+		<result column="status" property="status" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_qualify" parameterType="qualify" resultMap="qualify_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.name
+		,t.description
+		,t.status
+		,t.updater
+		,t.update_datetime
+		,t.remark
+		FROM
+		tcp_qualify t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_qualify_count" parameterType="qualify"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_qualify t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_qualify" parameterType="qualify">
+		INSERT INTO
+		tcp_qualify(
+		code
+		,type
+		,name
+		,description
+		,status
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{name}
+		,#{description}
+		,#{status}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_qualify" parameterType="qualify">
+		UPDATE tcp_qualify
+		SET
+		type = #{type}
+		,name = #{name}
+		,description = #{description}
+		,status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>
