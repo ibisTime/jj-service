@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IOperateDAO">
+	<resultMap id="operate_DB_Result" type="operate">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="pic" property="pic" />
+		<result column="adv_pic" property="advPic" />
+		<result column="company_code" property="companyCode" />
+		<result column="tgfw" property="tgfw" />
+		<result column="fee_mode" property="feeMode" />
+		<result column="pay_cycle" property="payCycle" />
+		<result column="scyylm" property="scyylm" />
+		<result column="suc_case" property="sucCase" />
+		<result column="quote_min" property="quoteMin" />
+		<result column="quote_max" property="quoteMax" />
+		<result column="quality_code" property="qualityCode" />
+		<result column="description" property="description" />
+		<result column="location" property="location" />
+		<result column="order_no" property="orderNo" />
+		<result column="status" property="status" />
+		<result column="publisher" property="publisher" />
+		<result column="publish_datetime" property="publishDatetime" />
+		<result column="dealer" property="dealer" />
+		<result column="deal_datetime" property="dealDatetime" />
+		<result column="deal_note" property="dealNote" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_operate" parameterType="operate" resultMap="operate_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.pic
+		,t.adv_pic
+		,t.company_code
+		,t.tgfw
+		,t.fee_mode
+		,t.pay_cycle
+		,t.scyylm
+		,t.suc_case
+		,t.quote_min
+		,t.quote_max
+		,t.quality_code
+		,t.description
+		,t.location
+		,t.order_no
+		,t.status
+		,t.publisher
+		,t.publish_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		FROM
+		tcp_operate t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_operate_count" parameterType="operate"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_operate t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_operate" parameterType="operate">
+		INSERT INTO
+		tcp_operate(
+		code
+		,name
+		,pic
+		,adv_pic
+		,company_code
+		,tgfw
+		,fee_mode
+		,pay_cycle
+		,scyylm
+		,suc_case
+		,quote_min
+		,quote_max
+		,quality_code
+		,description
+		,location
+		,order_no
+		,status
+		,publisher
+		,publish_datetime
+		,dealer
+		,deal_datetime
+		,deal_note
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{pic}
+		,#{advPic}
+		,#{companyCode}
+		,#{tgfw}
+		,#{feeMode}
+		,#{payCycle}
+		,#{scyylm}
+		,#{sucCase}
+		,#{quoteMin}
+		,#{quoteMax}
+		,#{qualityCode}
+		,#{description}
+		,#{location}
+		,#{orderNo}
+		,#{status}
+		,#{publisher}
+		,#{publishDatetime}
+		,#{dealer}
+		,#{dealDatetime}
+		,#{dealNote}
+		)
+	</insert>
+
+	<update id="update_operate" parameterType="operate">
+		UPDATE tcp_operate
+		SET
+		name = #{name}
+		,pic = #{pic}
+		,adv_pic = #{advPic}
+		,company_code = #{companyCode}
+		,tgfw = #{tgfw}
+		,fee_mode = #{feeMode}
+		,pay_cycle = #{payCycle}
+		,scyylm = #{scyylm}
+		,suc_case = #{sucCase}
+		,quote_min = #{quoteMin}
+		,quote_max = #{quoteMax}
+		,quality_code = #{qualityCode}
+		,description = #{description}
+		,location = #{location}
+		,order_no = #{orderNo}
+		,status = #{status}
+		,publisher = #{publisher}
+		,publish_datetime = #{publishDatetime}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

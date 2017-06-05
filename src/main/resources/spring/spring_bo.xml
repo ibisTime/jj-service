@@ -47,10 +47,6 @@
 		<property name="paginableDAO" ref="demandDAOImpl" />
 	</bean>
 	
-	<bean id="intentionBO" class="com.cdkj.service.bo.impl.IntentionBOImpl">
-		<property name="paginableDAO" ref="intentionDAOImpl" />
-	</bean>
-	
 	<bean id="resumeBO" class="com.cdkj.service.bo.impl.ResumeBOImpl">
 		<property name="paginableDAO" ref="resumeDAOImpl" />
 	</bean>
@@ -77,5 +73,29 @@
 	
 	<bean id="bcIntentionBO" class="com.cdkj.service.bo.impl.BcIntentionBOImpl">
 		<property name="paginableDAO" ref="bcIntentionDAOImpl" />
+	</bean>
+	
+	<bean id="cbIntentionBO" class="com.cdkj.service.bo.impl.CbIntentionBOImpl">
+		<property name="paginableDAO" ref="cbIntentionDAOImpl" />
+	</bean>
+	
+	<bean id="companyBO" class="com.cdkj.service.bo.impl.CompanyBOImpl">
+		<property name="paginableDAO" ref="companyDAOImpl" />
+	</bean>
+	
+	<bean id="gsQualifyBO" class="com.cdkj.service.bo.impl.GsQualifyBOImpl">
+		<property name="paginableDAO" ref="gsQualifyDAOImpl" />
+	</bean>
+	
+	<bean id="operateBO" class="com.cdkj.service.bo.impl.OperateBOImpl">
+		<property name="paginableDAO" ref="operateDAOImpl" />
+	</bean>
+	
+	<bean id="photoBO" class="com.cdkj.service.bo.impl.PhotoBOImpl">
+		<property name="paginableDAO" ref="photoDAOImpl" />
+	</bean>
+	
+	<bean id="trainBO" class="com.cdkj.service.bo.impl.TrainBOImpl">
+		<property name="paginableDAO" ref="trainDAOImpl" />
 	</bean>
 </beans>

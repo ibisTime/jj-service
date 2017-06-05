@@ -6,75 +6,73 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cdkj.service.bo.ICompanyBO;
+import com.cdkj.service.bo.ITrainBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
-import com.cdkj.service.dao.ICompanyDAO;
-import com.cdkj.service.domain.Company;
+import com.cdkj.service.dao.ITrainDAO;
+import com.cdkj.service.domain.Train;
 import com.cdkj.service.exception.BizException;
 
 @Component
-public class CompanyBOImpl extends PaginableBOImpl<Company> implements
-        ICompanyBO {
+public class TrainBOImpl extends PaginableBOImpl<Train> implements ITrainBO {
 
     @Autowired
-    private ICompanyDAO companyDAO;
+    private ITrainDAO trainDAO;
 
     @Override
-    public boolean isCompanyExist(String code) {
-        Company condition = new Company();
+    public boolean isTrainExist(String code) {
+        Train condition = new Train();
         condition.setCode(code);
-        if (companyDAO.selectTotalCount(condition) > 0) {
+        if (trainDAO.selectTotalCount(condition) > 0) {
             return true;
         }
         return false;
     }
 
     @Override
-    public String saveCompany(Company data) {
+    public String saveTrain(Train data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater
-                .generateM(EGeneratePrefix.COMPANY.getCode());
+            code = OrderNoGenerater.generateM(EGeneratePrefix.TRAIN.getCode());
             data.setCode(code);
-            companyDAO.insert(data);
+            trainDAO.insert(data);
         }
         return code;
     }
 
     @Override
-    public int removeCompany(String code) {
+    public int removeTrain(String code) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
-            Company data = new Company();
+            Train data = new Train();
             data.setCode(code);
-            count = companyDAO.delete(data);
+            count = trainDAO.delete(data);
         }
         return count;
     }
 
     @Override
-    public int refreshCompany(Company data) {
+    public int refreshTrain(Train data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            count = companyDAO.update(data);
+            count = trainDAO.update(data);
         }
         return count;
     }
 
     @Override
-    public List<Company> queryCompanyList(Company condition) {
-        return companyDAO.selectList(condition);
+    public List<Train> queryTrainList(Train condition) {
+        return trainDAO.selectList(condition);
     }
 
     @Override
-    public Company getCompany(String code) {
-        Company data = null;
+    public Train getTrain(String code) {
+        Train data = null;
         if (StringUtils.isNotBlank(code)) {
-            Company condition = new Company();
+            Train condition = new Train();
             condition.setCode(code);
-            data = companyDAO.select(condition);
+            data = trainDAO.select(condition);
             if (data == null) {
                 throw new BizException("xn0000", "�� ��Ų�����");
             }

@@ -6,75 +6,75 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cdkj.service.bo.ICompanyBO;
+import com.cdkj.service.bo.IOperateBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
-import com.cdkj.service.dao.ICompanyDAO;
-import com.cdkj.service.domain.Company;
+import com.cdkj.service.dao.IOperateDAO;
+import com.cdkj.service.domain.Operate;
 import com.cdkj.service.exception.BizException;
 
 @Component
-public class CompanyBOImpl extends PaginableBOImpl<Company> implements
-        ICompanyBO {
+public class OperateBOImpl extends PaginableBOImpl<Operate> implements
+        IOperateBO {
 
     @Autowired
-    private ICompanyDAO companyDAO;
+    private IOperateDAO operateDAO;
 
     @Override
-    public boolean isCompanyExist(String code) {
-        Company condition = new Company();
+    public boolean isOperateExist(String code) {
+        Operate condition = new Operate();
         condition.setCode(code);
-        if (companyDAO.selectTotalCount(condition) > 0) {
+        if (operateDAO.selectTotalCount(condition) > 0) {
             return true;
         }
         return false;
     }
 
     @Override
-    public String saveCompany(Company data) {
+    public String saveOperate(Operate data) {
         String code = null;
         if (data != null) {
             code = OrderNoGenerater
-                .generateM(EGeneratePrefix.COMPANY.getCode());
+                .generateM(EGeneratePrefix.OPERATE.getCode());
             data.setCode(code);
-            companyDAO.insert(data);
+            operateDAO.insert(data);
         }
         return code;
     }
 
     @Override
-    public int removeCompany(String code) {
+    public int removeOperate(String code) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
-            Company data = new Company();
+            Operate data = new Operate();
             data.setCode(code);
-            count = companyDAO.delete(data);
+            count = operateDAO.delete(data);
         }
         return count;
     }
 
     @Override
-    public int refreshCompany(Company data) {
+    public int refreshOperate(Operate data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            count = companyDAO.update(data);
+            count = operateDAO.update(data);
         }
         return count;
     }
 
     @Override
-    public List<Company> queryCompanyList(Company condition) {
-        return companyDAO.selectList(condition);
+    public List<Operate> queryOperateList(Operate condition) {
+        return operateDAO.selectList(condition);
     }
 
     @Override
-    public Company getCompany(String code) {
-        Company data = null;
+    public Operate getOperate(String code) {
+        Operate data = null;
         if (StringUtils.isNotBlank(code)) {
-            Company condition = new Company();
+            Operate condition = new Operate();
             condition.setCode(code);
-            data = companyDAO.select(condition);
+            data = operateDAO.select(condition);
             if (data == null) {
                 throw new BizException("xn0000", "�� ��Ų�����");
             }

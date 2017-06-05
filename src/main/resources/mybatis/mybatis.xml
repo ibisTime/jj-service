@@ -12,15 +12,21 @@
 		<typeAlias alias="serveShop" type="com.cdkj.service.domain.ServeShop" />
 		<typeAlias alias="serveTrain" type="com.cdkj.service.domain.ServeTrain" />
 		<typeAlias alias="demand" type="com.cdkj.service.domain.Demand" />
-		<typeAlias alias="intention" type="com.cdkj.service.domain.Intention" />
-		
 		<typeAlias alias="resume" type="com.cdkj.service.domain.Resume" />
+		
 		<typeAlias alias="position" type="com.cdkj.service.domain.Position" />
 		<typeAlias alias="focus" type="com.cdkj.service.domain.Focus" />
 		<typeAlias alias="group" type="com.cdkj.service.domain.Group" />
 		<typeAlias alias="news" type="com.cdkj.service.domain.News" />
-		
 		<typeAlias alias="qualify" type="com.cdkj.service.domain.Qualify" />
+		
 		<typeAlias alias="bcIntention" type="com.cdkj.service.domain.BcIntention" />
+		<typeAlias alias="cbIntention" type="com.cdkj.service.domain.CbIntention" />
+		<typeAlias alias="company" type="com.cdkj.service.domain.Company" />
+		<typeAlias alias="gsQualify" type="com.cdkj.service.domain.GsQualify" />
+		<typeAlias alias="operate" type="com.cdkj.service.domain.Operate" />
+		
+		<typeAlias alias="photo" type="com.cdkj.service.domain.Photo" />
+		<typeAlias alias="train" type="com.cdkj.service.domain.Train" />
 	</typeAliases>	
 </configuration>

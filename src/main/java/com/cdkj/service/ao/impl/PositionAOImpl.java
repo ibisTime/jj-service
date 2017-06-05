@@ -12,7 +12,6 @@ import com.cdkj.service.bo.IPositionBO;
 import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Position;
-import com.cdkj.service.dto.res.XN806010Res;
 import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
@@ -57,9 +56,6 @@ public class PositionAOImpl implements IPositionAO {
         List<Position> list = page.getList();
         if (CollectionUtils.isNotEmpty(list)) {
             for (Position position : list) {
-                XN806010Res res = companyBO.getCompany(position
-                    .getCompanyCode());
-                position.setCompany(res);
             }
         }
         return page;
@@ -69,11 +65,7 @@ public class PositionAOImpl implements IPositionAO {
     public List<Position> queryPositionList(Position condition) {
         List<Position> list = positionBO.queryPositionList(condition);
         if (CollectionUtils.isNotEmpty(list)) {
-            for (Position position : list) {
-                XN806010Res res = companyBO.getCompany(position
-                    .getCompanyCode());
-                position.setCompany(res);
-            }
+
         }
         return list;
     }
@@ -81,8 +73,6 @@ public class PositionAOImpl implements IPositionAO {
     @Override
     public Position getPosition(String code) {
         Position position = positionBO.getPosition(code);
-        XN806010Res res = companyBO.getCompany(position.getCompanyCode());
-        position.setCompany(res);
         return position;
     }
 

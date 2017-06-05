@@ -1,14 +1,32 @@
 package com.cdkj.service.bo;
 
-import com.cdkj.service.dto.res.XN806010Res;
+import java.util.List;
 
-public interface ICompanyBO {
+import com.cdkj.service.bo.base.IPaginableBO;
+import com.cdkj.service.domain.Company;
 
-    /** 
-     * 获取公司详情
-     * @return 
-     * @create: 2016年10月26日 下午2:06:07 zuixian
-     * @history: 
-     */
-    public XN806010Res getCompany(String companyCode);
+
+
+//CHECK ��鲢��ע�� 
+public interface ICompanyBO extends IPaginableBO<Company> {
+
+
+	public boolean isCompanyExist(String code);
+
+
+	public String saveCompany(Company data);
+
+
+	public int removeCompany(String code);
+
+
+	public int refreshCompany(Company data);
+
+
+	public List<Company> queryCompanyList(Company condition);
+
+
+	public Company getCompany(String code);
+
+
 }

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IPhotoDAO">
+	<resultMap id="photo_DB_Result" type="photo">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="pic" property="pic" />
+		<result column="adv_pic" property="advPic" />
+		<result column="company_code" property="companyCode" />
+		<result column="py_num" property="pyNum" />
+		<result column="sys_num" property="sysNum" />
+		<result column="is_dz" property="isDz" />
+		<result column="scpslm" property="scpslm" />
+		<result column="works" property="works" />
+		<result column="quote_min" property="quoteMin" />
+		<result column="quote_max" property="quoteMax" />
+		<result column="quality_code" property="qualityCode" />
+		<result column="description" property="description" />
+		<result column="location" property="location" />
+		<result column="order_no" property="orderNo" />
+		<result column="status" property="status" />
+		<result column="publisher" property="publisher" />
+		<result column="publish_datetime" property="publishDatetime" />
+		<result column="dealer" property="dealer" />
+		<result column="deal_datetime" property="dealDatetime" />
+		<result column="deal_note" property="dealNote" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_photo" parameterType="photo" resultMap="photo_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.pic
+		,t.adv_pic
+		,t.company_code
+		,t.py_num
+		,t.sys_num
+		,t.is_dz
+		,t.scpslm
+		,t.works
+		,t.quote_min
+		,t.quote_max
+		,t.quality_code
+		,t.description
+		,t.location
+		,t.order_no
+		,t.status
+		,t.publisher
+		,t.publish_datetime
+		,t.dealer
+		,t.deal_datetime
+		,t.deal_note
+		FROM
+		tcp_photo t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_photo_count" parameterType="photo"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_photo t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_photo" parameterType="photo">
+		INSERT INTO
+		tcp_photo(
+		code
+		,name
+		,pic
+		,adv_pic
+		,company_code
+		,py_num
+		,sys_num
+		,is_dz
+		,scpslm
+		,works
+		,quote_min
+		,quote_max
+		,quality_code
+		,description
+		,location
+		,order_no
+		,status
+		,publisher
+		,publish_datetime
+		,dealer
+		,deal_datetime
+		,deal_note
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{pic}
+		,#{advPic}
+		,#{companyCode}
+		,#{pyNum}
+		,#{sysNum}
+		,#{isDz}
+		,#{scpslm}
+		,#{works}
+		,#{quoteMin}
+		,#{quoteMax}
+		,#{qualityCode}
+		,#{description}
+		,#{location}
+		,#{orderNo}
+		,#{status}
+		,#{publisher}
+		,#{publishDatetime}
+		,#{dealer}
+		,#{dealDatetime}
+		,#{dealNote}
+		)
+	</insert>
+
+	<update id="update_photo" parameterType="photo">
+		UPDATE tcp_photo
+		SET
+		name = #{name}
+		,pic = #{pic}
+		,adv_pic = #{advPic}
+		,company_code = #{companyCode}
+		,py_num = #{pyNum}
+		,sys_num = #{sysNum}
+		,is_dz = #{isDz}
+		,scpslm = #{scpslm}
+		,works = #{works}
+		,quote_min = #{quoteMin}
+		,quote_max = #{quoteMax}
+		,quality_code = #{qualityCode}
+		,description = #{description}
+		,location = #{location}
+		,order_no = #{orderNo}
+		,status = #{status}
+		,publisher = #{publisher}
+		,publish_datetime = #{publishDatetime}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

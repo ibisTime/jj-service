@@ -5,6 +5,12 @@ import java.util.Date;
 import com.cdkj.service.dao.base.ABaseDO;
 import com.cdkj.service.dto.res.XN806010Res;
 
+/**
+ * 职位
+ * @author: asus 
+ * @since: 2017年6月5日 下午6:52:59 
+ * @history:
+ */
 public class Position extends ABaseDO {
 
     private static final long serialVersionUID = 1L;

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.ICbIntentionDAO">
+	<resultMap id="CbIntention_DB_Result" type="CbIntention">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="int_name" property="intName" />
+		<result column="int_mobile" property="intMobile" />
+		<result column="company_code" property="companyCode" />
+		<result column="service_code" property="serviceCode" />
+		<result column="position_code" property="positionCode" />
+		<result column="resume_code" property="resumeCode" />
+		<result column="cooperation_content" property="cooperationContent" />
+		<result column="submitter" property="submitter" />
+		<result column="submit_datetime" property="submitDatetime" />
+		<result column="status" property="status" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_CbIntention" parameterType="CbIntention" resultMap="CbIntention_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.int_name
+		,t.int_mobile
+		,t.company_code
+		,t.service_code
+		,t.position_code
+		,t.resume_code
+		,t.cooperation_content
+		,t.submitter
+		,t.submit_datetime
+		,t.status
+		,t.updater
+		,t.update_datetime
+		,t.remark
+		FROM
+		tcp_cb_intention t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_CbIntention_count" parameterType="CbIntention"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_cb_intention t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_CbIntention" parameterType="CbIntention">
+		INSERT INTO
+		tcp_cb_intention(
+		code
+		,type
+		,int_name
+		,int_mobile
+		,company_code
+		,service_code
+		,position_code
+		,resume_code
+		,cooperation_content
+		,submitter
+		,submit_datetime
+		,status
+		,updater
+		,update_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{intName}
+		,#{intMobile}
+		,#{companyCode}
+		,#{serviceCode}
+		,#{positionCode}
+		,#{resumeCode}
+		,#{cooperationContent}
+		,#{submitter}
+		,#{submitDatetime}
+		,#{status}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_CbIntention" parameterType="CbIntention">
+		UPDATE tcp_cb_intention
+		SET
+		type = #{type}
+		,int_name = #{intName}
+		,int_mobile = #{intMobile}
+		,company_code = #{companyCode}
+		,service_code = #{serviceCode}
+		,position_code = #{positionCode}
+		,resume_code = #{resumeCode}
+		,cooperation_content = #{cooperationContent}
+		,submitter = #{submitter}
+		,submit_datetime = #{submitDatetime}
+		,status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

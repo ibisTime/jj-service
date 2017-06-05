@@ -6,75 +6,74 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cdkj.service.bo.ICompanyBO;
+import com.cdkj.service.bo.ICbIntentionBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
-import com.cdkj.service.dao.ICompanyDAO;
-import com.cdkj.service.domain.Company;
+import com.cdkj.service.dao.ICbIntentionDAO;
+import com.cdkj.service.domain.CbIntention;
 import com.cdkj.service.exception.BizException;
 
 @Component
-public class CompanyBOImpl extends PaginableBOImpl<Company> implements
-        ICompanyBO {
+public class CbIntentionBOImpl extends PaginableBOImpl<CbIntention> implements
+        ICbIntentionBO {
 
     @Autowired
-    private ICompanyDAO companyDAO;
+    private ICbIntentionDAO CbIntentionDAO;
 
     @Override
-    public boolean isCompanyExist(String code) {
-        Company condition = new Company();
+    public boolean isCbIntentionExist(String code) {
+        CbIntention condition = new CbIntention();
         condition.setCode(code);
-        if (companyDAO.selectTotalCount(condition) > 0) {
+        if (CbIntentionDAO.selectTotalCount(condition) > 0) {
             return true;
         }
         return false;
     }
 
     @Override
-    public String saveCompany(Company data) {
+    public String saveCbIntention(CbIntention data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater
-                .generateM(EGeneratePrefix.COMPANY.getCode());
+            code = OrderNoGenerater.generateM(EGeneratePrefix.CBYX.getCode());
             data.setCode(code);
-            companyDAO.insert(data);
+            CbIntentionDAO.insert(data);
         }
         return code;
     }
 
     @Override
-    public int removeCompany(String code) {
+    public int removeCbIntention(String code) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
-            Company data = new Company();
+            CbIntention data = new CbIntention();
             data.setCode(code);
-            count = companyDAO.delete(data);
+            count = CbIntentionDAO.delete(data);
         }
         return count;
     }
 
     @Override
-    public int refreshCompany(Company data) {
+    public int refreshCbIntention(CbIntention data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            count = companyDAO.update(data);
+            count = CbIntentionDAO.update(data);
         }
         return count;
     }
 
     @Override
-    public List<Company> queryCompanyList(Company condition) {
-        return companyDAO.selectList(condition);
+    public List<CbIntention> queryCbIntentionList(CbIntention condition) {
+        return CbIntentionDAO.selectList(condition);
     }
 
     @Override
-    public Company getCompany(String code) {
-        Company data = null;
+    public CbIntention getCbIntention(String code) {
+        CbIntention data = null;
         if (StringUtils.isNotBlank(code)) {
-            Company condition = new Company();
+            CbIntention condition = new CbIntention();
             condition.setCode(code);
-            data = companyDAO.select(condition);
+            data = CbIntentionDAO.select(condition);
             if (data == null) {
                 throw new BizException("xn0000", "�� ��Ų�����");
             }

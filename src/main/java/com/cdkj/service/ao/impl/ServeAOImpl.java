@@ -28,7 +28,6 @@ import com.cdkj.service.domain.ServeKfwb;
 import com.cdkj.service.domain.ServePhoto;
 import com.cdkj.service.domain.ServeShop;
 import com.cdkj.service.domain.ServeTrain;
-import com.cdkj.service.dto.res.XN806010Res;
 import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
@@ -110,11 +109,7 @@ public class ServeAOImpl implements IServeAO {
         Paginable<Serve> page = serveBO.getPaginable(start, limit, condition);
         List<Serve> list = page.getList();
         if (CollectionUtils.isNotEmpty(list)) {
-            for (Serve serve : list) {
-                XN806010Res res = companyBO.getCompany(serve.getCompanyCode());
-                serve.setCompany(res);
-                addServeExt(serve);
-            }
+
         }
         return page;
     }
@@ -167,8 +162,6 @@ public class ServeAOImpl implements IServeAO {
     @Override
     public Serve getServe(String code) {
         Serve serve = serveBO.getServe(code);
-        XN806010Res res = companyBO.getCompany(serve.getCompanyCode());
-        serve.setCompany(res);
         addServeExt(serve);
         return serve;
     }

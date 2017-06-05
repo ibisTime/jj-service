@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.ICompanyDAO">
+	<resultMap id="company_DB_Result" type="company">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="name" property="name" />
+		<result column="abbr_name" property="abbrName" />
+		<result column="gsyyzzh" property="gsyyzzh" />
+		<result column="logo" property="logo" />
+		<result column="pic" property="pic" />
+		<result column="adv_pic" property="advPic" />
+		<result column="slogan" property="slogan" />
+		<result column="corporation" property="corporation" />
+		<result column="id_no" property="idNo" />
+		<result column="province" property="province" />
+		<result column="city" property="city" />
+		<result column="area" property="area" />
+		<result column="address" property="address" />
+		<result column="longitude" property="longitude" />
+		<result column="latitude" property="latitude" />
+		<result column="description" property="description" />
+		<result column="scale" property="scale" />
+		<result column="registered_capital" property="registeredCapital" />
+		<result column="regtime" property="regtime" />
+		<result column="gz_num" property="gzNum" />
+		<result column="mobile" property="mobile" />
+		<result column="email" property="email" />
+		<result column="qq" property="qq" />
+		<result column="we_chat" property="weChat" />
+		<result column="location" property="location" />
+		<result column="order_no" property="orderNo" />
+		<result column="is_default" property="isDefault" />
+		<result column="price_range" property="priceRange" />
+		<result column="status" property="status" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+		<result column="user_id" property="userId" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_company" parameterType="company" resultMap="company_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.name
+		,t.abbr_name
+		,t.gsyyzzh
+		,t.logo
+		,t.pic
+		,t.adv_pic
+		,t.slogan
+		,t.corporation
+		,t.id_no
+		,t.province
+		,t.city
+		,t.area
+		,t.address
+		,t.longitude
+		,t.latitude
+		,t.description
+		,t.scale
+		,t.registered_capital
+		,t.regtime
+		,t.gz_num
+		,t.mobile
+		,t.email
+		,t.qq
+		,t.we_chat
+		,t.location
+		,t.order_no
+		,t.is_default
+		,t.price_range
+		,t.status
+		,t.updater
+		,t.update_datetime
+		,t.remark
+		,t.user_id
+		FROM
+		tcp_company t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_company_count" parameterType="company"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_company t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_company" parameterType="company">
+		INSERT INTO
+		tcp_company(
+		code
+		,type
+		,name
+		,abbr_name
+		,gsyyzzh
+		,logo
+		,pic
+		,adv_pic
+		,slogan
+		,corporation
+		,id_no
+		,province
+		,city
+		,area
+		,address
+		,longitude
+		,latitude
+		,description
+		,scale
+		,registered_capital
+		,regtime
+		,gz_num
+		,mobile
+		,email
+		,qq
+		,we_chat
+		,location
+		,order_no
+		,is_default
+		,price_range
+		,status
+		,updater
+		,update_datetime
+		,remark
+		,user_id
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{name}
+		,#{abbrName}
+		,#{gsyyzzh}
+		,#{logo}
+		,#{pic}
+		,#{advPic}
+		,#{slogan}
+		,#{corporation}
+		,#{idNo}
+		,#{province}
+		,#{city}
+		,#{area}
+		,#{address}
+		,#{longitude}
+		,#{latitude}
+		,#{description}
+		,#{scale}
+		,#{registeredCapital}
+		,#{regtime}
+		,#{gzNum}
+		,#{mobile}
+		,#{email}
+		,#{qq}
+		,#{weChat}
+		,#{location}
+		,#{orderNo}
+		,#{isDefault}
+		,#{priceRange}
+		,#{status}
+		,#{updater}
+		,#{updateDatetime}
+		,#{remark}
+		,#{userId}
+		)
+	</insert>
+
+	<update id="update_company" parameterType="company">
+		UPDATE tcp_company
+		SET
+		type = #{type}
+		,name = #{name}
+		,abbr_name = #{abbrName}
+		,gsyyzzh = #{gsyyzzh}
+		,logo = #{logo}
+		,pic = #{pic}
+		,adv_pic = #{advPic}
+		,slogan = #{slogan}
+		,corporation = #{corporation}
+		,id_no = #{idNo}
+		,province = #{province}
+		,city = #{city}
+		,area = #{area}
+		,address = #{address}
+		,longitude = #{longitude}
+		,latitude = #{latitude}
+		,description = #{description}
+		,scale = #{scale}
+		,registered_capital = #{registeredCapital}
+		,regtime = #{regtime}
+		,gz_num = #{gzNum}
+		,mobile = #{mobile}
+		,email = #{email}
+		,qq = #{qq}
+		,we_chat = #{weChat}
+		,location = #{location}
+		,order_no = #{orderNo}
+		,is_default = #{isDefault}
+		,price_range = #{priceRange}
+		,status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		,user_id = #{userId}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>
