@@ -2,10 +2,8 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IDemandAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.DemandConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.Demand;
 import com.cdkj.service.dto.req.XN612192Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
@@ -26,7 +24,6 @@ public class XN612192 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        Demand data = DemandConverter.converter(req);
         demandAO.editDemand(req);
         return new BooleanRes(true);
     }

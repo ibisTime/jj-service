@@ -39,7 +39,7 @@ public class IntentionBOImpl extends PaginableBOImpl<Intention> implements
     public String saveIntention(Intention data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.YX.getCode());
+            code = OrderNoGenerater.generateM(EGeneratePrefix.CBYX.getCode());
             data.setCode(code);
             data.setFromDatetime(new Date());
             intentionDAO.insert(data);

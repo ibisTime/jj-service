@@ -13,7 +13,7 @@ package com.cdkj.service.dto.req;
  * @since: 2016年10月7日 下午5:37:47 
  * @history:
  */
-public class CD612050Req extends APageReq {
+public class XN612195Req extends APageReq {
     /** 
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
      */

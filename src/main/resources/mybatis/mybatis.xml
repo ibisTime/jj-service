@@ -21,5 +21,6 @@
 		<typeAlias alias="news" type="com.cdkj.service.domain.News" />
 		
 		<typeAlias alias="qualify" type="com.cdkj.service.domain.Qualify" />
+		<typeAlias alias="bcIntention" type="com.cdkj.service.domain.BcIntention" />
 	</typeAliases>	
 </configuration>

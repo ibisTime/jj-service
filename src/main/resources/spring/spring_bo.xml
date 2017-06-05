@@ -74,4 +74,8 @@
 	<bean id="qualifyBO" class="com.cdkj.service.bo.impl.QualifyBOImpl">
 		<property name="paginableDAO" ref="qualifyDAOImpl" />
 	</bean>
+	
+	<bean id="bcIntentionBO" class="com.cdkj.service.bo.impl.BcIntentionBOImpl">
+		<property name="paginableDAO" ref="bcIntentionDAOImpl" />
+	</bean>
 </beans>

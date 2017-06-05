@@ -107,10 +107,10 @@ public class DemandAOImpl implements IDemandAO {
     public void violationDemand(String code, String dealer, String dealNote) {
         Demand demand = demandBO.getDemand(code);
         String publisher = demand.getPublisher();
+        // 发送短信
         smsOutBO.sentContent(publisher, publisher,
             "尊敬的用户，您所发布的需求[" + demand.getName() + "]已做违规处理，违规原因[" + dealNote
                     + "]。");
-        // 发送短信
         demandBO.refreshDemandStatus(demand, dealer, dealNote);
     }
 }

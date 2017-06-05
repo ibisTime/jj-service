@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.service.dao.IBcIntentionDAO">
+	<resultMap id="bcIntention_DB_Result" type="bcIntention">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="company_code" property="companyCode" />
+		<result column="demand_code" property="demandCode" />
+		<result column="resume_code" property="resumeCode" />
+		<result column="submitter" property="submitter" />
+		<result column="submit_datetime" property="submitDatetime" />
+		<result column="status" property="status" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+		<result column="gs_user_id" property="gsUserId" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="code != null and code != '' ">
+				AND t.code = #{companyCode}
+			</if>
+			<if test="demand_code != null and demand_code != '' ">
+				AND t.demand_code = #{demandCode}
+			</if>
+			<if test="resume_code != null and resume_code != '' ">
+				AND t.resume_code = #{resumeCode}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="submitter != null and submitter != '' ">
+				AND t.submitter = #{submitter}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_bcIntention" parameterType="bcIntention" resultMap="bcIntention_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.company_code
+		,t.int_name
+		,t.demand_code
+		,t.resume_code
+		,t.hz_content
+		,t.submitter
+		,t.submit_datetime
+		,t.status
+		,t.updater
+		,t.update_datetime
+		,t.remark
+		,t.gs_user_id
+		FROM
+		tcp_bc_intention t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_bcIntention_count" parameterType="bcIntention"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tcp_bc_intention t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_bcIntention" parameterType="bcIntention">
+		INSERT INTO
+		tcp_bc_intention(
+		code
+		,type
+		,company_code
+		,demand_code
+		,resume_code
+		,submitter
+		,submit_datetime
+		,status
+		,gs_user_id
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{companyCode}
+		,#{demandCode}
+		,#{resumeCode}
+		,#{submitter}
+		,#{submitDatetime}
+		,#{status}
+		,#{gsUserId}
+		)
+	</insert>
+
+	<update id="update_bcIntention" parameterType="bcIntention">
+		UPDATE tcp_bc_intention
+		SET
+		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>
