@@ -10,9 +10,9 @@ package com.cdkj.service.api.converter;
 
 import com.cdkj.service.common.DateUtil;
 import com.cdkj.service.domain.Demand;
-import com.cdkj.service.dto.req.CD612040Req;
-import com.cdkj.service.dto.req.CD612041Req;
-import com.cdkj.service.dto.req.CD612043Req;
+import com.cdkj.service.dto.req.XN612190Req;
+import com.cdkj.service.dto.req.XN612192Req;
+import com.cdkj.service.dto.req.XN612193Req;
 import com.cdkj.service.dto.req.CD612050Req;
 
 /** 
@@ -22,7 +22,7 @@ import com.cdkj.service.dto.req.CD612050Req;
  */
 public class DemandConverter {
 
-    public static Demand converter(CD612040Req req) {
+    public static Demand converter(XN612190Req req) {
         Demand result = new Demand();
         result.setName(req.getName());
         result.setQualityCode(req.getQualityCode());
@@ -33,7 +33,7 @@ public class DemandConverter {
         return result;
     }
 
-    public static Demand converter(CD612041Req req) {
+    public static Demand converter(XN612192Req req) {
         Demand result = new Demand();
         result.setCode(req.getCode());
         result.setName(req.getName());
@@ -45,7 +45,7 @@ public class DemandConverter {
         return result;
     }
 
-    public static Demand converter(CD612043Req req) {
+    public static Demand converter(XN612193Req req) {
         Demand result = new Demand();
         result.setCode(req.getCode());
         result.setDealer(req.getDealer());

@@ -1,6 +1,12 @@
 package com.cdkj.service.dto.req;
 
-public class CD612071Req {
+/**
+ * 详情查简历
+ * @author: asus 
+ * @since: 2017年6月5日 下午3:38:52 
+ * @history:
+ */
+public class XN612186Req {
 
     // 编号 (选填)
     private String code;

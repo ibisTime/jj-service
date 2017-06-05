@@ -4,64 +4,102 @@ import java.util.Date;
 import java.util.List;
 
 import com.cdkj.service.dao.base.ABaseDO;
-import com.cdkj.service.dto.res.XN805901Res;
 
+/**
+ * 简历
+ * @author: asus 
+ * @since: 2017年6月5日 下午2:28:55 
+ * @history:
+ */
 public class Resume extends ABaseDO {
 
     private static final long serialVersionUID = 1L;
 
+    // 编号
     private String code;
 
+    // 简历名称
     private String name;
 
+    // 是否有工作经验
     private String isWork;
 
+    // 最近公司名称
     private String preCompName;
 
+    // 最近职位名称
     private String prePosName;
 
+    // 最近工作时间
     private String preWorkTime;
 
+    // 最近月薪
     private String preMsalary;
 
+    // 最近职位描述
     private String preDescription;
 
+    // 学历
     private String education;
 
+    // 是否统招
     private String isTz;
 
+    // 就读时间
     private String studyTime;
 
+    // 学校名称
     private String school;
 
+    // 专业名称
     private String profession;
 
+    // 工作类型
     private String type;
 
+    // 期望岗位
     private String expPosition;
 
+    // 期望月薪
     private String expMsalary;
 
+    // 期望工作地点(省)
     private String expProvince;
 
+    // 期望工作地点(市)
     private String expCity;
 
+    // 工作状态
     private String workStatus;
 
+    // 是否公开
     private String isOpen;
 
+    // 使用次数
     private Integer useTimes;
 
+    // UI位置
+    private String location;
+
+    // UI顺序
+    private Integer orderNo;
+
+    // 状态
     private String status;
 
+    // 发布人
     private String publisher;
 
+    // 更新时间
     private Date publishDatetime;
 
+    // 处理人
     private String dealer;
 
+    // 处理时间
     private Date dealDatetime;
 
+    // 违规说明
     private String dealNote;
 
     // ****************db properties ******************
@@ -70,8 +108,6 @@ public class Resume extends ABaseDO {
     private String workTime;
 
     List<String> expPositionList;
-
-    private XN805901Res user;
 
     public String getCode() {
         return code;
@@ -305,14 +341,6 @@ public class Resume extends ABaseDO {
         this.workTime = workTime;
     }
 
-    public XN805901Res getUser() {
-        return user;
-    }
-
-    public void setUser(XN805901Res user) {
-        this.user = user;
-    }
-
     public List<String> getExpPositionList() {
         return expPositionList;
     }
@@ -320,4 +348,21 @@ public class Resume extends ABaseDO {
     public void setExpPositionList(List<String> expPositionList) {
         this.expPositionList = expPositionList;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Integer getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
+    }
+
 }

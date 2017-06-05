@@ -5,7 +5,7 @@ package com.cdkj.service.dto.req;
  * @since: 2016年10月7日 下午5:22:58 
  * @history:
  */
-public class CD612041Req {
+public class XN612192Req {
     // 编号(必填)
     private String code;
 

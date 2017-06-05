@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IResumeBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IResumeDAO;
 import com.cdkj.service.domain.Resume;
 import com.cdkj.service.enums.EBoolean;
@@ -33,53 +31,38 @@ public class ResumeBOImpl extends PaginableBOImpl<Resume> implements IResumeBO {
     }
 
     @Override
-    public String saveResume(Resume data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.JL.getCode());
-            data.setCode(code);
-            data.setStatus(EBoolean.YES.getCode());
-            data.setPublishDatetime(new Date());
-            data.setUseTimes(0);
-            resumeDAO.insert(data);
-        }
-        return code;
+    public void saveResume(Resume data) {
+        resumeDAO.insert(data);
     }
 
     @Override
-    public int removeResume(String code) {
-        int count = 0;
+    public void removeResume(String code) {
         if (StringUtils.isNotBlank(code)) {
             Resume data = new Resume();
             data.setCode(code);
-            count = resumeDAO.delete(data);
+            resumeDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshResume(Resume data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            data.setPublishDatetime(new Date());
-            count = resumeDAO.update(data);
-        }
-        return count;
+    public void refreshResume(Resume data) {
+        resumeDAO.update(data);
     }
 
     @Override
-    public int refreshResumeUseTime(String code) {
-        int count = 0;
+    public void refreshResumeUseTime(String code) {
         if (StringUtils.isNotBlank(code)) {
             Resume data = new Resume();
             data.setCode(code);
-            count = resumeDAO.updateUseTime(data);
+            resumeDAO.updateUseTime(data);
         }
-        return count;
     }
 
     @Override
-    public List<Resume> queryResumeList(Resume condition) {
+    public List<Resume> queryResumeList(String publisher, String status) {
+        Resume condition = new Resume();
+        condition.setPublisher(publisher);
+        condition.setStatus(status);
         return resumeDAO.selectList(condition);
     }
 
@@ -98,13 +81,13 @@ public class ResumeBOImpl extends PaginableBOImpl<Resume> implements IResumeBO {
     }
 
     @Override
-    public int refreshResumeStatus(String code, String dealer, String dealNote) {
+    public void refreshResumeStatus(String code, String dealer, String dealNote) {
         Resume data = new Resume();
         data.setCode(code);
         data.setStatus(EBoolean.NO.getCode());
         data.setDealer(dealer);
         data.setDealNote(dealNote);
         data.setDealDatetime(new Date());
-        return resumeDAO.updateStatus(data);
+        resumeDAO.updateStatus(data);
     }
 }

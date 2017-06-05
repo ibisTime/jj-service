@@ -8,7 +8,7 @@
  */
 package com.cdkj.service.bo;
 
-import com.cdkj.service.dto.res.XN805901Res;
+import com.cdkj.service.domain.User;
 
 /** 
  * @author: xieyj 
@@ -17,5 +17,5 @@ import com.cdkj.service.dto.res.XN805901Res;
  */
 public interface IUserBO {
 
-    public XN805901Res getRemoteUser(String tokenId, String userId);
+    public User getRemoteUser(String userId);
 }

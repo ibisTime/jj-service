@@ -1,8 +1,8 @@
 package com.cdkj.service.dto.req;
 
-public class CD612072Req {
+public class XN612187Req {
 
-    // 编号 (选填)
+    // 用户编号 (必填)
     private String publisher;
 
     // 状态 (选填)

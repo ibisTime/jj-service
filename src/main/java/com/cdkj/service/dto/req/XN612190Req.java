@@ -13,7 +13,7 @@ package com.cdkj.service.dto.req;
  * @since: 2016年10月7日 下午5:22:58 
  * @history:
  */
-public class CD612040Req {
+public class XN612190Req {
     // 需求名称(必填)
     private String name;
 

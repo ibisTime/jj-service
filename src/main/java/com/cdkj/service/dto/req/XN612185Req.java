@@ -1,6 +1,6 @@
 package com.cdkj.service.dto.req;
 
-public class CD612070Req extends APageReq {
+public class XN612185Req extends APageReq {
 
     private static final long serialVersionUID = 1L;
 

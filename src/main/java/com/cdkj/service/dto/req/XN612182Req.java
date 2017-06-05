@@ -14,49 +14,77 @@ package com.cdkj.service.dto.req;
  * @since: 2016年10月8日 下午3:47:18 
  * @history:
  */
-public class CD612061Req {
-
+public class XN612182Req {
+    // 编号
     private String code;
 
+    // 简历名称(必填)
     private String name;
 
+    // 是否有工作经历
     private String isWork;
 
+    // 公司名称
     private String preCompName;
 
+    // 职位名称
     private String prePosName;
 
+    // 工作时间
     private String preWorkTime;
 
+    // 月薪
     private String preMsalary;
 
+    // 岗位描述
     private String preDescription;
 
+    // 学历
     private String education;
 
+    // 是否统招
     private String isTz;
 
+    // 就读时间
     private String studyTime;
 
+    // 学校名称
     private String school;
 
+    // 专业
     private String profession;
 
+    // 工作类型
     private String type;
 
+    // 期望职位
     private String expPosition;
 
+    // 期望月薪
     private String expMsalary;
 
+    // 期望地点(省)
     private String expProvince;
 
+    // 期望地点(市)
     private String expCity;
 
+    // 工作状态
     private String workStatus;
 
+    // 是否公开
     private String isOpen;
 
+    // 发布人
     private String publisher;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getName() {
         return name;
@@ -216,13 +244,5 @@ public class CD612061Req {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 }

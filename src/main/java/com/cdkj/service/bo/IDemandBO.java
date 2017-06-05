@@ -14,13 +14,14 @@ public interface IDemandBO extends IPaginableBO<Demand> {
 
     public boolean isDemandExist(String code);
 
-    public String saveDemand(Demand data);
+    public void saveDemand(Demand data);
 
-    public int removeDemand(String code);
+    public void removeDemand(String code);
 
-    public int refreshDemand(Demand data);
+    public void refreshDemand(Demand data);
 
-    public int refreshDemandStatus(String code, String dealer, String dealNote);
+    public void refreshDemandStatus(Demand demand, String dealer,
+            String dealNote);
 
     public List<Demand> queryDemandList(Demand condition);
 

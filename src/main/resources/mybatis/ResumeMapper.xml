@@ -8,29 +8,37 @@
 		<result column="is_work" property="isWork" />
 		<result column="pre_comp_name" property="preCompName" />
 		<result column="pre_pos_name" property="prePosName" />
+		
 		<result column="pre_work_time" property="preWorkTime" />
 		<result column="pre_msalary" property="preMsalary" />
 		<result column="pre_description" property="preDescription" />
 		<result column="education" property="education" />
 		<result column="is_tz" property="isTz" />
+		
 		<result column="study_time" property="studyTime" />
 		<result column="school" property="school" />
 		<result column="profession" property="profession" />
 		<result column="type" property="type" />
 		<result column="exp_position" property="expPosition" />
+		
 		<result column="exp_msalary" property="expMsalary" />
 		<result column="exp_province" property="expProvince" />
 		<result column="exp_city" property="expCity" />
 		<result column="work_status" property="workStatus" />
 		<result column="is_open" property="isOpen" />
+		
 		<result column="use_times" property="useTimes" />
+		<result column="location" property="location" />
+		<result column="order_no" property="orderNo" />
 		<result column="status" property="status" />
 		<result column="publisher" property="publisher" />
+		
 		<result column="mobile" property="mobile" />
 		<result column="work_time" property="workTime" />
 		<result column="publish_datetime" property="publishDatetime" />
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
+		
 		<result column="deal_note" property="dealNote" />
 	</resultMap>
 	<sql id="where_condition">
@@ -87,6 +95,8 @@
 		,t.work_status
 		,t.is_open
 		,t.use_times
+		,t.location
+		,t.order_no
 		,t.status
 		,t.publisher
 		,ju.mobile
@@ -121,28 +131,31 @@
 		,is_work
 		,pre_comp_name
 		,pre_pos_name
+		
 		,pre_work_time
 		,pre_msalary
 		,pre_description
 		,education
 		,is_tz
+		
 		,study_time
 		,school
 		,profession
 		,type
 		,exp_position
+		
 		,exp_msalary
 		,exp_province
 		,exp_city
 		,work_status
 		,is_open
+		
 		,use_times
+		,location
+		,order_no
 		,status
 		,publisher
 		,publish_datetime
-		,dealer
-		,deal_datetime
-		,deal_note
 		)
 		VALUES(
 		#{code}
@@ -166,12 +179,11 @@
 		,#{workStatus}
 		,#{isOpen}
 		,#{useTimes}
+		,#{location}
+		,#{orderNo}
 		,#{status}
 		,#{publisher}
 		,#{publishDatetime}
-		,#{dealer}
-		,#{dealDatetime}
-		,#{dealNote}
 		)
 	</insert>
 
@@ -182,21 +194,25 @@
 		,is_work = #{isWork}
 		,pre_comp_name = #{preCompName}
 		,pre_pos_name = #{prePosName}
+		
 		,pre_work_time = #{preWorkTime}
 		,pre_msalary = #{preMsalary}
 		,pre_description = #{preDescription}
 		,education = #{education}
 		,is_tz = #{isTz}
+		
 		,study_time = #{studyTime}
 		,school = #{school}
 		,profession = #{profession}
 		,type = #{type}
 		,exp_position = #{expPosition}
+		
 		,exp_msalary = #{expMsalary}
 		,exp_province = #{expProvince}
 		,exp_city = #{expCity}
 		,work_status = #{workStatus}
 		,is_open = #{isOpen}
+		
 		,publisher = #{publisher}
 		,publish_datetime = #{publishDatetime}
 		WHERE code = #{code}

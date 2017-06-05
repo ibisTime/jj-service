@@ -4,23 +4,26 @@ import java.util.List;
 
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Resume;
+import com.cdkj.service.dto.req.XN612180Req;
+import com.cdkj.service.dto.req.XN612182Req;
+import com.cdkj.service.dto.res.XN612186Res;
 
 public interface IResumeAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addResume(Resume data);
+    public String addResume(XN612180Req req);
 
-    public int dropResume(String code);
+    public void dropResume(String code);
 
-    public int editResume(Resume data);
+    public void editResume(XN612182Req req);
 
-    public int editResumeStatus(String code, String dealer, String dealNote);
+    public void editResumeStatus(String code, String dealer, String dealNote);
 
     public Paginable<Resume> queryResumePage(int start, int limit,
             Resume condition);
 
-    public List<Resume> queryResumeList(Resume condition);
+    public List<Resume> queryResumeList(String publisher, String status);
 
-    public Resume getResume(String code);
+    public XN612186Res getResume(String code);
 
 }

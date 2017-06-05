@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IDemandBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IDemandDAO;
 import com.cdkj.service.domain.Demand;
 import com.cdkj.service.enums.EBoolean;
@@ -38,37 +36,22 @@ public class DemandBOImpl extends PaginableBOImpl<Demand> implements IDemandBO {
     }
 
     @Override
-    public String saveDemand(Demand data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.XQ.getCode());
-            data.setCode(code);
-            data.setStatus(EBoolean.YES.getCode());
-            data.setPublishDatetime(new Date());
-            demandDAO.insert(data);
-        }
-        return code;
+    public void saveDemand(Demand data) {
+        demandDAO.insert(data);
     }
 
     @Override
-    public int removeDemand(String code) {
-        int count = 0;
+    public void removeDemand(String code) {
         if (StringUtils.isNotBlank(code)) {
             Demand data = new Demand();
             data.setCode(code);
-            count = demandDAO.delete(data);
+            demandDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshDemand(Demand data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            data.setPublishDatetime(new Date());
-            count = demandDAO.update(data);
-        }
-        return count;
+    public void refreshDemand(Demand data) {
+        demandDAO.update(data);
     }
 
     @Override
@@ -94,17 +77,12 @@ public class DemandBOImpl extends PaginableBOImpl<Demand> implements IDemandBO {
      * @see com.cdkj.service.bo.IDemandBO#refreshDemandStatus(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public int refreshDemandStatus(String code, String dealer, String dealNote) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Demand data = new Demand();
-            data.setCode(code);
-            data.setStatus(EBoolean.NO.getCode());
-            data.setDealer(dealer);
-            data.setDealNote(dealNote);
-            data.setDealDatetime(new Date());
-            count = demandDAO.updateStatus(data);
-        }
-        return count;
+    public void refreshDemandStatus(Demand demand, String dealer,
+            String dealNote) {
+        demand.setStatus(EBoolean.NO.getCode());
+        demand.setDealer(dealer);
+        demand.setDealNote(dealNote);
+        demand.setDealDatetime(new Date());
+        demandDAO.updateStatus(demand);
     }
 }

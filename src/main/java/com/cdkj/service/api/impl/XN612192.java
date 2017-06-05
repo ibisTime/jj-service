@@ -2,35 +2,40 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IDemandAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.api.converter.DemandConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.dto.req.CD612042Req;
+import com.cdkj.service.domain.Demand;
+import com.cdkj.service.dto.req.XN612192Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
 /**
- * 删除需求
+ * 修改需求
  * @author: xieyj 
  * @since: 2016年10月7日 下午6:03:47 
  * @history:
  */
-public class CD612042 extends AProcessor {
+public class XN612192 extends AProcessor {
 
     private IDemandAO demandAO = SpringContextHolder.getBean(IDemandAO.class);
 
-    private CD612042Req req = null;
+    private XN612192Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
-        demandAO.dropDemand(req.getCode());
+        Demand data = DemandConverter.converter(req);
+        demandAO.editDemand(req);
         return new BooleanRes(true);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, CD612042Req.class);
-        StringValidater.validateBlank(req.getCode());
+        req = JsonUtil.json2Bean(inputparams, XN612192Req.class);
+        StringValidater.validateBlank(req.getCode(), req.getName(),
+            req.getQualityCode(), req.getUrgentLevel(), req.getDescription(),
+            req.getPublisher());
     }
 }

@@ -9,17 +9,17 @@ public interface IResumeBO extends IPaginableBO<Resume> {
 
     public boolean isResumeExist(String code);
 
-    public String saveResume(Resume data);
+    public void saveResume(Resume data);
 
-    public int removeResume(String code);
+    public void removeResume(String code);
 
-    public int refreshResume(Resume data);
+    public void refreshResume(Resume data);
 
-    public int refreshResumeUseTime(String code);
+    public void refreshResumeUseTime(String code);
 
-    public int refreshResumeStatus(String code, String dealer, String dealNote);
+    public void refreshResumeStatus(String code, String dealer, String dealNote);
 
-    public List<Resume> queryResumeList(Resume condition);
+    public List<Resume> queryResumeList(String publisher, String status);
 
     public Resume getResume(String code);
 

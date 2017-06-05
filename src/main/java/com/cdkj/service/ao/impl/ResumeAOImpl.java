@@ -1,6 +1,7 @@
 package com.cdkj.service.ao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,8 +13,14 @@ import com.cdkj.service.bo.IResumeBO;
 import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.core.EGeneratePrefix;
+import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.domain.Resume;
-import com.cdkj.service.dto.res.XN805901Res;
+import com.cdkj.service.domain.User;
+import com.cdkj.service.dto.req.XN612180Req;
+import com.cdkj.service.dto.req.XN612182Req;
+import com.cdkj.service.dto.res.XN612186Res;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -29,24 +36,83 @@ public class ResumeAOImpl implements IResumeAO {
     private ISmsOutBO smsOutBO;
 
     @Override
-    public String addResume(Resume data) {
-        return resumeBO.saveResume(data);
+    public String addResume(XN612180Req req) {
+        Resume data = new Resume();
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.JL.getCode());
+        data.setCode(code);
+        data.setName(req.getName());
+        data.setIsWork(req.getIsWork());
+        data.setPreCompName(req.getPreCompName());
+        data.setPrePosName(req.getPrePosName());
+
+        data.setPreWorkTime(req.getPreWorkTime());
+        data.setPreMsalary(req.getPreMsalary());
+        data.setPreDescription(req.getPreDescription());
+        data.setEducation(req.getEducation());
+        data.setIsTz(req.getIsTz());
+
+        data.setStudyTime(req.getStudyTime());
+        data.setSchool(req.getSchool());
+        data.setProfession(req.getProfession());
+        data.setType(req.getType());
+        data.setExpPosition(req.getExpPosition());
+
+        data.setExpMsalary(req.getExpMsalary());
+        data.setExpProvince(req.getExpProvince());
+        data.setExpCity(req.getExpCity());
+        data.setWorkStatus(req.getWorkStatus());
+        data.setIsOpen(req.getIsOpen());
+
+        data.setUseTimes(0);
+        data.setLocation(EBoolean.NO.getCode());
+        data.setOrderNo(0);
+        data.setStatus(EBoolean.YES.getCode());
+        data.setPublisher(req.getPublisher());
+
+        data.setPublishDatetime(new Date());
+        resumeBO.saveResume(data);
+        return code;
     }
 
     @Override
-    public int editResume(Resume data) {
-        if (!resumeBO.isResumeExist(data.getCode())) {
-            throw new BizException("xn0000", "简历不存在");
-        }
-        return resumeBO.refreshResume(data);
+    public void editResume(XN612182Req req) {
+        resumeBO.getResume(req.getCode());
+        Resume data = new Resume();
+        data.setCode(req.getCode());
+        data.setName(req.getName());
+        data.setIsWork(req.getIsWork());
+        data.setPreCompName(req.getPreCompName());
+        data.setPrePosName(req.getPrePosName());
+
+        data.setPreWorkTime(req.getPreWorkTime());
+        data.setPreMsalary(req.getPreMsalary());
+        data.setPreDescription(req.getPreDescription());
+        data.setEducation(req.getEducation());
+        data.setIsTz(req.getIsTz());
+
+        data.setStudyTime(req.getStudyTime());
+        data.setSchool(req.getSchool());
+        data.setProfession(req.getProfession());
+        data.setType(req.getType());
+        data.setExpPosition(req.getExpPosition());
+
+        data.setExpMsalary(req.getExpMsalary());
+        data.setExpProvince(req.getExpProvince());
+        data.setExpCity(req.getExpCity());
+        data.setWorkStatus(req.getWorkStatus());
+        data.setIsOpen(req.getIsOpen());
+
+        data.setPublisher(req.getPublisher());
+        data.setPublishDatetime(new Date());
+        resumeBO.refreshResume(data);
     }
 
     @Override
-    public int dropResume(String code) {
+    public void dropResume(String code) {
         if (!resumeBO.isResumeExist(code)) {
             throw new BizException("xn0000", "简历不存在");
         }
-        return resumeBO.removeResume(code);
+        resumeBO.removeResume(code);
     }
 
     @Override
@@ -64,26 +130,27 @@ public class ResumeAOImpl implements IResumeAO {
     }
 
     @Override
-    public List<Resume> queryResumeList(Resume condition) {
-        return resumeBO.queryResumeList(condition);
+    public List<Resume> queryResumeList(String publisher, String status) {
+        return resumeBO.queryResumeList(publisher, status);
     }
 
     @Override
-    public Resume getResume(String code) {
+    public XN612186Res getResume(String code) {
         Resume resume = resumeBO.getResume(code);
-        XN805901Res res = userBO.getRemoteUser(resume.getPublisher(),
-            resume.getPublisher());
-        resume.setUser(res);
-        return resume;
+        User user = userBO.getRemoteUser(resume.getPublisher());
+        XN612186Res res = new XN612186Res();
+        res.setResume(resume);
+        res.setUser(user);
+        return res;
     }
 
     @Override
-    public int editResumeStatus(String code, String dealer, String dealNote) {
+    public void editResumeStatus(String code, String dealer, String dealNote) {
         Resume resume = resumeBO.getResume(code);
         String publisher = resume.getPublisher();
         smsOutBO.sentContent(publisher, publisher,
             "尊敬的用户，您所发布的简历[" + resume.getName() + "]已做违规处理，违规原因[" + dealNote
                     + "]。");
-        return resumeBO.refreshResumeStatus(code, dealer, dealNote);
+        resumeBO.refreshResumeStatus(code, dealer, dealNote);
     }
 }

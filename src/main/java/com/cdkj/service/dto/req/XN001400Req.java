@@ -1,6 +1,6 @@
 package com.cdkj.service.dto.req;
 
-public class XN805901Req {
+public class XN001400Req {
     // 应用用户的唯一编号（目前暂用UserId,后期改进）
     private String tokenId;
 

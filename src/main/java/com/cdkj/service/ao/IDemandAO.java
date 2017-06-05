@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Demand;
+import com.cdkj.service.dto.req.XN612190Req;
+import com.cdkj.service.dto.req.XN612192Req;
 
 /**
  * @author: xieyj 
@@ -13,13 +15,13 @@ import com.cdkj.service.domain.Demand;
 public interface IDemandAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addDemand(Demand data);
+    public String addDemand(XN612190Req req);
 
-    public int dropDemand(String code);
+    public void dropDemand(String code);
 
-    public int editDemand(Demand data);
+    public void editDemand(XN612192Req req);
 
-    public int violationDemand(String code, String dealer, String dealNote);
+    public void violationDemand(String code, String dealer, String dealNote);
 
     public Paginable<Demand> queryDemandPage(int start, int limit,
             Demand condition);
