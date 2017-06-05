@@ -4,56 +4,69 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IFocusAO;
 import com.cdkj.service.bo.IFocusBO;
+import com.cdkj.service.bo.IGroupBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Focus;
+import com.cdkj.service.domain.Group;
 import com.cdkj.service.exception.BizException;
 
-
-
-//CHECK ��鲢��ע�� 
 @Service
 public class FocusAOImpl implements IFocusAO {
 
-	@Autowired
-	private IFocusBO focusBO;
+    @Autowired
+    private IFocusBO focusBO;
 
-	@Override
-	public String addFocus(Focus data) {
-		return focusBO.saveFocus(data);
-	}
+    @Autowired
+    private IGroupBO groupBO;
 
-	@Override
-	public int editFocus(Focus data) {
-		if (!focusBO.isFocusExist(data.getCode())) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return focusBO.refreshFocus(data);
-	}
+    @Override
+    @Transactional
+    public String addFocus(String companyCode, String groupCode, String userId) {
+        Group group = groupBO.getGroup(groupCode);
+        groupBO.refreshFocusNum(groupCode, group.getFocusNum() + 1);
+        return focusBO.saveFocus(companyCode, groupCode, userId);
+    }
 
-	@Override
-	public int dropFocus(String code) {
-		if (!focusBO.isFocusExist(code)) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return focusBO.removeFocus(code);
-	}
+    @Override
+    @Transactional
+    public void editFocus(String code, String groupCode) {
+        Focus focus = focusBO.getFocus(code);
+        if (groupCode.equals(focus.getGroupCode())) {
+            throw new BizException("xn0000", "您没有对该公司进行换组");
+        }
+        Group groupOld = groupBO.getGroup(focus.getGroupCode());
+        groupBO.refreshFocusNum(focus.getGroupCode(),
+            groupOld.getFocusNum() - 1);
+        Group groupNew = groupBO.getGroup(groupCode);
+        groupBO.refreshFocusNum(groupCode, groupNew.getFocusNum() + 1);
+        focusBO.refreshFocus(focus, groupCode);
+    }
 
-	@Override
-	public Paginable<Focus> queryFocusPage(int start, int limit,
-			Focus condition) {
-		return focusBO.getPaginable(start, limit, condition);
-	}
+    @Override
+    @Transactional
+    public void dropFocus(String code) {
+        Focus focus = focusBO.getFocus(code);
+        Group group = groupBO.getGroup(focus.getGroupCode());
+        groupBO.refreshFocusNum(focus.getGroupCode(), group.getFocusNum() - 1);
+        focusBO.removeFocus(code);
+    }
 
-	@Override
-	public List<Focus> queryFocusList(Focus condition) {
-		return focusBO.queryFocusList(condition);
-	}
+    @Override
+    public Paginable<Focus> queryFocusPage(int start, int limit, Focus condition) {
+        return focusBO.getPaginable(start, limit, condition);
+    }
 
-	@Override
-	public Focus getFocus(String code) {
-		return focusBO.getFocus(code);
-	}
+    @Override
+    public List<Focus> queryFocusList(Focus condition) {
+        return focusBO.queryFocusList(condition);
+    }
+
+    @Override
+    public Focus getFocus(String code) {
+        return focusBO.getFocus(code);
+    }
 }

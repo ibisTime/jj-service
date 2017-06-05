@@ -1,7 +1,12 @@
 package com.cdkj.service.api.impl;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.cdkj.service.ao.IQualifyAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.common.JsonUtil;
+import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.dto.req.XN612015Req;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -21,14 +26,24 @@ public class XN612015 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        // TODO Auto-generated method stub
-        return null;
+        Qualify condition = new Qualify();
+        condition.setType(req.getType());
+        condition.setName(req.getName());
+        condition.setUpdater(req.getUpdater());
+        String orderColumn = req.getOrderColumn();
+        if (StringUtils.isBlank(orderColumn)) {
+            orderColumn = IQualifyAO.DEFAULT_ORDER_COLUMN;
+        }
+        condition.setOrder(orderColumn, req.getOrderDir());
+        int start = StringValidater.toInteger(req.getStart());
+        int limit = StringValidater.toInteger(req.getLimit());
+        return qualifyAO.queryQualifyPage(start, limit, condition);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        // TODO Auto-generated method stub
-
+        req = JsonUtil.json2Bean(inputparams, XN612015Req.class);
+        StringValidater.validateNumber(req.getStart(), req.getLimit());
     }
 
 }

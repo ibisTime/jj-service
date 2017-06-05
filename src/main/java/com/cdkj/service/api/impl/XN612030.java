@@ -2,7 +2,10 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IFocusAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.common.JsonUtil;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.dto.req.XN612030Req;
+import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
@@ -20,13 +23,14 @@ public class XN612030 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        // TODO Auto-generated method stub
-        return null;
+        return new PKCodeRes(focusAO.addFocus(req.getCompanyCode(),
+            req.getGroupCode(), req.getUserId()));
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        // TODO Auto-generated method stub
-
+        req = JsonUtil.json2Bean(inputparams, XN612030Req.class);
+        StringValidater.validateBlank(req.getCompanyCode(), req.getGroupCode(),
+            req.getUserId());
     }
 }

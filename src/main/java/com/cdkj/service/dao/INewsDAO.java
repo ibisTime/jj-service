@@ -5,5 +5,7 @@ import com.cdkj.service.domain.News;
 
 //dao层 
 public interface INewsDAO extends IBaseDAO<News> {
-	String NAMESPACE = INewsDAO.class.getName().concat(".");
+    String NAMESPACE = INewsDAO.class.getName().concat(".");
+
+    public int upOrDown(News data);
 }

@@ -5,5 +5,7 @@ import com.cdkj.service.domain.Group;
 
 //dao层 
 public interface IGroupDAO extends IBaseDAO<Group> {
-	String NAMESPACE = IGroupDAO.class.getName().concat(".");
+    String NAMESPACE = IGroupDAO.class.getName().concat(".");
+
+    public int updateFocusNum(Group data);
 }

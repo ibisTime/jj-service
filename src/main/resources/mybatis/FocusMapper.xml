@@ -13,6 +13,15 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="company_code != null and company_code != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+			<if test="user_id != null and user_id != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="group_code != null and group_code != '' ">
+				AND t.group_code = #{groupCode}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_focus" parameterType="focus" resultMap="focus_DB_Result">
@@ -56,11 +65,15 @@
 	<update id="update_focus" parameterType="focus">
 		UPDATE tcp_focus
 		SET
-		company_code = #{companyCode}
-		,user_id = #{userId}
-		,group_code = #{groupCode}
+		group_code = #{groupCode}
 		WHERE code = #{code}
 	</update>
 
+	<delete id="delete_focus" parameterType="focus">
+		DELETE FROM
+		tcp_focus
+		WHERE
+		code = #{code}
+	</delete>
 
 </mapper>

@@ -1,7 +1,11 @@
 package com.cdkj.service.api.impl;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.cdkj.service.ao.IFocusAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.common.JsonUtil;
+import com.cdkj.service.domain.Focus;
 import com.cdkj.service.dto.req.XN612036Req;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -20,14 +24,21 @@ public class XN612036 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        // TODO Auto-generated method stub
-        return null;
+        Focus condition = new Focus();
+        condition.setCompanyCode(req.getCompanyCode());
+        condition.setUserId(req.getUserId());
+        condition.setGroupCode(req.getGroupCode());
+        String orderColumn = req.getOrderColumn();
+        if (StringUtils.isBlank(orderColumn)) {
+            orderColumn = IFocusAO.DEFAULT_ORDER_COLUMN;
+        }
+        condition.setOrder(orderColumn, req.getOrderDir());
+        return focusAO.queryFocusList(condition);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        // TODO Auto-generated method stub
-
+        req = JsonUtil.json2Bean(inputparams, XN612036Req.class);
     }
 
 }

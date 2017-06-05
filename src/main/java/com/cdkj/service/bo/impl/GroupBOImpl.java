@@ -1,5 +1,6 @@
 package com.cdkj.service.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,8 +11,10 @@ import com.cdkj.service.bo.IGroupBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.dao.IGroupDAO;
 import com.cdkj.service.domain.Group;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 @Component
@@ -31,34 +34,42 @@ public class GroupBOImpl extends PaginableBOImpl<Group> implements IGroupBO {
     }
 
     @Override
-    public String saveGroup(Group data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.GROUP.getCode());
-            data.setCode(code);
-            groupDAO.insert(data);
-        }
+    public String saveGroup(String name, String userId) {
+        Group data = new Group();
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.GROUP
+            .getCode());
+        data.setCode(code);
+        data.setName(name);
+        data.setFocusNum(StringValidater.toInteger(EBoolean.NO.getCode()));
+        data.setCreateDatetime(new Date());
+        data.setUserId(userId);
+        groupDAO.insert(data);
         return code;
     }
 
     @Override
-    public int removeGroup(String code) {
-        int count = 0;
+    public void removeGroup(String code) {
         if (StringUtils.isNotBlank(code)) {
             Group data = new Group();
             data.setCode(code);
-            count = groupDAO.delete(data);
+            groupDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshGroup(Group data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = groupDAO.update(data);
-        }
-        return count;
+    public void refreshGroup(String code, String name) {
+        Group data = new Group();
+        data.setCode(code);
+        data.setName(name);
+        groupDAO.update(data);
+    }
+
+    @Override
+    public void refreshFocusNum(String code, Integer focusNum) {
+        Group data = new Group();
+        data.setCode(code);
+        data.setFocusNum(focusNum);
+        groupDAO.updateFocusNum(data);
     }
 
     @Override
@@ -79,4 +90,5 @@ public class GroupBOImpl extends PaginableBOImpl<Group> implements IGroupBO {
         }
         return data;
     }
+
 }

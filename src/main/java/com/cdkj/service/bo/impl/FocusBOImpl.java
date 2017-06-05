@@ -31,38 +31,40 @@ public class FocusBOImpl extends PaginableBOImpl<Focus> implements IFocusBO {
     }
 
     @Override
-    public String saveFocus(Focus data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.FOCUS.getCode());
-            data.setCode(code);
-            focusDAO.insert(data);
-        }
+    public String saveFocus(String companyCode, String groupCode, String userId) {
+        Focus data = new Focus();
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.FOCUS
+            .getCode());
+        data.setCode(code);
+        data.setCompanyCode(companyCode);
+        data.setGroupCode(groupCode);
+        data.setUserId(userId);
+        focusDAO.insert(data);
         return code;
     }
 
     @Override
-    public int removeFocus(String code) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Focus data = new Focus();
-            data.setCode(code);
-            count = focusDAO.delete(data);
-        }
-        return count;
+    public void removeFocus(String code) {
+        Focus data = new Focus();
+        data.setCode(code);
+        focusDAO.delete(data);
     }
 
     @Override
-    public int refreshFocus(Focus data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = focusDAO.update(data);
-        }
-        return count;
+    public void refreshFocus(Focus focus, String groupCode) {
+        focus.setGroupCode(groupCode);
+        focusDAO.update(focus);
     }
 
     @Override
     public List<Focus> queryFocusList(Focus condition) {
+        return focusDAO.selectList(condition);
+    }
+
+    @Override
+    public List<Focus> queryFocusList(String groupCode) {
+        Focus condition = new Focus();
+        condition.setGroupCode(groupCode);
         return focusDAO.selectList(condition);
     }
 
@@ -79,4 +81,5 @@ public class FocusBOImpl extends PaginableBOImpl<Focus> implements IFocusBO {
         }
         return data;
     }
+
 }

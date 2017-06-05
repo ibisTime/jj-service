@@ -11,11 +11,11 @@ import com.cdkj.service.domain.Focus;
 public interface IFocusAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addFocus(Focus data);
+    public String addFocus(String companyCode, String groupCode, String userId);
 
-    public int dropFocus(String code);
+    public void dropFocus(String code);
 
-    public int editFocus(Focus data);
+    public void editFocus(String code, String groupCode);
 
     public Paginable<Focus> queryFocusPage(int start, int limit, Focus condition);
 

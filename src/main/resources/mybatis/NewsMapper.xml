@@ -12,12 +12,30 @@
 		<result column="send_platform" property="sendPlatform" />
 		<result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
-		<result column="reamrk" property="reamrk" />
+		<result column="remark" property="remark" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="title != null and title != '' ">
+				AND t.title like "%"#{title}"%"
+			</if>
+			<if test="summary != null and summary != '' ">
+				AND t.summary like "%"#{summary}"%"
+			</if>
+			<if test="send_platform != null and send_platform != '' ">
+				AND t.send_platform = #{sendPlatform}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="updater != null and updater != '' ">
+				AND t.updater = #{updater}
 			</if>
 		</trim>
 	</sql>
@@ -32,7 +50,7 @@
 		,t.send_platform
 		,t.updater
 		,t.update_datetime
-		,t.reamrk
+		,t.remark
 		FROM
 		tcp_news t
 		<include refid="where_condition" />
@@ -61,7 +79,7 @@
 		,send_platform
 		,updater
 		,update_datetime
-		,reamrk
+		,remark
 		)
 		VALUES(
 		#{code}
@@ -73,7 +91,7 @@
 		,#{sendPlatform}
 		,#{updater}
 		,#{updateDatetime}
-		,#{reamrk}
+		,#{remark}
 		)
 	</insert>
 
@@ -88,9 +106,16 @@
 		,send_platform = #{sendPlatform}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
-		,reamrk = #{reamrk}
+		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
 
-
+   <update id="update_upOrDown" parameterType="News">
+		UPDATE tcp_news
+		SET
+		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		WHERE code = #{code}
+	</update>
 </mapper>

@@ -6,54 +6,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IGroupAO;
+import com.cdkj.service.bo.IFocusBO;
 import com.cdkj.service.bo.IGroupBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.domain.Focus;
 import com.cdkj.service.domain.Group;
 import com.cdkj.service.exception.BizException;
 
-
-
-//CHECK ��鲢��ע�� 
 @Service
 public class GroupAOImpl implements IGroupAO {
 
-	@Autowired
-	private IGroupBO groupBO;
+    @Autowired
+    private IGroupBO groupBO;
 
-	@Override
-	public String addGroup(Group data) {
-		return groupBO.saveGroup(data);
-	}
+    @Autowired
+    private IFocusBO focusBO;
 
-	@Override
-	public int editGroup(Group data) {
-		if (!groupBO.isGroupExist(data.getCode())) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return groupBO.refreshGroup(data);
-	}
+    @Override
+    public String addGroup(String name, String userId) {
+        return groupBO.saveGroup(name, userId);
+    }
 
-	@Override
-	public int dropGroup(String code) {
-		if (!groupBO.isGroupExist(code)) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return groupBO.removeGroup(code);
-	}
+    @Override
+    public void editGroup(String code, String name) {
+        if (!groupBO.isGroupExist(code)) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        groupBO.refreshGroup(code, name);
+    }
 
-	@Override
-	public Paginable<Group> queryGroupPage(int start, int limit,
-			Group condition) {
-		return groupBO.getPaginable(start, limit, condition);
-	}
+    @Override
+    public void dropGroup(String code) {
+        if (!groupBO.isGroupExist(code)) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        List<Focus> focusList = focusBO.queryFocusList(code);
+        for (Focus focus : focusList) {
+            focusBO.refreshFocus(focus, null);
+        }
+        groupBO.removeGroup(code);
+    }
 
-	@Override
-	public List<Group> queryGroupList(Group condition) {
-		return groupBO.queryGroupList(condition);
-	}
+    @Override
+    public Paginable<Group> queryGroupPage(int start, int limit, Group condition) {
+        return groupBO.getPaginable(start, limit, condition);
+    }
 
-	@Override
-	public Group getGroup(String code) {
-		return groupBO.getGroup(code);
-	}
+    @Override
+    public List<Group> queryGroupList(Group condition) {
+        return groupBO.queryGroupList(condition);
+    }
+
+    @Override
+    public Group getGroup(String code) {
+        return groupBO.getGroup(code);
+    }
 }

@@ -11,16 +11,24 @@ import com.cdkj.service.domain.News;
 public interface INewsAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addNews(News data);
+    public String addNews(String title, String type, String sendPlatform,
+            String summary, String content, String isPublish, String updater,
+            String remark);
 
-    public int dropNews(String code);
+    public void dropNews(String code);
 
-    public int editNews(News data);
+    public void editNews(String code, String title, String type,
+            String sendPlatform, String summary, String content,
+            String isPublish, String updater, String remark);
 
     public Paginable<News> queryNewsPage(int start, int limit, News condition);
 
     public List<News> queryNewsList(News condition);
 
     public News getNews(String code);
+
+    public void shelves(String code, String updater);
+
+    public void soldOut(String code, String updater);
 
 }

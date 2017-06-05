@@ -50,4 +50,9 @@ public class GroupDAOImpl extends AMybatisTemplate implements IGroupDAO {
         return super.update(NAMESPACE.concat("update_group"), data);
     }
 
+    @Override
+    public int updateFocusNum(Group data) {
+        return super.update(NAMESPACE.concat("update_focus_num"), data);
+    }
+
 }

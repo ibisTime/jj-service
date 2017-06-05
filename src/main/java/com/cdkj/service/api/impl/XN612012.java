@@ -2,7 +2,10 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IQualifyAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.common.JsonUtil;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.dto.req.XN612012Req;
+import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
@@ -21,14 +24,16 @@ public class XN612012 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        // TODO Auto-generated method stub
-        return null;
+        qualifyAO.editQualify(req.getCode(), req.getType(), req.getName(),
+            req.getDescription(), req.getUpdater(), req.getRemark());
+        return new BooleanRes(true);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        // TODO Auto-generated method stub
-
+        req = JsonUtil.json2Bean(inputparams, XN612012Req.class);
+        StringValidater.validateBlank(req.getCode(), req.getType(),
+            req.getName(), req.getDescription(), req.getUpdater());
     }
 
 }

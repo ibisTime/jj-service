@@ -2,6 +2,7 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IFocusAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.dto.req.XN612037Req;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -20,13 +21,11 @@ public class XN612037 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        // TODO Auto-generated method stub
-        return null;
+        return focusAO.getFocus(req.getCode());
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        // TODO Auto-generated method stub
-
+        req = JsonUtil.json2Bean(inputparams, XN612037Req.class);
     }
 }

@@ -5,28 +5,20 @@ import java.util.List;
 import com.cdkj.service.bo.base.IPaginableBO;
 import com.cdkj.service.domain.Group;
 
-
-
-//CHECK ��鲢��ע�� 
 public interface IGroupBO extends IPaginableBO<Group> {
 
+    public boolean isGroupExist(String code);
 
-	public boolean isGroupExist(String code);
+    public String saveGroup(String name, String userId);
 
+    public void removeGroup(String code);
 
-	public String saveGroup(Group data);
+    public void refreshGroup(String code, String name);
 
+    public void refreshFocusNum(String code, Integer focusNum);
 
-	public int removeGroup(String code);
+    public List<Group> queryGroupList(Group condition);
 
-
-	public int refreshGroup(Group data);
-
-
-	public List<Group> queryGroupList(Group condition);
-
-
-	public Group getGroup(String code);
-
+    public Group getGroup(String code);
 
 }

@@ -1,5 +1,6 @@
 package com.cdkj.service.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IQualifyDAO;
 import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.exception.BizException;
@@ -32,35 +31,17 @@ public class QualifyBOImpl extends PaginableBOImpl<Qualify> implements
     }
 
     @Override
-    public String saveQualify(Qualify data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater
-                .generateM(EGeneratePrefix.QUALIFY.getCode());
-            data.setCode(code);
-            qualifyDAO.insert(data);
-        }
-        return code;
-    }
-
-    @Override
-    public int removeQualify(String code) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Qualify data = new Qualify();
-            data.setCode(code);
-            count = qualifyDAO.delete(data);
-        }
-        return count;
-    }
-
-    @Override
-    public int refreshQualify(Qualify data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = qualifyDAO.update(data);
-        }
-        return count;
+    public void refreshQualify(String code, String type, String name,
+            String description, String updater, String remark) {
+        Qualify data = new Qualify();
+        data.setCode(code);
+        data.setType(type);
+        data.setName(name);
+        data.setDescription(description);
+        data.setUpdater(updater);
+        data.setUpdateDatetime(new Date());
+        data.setRemark(remark);
+        qualifyDAO.update(data);
     }
 
     @Override

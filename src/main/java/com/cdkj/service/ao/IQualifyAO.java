@@ -11,11 +11,8 @@ import com.cdkj.service.domain.Qualify;
 public interface IQualifyAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addQualify(Qualify data);
-
-    public int dropQualify(String code);
-
-    public int editQualify(Qualify data);
+    public void editQualify(String code, String type, String name,
+            String description, String updater, String remark);
 
     public Paginable<Qualify> queryQualifyPage(int start, int limit,
             Qualify condition);

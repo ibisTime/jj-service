@@ -14,6 +14,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="user_id != null and user_id != '' ">
+				AND t.user_id = #{userId}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_group" parameterType="group" resultMap="group_DB_Result">
@@ -61,11 +64,21 @@
 		UPDATE tcp_group
 		SET
 		name = #{name}
-		,focus_num = #{focusNum}
-		,create_datetime = #{createDatetime}
-		,user_id = #{userId}
 		WHERE code = #{code}
 	</update>
 
+	<update id="update_focus_num" parameterType="group">
+		UPDATE tcp_group
+		SET
+		focus_num = #{focusNum}
+		WHERE code = #{code}
+	</update>
+
+	<delete id="delete_group" parameterType="group">
+		DELETE FROM
+		tcp_group
+		WHERE
+		code = #{code}
+	</delete>
 
 </mapper>

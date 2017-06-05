@@ -11,11 +11,11 @@ import com.cdkj.service.domain.Group;
 public interface IGroupAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addGroup(Group data);
+    public String addGroup(String name, String userId);
 
-    public int dropGroup(String code);
+    public void dropGroup(String code);
 
-    public int editGroup(Group data);
+    public void editGroup(String code, String name);
 
     public Paginable<Group> queryGroupPage(int start, int limit, Group condition);
 

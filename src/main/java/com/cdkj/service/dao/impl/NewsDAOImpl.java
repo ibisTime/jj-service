@@ -8,7 +8,7 @@ import com.cdkj.service.dao.INewsDAO;
 import com.cdkj.service.dao.base.support.AMybatisTemplate;
 import com.cdkj.service.domain.News;
 
-@Repository("NewsDAOImpl")
+@Repository("newsDAOImpl")
 public class NewsDAOImpl extends AMybatisTemplate implements INewsDAO {
 
     @Override
@@ -48,6 +48,11 @@ public class NewsDAOImpl extends AMybatisTemplate implements INewsDAO {
     @Override
     public int update(News data) {
         return super.update(NAMESPACE.concat("update_News"), data);
+    }
+
+    @Override
+    public int upOrDown(News data) {
+        return super.update(NAMESPACE.concat("update_upOrDown"), data);
     }
 
 }

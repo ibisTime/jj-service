@@ -2,7 +2,10 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IGroupAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.common.JsonUtil;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.dto.req.XN612020Req;
+import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
@@ -20,14 +23,13 @@ public class XN612020 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        // TODO Auto-generated method stub
-        return null;
+        return new PKCodeRes(groupAO.addGroup(req.getName(), req.getUserId()));
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        // TODO Auto-generated method stub
-
+        req = JsonUtil.json2Bean(inputparams, XN612020Req.class);
+        StringValidater.validateBlank(req.getName(), req.getUserId());
     }
 
 }
