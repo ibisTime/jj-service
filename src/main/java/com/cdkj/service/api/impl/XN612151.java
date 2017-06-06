@@ -16,7 +16,7 @@ import com.cdkj.service.spring.SpringContextHolder;
  * @since: 2016年10月7日 下午4:06:14 
  * @history:
  */
-public class CD612082 extends AProcessor {
+public class XN612151 extends AProcessor {
 
     private IPositionAO positionAO = SpringContextHolder
         .getBean(IPositionAO.class);
@@ -25,8 +25,8 @@ public class CD612082 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        int count = positionAO.dropPosition(req.getCode());
-        return new BooleanRes(count > 0 ? true : false);
+        positionAO.dropPosition(req.getCode());
+        return new BooleanRes(true);
     }
 
     @Override
