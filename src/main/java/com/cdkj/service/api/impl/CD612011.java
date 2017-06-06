@@ -6,7 +6,7 @@ import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.ServeCp;
-import com.cdkj.service.dto.req.CD612011Req;
+import com.cdkj.service.dto.req.XN612125Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -23,7 +23,7 @@ public class CD612011 extends AProcessor {
     private IServeCpAO serveCpAO = SpringContextHolder
         .getBean(IServeCpAO.class);
 
-    private CD612011Req req = null;
+    private XN612125Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
@@ -34,7 +34,7 @@ public class CD612011 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, CD612011Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN612125Req.class);
         StringValidater.validateBlank(req.getCode(), req.getName(),
             req.getQuoteMin(), req.getQuoteMax(), req.getCkNum(),
             req.getCkArea(), req.getGoodsKind(), req.getDsendNum(),

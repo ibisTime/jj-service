@@ -6,7 +6,7 @@ import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.ServeKfwb;
-import com.cdkj.service.dto.req.CD612008Req;
+import com.cdkj.service.dto.req.XN612122Req;
 import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -23,7 +23,7 @@ public class CD612008 extends AProcessor {
     private IServeKfwbAO serveKfwbAO = SpringContextHolder
         .getBean(IServeKfwbAO.class);
 
-    private CD612008Req req = null;
+    private XN612122Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
@@ -34,7 +34,7 @@ public class CD612008 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, CD612008Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN612122Req.class);
         StringValidater.validateBlank(req.getName(), req.getCompanyCode(),
             req.getQuoteMin(), req.getQuoteMax(), req.getQualityCode(),
             req.getKfNum(), req.getMtradeAmount(), req.getBusiness(),

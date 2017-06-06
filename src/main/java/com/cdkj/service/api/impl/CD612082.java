@@ -4,7 +4,7 @@ import com.cdkj.service.ao.IPositionAO;
 import com.cdkj.service.api.AProcessor;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.dto.req.CD612082Req;
+import com.cdkj.service.dto.req.XN612151Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -21,7 +21,7 @@ public class CD612082 extends AProcessor {
     private IPositionAO positionAO = SpringContextHolder
         .getBean(IPositionAO.class);
 
-    private CD612082Req req = null;
+    private XN612151Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
@@ -31,7 +31,7 @@ public class CD612082 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, CD612082Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN612151Req.class);
         StringValidater.validateBlank(req.getCode());
     }
 }

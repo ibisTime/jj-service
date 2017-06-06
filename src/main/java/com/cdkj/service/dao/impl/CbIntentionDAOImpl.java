@@ -8,7 +8,7 @@ import com.cdkj.service.dao.ICbIntentionDAO;
 import com.cdkj.service.dao.base.support.AMybatisTemplate;
 import com.cdkj.service.domain.CbIntention;
 
-@Repository("CbIntentionDAOImpl")
+@Repository("cbIntentionDAOImpl")
 public class CbIntentionDAOImpl extends AMybatisTemplate implements
         ICbIntentionDAO {
 

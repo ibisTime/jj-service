@@ -6,7 +6,7 @@ import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.ServeArt;
-import com.cdkj.service.dto.req.CD612007Req;
+import com.cdkj.service.dto.req.XN612121Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -23,7 +23,7 @@ public class CD612007 extends AProcessor {
     private IServeArtAO serveArtAO = SpringContextHolder
         .getBean(IServeArtAO.class);
 
-    private CD612007Req req = null;
+    private XN612121Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
@@ -34,7 +34,7 @@ public class CD612007 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, CD612007Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN612121Req.class);
         StringValidater.validateBlank(req.getCode(), req.getName(),
             req.getQuoteMin(), req.getQuoteMax(), req.getDesignNum(),
             req.getSclm(), req.getHomeDays(), req.getHomePrice(),

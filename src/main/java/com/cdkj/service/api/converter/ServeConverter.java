@@ -10,28 +10,28 @@ import com.cdkj.service.domain.ServeKfwb;
 import com.cdkj.service.domain.ServePhoto;
 import com.cdkj.service.domain.ServeShop;
 import com.cdkj.service.domain.ServeTrain;
-import com.cdkj.service.dto.req.CD612000Req;
-import com.cdkj.service.dto.req.CD612001Req;
-import com.cdkj.service.dto.req.CD612002Req;
-import com.cdkj.service.dto.req.CD612003Req;
-import com.cdkj.service.dto.req.CD612004Req;
-import com.cdkj.service.dto.req.CD612005Req;
-import com.cdkj.service.dto.req.CD612006Req;
-import com.cdkj.service.dto.req.CD612007Req;
-import com.cdkj.service.dto.req.CD612008Req;
-import com.cdkj.service.dto.req.CD612009Req;
-import com.cdkj.service.dto.req.CD612010Req;
-import com.cdkj.service.dto.req.CD612011Req;
-import com.cdkj.service.dto.req.CD612012Req;
-import com.cdkj.service.dto.req.CD612013Req;
-import com.cdkj.service.dto.req.CD612014Req;
-import com.cdkj.service.dto.req.CD612015Req;
-import com.cdkj.service.dto.req.CD612030Req;
+import com.cdkj.service.dto.req.XN612080Req;
+import com.cdkj.service.dto.req.XN612082Req;
+import com.cdkj.service.dto.req.XN612090Req;
+import com.cdkj.service.dto.req.XN612092Req;
+import com.cdkj.service.dto.req.XN612110Req;
+import com.cdkj.service.dto.req.XN612112Req;
+import com.cdkj.service.dto.req.XN612120Req;
+import com.cdkj.service.dto.req.XN612121Req;
+import com.cdkj.service.dto.req.XN612122Req;
+import com.cdkj.service.dto.req.XN612123Req;
+import com.cdkj.service.dto.req.XN612124Req;
+import com.cdkj.service.dto.req.XN612125Req;
+import com.cdkj.service.dto.req.XN612126Req;
+import com.cdkj.service.dto.req.XN612127Req;
+import com.cdkj.service.dto.req.XN612128Req;
+import com.cdkj.service.dto.req.XN612129Req;
+import com.cdkj.service.dto.req.XN612140Req;
 
 public class ServeConverter {
 
     // 新增摄影/拍摄服务
-    public static ServePhoto converter(CD612000Req req) {
+    public static ServePhoto converter(XN612080Req req) {
         ServePhoto result = new ServePhoto();
         Serve serve = new Serve();
         serve.setName(req.getName());
@@ -51,7 +51,7 @@ public class ServeConverter {
     }
 
     // 修改摄影/拍摄服务
-    public static ServePhoto converter(CD612001Req req) {
+    public static ServePhoto converter(XN612082Req req) {
         ServePhoto result = new ServePhoto();
         Serve serve = new Serve();
         serve.setCode(req.getCode());
@@ -71,7 +71,7 @@ public class ServeConverter {
     }
 
     // 新增培训
-    public static ServeTrain converter(CD612002Req req) {
+    public static ServeTrain converter(XN612090Req req) {
         ServeTrain result = new ServeTrain();
         Serve serve = new Serve();
         serve.setName(req.getName());
@@ -93,7 +93,7 @@ public class ServeConverter {
     }
 
     // 修改培训
-    public static ServeTrain converter(CD612003Req req) {
+    public static ServeTrain converter(XN612092Req req) {
         ServeTrain result = new ServeTrain();
         Serve serve = new Serve();
         serve.setCode(req.getCode());
@@ -115,7 +115,7 @@ public class ServeConverter {
     }
 
     // 新增店铺代运营
-    public static ServeShop converter(CD612004Req req) {
+    public static ServeShop converter(XN612110Req req) {
         ServeShop result = new ServeShop();
         Serve serve = new Serve();
         serve.setName(req.getName());
@@ -135,7 +135,7 @@ public class ServeConverter {
     }
 
     // 修改店铺代运营
-    public static ServeShop converter(CD612005Req req) {
+    public static ServeShop converter(XN612112Req req) {
         ServeShop result = new ServeShop();
         Serve serve = new Serve();
         serve.setCode(req.getCode());
@@ -155,7 +155,7 @@ public class ServeConverter {
     }
 
     // 新增美工外包
-    public static ServeArt converter(CD612006Req req) {
+    public static ServeArt converter(XN612120Req req) {
         ServeArt result = new ServeArt();
         Serve serve = new Serve();
         serve.setName(req.getName());
@@ -181,7 +181,7 @@ public class ServeConverter {
     }
 
     // 修改美工外包
-    public static ServeArt converter(CD612007Req req) {
+    public static ServeArt converter(XN612121Req req) {
         ServeArt result = new ServeArt();
         Serve serve = new Serve();
         serve.setCode(req.getCode());
@@ -207,7 +207,7 @@ public class ServeConverter {
     }
 
     // 新增客服外包
-    public static ServeKfwb converter(CD612008Req req) {
+    public static ServeKfwb converter(XN612122Req req) {
         ServeKfwb result = new ServeKfwb();
         Serve serve = new Serve();
         serve.setName(req.getName());
@@ -226,7 +226,7 @@ public class ServeConverter {
     }
 
     // 修改客服外包
-    public static ServeKfwb converter(CD612009Req req) {
+    public static ServeKfwb converter(XN612123Req req) {
         ServeKfwb result = new ServeKfwb();
         Serve serve = new Serve();
         serve.setCode(req.getCode());
@@ -245,7 +245,7 @@ public class ServeConverter {
     }
 
     // 新增仓配服务
-    public static ServeCp converter(CD612010Req req) {
+    public static ServeCp converter(XN612124Req req) {
         ServeCp result = new ServeCp();
         Serve serve = new Serve();
         serve.setName(req.getName());
@@ -264,7 +264,7 @@ public class ServeConverter {
     }
 
     // 修改仓配服务
-    public static ServeCp converter(CD612011Req req) {
+    public static ServeCp converter(XN612125Req req) {
         ServeCp result = new ServeCp();
         Serve serve = new Serve();
         serve.setCode(req.getCode());
@@ -283,7 +283,7 @@ public class ServeConverter {
     }
 
     // 新增软件外包
-    public static Serve converter(CD612012Req req) {
+    public static Serve converter(XN612126Req req) {
         Serve serve = new Serve();
         serve.setName(req.getName());
         serve.setCompanyCode(req.getCompanyCode());
@@ -296,7 +296,7 @@ public class ServeConverter {
     }
 
     // 修改软件外包
-    public static Serve converter(CD612013Req req) {
+    public static Serve converter(XN612127Req req) {
         Serve serve = new Serve();
         serve.setCode(req.getCode());
         serve.setName(req.getName());
@@ -308,7 +308,7 @@ public class ServeConverter {
     }
 
     // 新增产业园
-    public static ServeCyy converter(CD612014Req req) {
+    public static ServeCyy converter(XN612128Req req) {
         ServeCyy result = new ServeCyy();
         Serve serve = new Serve();
         serve.setName(req.getName());
@@ -332,7 +332,7 @@ public class ServeConverter {
     }
 
     // 修改产业园
-    public static ServeCyy converter(CD612015Req req) {
+    public static ServeCyy converter(XN612129Req req) {
         ServeCyy result = new ServeCyy();
         Serve serve = new Serve();
         serve.setCode(req.getCode());
@@ -356,7 +356,7 @@ public class ServeConverter {
     }
 
     // 分页查询服务
-    public static Serve converter(CD612030Req req) {
+    public static Serve converter(XN612140Req req) {
         Serve serve = new Serve();
         serve.setName(req.getName());
         serve.setCompanyCode(req.getCompanyCode());

@@ -19,13 +19,13 @@ public class CbIntentionBOImpl extends PaginableBOImpl<CbIntention> implements
         ICbIntentionBO {
 
     @Autowired
-    private ICbIntentionDAO CbIntentionDAO;
+    private ICbIntentionDAO cbIntentionDAO;
 
     @Override
     public boolean isCbIntentionExist(String code) {
         CbIntention condition = new CbIntention();
         condition.setCode(code);
-        if (CbIntentionDAO.selectTotalCount(condition) > 0) {
+        if (cbIntentionDAO.selectTotalCount(condition) > 0) {
             return true;
         }
         return false;
@@ -37,7 +37,7 @@ public class CbIntentionBOImpl extends PaginableBOImpl<CbIntention> implements
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.CBYX.getCode());
             data.setCode(code);
-            CbIntentionDAO.insert(data);
+            cbIntentionDAO.insert(data);
         }
         return code;
     }
@@ -48,7 +48,7 @@ public class CbIntentionBOImpl extends PaginableBOImpl<CbIntention> implements
         if (StringUtils.isNotBlank(code)) {
             CbIntention data = new CbIntention();
             data.setCode(code);
-            count = CbIntentionDAO.delete(data);
+            count = cbIntentionDAO.delete(data);
         }
         return count;
     }
@@ -57,14 +57,14 @@ public class CbIntentionBOImpl extends PaginableBOImpl<CbIntention> implements
     public int refreshCbIntention(CbIntention data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            count = CbIntentionDAO.update(data);
+            count = cbIntentionDAO.update(data);
         }
         return count;
     }
 
     @Override
     public List<CbIntention> queryCbIntentionList(CbIntention condition) {
-        return CbIntentionDAO.selectList(condition);
+        return cbIntentionDAO.selectList(condition);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CbIntentionBOImpl extends PaginableBOImpl<CbIntention> implements
         if (StringUtils.isNotBlank(code)) {
             CbIntention condition = new CbIntention();
             condition.setCode(code);
-            data = CbIntentionDAO.select(condition);
+            data = cbIntentionDAO.select(condition);
             if (data == null) {
                 throw new BizException("xn0000", "�� ��Ų�����");
             }

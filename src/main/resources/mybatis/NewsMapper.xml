@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cdkj.service.dao.INewsDAO">
-	<resultMap id="News_DB_Result" type="News">
+	<resultMap id="News_DB_Result" type="news">
 		<result column="code" property="code" />
 		<result column="type" property="type" />
 		<result column="title" property="title" />
@@ -28,7 +28,7 @@
 			<if test="summary != null and summary != '' ">
 				AND t.summary like "%"#{summary}"%"
 			</if>
-			<if test="send_platform != null and send_platform != '' ">
+			<if test="sendPlatform != null and sendPlatform != '' ">
 				AND t.send_platform = #{sendPlatform}
 			</if>
 			<if test="status != null and status != '' ">
@@ -39,7 +39,7 @@
 			</if>
 		</trim>
 	</sql>
-	<select id="select_News" parameterType="News" resultMap="News_DB_Result">
+	<select id="select_News" parameterType="news" resultMap="News_DB_Result">
 		SELECT
 		t.code
 		,t.type
@@ -61,13 +61,13 @@
 		</trim>
 	</select>
 
-	<select id="select_News_count" parameterType="News"
+	<select id="select_News_count" parameterType="news"
 		resultType="java.lang.Long">
 		SELECT count(1) FROM tcp_news t
 		<include refid="where_condition" />
 	</select>
 
-	<insert id="insert_News" parameterType="News">
+	<insert id="insert_News" parameterType="news">
 		INSERT INTO
 		tcp_news(
 		code
@@ -95,7 +95,7 @@
 		)
 	</insert>
 
-	<update id="update_News" parameterType="News">
+	<update id="update_News" parameterType="news">
 		UPDATE tcp_news
 		SET
 		type = #{type}
@@ -110,7 +110,7 @@
 		WHERE code = #{code}
 	</update>
 
-   <update id="update_upOrDown" parameterType="News">
+   <update id="update_upOrDown" parameterType="news">
 		UPDATE tcp_news
 		SET
 		status = #{status}

@@ -41,7 +41,7 @@ public class Position extends ABaseDO {
 
     private String companyCode;
 
-    private String isHot;
+    private String location;
 
     private Integer orderNo;
 
@@ -168,14 +168,6 @@ public class Position extends ABaseDO {
         this.companyCode = companyCode;
     }
 
-    public String getIsHot() {
-        return isHot;
-    }
-
-    public void setIsHot(String isHot) {
-        this.isHot = isHot;
-    }
-
     public Integer getOrderNo() {
         return orderNo;
     }
@@ -270,5 +262,13 @@ public class Position extends ABaseDO {
 
     public void setCompany(XN806010Res company) {
         this.company = company;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
