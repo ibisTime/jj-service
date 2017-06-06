@@ -4,7 +4,6 @@ import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Position;
 import com.cdkj.service.dto.req.XN612150Req;
 import com.cdkj.service.dto.req.XN612152Req;
-import com.cdkj.service.dto.req.XN6121503Req;
 
 public class PositionConverter {
 
@@ -45,17 +44,4 @@ public class PositionConverter {
         return result;
     }
 
-    // 分页查询职位
-    public static Position converter(XN6121503Req req) {
-        Position result = new Position();
-        result.setName(req.getName());
-        result.setType(req.getType());
-        result.setKind(req.getKind());
-        result.setStatus(req.getStatus());
-        result.setCompanyCode(req.getCompanyCode());
-        result.setGsProvince(req.getGsProvince());
-        result.setGsCity(req.getGsCity());
-        result.setGsArea(req.getGsArea());
-        return result;
-    }
 }

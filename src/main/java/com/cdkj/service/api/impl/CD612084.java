@@ -25,7 +25,7 @@ public class CD612084 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        int count = positionAO.editPositionHot(req.getCode(), req.getIsHot(),
+        int count = positionAO.editPositionHot(req.getCode(), null,
             req.getOrderNo(), req.getDealer());
         return new BooleanRes(count > 0 ? true : false);
     }
@@ -33,7 +33,6 @@ public class CD612084 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN612154Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getIsHot(),
-            req.getDealer());
+        StringValidater.validateBlank(req.getCode(), req.getDealer());
     }
 }

@@ -43,7 +43,7 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
             // 状态默认设置为 正常
             data.setStatus(EBoolean.YES.getCode());
             // 是否热门默认设置为 否
-            data.setIsHot(EBoolean.NO.getCode());
+            data.setLocation(EBoolean.NO.getCode());
             // 次序默认设置为 0
             data.setOrderNo(0);
             data.setPublishDatetime(new Date());
@@ -108,7 +108,7 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
             String dealer) {
         Position data = new Position();
         data.setCode(code);
-        data.setIsHot(isHot);
+        data.setLocation(isHot);
         if (StringUtils.isBlank(orderNo)) {
             orderNo = "0";
         }

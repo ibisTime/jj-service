@@ -44,7 +44,7 @@ public class XN612052Req {
     private String pic;
 
     // 广告图
-    private String adv_pic;
+    private String advPic;
 
     // 广告语
     private String slogan;
@@ -157,18 +157,6 @@ public class XN612052Req {
         this.pic = pic;
     }
 
-    public String getAdv_pic() {
-        return adv_pic;
-    }
-
-    public void setAdv_pic(String adv_pic) {
-        this.adv_pic = adv_pic;
-    }
-
-    public String getSlogan() {
-        return slogan;
-    }
-
     public void setSlogan(String slogan) {
         this.slogan = slogan;
     }
@@ -203,5 +191,17 @@ public class XN612052Req {
 
     public void setUpdater(String updater) {
         this.updater = updater;
+    }
+
+    public String getAdvPic() {
+        return advPic;
+    }
+
+    public void setAdvPic(String advPic) {
+        this.advPic = advPic;
+    }
+
+    public String getSlogan() {
+        return slogan;
     }
 }

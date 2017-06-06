@@ -363,7 +363,6 @@ public class ServeConverter {
         serve.setCompanyName(req.getCompanyName());
         serve.setStatus(req.getStatus());
         serve.setQualityCode(req.getQualityCode());
-        serve.setIsHot(req.getIsHot());
         serve.setPublisher(req.getPublisher());
         serve.setProvince(req.getProvince());
         serve.setCity(req.getCity());

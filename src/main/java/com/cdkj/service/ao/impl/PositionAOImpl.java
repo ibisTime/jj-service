@@ -111,7 +111,7 @@ public class PositionAOImpl implements IPositionAO {
         } else {
             location++;
         }
-        return positionBO.refreshPositionHot(data.getCode(), data.getIsHot(),
+        return positionBO.refreshPositionHot(data.getCode(), null,
             String.valueOf(location), data.getDealer());
     }
 }

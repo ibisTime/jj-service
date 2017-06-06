@@ -63,7 +63,7 @@
 		t.code
 		,t.name
 		,t.quality_code
-		,tcert.type
+		<!-- ,tcert.type -->
 		,t.exp_company
 		,t.urgent_level
 		,t.description
@@ -73,7 +73,7 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
-		,tu.mobile
+		<!-- ,tu.mobile -->
 		FROM
 		tcp_demand t 
 		<!-- inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id

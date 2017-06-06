@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN001400Req;
+import com.cdkj.service.dto.req.XN805041Req;
 import com.cdkj.service.dto.res.XN001400Res;
+import com.cdkj.service.dto.res.XN805041Res;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.http.BizConnecter;
 import com.cdkj.service.http.JsonUtils;
@@ -39,5 +41,19 @@ public class UserBOImpl implements IUserBO {
         user.setLevel(res.getLevel());
         user.setKind(res.getKind());
         return user;
+    }
+
+    @Override
+    public String doRegister(String mobile, String loginPwd,
+            String loginPwdStrength, String userReferee, String smsCaptcha) {
+        XN805041Req req = new XN805041Req();
+        req.setMobile(mobile);
+        req.setLoginPwd(loginPwd);
+        req.setLoginPwdStrength(loginPwdStrength);
+        req.setUserReferee(null);
+        req.setSmsCaptcha(smsCaptcha);
+        XN805041Res res = BizConnecter.getBizData("805041",
+            JsonUtils.object2Json(req), XN805041Res.class);
+        return res.getUserId();
     }
 }

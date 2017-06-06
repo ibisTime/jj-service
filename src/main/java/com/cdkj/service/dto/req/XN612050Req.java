@@ -31,6 +31,9 @@ public class XN612050Req {
     // 密码（必填）
     private String password;
 
+    // 密码强度
+    private String pwdStrength;
+
     public String getType() {
         return type;
     }
@@ -93,5 +96,13 @@ public class XN612050Req {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPwdStrength() {
+        return pwdStrength;
+    }
+
+    public void setPwdStrength(String pwdStrength) {
+        this.pwdStrength = pwdStrength;
     }
 }
