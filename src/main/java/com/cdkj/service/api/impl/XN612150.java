@@ -2,10 +2,8 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IPositionAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.PositionConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.Position;
 import com.cdkj.service.dto.req.XN612150Req;
 import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
@@ -27,9 +25,7 @@ public class XN612150 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        Position data = PositionConverter.converter(req);
-        String code = positionAO.addPosition(data);
-        return new PKCodeRes(code);
+        return new PKCodeRes(positionAO.addPosition(req));
     }
 
     @Override

@@ -9,15 +9,16 @@ public interface IPositionBO extends IPaginableBO<Position> {
 
     public boolean isPositionExist(String code);
 
-    public String savePosition(Position data);
+    public void savePosition(Position data);
 
-    public int removePosition(String code);
+    public void removePosition(String code);
 
-    public int refreshPosition(Position data);
+    public void refreshPosition(Position data);
 
-    public int refreshPositionStatus(String code, String dealer, String dealNote);
+    public void refreshPositionStatus(String code, String dealer,
+            String dealNote);
 
-    public int refreshPositionHot(String code, String isHot, String orderNo,
+    public void refreshPositionHot(String code, String isHot, String orderNo,
             String dealer);
 
     public List<Position> queryPositionList(Position condition);

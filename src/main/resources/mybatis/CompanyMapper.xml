@@ -44,6 +44,30 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="orderNo != null and orderNo != '' ">
+				AND t.order_no = #{orderNo}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="location != null and location != '' ">
+				AND t.location = #{location}
+			</if>
+			<if test="province != null and province != '' ">
+				AND t.province = #{province}
+			</if>
+			<if test="city != null and city != '' ">
+				AND t.city = #{city}
+			</if>
+			<if test="area != null and area != '' ">
+				AND t.area = #{area}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_company" parameterType="company" resultMap="company_DB_Result">
@@ -105,74 +129,30 @@
 		code
 		,type
 		,name
-		,abbr_name
 		,gsyyzzh
-		,logo
-		,pic
-		,adv_pic
-		,slogan
 		,corporation
 		,id_no
-		,province
-		,city
-		,area
-		,address
-		,longitude
-		,latitude
-		,description
-		,scale
-		,registered_capital
-		,regtime
-		,gz_num
 		,mobile
-		,email
-		,qq
-		,we_chat
 		,location
 		,order_no
-		,is_default
-		,price_range
 		,status
 		,updater
 		,update_datetime
-		,remark
 		,user_id
 		)
 		VALUES(
 		#{code}
 		,#{type}
 		,#{name}
-		,#{abbrName}
 		,#{gsyyzzh}
-		,#{logo}
-		,#{pic}
-		,#{advPic}
-		,#{slogan}
 		,#{corporation}
 		,#{idNo}
-		,#{province}
-		,#{city}
-		,#{area}
-		,#{address}
-		,#{longitude}
-		,#{latitude}
-		,#{description}
-		,#{scale}
-		,#{registeredCapital}
-		,#{regtime}
-		,#{gzNum}
 		,#{mobile}
-		,#{email}
-		,#{qq}
-		,#{weChat}
 		,#{location}
 		,#{orderNo}
-		,#{isDefault}
-		,#{priceRange}
 		,#{status}
 		,#{updater}
 		,#{updateDatetime}
-		,#{remark}
 		,#{userId}
 		)
 	</insert>
@@ -180,16 +160,11 @@
 	<update id="update_company" parameterType="company">
 		UPDATE tcp_company
 		SET
-		type = #{type}
-		,name = #{name}
-		,abbr_name = #{abbrName}
-		,gsyyzzh = #{gsyyzzh}
+		name = #{name}
 		,logo = #{logo}
 		,pic = #{pic}
 		,adv_pic = #{advPic}
 		,slogan = #{slogan}
-		,corporation = #{corporation}
-		,id_no = #{idNo}
 		,province = #{province}
 		,city = #{city}
 		,area = #{area}
@@ -200,22 +175,39 @@
 		,scale = #{scale}
 		,registered_capital = #{registeredCapital}
 		,regtime = #{regtime}
-		,gz_num = #{gzNum}
 		,mobile = #{mobile}
-		,email = #{email}
-		,qq = #{qq}
-		,we_chat = #{weChat}
 		,location = #{location}
 		,order_no = #{orderNo}
-		,is_default = #{isDefault}
-		,price_range = #{priceRange}
 		,status = #{status}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
-		,remark = #{remark}
-		,user_id = #{userId}
 		WHERE code = #{code}
 	</update>
 
+	<update id="update_hot_location" parameterType="company">
+		UPDATE tcp_company
+		SET
+		location = #{location}
+		,order_no = #{orderNo}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		WHERE code = #{code}
+	</update>
 
+	<update id="update_price_range" parameterType="company">
+		UPDATE tcp_company
+		SET
+		price_range = #{priceRange}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_approvel" parameterType="company">
+		UPDATE tcp_company
+		SET
+		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
 </mapper>

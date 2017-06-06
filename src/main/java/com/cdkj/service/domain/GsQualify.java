@@ -1,5 +1,7 @@
 package com.cdkj.service.domain;
 
+import java.util.Date;
+
 import com.cdkj.service.dao.base.ABaseDO;
 
 /**
@@ -10,127 +12,139 @@ import com.cdkj.service.dao.base.ABaseDO;
 */
 public class GsQualify extends ABaseDO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// 编号
-	private String code;
+    // 编号
+    private String code;
 
-	// 公司编号
-	private String companyCode;
+    // 公司编号
+    private String companyCode;
 
-	// 资质编号
-	private String qualifyCode;
+    // 资质编号
+    private String qualifyCode;
 
-	// 广告语
-	private String slogan;
+    // 广告语
+    private String slogan;
 
-	// 状态
-	private String status;
+    // 状态
+    private String status;
 
-	// 申请人
-	private String applyUser;
+    // 申请人
+    private String applyUser;
 
-	// 申请时间
-	private String applyDatetime;
+    // 申请时间
+    private Date applyDatetime;
 
-	// 审批人
-	private String approver;
+    // 审批人
+    private String approver;
 
-	// 审批时间
-	private String approveDatetime;
+    // 审批时间
+    private Date approveDatetime;
 
-	// 审批意见
-	private String approveNote;
+    // 审批意见
+    private String approveNote;
 
-	// 备注
-	private String remark;
+    // 备注
+    private String remark;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    // ********************DB**************
+    // 资质类型
+    private String qualifyType;
 
-	public String getCode() {
-		return code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public String getCompanyCode() {
-		return companyCode;
-	}
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
 
-	public void setQualifyCode(String qualifyCode) {
-		this.qualifyCode = qualifyCode;
-	}
+    public String getCompanyCode() {
+        return companyCode;
+    }
 
-	public String getQualifyCode() {
-		return qualifyCode;
-	}
+    public void setQualifyCode(String qualifyCode) {
+        this.qualifyCode = qualifyCode;
+    }
 
-	public void setSlogan(String slogan) {
-		this.slogan = slogan;
-	}
+    public String getQualifyCode() {
+        return qualifyCode;
+    }
 
-	public String getSlogan() {
-		return slogan;
-	}
+    public void setSlogan(String slogan) {
+        this.slogan = slogan;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getSlogan() {
+        return slogan;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setApplyUser(String applyUser) {
-		this.applyUser = applyUser;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public String getApplyUser() {
-		return applyUser;
-	}
+    public void setApplyUser(String applyUser) {
+        this.applyUser = applyUser;
+    }
 
-	public void setApplyDatetime(String applyDatetime) {
-		this.applyDatetime = applyDatetime;
-	}
+    public String getApplyUser() {
+        return applyUser;
+    }
 
-	public String getApplyDatetime() {
-		return applyDatetime;
-	}
+    public void setApplyDatetime(Date applyDatetime) {
+        this.applyDatetime = applyDatetime;
+    }
 
-	public void setApprover(String approver) {
-		this.approver = approver;
-	}
+    public Date getApplyDatetime() {
+        return applyDatetime;
+    }
 
-	public String getApprover() {
-		return approver;
-	}
+    public void setApprover(String approver) {
+        this.approver = approver;
+    }
 
-	public void setApproveDatetime(String approveDatetime) {
-		this.approveDatetime = approveDatetime;
-	}
+    public String getApprover() {
+        return approver;
+    }
 
-	public String getApproveDatetime() {
-		return approveDatetime;
-	}
+    public void setApproveDatetime(Date approveDatetime) {
+        this.approveDatetime = approveDatetime;
+    }
 
-	public void setApproveNote(String approveNote) {
-		this.approveNote = approveNote;
-	}
+    public Date getApproveDatetime() {
+        return approveDatetime;
+    }
 
-	public String getApproveNote() {
-		return approveNote;
-	}
+    public void setApproveNote(String approveNote) {
+        this.approveNote = approveNote;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public String getApproveNote() {
+        return approveNote;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public String getQualifyType() {
+        return qualifyType;
+    }
+
+    public void setQualifyType(String qualifyType) {
+        this.qualifyType = qualifyType;
+    }
 
 }

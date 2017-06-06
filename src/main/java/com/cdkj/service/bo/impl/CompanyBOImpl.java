@@ -58,23 +58,23 @@ public class CompanyBOImpl extends PaginableBOImpl<Company> implements
     }
 
     @Override
-    public int removeCompany(String code) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Company data = new Company();
-            data.setCode(code);
-            count = companyDAO.delete(data);
-        }
-        return count;
+    public void refreshCompany(Company data) {
+        companyDAO.update(data);
     }
 
     @Override
-    public int refreshCompany(Company data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = companyDAO.update(data);
-        }
-        return count;
+    public void hotLocation(Company company, String orderNo, String updater) {
+        company.setLocation(EBoolean.YES.getCode());
+        company.setOrderNo(orderNo);
+        company.setUpdater(updater);
+        company.setUpdateDatetime(new Date());
+        companyDAO.hotLocation(company);
+    }
+
+    @Override
+    public void priceRange(Company company, String priceRange) {
+        company.setPriceRange(priceRange);
+        companyDAO.priceRange(company);
     }
 
     @Override
@@ -97,9 +97,35 @@ public class CompanyBOImpl extends PaginableBOImpl<Company> implements
     }
 
     @Override
-    public List<Company> queryCompanyList(String orderNo) {
+    public List<Company> queryCompanyList(String orderNo, String name) {
         Company condition = new Company();
         condition.setOrderNo(orderNo);
+        condition.setName(name);
         return companyDAO.selectList(condition);
     }
+
+    @Override
+    public Company byUserId(String userId) {
+        Company data = null;
+        if (StringUtils.isNotBlank(userId)) {
+            Company condition = new Company();
+            condition.setUserId(userId);
+            data = companyDAO.select(condition);
+            if (data == null) {
+                throw new BizException("xn0000", "该用户没有注册企业");
+            }
+        }
+        return data;
+    }
+
+    @Override
+    public void approvel(Company company, ECompanyStatus status,
+            String approveUser, String approveNote) {
+        company.setStatus(status.getCode());
+        company.setUpdater(approveUser);
+        company.setRemark(approveNote);
+        company.setUpdateDatetime(new Date());
+        companyDAO.approvel(company);
+    }
+
 }

@@ -2,6 +2,8 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.ICompanyAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.common.JsonUtil;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.dto.req.XN612054Req;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
@@ -27,8 +29,8 @@ public class XN612054 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        // TODO Auto-generated method stub
-
+        req = JsonUtil.json2Bean(inputparams, XN612054Req.class);
+        StringValidater.validateBlank(req.getCode(), req.getAction());
     }
 
 }

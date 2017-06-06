@@ -20,5 +20,5 @@ public interface IUserBO {
     public User getRemoteUser(String userId);
 
     public String doRegister(String mobile, String loginPwd,
-            String loginPwdStrength, String userReferee, String smsCaptcha);
+            String loginPwdStrength, String smsCaptcha);
 }

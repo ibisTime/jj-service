@@ -45,13 +45,16 @@ public class UserBOImpl implements IUserBO {
 
     @Override
     public String doRegister(String mobile, String loginPwd,
-            String loginPwdStrength, String userReferee, String smsCaptcha) {
+            String loginPwdStrength, String smsCaptcha) {
         XN805041Req req = new XN805041Req();
         req.setMobile(mobile);
         req.setLoginPwd(loginPwd);
         req.setLoginPwdStrength(loginPwdStrength);
         req.setUserReferee(null);
+        req.setKind("f2");
+        req.setIsRegHx("1");
         req.setSmsCaptcha(smsCaptcha);
+        req.setSystemCode("CD-CJJ000010");
         XN805041Res res = BizConnecter.getBizData("805041",
             JsonUtils.object2Json(req), XN805041Res.class);
         return res.getUserId();

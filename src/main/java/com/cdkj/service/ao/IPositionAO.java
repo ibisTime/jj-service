@@ -4,22 +4,24 @@ import java.util.List;
 
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Position;
+import com.cdkj.service.dto.req.XN612150Req;
+import com.cdkj.service.dto.req.XN612152Req;
 
 public interface IPositionAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addPosition(Position data);
+    public String addPosition(XN612150Req req);
 
-    public int dropPosition(String code);
+    public void dropPosition(String code);
 
-    public int editPosition(Position data);
+    public void editPosition(XN612152Req req);
 
-    public int editPositionStatus(String code, String dealer, String dealNote);
+    public void editPositionStatus(String code, String dealer, String dealNote);
 
-    public int editPositionHot(String code, String isHot, String orderNo,
+    public void editPositionHot(String code, String isHot, String orderNo,
             String dealer);
 
-    public int editPositionHotLocation(String code, String action);
+    public void editPositionHotLocation(String code, String action);
 
     public Paginable<Position> queryPositionPage(int start, int limit,
             Position condition);

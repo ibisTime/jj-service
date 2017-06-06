@@ -5,5 +5,7 @@ import com.cdkj.service.domain.GsQualify;
 
 //dao层 
 public interface IGsQualifyDAO extends IBaseDAO<GsQualify> {
-	String NAMESPACE = IGsQualifyDAO.class.getName().concat(".");
+    String NAMESPACE = IGsQualifyDAO.class.getName().concat(".");
+
+    public int approvel(GsQualify gsQualify);
 }

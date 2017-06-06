@@ -20,6 +20,15 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+			<if test="qualifyCode != null and qualifyCode != '' ">
+				AND t.qualify_code = #{qualifyCode}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_gsQualify" parameterType="gsQualify" resultMap="gsQualify_DB_Result">
@@ -84,18 +93,23 @@
 	<update id="update_gsQualify" parameterType="gsQualify">
 		UPDATE tcp_gs_qualify
 		SET
-		company_code = #{companyCode}
-		,qualify_code = #{qualifyCode}
+		qualify_code = #{qualifyCode}
 		,slogan = #{slogan}
 		,status = #{status}
 		,apply_user = #{applyUser}
 		,apply_datetime = #{applyDatetime}
+		WHERE code = #{code}
+	</update>
+
+	<update id="update_approvel" parameterType="gsQualify">
+		UPDATE tcp_gs_qualify
+		SET
+		status = #{status}
 		,approver = #{approver}
 		,approve_datetime = #{approveDatetime}
 		,approve_note = #{approveNote}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
-
 
 </mapper>

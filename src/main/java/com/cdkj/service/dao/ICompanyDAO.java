@@ -5,5 +5,11 @@ import com.cdkj.service.domain.Company;
 
 //dao层 
 public interface ICompanyDAO extends IBaseDAO<Company> {
-	String NAMESPACE = ICompanyDAO.class.getName().concat(".");
+    String NAMESPACE = ICompanyDAO.class.getName().concat(".");
+
+    public int hotLocation(Company data);
+
+    public int priceRange(Company data);
+
+    public int approvel(Company company);
 }

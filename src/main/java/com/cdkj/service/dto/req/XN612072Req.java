@@ -16,6 +16,9 @@ public class XN612072Req {
     // 广告语
     private String slogan;
 
+    // 定价区间
+    private String priceRange;
+
     // 申请人
     private String applyUser;
 
@@ -49,5 +52,13 @@ public class XN612072Req {
 
     public void setApplyUser(String applyUser) {
         this.applyUser = applyUser;
+    }
+
+    public String getPriceRange() {
+        return priceRange;
+    }
+
+    public void setPriceRange(String priceRange) {
+        this.priceRange = priceRange;
     }
 }

@@ -4,29 +4,25 @@ import java.util.List;
 
 import com.cdkj.service.bo.base.IPaginableBO;
 import com.cdkj.service.domain.GsQualify;
+import com.cdkj.service.enums.ECompanyStatus;
 
-
-
-//CHECK ��鲢��ע�� 
 public interface IGsQualifyBO extends IPaginableBO<GsQualify> {
 
+    public boolean isGsQualifyExist(String code);
 
-	public boolean isGsQualifyExist(String code);
+    public String saveGsQualify(String companyCode, String qualifyCode,
+            String slogan, String applyUser);
 
+    public void removeGsQualify(String code);
 
-	public String saveGsQualify(GsQualify data);
+    public void refreshGsQualify(GsQualify data, String qualifyCode,
+            String slogan, String applyUser);
 
+    public List<GsQualify> queryGsQualifyList(GsQualify condition);
 
-	public int removeGsQualify(String code);
+    public GsQualify getGsQualify(String code);
 
-
-	public int refreshGsQualify(GsQualify data);
-
-
-	public List<GsQualify> queryGsQualifyList(GsQualify condition);
-
-
-	public GsQualify getGsQualify(String code);
-
+    public void approvel(GsQualify gsQualify, ECompanyStatus status,
+            String approveUser, String approveNote);
 
 }

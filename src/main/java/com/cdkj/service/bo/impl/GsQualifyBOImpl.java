@@ -1,5 +1,6 @@
 package com.cdkj.service.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,7 @@ import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IGsQualifyDAO;
 import com.cdkj.service.domain.GsQualify;
+import com.cdkj.service.enums.ECompanyStatus;
 import com.cdkj.service.exception.BizException;
 
 @Component
@@ -32,35 +34,40 @@ public class GsQualifyBOImpl extends PaginableBOImpl<GsQualify> implements
     }
 
     @Override
-    public String saveGsQualify(GsQualify data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.GSQUALIFY
-                .getCode());
-            data.setCode(code);
-            gsQualifyDAO.insert(data);
-        }
+    public String saveGsQualify(String companyCode, String qualifyCode,
+            String slogan, String applyUser) {
+        GsQualify data = new GsQualify();
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.GSQUALIFY
+            .getCode());
+        data.setCode(code);
+        data.setCompanyCode(companyCode);
+        data.setQualifyCode(qualifyCode);
+        data.setSlogan(slogan);
+        data.setStatus(ECompanyStatus.APPLY.getCode());
+        data.setApplyUser(applyUser);
+        data.setApplyDatetime(new Date());
+        gsQualifyDAO.insert(data);
         return code;
     }
 
     @Override
-    public int removeGsQualify(String code) {
-        int count = 0;
+    public void removeGsQualify(String code) {
         if (StringUtils.isNotBlank(code)) {
             GsQualify data = new GsQualify();
             data.setCode(code);
-            count = gsQualifyDAO.delete(data);
+            gsQualifyDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshGsQualify(GsQualify data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = gsQualifyDAO.update(data);
-        }
-        return count;
+    public void refreshGsQualify(GsQualify data, String qualifyCode,
+            String slogan, String applyUser) {
+        data.setQualifyCode(qualifyCode);
+        data.setSlogan(slogan);
+        data.setApplyUser(applyUser);
+        data.setApplyDatetime(new Date());
+        data.setStatus(ECompanyStatus.APPLY.getCode());
+        gsQualifyDAO.update(data);
     }
 
     @Override
@@ -80,5 +87,15 @@ public class GsQualifyBOImpl extends PaginableBOImpl<GsQualify> implements
             }
         }
         return data;
+    }
+
+    @Override
+    public void approvel(GsQualify gsQualify, ECompanyStatus status,
+            String approveUser, String approveNote) {
+        gsQualify.setStatus(status.getCode());
+        gsQualify.setApprover(approveUser);
+        gsQualify.setApproveNote(approveNote);
+        gsQualify.setApproveDatetime(new Date());
+        gsQualifyDAO.approvel(gsQualify);
     }
 }

@@ -17,7 +17,7 @@ public interface ICompanyAO {
             String corporation, String idNo, String mobile, String smsCaptcha,
             String password, String pwdStrength);
 
-    public int editCompany(XN612052Req req);
+    public void editCompany(XN612052Req req);
 
     public void hotLocation(String code, String orderNo, String updater);
 
@@ -27,5 +27,7 @@ public interface ICompanyAO {
     public List<Company> queryCompanyList(Company condition);
 
     public Company getCompany(String code);
+
+    public Company byUserId(String userId);
 
 }

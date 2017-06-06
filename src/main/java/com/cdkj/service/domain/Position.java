@@ -26,6 +26,9 @@ public class Position extends ABaseDO {
 
     private String city;
 
+    // 区
+    private String area;
+
     private String experience;
 
     private String education;
@@ -270,5 +273,13 @@ public class Position extends ABaseDO {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

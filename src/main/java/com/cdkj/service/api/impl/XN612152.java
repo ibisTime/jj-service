@@ -2,10 +2,8 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IPositionAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.PositionConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.Position;
 import com.cdkj.service.dto.req.XN612152Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
@@ -18,7 +16,7 @@ import com.cdkj.service.spring.SpringContextHolder;
  * @since: 2016年10月7日 下午4:06:14 
  * @history:
  */
-public class CD612081 extends AProcessor {
+public class XN612152 extends AProcessor {
 
     private IPositionAO positionAO = SpringContextHolder
         .getBean(IPositionAO.class);
@@ -27,9 +25,8 @@ public class CD612081 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        Position data = PositionConverter.converter(req);
-        int count = positionAO.editPosition(data);
-        return new BooleanRes(count > 0 ? true : false);
+        positionAO.editPosition(req);
+        return new BooleanRes(true);
     }
 
     @Override

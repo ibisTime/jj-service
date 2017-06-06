@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IPositionBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.dao.IPositionDAO;
 import com.cdkj.service.domain.Position;
@@ -35,42 +33,22 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
     }
 
     @Override
-    public String savePosition(Position data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.ZW.getCode());
-            data.setCode(code);
-            // 状态默认设置为 正常
-            data.setStatus(EBoolean.YES.getCode());
-            // 是否热门默认设置为 否
-            data.setLocation(EBoolean.NO.getCode());
-            // 次序默认设置为 0
-            data.setOrderNo(0);
-            data.setPublishDatetime(new Date());
-            positionDAO.insert(data);
-        }
-        return code;
+    public void savePosition(Position data) {
+        positionDAO.insert(data);
     }
 
     @Override
-    public int removePosition(String code) {
-        int count = 0;
+    public void removePosition(String code) {
         if (StringUtils.isNotBlank(code)) {
             Position data = new Position();
             data.setCode(code);
-            count = positionDAO.delete(data);
+            positionDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshPosition(Position data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            data.setPublishDatetime(new Date());
-            count = positionDAO.update(data);
-        }
-        return count;
+    public void refreshPosition(Position data) {
+        positionDAO.update(data);
     }
 
     @Override
@@ -93,18 +71,19 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
     }
 
     @Override
-    public int refreshPositionStatus(String code, String dealer, String dealNote) {
+    public void refreshPositionStatus(String code, String dealer,
+            String dealNote) {
         Position data = new Position();
         data.setCode(code);
         data.setStatus(EBoolean.NO.getCode());
         data.setDealer(dealer);
         data.setDealNote(dealNote);
         data.setDealDatetime(new Date());
-        return positionDAO.updateStatus(data);
+        positionDAO.updateStatus(data);
     }
 
     @Override
-    public int refreshPositionHot(String code, String isHot, String orderNo,
+    public void refreshPositionHot(String code, String isHot, String orderNo,
             String dealer) {
         Position data = new Position();
         data.setCode(code);
@@ -115,6 +94,6 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
         data.setOrderNo(StringValidater.toInteger(orderNo));
         data.setDealer(dealer);
         data.setDealDatetime(new Date());
-        return positionDAO.updateHot(data);
+        positionDAO.updateHot(data);
     }
 }

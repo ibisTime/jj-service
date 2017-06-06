@@ -50,4 +50,9 @@ public class GsQualifyDAOImpl extends AMybatisTemplate implements IGsQualifyDAO 
         return super.update(NAMESPACE.concat("update_gsQualify"), data);
     }
 
+    @Override
+    public int approvel(GsQualify data) {
+        return super.update(NAMESPACE.concat("update_approvel"), data);
+    }
+
 }
