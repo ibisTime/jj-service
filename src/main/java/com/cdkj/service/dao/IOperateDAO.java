@@ -5,5 +5,9 @@ import com.cdkj.service.domain.Operate;
 
 //dao层 
 public interface IOperateDAO extends IBaseDAO<Operate> {
-	String NAMESPACE = IOperateDAO.class.getName().concat(".");
+    String NAMESPACE = IOperateDAO.class.getName().concat(".");
+
+    public int wgclOperate(Operate operate);
+
+    public int updateLocation(Operate operate);
 }

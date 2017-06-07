@@ -3,6 +3,7 @@ package com.cdkj.service.ao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,5 +102,27 @@ public class PhotoAOImpl implements IPhotoAO {
     @Override
     public Photo getPhoto(String code) {
         return photoBO.getPhoto(code);
+    }
+
+    @Override
+    public void wgclPhoto(String code, String dealer, String dealNote) {
+        Photo photo = photoBO.getPhoto(code);
+        if (EBoolean.NO.getCode().equals(photo.getStatus())) {
+            throw new BizException("xn0000", "该服务已做违规处理");
+        }
+        photoBO.wgclPhoto(photo, dealer, dealNote);
+    }
+
+    @Override
+    public void editLocation(String code, String location, String orderNo,
+            String dealer) {
+        Photo photo = photoBO.getPhoto(code);
+        if (!EBoolean.NO.getCode().equals(orderNo)) {
+            List<Photo> photoList = photoBO.queryPhotoList(location, orderNo);
+            if (CollectionUtils.isNotEmpty(photoList)) {
+                throw new BizException("xn0000", "顺序重复");
+            }
+        }
+        photoBO.refreshLocation(photo, location, orderNo, dealer);
     }
 }

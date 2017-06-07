@@ -25,4 +25,8 @@ public interface ITrainAO {
 
     public Train getTrain(String code);
 
+    public void wgclTrain(String code, String dealer, String dealNote);
+
+    public void editLocation(String code, String location, String orderNo,
+            String dealer);
 }

@@ -5,5 +5,9 @@ import com.cdkj.service.domain.Photo;
 
 //dao层 
 public interface IPhotoDAO extends IBaseDAO<Photo> {
-	String NAMESPACE = IPhotoDAO.class.getName().concat(".");
+    String NAMESPACE = IPhotoDAO.class.getName().concat(".");
+
+    public int wgclPhoto(Photo photo);
+
+    public int updateLocation(Photo photo);
 }

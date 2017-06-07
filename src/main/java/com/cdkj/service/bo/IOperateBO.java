@@ -19,4 +19,11 @@ public interface IOperateBO extends IPaginableBO<Operate> {
 
     public Operate getOperate(String code);
 
+    public void wgclOperate(Operate operate, String dealer, String dealNote);
+
+    public List<Operate> queryOperateList(String location, String orderNo);
+
+    public void refreshLocation(Operate operate, String location,
+            String orderNo, String dealer);
+
 }

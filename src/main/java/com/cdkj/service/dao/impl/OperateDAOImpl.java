@@ -50,4 +50,14 @@ public class OperateDAOImpl extends AMybatisTemplate implements IOperateDAO {
         return super.update(NAMESPACE.concat("update_operate"), data);
     }
 
+    @Override
+    public int wgclOperate(Operate data) {
+        return super.update(NAMESPACE.concat("update_wg"), data);
+    }
+
+    @Override
+    public int updateLocation(Operate data) {
+        return super.update(NAMESPACE.concat("update_location"), data);
+    }
+
 }

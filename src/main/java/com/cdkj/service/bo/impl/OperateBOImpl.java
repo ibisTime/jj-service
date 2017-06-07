@@ -1,5 +1,6 @@
 package com.cdkj.service.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +11,7 @@ import com.cdkj.service.bo.IOperateBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.dao.IOperateDAO;
 import com.cdkj.service.domain.Operate;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 @Component
@@ -61,9 +63,36 @@ public class OperateBOImpl extends PaginableBOImpl<Operate> implements
             condition.setCode(code);
             data = operateDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn0000", "不存在该运营编号");
             }
         }
         return data;
+    }
+
+    @Override
+    public void wgclOperate(Operate operate, String dealer, String dealNote) {
+        operate.setStatus(EBoolean.NO.getCode());
+        operate.setDealer(dealer);
+        operate.setDealDatetime(new Date());
+        operate.setDealNote(dealNote);
+        operateDAO.wgclOperate(operate);
+    }
+
+    @Override
+    public List<Operate> queryOperateList(String location, String orderNo) {
+        Operate condition = new Operate();
+        condition.setLocation(location);
+        condition.setOrderNo(orderNo);
+        return operateDAO.selectList(condition);
+    }
+
+    @Override
+    public void refreshLocation(Operate operate, String location,
+            String orderNo, String dealer) {
+        operate.setLocation(location);
+        operate.setOrderNo(orderNo);
+        operate.setDealer(dealer);
+        operate.setDealDatetime(new Date());
+        operateDAO.updateLocation(operate);
     }
 }

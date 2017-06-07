@@ -3,6 +3,7 @@ package com.cdkj.service.ao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -102,5 +103,27 @@ public class TrainAOImpl implements ITrainAO {
     @Override
     public Train getTrain(String code) {
         return trainBO.getTrain(code);
+    }
+
+    @Override
+    public void wgclTrain(String code, String dealer, String dealNote) {
+        Train train = trainBO.getTrain(code);
+        if (EBoolean.NO.getCode().equals(train.getStatus())) {
+            throw new BizException("xn0000", "该服务已做违规处理");
+        }
+        trainBO.wgclTrain(train, dealer, dealNote);
+    }
+
+    @Override
+    public void editLocation(String code, String location, String orderNo,
+            String dealer) {
+        Train train = trainBO.getTrain(code);
+        if (!EBoolean.NO.getCode().equals(orderNo)) {
+            List<Train> trainList = trainBO.queryTrainList(location, orderNo);
+            if (CollectionUtils.isNotEmpty(trainList)) {
+                throw new BizException("xn0000", "顺序重复");
+            }
+        }
+        trainBO.refreshLocation(train, location, orderNo, dealer);
     }
 }

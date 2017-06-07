@@ -19,4 +19,11 @@ public interface ITrainBO extends IPaginableBO<Train> {
 
     public Train getTrain(String code);
 
+    public void wgclTrain(Train train, String dealer, String dealNote);
+
+    public List<Train> queryTrainList(String location, String orderNo);
+
+    public void refreshLocation(Train train, String location, String orderNo,
+            String dealer);
+
 }

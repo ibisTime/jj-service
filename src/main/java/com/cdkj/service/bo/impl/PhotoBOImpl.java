@@ -1,5 +1,6 @@
 package com.cdkj.service.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -35,20 +36,16 @@ public class PhotoBOImpl extends PaginableBOImpl<Photo> implements IPhotoBO {
 
     @Override
     public void removePhoto(String code) {
-        int count = 0;
         if (StringUtils.isNotBlank(code)) {
             Photo data = new Photo();
             data.setCode(code);
-            count = photoDAO.delete(data);
+            photoDAO.delete(data);
         }
     }
 
     @Override
     public void refreshPhoto(Photo data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = photoDAO.update(data);
-        }
+        photoDAO.update(data);
     }
 
     @Override
@@ -64,9 +61,35 @@ public class PhotoBOImpl extends PaginableBOImpl<Photo> implements IPhotoBO {
             condition.setCode(code);
             data = photoDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn0000", "不存在该服务");
             }
         }
         return data;
+    }
+
+    @Override
+    public void wgclPhoto(Photo photo, String dealer, String dealNote) {
+        photo.setDealer(dealer);
+        photo.setDealDatetime(new Date());
+        photo.setDealNote(dealNote);
+        photoDAO.wgclPhoto(photo);
+    }
+
+    @Override
+    public List<Photo> queryPhotoList(String location, String orderNo) {
+        Photo condition = new Photo();
+        condition.setLocation(location);
+        condition.setOrderNo(orderNo);
+        return photoDAO.selectList(condition);
+    }
+
+    @Override
+    public void refreshLocation(Photo photo, String location, String orderNo,
+            String dealer) {
+        photo.setLocation(location);
+        photo.setOrderNo(orderNo);
+        photo.setDealer(dealer);
+        photo.setDealDatetime(new Date());
+        photoDAO.updateLocation(photo);
     }
 }

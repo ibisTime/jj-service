@@ -19,4 +19,11 @@ public interface IPhotoBO extends IPaginableBO<Photo> {
 
     public Photo getPhoto(String code);
 
+    public void wgclPhoto(Photo photo, String dealer, String dealNote);
+
+    public List<Photo> queryPhotoList(String location, String orderNo);
+
+    public void refreshLocation(Photo photo, String location, String orderNo,
+            String dealer);
+
 }

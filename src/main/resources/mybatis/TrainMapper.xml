@@ -27,11 +27,55 @@
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
 		<result column="deal_note" property="dealNote" />
+		<result column="quality_name" property="qualityName" />
+		<result column="company_name" property="companyName" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
+			</if>
+			<if test="location != null and location != '' ">
+				AND t.location = #{location}
+			</if>
+			<if test="orderNo != null and orderNo != '' ">
+				AND t.order_no = #{orderNo}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+			<if test="qualityCode != null and qualityCode != '' ">
+				AND t.quality_code = #{qualityCode}
+			</if>
+			<if test="publisher != null and publisher != '' ">
+				AND t.publisher = #{publisher}
+			</if>
+			<if test="dealer != null and dealer != '' ">
+				AND t.dealer = #{dealer}
+			</if>
+			<if test="publishDatetimeStart != null and publishDatetimeStart != '' ">
+				<![CDATA[AND t.publish_datetime >= #{publishDatetimeStart}]]>
+			</if>
+			<if test="publishDatetimeEnd != null and publishDatetimeEnd != '' ">
+				<![CDATA[AND t.publish_datetime <= #{publishDatetimeEnd}]]>
+			</if>
+			<if test="companyName != null and companyName != '' ">
+				AND tc.name like "%"#{companyName}"%" 
+			</if>
+			<if test="province != null and province != '' ">
+				AND tc.province = #{province}
+			</if>
+			<if test="city != null and city != '' ">
+				AND tc.city = #{city}
+			</if>
+			<if test="area != null and area != '' ">
+				AND tc.area = #{area}
 			</if>
 		</trim>
 	</sql>
@@ -61,8 +105,13 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
+		,tc.province
+		,tc.city
+		,tc.area
+		,tsc.name as quality_name
+		,tsc.type
 		FROM
-		tcp_train t
+		tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -73,7 +122,7 @@
 
 	<select id="select_train_count" parameterType="train"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_train t
+		SELECT count(1) FROM tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 
@@ -148,5 +197,23 @@
 		WHERE code = #{code}
 	</update>
 
+	<update id="update_wgcl" parameterType="train">
+		UPDATE tcp_train
+		SET
+		status = #{status}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_location" parameterType="train">
+		UPDATE tcp_train
+		SET
+		location = #{location}
+		,order_no = #{orderNo}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		WHERE code = #{code}
+	</update>
 
 </mapper>

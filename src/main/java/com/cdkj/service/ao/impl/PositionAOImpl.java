@@ -3,7 +3,6 @@ package com.cdkj.service.ao.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,20 +96,21 @@ public class PositionAOImpl implements IPositionAO {
             Position condition) {
         Paginable<Position> page = positionBO.getPaginable(start, limit,
             condition);
-        List<Position> list = page.getList();
-        if (CollectionUtils.isNotEmpty(list)) {
-            for (Position position : list) {
-            }
-        }
+        // List<Position> list = page.getList();
+        // if (CollectionUtils.isNotEmpty(list)) {
+        // for (Position position : list) {
+        // }
+        // }
         return page;
     }
 
     @Override
     public List<Position> queryPositionList(Position condition) {
         List<Position> list = positionBO.queryPositionList(condition);
-        if (CollectionUtils.isNotEmpty(list)) {
-
-        }
+        // if (CollectionUtils.isNotEmpty(list)) {
+        // for (Position position : list) {
+        // }
+        // }
         return list;
     }
 

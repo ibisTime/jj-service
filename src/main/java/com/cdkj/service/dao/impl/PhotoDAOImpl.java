@@ -50,4 +50,14 @@ public class PhotoDAOImpl extends AMybatisTemplate implements IPhotoDAO {
         return super.update(NAMESPACE.concat("update_photo"), data);
     }
 
+    @Override
+    public int wgclPhoto(Photo data) {
+        return super.update(NAMESPACE.concat("update_photo_wg"), data);
+    }
+
+    @Override
+    public int updateLocation(Photo data) {
+        return super.update(NAMESPACE.concat("update_location"), data);
+    }
+
 }

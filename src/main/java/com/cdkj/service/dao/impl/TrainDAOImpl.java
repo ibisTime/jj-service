@@ -50,4 +50,14 @@ public class TrainDAOImpl extends AMybatisTemplate implements ITrainDAO {
         return super.update(NAMESPACE.concat("update_train"), data);
     }
 
+    @Override
+    public int wgclTrain(Train train) {
+        return super.update(NAMESPACE.concat("update_wgcl"), train);
+    }
+
+    @Override
+    public int updateLocation(Train train) {
+        return super.update(NAMESPACE.concat("update_location"), train);
+    }
+
 }

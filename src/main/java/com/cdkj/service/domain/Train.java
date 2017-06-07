@@ -86,6 +86,28 @@ public class Train extends ABaseDO {
     // 处理意见
     private String dealNote;
 
+    // *******************************
+    // 服务类型
+    private String type;
+
+    // 公司-省
+    private String province;
+
+    // 公司-市
+    private String city;
+
+    // 公司-区
+    private String area;
+
+    private Date publishDatetimeStart;
+
+    private Date publishDatetimeEnd;
+
+    private String qualityName;
+
+    // 公司名称
+    private String companyName;
+
     public String getCode() {
         return code;
     }
@@ -276,6 +298,70 @@ public class Train extends ABaseDO {
 
     public void setDealNote(String dealNote) {
         this.dealNote = dealNote;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public Date getPublishDatetimeStart() {
+        return publishDatetimeStart;
+    }
+
+    public void setPublishDatetimeStart(Date publishDatetimeStart) {
+        this.publishDatetimeStart = publishDatetimeStart;
+    }
+
+    public Date getPublishDatetimeEnd() {
+        return publishDatetimeEnd;
+    }
+
+    public void setPublishDatetimeEnd(Date publishDatetimeEnd) {
+        this.publishDatetimeEnd = publishDatetimeEnd;
+    }
+
+    public String getQualityName() {
+        return qualityName;
+    }
+
+    public void setQualityName(String qualityName) {
+        this.qualityName = qualityName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
 }

@@ -26,4 +26,8 @@ public interface IOperateAO {
 
     public Operate getOperate(String code);
 
+    public void wgclOperate(String code, String dealer, String dealNote);
+
+    public void editLocation(String code, String location, String orderNo,
+            String dealer);
 }

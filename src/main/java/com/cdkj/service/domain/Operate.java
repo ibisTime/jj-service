@@ -75,7 +75,7 @@ public class Operate extends ABaseDO {
     private String dealer;
 
     // 处理时间
-    private String dealDatetime;
+    private Date dealDatetime;
 
     // 处理意见
     private String dealNote;
@@ -240,11 +240,11 @@ public class Operate extends ABaseDO {
         return dealer;
     }
 
-    public void setDealDatetime(String dealDatetime) {
+    public void setDealDatetime(Date dealDatetime) {
         this.dealDatetime = dealDatetime;
     }
 
-    public String getDealDatetime() {
+    public Date getDealDatetime() {
         return dealDatetime;
     }
 

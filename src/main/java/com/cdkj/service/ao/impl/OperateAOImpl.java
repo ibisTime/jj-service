@@ -3,6 +3,7 @@ package com.cdkj.service.ao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -98,5 +99,28 @@ public class OperateAOImpl implements IOperateAO {
     @Override
     public Operate getOperate(String code) {
         return operateBO.getOperate(code);
+    }
+
+    @Override
+    public void wgclOperate(String code, String dealer, String dealNote) {
+        Operate operate = operateBO.getOperate(code);
+        if (EBoolean.NO.getCode().equals(operate.getStatus())) {
+            throw new BizException("xn0000", "该服务已做违规处理");
+        }
+        operateBO.wgclOperate(operate, dealer, dealNote);
+    }
+
+    @Override
+    public void editLocation(String code, String location, String orderNo,
+            String dealer) {
+        Operate operate = operateBO.getOperate(code);
+        if (!EBoolean.NO.getCode().equals(orderNo)) {
+            List<Operate> operateList = operateBO.queryOperateList(location,
+                orderNo);
+            if (CollectionUtils.isNotEmpty(operateList)) {
+                throw new BizException("xn0000", "顺序重复");
+            }
+        }
+        operateBO.refreshLocation(operate, location, orderNo, dealer);
     }
 }

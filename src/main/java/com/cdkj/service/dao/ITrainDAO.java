@@ -5,5 +5,9 @@ import com.cdkj.service.domain.Train;
 
 //dao层 
 public interface ITrainDAO extends IBaseDAO<Train> {
-	String NAMESPACE = ITrainDAO.class.getName().concat(".");
+    String NAMESPACE = ITrainDAO.class.getName().concat(".");
+
+    public int wgclTrain(Train train);
+
+    public int updateLocation(Train train);
 }

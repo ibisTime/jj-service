@@ -25,4 +25,9 @@ public interface IPhotoAO {
 
     public Photo getPhoto(String code);
 
+    public void wgclPhoto(String code, String dealer, String dealNote);
+
+    public void editLocation(String code, String location, String orderNo,
+            String dealer);
+
 }
