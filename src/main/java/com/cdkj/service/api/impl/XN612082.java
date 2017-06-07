@@ -12,13 +12,13 @@ import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
-/** 
+/**
  * 修改摄影/拍摄服务
- * @author: zuixian 
- * @since: 2016年10月7日 下午4:06:14 
+ * @author: asus 
+ * @since: 2017年6月7日 上午10:14:15 
  * @history:
  */
-public class CD612001 extends AProcessor {
+public class XN612082 extends AProcessor {
 
     private IServePhotoAO servePhotoAO = SpringContextHolder
         .getBean(IServePhotoAO.class);

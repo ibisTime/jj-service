@@ -6,38 +6,38 @@ import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.ServeShop;
-import com.cdkj.service.dto.req.XN612112Req;
-import com.cdkj.service.dto.res.BooleanRes;
+import com.cdkj.service.dto.req.XN612110Req;
+import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
-/** 
- * 修改店铺代运营
- * @author: zuixian 
- * @since: 2016年10月7日 下午4:06:14 
+/**
+ * 新增店铺代运营
+ * @author: asus 
+ * @since: 2017年6月7日 上午10:15:19 
  * @history:
  */
-public class CD612005 extends AProcessor {
+public class XN612110 extends AProcessor {
 
     private IServeShopAO serveShopAO = SpringContextHolder
         .getBean(IServeShopAO.class);
 
-    private XN612112Req req = null;
+    private XN612110Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
         ServeShop data = ServeConverter.converter(req);
-        int count = serveShopAO.editServeShop(data);
-        return new BooleanRes(count > 0 ? true : false);
+        String code = serveShopAO.addServeShop(data);
+        return new PKCodeRes(code);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN612112Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getName(),
-            req.getQuoteMin(), req.getQuoteMax(), req.getTgfw(),
-            req.getFeeMode(), req.getPayCycle(), req.getScyylm(),
-            req.getSucCase(), req.getPublisher());
+        req = JsonUtil.json2Bean(inputparams, XN612110Req.class);
+        StringValidater.validateBlank(req.getName(), req.getCompanyCode(),
+            req.getQuoteMin(), req.getQuoteMax(), req.getQualityCode(),
+            req.getTgfw(), req.getFeeMode(), req.getPayCycle(),
+            req.getScyylm(), req.getSucCase(), req.getPublisher());
     }
 }

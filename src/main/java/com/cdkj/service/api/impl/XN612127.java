@@ -2,37 +2,39 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IServeAO;
 import com.cdkj.service.api.AProcessor;
+import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.dto.req.XN612131Req;
+import com.cdkj.service.domain.Serve;
+import com.cdkj.service.dto.req.XN612127Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
-/** 
- * 服务违规处理，状态更改为违规
- * @author: zuixian 
- * @since: 2016年10月7日 下午4:06:14 
+/**
+ * 修改软件外包
+ * @author: asus 
+ * @since: 2017年6月7日 上午10:20:00 
  * @history:
  */
-public class CD612017 extends AProcessor {
+public class XN612127 extends AProcessor {
 
     private IServeAO serveAO = SpringContextHolder.getBean(IServeAO.class);
 
-    private XN612131Req req = null;
+    private XN612127Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
-        int count = serveAO.editServeStatus(req.getCode(), req.getDealer(),
-            req.getDealNote());
+        Serve data = ServeConverter.converter(req);
+        int count = serveAO.editServe(data);
         return new BooleanRes(count > 0 ? true : false);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN612131Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getDealer(),
-            req.getDealNote());
+        req = JsonUtil.json2Bean(inputparams, XN612127Req.class);
+        StringValidater.validateBlank(req.getCode(), req.getName(),
+            req.getQuoteMin(), req.getQuoteMax(), req.getPublisher());
     }
 }

@@ -1,43 +1,41 @@
 package com.cdkj.service.api.impl;
 
-import com.cdkj.service.ao.IServeShopAO;
+import com.cdkj.service.ao.IServeAO;
 import com.cdkj.service.api.AProcessor;
 import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.ServeShop;
-import com.cdkj.service.dto.req.XN612110Req;
+import com.cdkj.service.domain.Serve;
+import com.cdkj.service.dto.req.XN612126Req;
 import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
-/** 
- * 新增店铺代运营
- * @author: zuixian 
- * @since: 2016年10月7日 下午4:06:14 
+/**
+ * 新增软件外包
+ * @author: asus 
+ * @since: 2017年6月7日 上午10:19:28 
  * @history:
  */
-public class CD612004 extends AProcessor {
+public class XN612126 extends AProcessor {
 
-    private IServeShopAO serveShopAO = SpringContextHolder
-        .getBean(IServeShopAO.class);
+    private IServeAO serveAO = SpringContextHolder.getBean(IServeAO.class);
 
-    private XN612110Req req = null;
+    private XN612126Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
-        ServeShop data = ServeConverter.converter(req);
-        String code = serveShopAO.addServeShop(data);
+        Serve data = ServeConverter.converter(req);
+        String code = serveAO.addServe(data);
         return new PKCodeRes(code);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN612110Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN612126Req.class);
         StringValidater.validateBlank(req.getName(), req.getCompanyCode(),
             req.getQuoteMin(), req.getQuoteMax(), req.getQualityCode(),
-            req.getTgfw(), req.getFeeMode(), req.getPayCycle(),
-            req.getScyylm(), req.getSucCase(), req.getPublisher());
+            req.getPublisher());
     }
 }

@@ -12,13 +12,13 @@ import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
-/** 
+/**
  * 修改培训
- * @author: zuixian 
- * @since: 2016年10月7日 下午4:06:14 
+ * @author: asus 
+ * @since: 2017年6月7日 上午10:14:58 
  * @history:
  */
-public class CD612003 extends AProcessor {
+public class XN612092 extends AProcessor {
 
     private IServeTrainAO serveTrainAO = SpringContextHolder
         .getBean(IServeTrainAO.class);

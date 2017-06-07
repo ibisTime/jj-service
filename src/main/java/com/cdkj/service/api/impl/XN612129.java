@@ -1,40 +1,43 @@
 package com.cdkj.service.api.impl;
 
-import com.cdkj.service.ao.IServeAO;
+import com.cdkj.service.ao.IServeCyyAO;
 import com.cdkj.service.api.AProcessor;
 import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.Serve;
-import com.cdkj.service.dto.req.XN612127Req;
+import com.cdkj.service.domain.ServeCyy;
+import com.cdkj.service.dto.req.XN612129Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
-/** 
- * 修改客服外包
- * @author: zuixian 
- * @since: 2016年10月7日 下午4:06:14 
+/**
+ * 修改产业园
+ * @author: asus 
+ * @since: 2017年6月7日 上午10:21:24 
  * @history:
  */
-public class CD612013 extends AProcessor {
+public class XN612129 extends AProcessor {
 
-    private IServeAO serveAO = SpringContextHolder.getBean(IServeAO.class);
+    private IServeCyyAO serveCyyAO = SpringContextHolder
+        .getBean(IServeCyyAO.class);
 
-    private XN612127Req req = null;
+    private XN612129Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
-        Serve data = ServeConverter.converter(req);
-        int count = serveAO.editServe(data);
+        ServeCyy data = ServeConverter.converter(req);
+        int count = serveCyyAO.editServeCyy(data);
         return new BooleanRes(count > 0 ? true : false);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN612127Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN612129Req.class);
         StringValidater.validateBlank(req.getCode(), req.getName(),
-            req.getQuoteMin(), req.getQuoteMax(), req.getPublisher());
+            req.getQuoteMin(), req.getQuoteMax(), req.getBgArea(),
+            req.getAvailBgArea(), req.getCcArea(), req.getAvailCcArea(),
+            req.getPublisher());
     }
 }
