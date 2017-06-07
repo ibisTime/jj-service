@@ -1,5 +1,6 @@
 package com.cdkj.service.ao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,52 +9,98 @@ import org.springframework.stereotype.Service;
 import com.cdkj.service.ao.ITrainAO;
 import com.cdkj.service.bo.ITrainBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.core.EGeneratePrefix;
+import com.cdkj.service.core.OrderNoGenerater;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Train;
+import com.cdkj.service.dto.req.XN612090Req;
+import com.cdkj.service.dto.req.XN612092Req;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
-
-
-//CHECK ��鲢��ע�� 
 @Service
 public class TrainAOImpl implements ITrainAO {
 
-	@Autowired
-	private ITrainBO trainBO;
+    @Autowired
+    private ITrainBO trainBO;
 
-	@Override
-	public String addTrain(Train data) {
-		return trainBO.saveTrain(data);
-	}
+    @Override
+    public String addTrain(XN612090Req req) {
+        Train data = new Train();
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.TRAIN
+            .getCode());
+        data.setCode(code);
+        data.setName(req.getName());
+        data.setPic(req.getPic());
+        data.setAdvPic(req.getAdvPic());
+        data.setCompanyCode(req.getCompanyCode());
 
-	@Override
-	public int editTrain(Train data) {
-		if (!trainBO.isTrainExist(data.getCode())) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return trainBO.refreshTrain(data);
-	}
+        data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
+        data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
+        data.setQualityCode(req.getQualityCode());
+        data.setLectorNum(StringValidater.toInteger(req.getLectorNum()));
+        data.setMtrainTimes(StringValidater.toInteger(req.getMtrainTimes()));
 
-	@Override
-	public int dropTrain(String code) {
-		if (!trainBO.isTrainExist(code)) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return trainBO.removeTrain(code);
-	}
+        data.setMtrainNum(StringValidater.toInteger(req.getMtrainNum()));
+        data.setResume1(req.getResume1());
+        data.setResume2(req.getResume2());
+        data.setResume3(req.getResume3());
+        data.setCourse(req.getCourse());
 
-	@Override
-	public Paginable<Train> queryTrainPage(int start, int limit,
-			Train condition) {
-		return trainBO.getPaginable(start, limit, condition);
-	}
+        data.setLocation(EBoolean.NO.getCode());
+        data.setOrderNo(EBoolean.NO.getCode());
+        data.setDescription(req.getDescription());
+        data.setStatus(EBoolean.YES.getCode());
+        data.setPublisher(req.getPublisher());
 
-	@Override
-	public List<Train> queryTrainList(Train condition) {
-		return trainBO.queryTrainList(condition);
-	}
+        data.setPublishDatetime(new Date());
+        trainBO.saveTrain(data);
+        return code;
+    }
 
-	@Override
-	public Train getTrain(String code) {
-		return trainBO.getTrain(code);
-	}
+    @Override
+    public void editTrain(XN612092Req req) {
+        Train data = trainBO.getTrain(req.getCode());
+        data.setName(req.getName());
+        data.setPic(req.getPic());
+        data.setAdvPic(req.getAdvPic());
+        data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
+        data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
+
+        data.setLectorNum(StringValidater.toInteger(req.getLectorNum()));
+        data.setMtrainTimes(StringValidater.toInteger(req.getMtrainTimes()));
+        data.setMtrainNum(StringValidater.toInteger(req.getMtrainNum()));
+        data.setResume1(req.getResume1());
+        data.setResume2(req.getResume2());
+
+        data.setResume3(req.getResume3());
+        data.setCourse(req.getCourse());
+        data.setDescription(req.getDescription());
+        data.setPublisher(req.getPublisher());
+        data.setPublishDatetime(new Date());
+        trainBO.refreshTrain(data);
+    }
+
+    @Override
+    public void dropTrain(String code) {
+        if (!trainBO.isTrainExist(code)) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        trainBO.removeTrain(code);
+    }
+
+    @Override
+    public Paginable<Train> queryTrainPage(int start, int limit, Train condition) {
+        return trainBO.getPaginable(start, limit, condition);
+    }
+
+    @Override
+    public List<Train> queryTrainList(Train condition) {
+        return trainBO.queryTrainList(condition);
+    }
+
+    @Override
+    public Train getTrain(String code) {
+        return trainBO.getTrain(code);
+    }
 }

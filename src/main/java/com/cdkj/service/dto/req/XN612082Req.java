@@ -14,6 +14,12 @@ public class XN612082Req {
     // 服务名称 (必填)
     private String name;
 
+    // 缩略图
+    private String pic;
+
+    // 广告图
+    private String advPic;
+
     // 最小报价(必填)
     private String quoteMin;
 
@@ -127,5 +133,21 @@ public class XN612082Req {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getAdvPic() {
+        return advPic;
+    }
+
+    public void setAdvPic(String advPic) {
+        this.advPic = advPic;
     }
 }

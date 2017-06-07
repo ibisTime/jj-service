@@ -6,16 +6,18 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Operate;
+import com.cdkj.service.dto.req.XN612110Req;
+import com.cdkj.service.dto.req.XN612112Req;
 
 @Component
 public interface IOperateAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addOperate(Operate data);
+    public String addOperate(XN612110Req req);
 
-    public int dropOperate(String code);
+    public void dropOperate(String code);
 
-    public int editOperate(Operate data);
+    public void editOperate(XN612112Req req);
 
     public Paginable<Operate> queryOperatePage(int start, int limit,
             Operate condition);

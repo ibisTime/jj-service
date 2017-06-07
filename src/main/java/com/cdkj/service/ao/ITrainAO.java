@@ -6,16 +6,18 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Train;
+import com.cdkj.service.dto.req.XN612090Req;
+import com.cdkj.service.dto.req.XN612092Req;
 
 @Component
 public interface ITrainAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addTrain(Train data);
+    public String addTrain(XN612090Req req);
 
-    public int dropTrain(String code);
+    public void dropTrain(String code);
 
-    public int editTrain(Train data);
+    public void editTrain(XN612092Req req);
 
     public Paginable<Train> queryTrainPage(int start, int limit, Train condition);
 

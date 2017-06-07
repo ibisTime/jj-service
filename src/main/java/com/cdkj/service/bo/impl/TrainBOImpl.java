@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.ITrainBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.ITrainDAO;
 import com.cdkj.service.domain.Train;
 import com.cdkj.service.exception.BizException;
@@ -31,34 +29,22 @@ public class TrainBOImpl extends PaginableBOImpl<Train> implements ITrainBO {
     }
 
     @Override
-    public String saveTrain(Train data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.TRAIN.getCode());
-            data.setCode(code);
-            trainDAO.insert(data);
-        }
-        return code;
+    public void saveTrain(Train data) {
+        trainDAO.insert(data);
     }
 
     @Override
-    public int removeTrain(String code) {
-        int count = 0;
+    public void removeTrain(String code) {
         if (StringUtils.isNotBlank(code)) {
             Train data = new Train();
             data.setCode(code);
-            count = trainDAO.delete(data);
+            trainDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshTrain(Train data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = trainDAO.update(data);
-        }
-        return count;
+    public void refreshTrain(Train data) {
+        trainDAO.update(data);
     }
 
     @Override

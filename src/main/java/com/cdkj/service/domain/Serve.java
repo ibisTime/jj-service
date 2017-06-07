@@ -13,6 +13,10 @@ public class Serve extends ABaseDO {
 
     private String name;
 
+    private String pic;
+
+    private String advPic;
+
     private String companyCode;
 
     private String companyName;
@@ -322,5 +326,21 @@ public class Serve extends ABaseDO {
 
     public void setQualityName(String qualityName) {
         this.qualityName = qualityName;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getAdvPic() {
+        return advPic;
+    }
+
+    public void setAdvPic(String advPic) {
+        this.advPic = advPic;
     }
 }

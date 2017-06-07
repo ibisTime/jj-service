@@ -6,16 +6,18 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Photo;
+import com.cdkj.service.dto.req.XN612080Req;
+import com.cdkj.service.dto.req.XN612082Req;
 
 @Component
 public interface IPhotoAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addPhoto(Photo data);
+    public String addPhoto(XN612080Req req);
 
-    public int dropPhoto(String code);
+    public void dropPhoto(String code);
 
-    public int editPhoto(Photo data);
+    public void editPhoto(XN612082Req req);
 
     public Paginable<Photo> queryPhotoPage(int start, int limit, Photo condition);
 

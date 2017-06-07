@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IPhotoBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IPhotoDAO;
 import com.cdkj.service.domain.Photo;
 import com.cdkj.service.exception.BizException;
@@ -31,34 +29,26 @@ public class PhotoBOImpl extends PaginableBOImpl<Photo> implements IPhotoBO {
     }
 
     @Override
-    public String savePhoto(Photo data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.PHOTO.getCode());
-            data.setCode(code);
-            photoDAO.insert(data);
-        }
-        return code;
+    public void savePhoto(Photo data) {
+        photoDAO.insert(data);
     }
 
     @Override
-    public int removePhoto(String code) {
+    public void removePhoto(String code) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
             Photo data = new Photo();
             data.setCode(code);
             count = photoDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshPhoto(Photo data) {
+    public void refreshPhoto(Photo data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
             count = photoDAO.update(data);
         }
-        return count;
     }
 
     @Override

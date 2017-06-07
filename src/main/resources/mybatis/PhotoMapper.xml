@@ -95,9 +95,6 @@
 		,status
 		,publisher
 		,publish_datetime
-		,dealer
-		,deal_datetime
-		,deal_note
 		)
 		VALUES(
 		#{code}
@@ -119,9 +116,6 @@
 		,#{status}
 		,#{publisher}
 		,#{publishDatetime}
-		,#{dealer}
-		,#{dealDatetime}
-		,#{dealNote}
 		)
 	</insert>
 
@@ -131,7 +125,6 @@
 		name = #{name}
 		,pic = #{pic}
 		,adv_pic = #{advPic}
-		,company_code = #{companyCode}
 		,py_num = #{pyNum}
 		,sys_num = #{sysNum}
 		,is_dz = #{isDz}
@@ -139,16 +132,12 @@
 		,works = #{works}
 		,quote_min = #{quoteMin}
 		,quote_max = #{quoteMax}
-		,quality_code = #{qualityCode}
 		,description = #{description}
 		,location = #{location}
 		,order_no = #{orderNo}
 		,status = #{status}
 		,publisher = #{publisher}
 		,publish_datetime = #{publishDatetime}
-		,dealer = #{dealer}
-		,deal_datetime = #{dealDatetime}
-		,deal_note = #{dealNote}
 		WHERE code = #{code}
 	</update>
 

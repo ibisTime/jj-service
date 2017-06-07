@@ -1,11 +1,9 @@
 package com.cdkj.service.api.impl;
 
-import com.cdkj.service.ao.IServeTrainAO;
+import com.cdkj.service.ao.ITrainAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.ServeTrain;
 import com.cdkj.service.dto.req.XN612090Req;
 import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
@@ -20,25 +18,23 @@ import com.cdkj.service.spring.SpringContextHolder;
  */
 public class XN612090 extends AProcessor {
 
-    private IServeTrainAO serveTrainAO = SpringContextHolder
-        .getBean(IServeTrainAO.class);
+    private ITrainAO trainAO = SpringContextHolder.getBean(ITrainAO.class);
 
     private XN612090Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
-        ServeTrain data = ServeConverter.converter(req);
-        String code = serveTrainAO.addServeTrain(data);
-        return new PKCodeRes(code);
+        return new PKCodeRes(trainAO.addTrain(req));
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN612090Req.class);
-        StringValidater.validateBlank(req.getName(), req.getCompanyCode(),
-            req.getQuoteMin(), req.getQuoteMax(), req.getQualityCode(),
-            req.getLectorNum(), req.getMtrainTimes(), req.getMtrainNum(),
-            req.getResume1(), req.getResume2(), req.getResume3(),
-            req.getCourse(), req.getPublisher());
+        StringValidater.validateBlank(req.getName(), req.getPic(),
+            req.getAdvPic(), req.getCompanyCode(), req.getQuoteMin(),
+            req.getQuoteMax(), req.getQualityCode(), req.getLectorNum(),
+            req.getMtrainTimes(), req.getMtrainNum(), req.getResume1(),
+            req.getResume2(), req.getResume3(), req.getCourse(),
+            req.getPublisher());
     }
 }

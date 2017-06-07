@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.service.bo.IOperateBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
-import com.cdkj.service.core.EGeneratePrefix;
-import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.dao.IOperateDAO;
 import com.cdkj.service.domain.Operate;
 import com.cdkj.service.exception.BizException;
@@ -32,35 +30,22 @@ public class OperateBOImpl extends PaginableBOImpl<Operate> implements
     }
 
     @Override
-    public String saveOperate(Operate data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater
-                .generateM(EGeneratePrefix.OPERATE.getCode());
-            data.setCode(code);
-            operateDAO.insert(data);
-        }
-        return code;
+    public void saveOperate(Operate data) {
+        operateDAO.insert(data);
     }
 
     @Override
-    public int removeOperate(String code) {
-        int count = 0;
+    public void removeOperate(String code) {
         if (StringUtils.isNotBlank(code)) {
             Operate data = new Operate();
             data.setCode(code);
-            count = operateDAO.delete(data);
+            operateDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshOperate(Operate data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = operateDAO.update(data);
-        }
-        return count;
+    public void refreshOperate(Operate data) {
+        operateDAO.update(data);
     }
 
     @Override

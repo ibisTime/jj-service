@@ -11,6 +11,12 @@ public class XN612090Req {
     // 服务名称 (必填)
     private String name;
 
+    // 缩略图
+    private String pic;
+
+    // 广告图
+    private String advPic;
+
     // 公司编号(必填)
     private String companyCode;
 
@@ -160,5 +166,21 @@ public class XN612090Req {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getAdvPic() {
+        return advPic;
+    }
+
+    public void setAdvPic(String advPic) {
+        this.advPic = advPic;
     }
 }
