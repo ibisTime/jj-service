@@ -78,7 +78,7 @@ public class Company extends ABaseDO {
     private String regtime;
 
     // 被关注数量
-    private String gzNum;
+    private Integer gzNum;
 
     // 电话
     private String mobile;
@@ -287,11 +287,11 @@ public class Company extends ABaseDO {
         return regtime;
     }
 
-    public void setGzNum(String gzNum) {
+    public void setGzNum(Integer gzNum) {
         this.gzNum = gzNum;
     }
 
-    public String getGzNum() {
+    public Integer getGzNum() {
         return gzNum;
     }
 

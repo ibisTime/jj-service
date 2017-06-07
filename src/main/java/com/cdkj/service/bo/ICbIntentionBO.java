@@ -4,18 +4,21 @@ import java.util.List;
 
 import com.cdkj.service.bo.base.IPaginableBO;
 import com.cdkj.service.domain.CbIntention;
+import com.cdkj.service.enums.ECbIntentionStatus;
 
 public interface ICbIntentionBO extends IPaginableBO<CbIntention> {
 
     public boolean isCbIntentionExist(String code);
 
-    public String saveCbIntention(CbIntention data);
+    public void saveCbIntention(CbIntention data);
 
-    public int removeCbIntention(String code);
+    public void dropCbIntention(String code);
 
-    public int refreshCbIntention(CbIntention data);
+    public void refreshCbIntention(CbIntention data, ECbIntentionStatus status,
+            String updater, String remark);
 
-    public List<CbIntention> queryCbIntentionList(CbIntention condition);
+    public List<CbIntention> queryCbIntentionList(String positionCode,
+            String resumeCode, String serviceCode);
 
     public CbIntention getCbIntention(String code);
 

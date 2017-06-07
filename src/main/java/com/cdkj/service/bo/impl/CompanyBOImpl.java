@@ -128,4 +128,10 @@ public class CompanyBOImpl extends PaginableBOImpl<Company> implements
         companyDAO.approvel(company);
     }
 
+    @Override
+    public void xgGzNum(Company company, Integer gzNum) {
+        company.setGzNum(gzNum);
+        companyDAO.updateGzNum(company);
+    }
+
 }

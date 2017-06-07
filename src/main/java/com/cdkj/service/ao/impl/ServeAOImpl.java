@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IServeAO;
+import com.cdkj.service.bo.ICbIntentionBO;
 import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IServeArtBO;
 import com.cdkj.service.bo.IServeBO;
@@ -17,6 +18,7 @@ import com.cdkj.service.bo.IServeKfwbBO;
 import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.CbIntention;
 import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeArt;
 import com.cdkj.service.domain.ServeCp;
@@ -47,6 +49,9 @@ public class ServeAOImpl implements IServeAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private ICbIntentionBO cbIntentionBO;
 
     @Autowired
     private ISmsOutBO smsOutBO;
@@ -84,6 +89,11 @@ public class ServeAOImpl implements IServeAO {
             serveCyyBO.removeServeCyy(code);
         } else if (serveKfwbBO.isServeKfwbExist(code)) {
             serveKfwbBO.removeServeKfwb(code);
+        }
+        List<CbIntention> list = cbIntentionBO.queryCbIntentionList(null, null,
+            code);
+        for (CbIntention cbIntention : list) {
+            cbIntentionBO.dropCbIntention(cbIntention.getCode());
         }
     }
 

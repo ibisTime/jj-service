@@ -210,4 +210,11 @@
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
+	
+	<update id="update_gzNum" parameterType="company">
+		UPDATE tcp_company
+		SET
+		gz_num = #{gzNum}
+		WHERE code = #{code}
+	</update>
 </mapper>

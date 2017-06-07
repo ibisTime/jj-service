@@ -11,5 +11,7 @@ public interface ICompanyDAO extends IBaseDAO<Company> {
 
     public int priceRange(Company data);
 
-    public int approvel(Company company);
+    public int approvel(Company data);
+
+    public int updateGzNum(Company data);
 }

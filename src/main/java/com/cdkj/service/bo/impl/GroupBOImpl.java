@@ -65,11 +65,9 @@ public class GroupBOImpl extends PaginableBOImpl<Group> implements IGroupBO {
     }
 
     @Override
-    public void refreshFocusNum(String code, Integer focusNum) {
-        Group data = new Group();
-        data.setCode(code);
-        data.setFocusNum(focusNum);
-        groupDAO.updateFocusNum(data);
+    public void refreshFocusNum(Group group, Integer focusNum) {
+        group.setFocusNum(focusNum);
+        groupDAO.updateFocusNum(group);
     }
 
     @Override

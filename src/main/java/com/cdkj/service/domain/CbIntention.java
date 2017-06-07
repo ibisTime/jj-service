@@ -1,5 +1,7 @@
 package com.cdkj.service.domain;
 
+import java.util.Date;
+
 import com.cdkj.service.dao.base.ABaseDO;
 
 /**
@@ -10,171 +12,171 @@ import com.cdkj.service.dao.base.ABaseDO;
 */
 public class CbIntention extends ABaseDO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// 编号
-	private String code;
+    // 编号
+    private String code;
 
-	// 类型
-	private String type;
+    // 类型
+    private String type;
 
-	// 意向人
-	private String intName;
+    // 意向人
+    private String intName;
 
-	// 联系方式
-	private String intMobile;
+    // 联系方式
+    private String intMobile;
 
-	// 公司编号
-	private String companyCode;
+    // 公司编号
+    private String companyCode;
 
-	// 服务编号
-	private String serviceCode;
+    // 服务编号
+    private String serviceCode;
 
-	// 职位编号
-	private String positionCode;
+    // 职位编号
+    private String positionCode;
 
-	// 简历编号
-	private String resumeCode;
+    // 简历编号
+    private String resumeCode;
 
-	// 意向描述
-	private String cooperationContent;
+    // 意向描述
+    private String hzContent;
 
-	// 提交人
-	private String submitter;
+    // 提交人
+    private String submitter;
 
-	// 提交时间
-	private String submitDatetime;
+    // 提交时间
+    private Date submitDatetime;
 
-	// 状态
-	private String status;
+    // 状态
+    private String status;
 
-	// 最后修改人
-	private String updater;
+    // 最后修改人
+    private String updater;
 
-	// 最后修改时间
-	private String updateDatetime;
+    // 最后修改时间
+    private Date updateDatetime;
 
-	// 备注
-	private String remark;
+    // 备注
+    private String remark;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setIntName(String intName) {
-		this.intName = intName;
-	}
+    public void setIntName(String intName) {
+        this.intName = intName;
+    }
 
-	public String getIntName() {
-		return intName;
-	}
+    public String getIntName() {
+        return intName;
+    }
 
-	public void setIntMobile(String intMobile) {
-		this.intMobile = intMobile;
-	}
+    public void setIntMobile(String intMobile) {
+        this.intMobile = intMobile;
+    }
 
-	public String getIntMobile() {
-		return intMobile;
-	}
+    public String getIntMobile() {
+        return intMobile;
+    }
 
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
-	}
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
 
-	public String getCompanyCode() {
-		return companyCode;
-	}
+    public String getCompanyCode() {
+        return companyCode;
+    }
 
-	public void setServiceCode(String serviceCode) {
-		this.serviceCode = serviceCode;
-	}
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
+    }
 
-	public String getServiceCode() {
-		return serviceCode;
-	}
+    public String getServiceCode() {
+        return serviceCode;
+    }
 
-	public void setPositionCode(String positionCode) {
-		this.positionCode = positionCode;
-	}
+    public void setPositionCode(String positionCode) {
+        this.positionCode = positionCode;
+    }
 
-	public String getPositionCode() {
-		return positionCode;
-	}
+    public String getPositionCode() {
+        return positionCode;
+    }
 
-	public void setResumeCode(String resumeCode) {
-		this.resumeCode = resumeCode;
-	}
+    public void setResumeCode(String resumeCode) {
+        this.resumeCode = resumeCode;
+    }
 
-	public String getResumeCode() {
-		return resumeCode;
-	}
+    public String getResumeCode() {
+        return resumeCode;
+    }
 
-	public void setCooperationContent(String cooperationContent) {
-		this.cooperationContent = cooperationContent;
-	}
+    public void setSubmitter(String submitter) {
+        this.submitter = submitter;
+    }
 
-	public String getCooperationContent() {
-		return cooperationContent;
-	}
+    public String getSubmitter() {
+        return submitter;
+    }
 
-	public void setSubmitter(String submitter) {
-		this.submitter = submitter;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public String getSubmitter() {
-		return submitter;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setSubmitDatetime(String submitDatetime) {
-		this.submitDatetime = submitDatetime;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	public String getSubmitDatetime() {
-		return submitDatetime;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getRemark() {
+        return remark;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    public String getHzContent() {
+        return hzContent;
+    }
 
-	public String getUpdater() {
-		return updater;
-	}
+    public void setHzContent(String hzContent) {
+        this.hzContent = hzContent;
+    }
 
-	public void setUpdateDatetime(String updateDatetime) {
-		this.updateDatetime = updateDatetime;
-	}
+    public Date getSubmitDatetime() {
+        return submitDatetime;
+    }
 
-	public String getUpdateDatetime() {
-		return updateDatetime;
-	}
+    public void setSubmitDatetime(Date submitDatetime) {
+        this.submitDatetime = submitDatetime;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public Date getUpdateDatetime() {
+        return updateDatetime;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public void setUpdateDatetime(Date updateDatetime) {
+        this.updateDatetime = updateDatetime;
+    }
 
 }

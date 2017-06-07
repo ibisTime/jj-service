@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IFocusAO;
+import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IFocusBO;
 import com.cdkj.service.bo.IGroupBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Focus;
 import com.cdkj.service.domain.Group;
 import com.cdkj.service.exception.BizException;
@@ -23,11 +25,16 @@ public class FocusAOImpl implements IFocusAO {
     @Autowired
     private IGroupBO groupBO;
 
+    @Autowired
+    private ICompanyBO companyBO;
+
     @Override
     @Transactional
     public String addFocus(String companyCode, String groupCode, String userId) {
+        Company company = companyBO.getCompany(companyCode);
         Group group = groupBO.getGroup(groupCode);
-        groupBO.refreshFocusNum(groupCode, group.getFocusNum() + 1);
+        groupBO.refreshFocusNum(group, group.getFocusNum() + 1);
+        companyBO.xgGzNum(company, company.getGzNum() + 1);
         return focusBO.saveFocus(companyCode, groupCode, userId);
     }
 
@@ -38,11 +45,13 @@ public class FocusAOImpl implements IFocusAO {
         if (groupCode.equals(focus.getGroupCode())) {
             throw new BizException("xn0000", "您没有对该公司进行换组");
         }
+        Company company = companyBO.getCompany(focus.getCompanyCode());
         Group groupOld = groupBO.getGroup(focus.getGroupCode());
-        groupBO.refreshFocusNum(focus.getGroupCode(),
-            groupOld.getFocusNum() - 1);
+        groupBO.refreshFocusNum(groupOld, groupOld.getFocusNum() - 1);
+        companyBO.xgGzNum(company, company.getGzNum() - 1);
         Group groupNew = groupBO.getGroup(groupCode);
-        groupBO.refreshFocusNum(groupCode, groupNew.getFocusNum() + 1);
+        groupBO.refreshFocusNum(groupNew, groupNew.getFocusNum() + 1);
+        companyBO.xgGzNum(company, company.getGzNum() + 1);
         focusBO.refreshFocus(focus, groupCode);
     }
 
@@ -51,8 +60,10 @@ public class FocusAOImpl implements IFocusAO {
     public void dropFocus(String code) {
         Focus focus = focusBO.getFocus(code);
         Group group = groupBO.getGroup(focus.getGroupCode());
-        groupBO.refreshFocusNum(focus.getGroupCode(), group.getFocusNum() - 1);
+        Company company = companyBO.getCompany(focus.getCompanyCode());
         focusBO.removeFocus(code);
+        groupBO.refreshFocusNum(group, group.getFocusNum() - 1);
+        companyBO.xgGzNum(company, company.getGzNum() - 1);
     }
 
     @Override

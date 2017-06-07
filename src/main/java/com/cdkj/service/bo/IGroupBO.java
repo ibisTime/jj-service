@@ -15,7 +15,7 @@ public interface IGroupBO extends IPaginableBO<Group> {
 
     public void refreshGroup(String code, String name);
 
-    public void refreshFocusNum(String code, Integer focusNum);
+    public void refreshFocusNum(Group group, Integer focusNum);
 
     public List<Group> queryGroupList(Group condition);
 

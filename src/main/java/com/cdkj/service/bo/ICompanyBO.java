@@ -30,4 +30,6 @@ public interface ICompanyBO extends IPaginableBO<Company> {
     public void approvel(Company company, ECompanyStatus status,
             String approveUser, String approveNote);
 
+    public void xgGzNum(Company company, Integer gzNum);
+
 }

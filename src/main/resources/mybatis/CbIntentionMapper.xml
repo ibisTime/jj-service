@@ -11,7 +11,7 @@
 		<result column="service_code" property="serviceCode" />
 		<result column="position_code" property="positionCode" />
 		<result column="resume_code" property="resumeCode" />
-		<result column="cooperation_content" property="cooperationContent" />
+		<result column="hz_content" property="hzContent" />
 		<result column="submitter" property="submitter" />
 		<result column="submit_datetime" property="submitDatetime" />
 		<result column="status" property="status" />
@@ -23,6 +23,27 @@
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
+			<if test="intName != null and intName != '' ">
+				AND t.int_name like "%"#{intName}#"%"
+			</if>
+			<if test="intMobile != null and intMobile != '' ">
+				AND t.int_mobile like "%"#{intMobile}#"%"
+			</if>
+			<if test="serviceCode != null and serviceCode != '' ">
+				AND t.service_code = #{serviceCode}
+			</if>
+			<if test="positionCode != null and positionCode != '' ">
+				AND t.position_code = #{positionCode}
+			</if>
+			<if test="resumeCode != null and resumeCode != '' ">
+				AND t.resume_code = #{resumeCode}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
 			</if>
 		</trim>
 	</sql>
@@ -36,7 +57,7 @@
 		,t.service_code
 		,t.position_code
 		,t.resume_code
-		,t.cooperation_content
+		,t.hz_content
 		,t.submitter
 		,t.submit_datetime
 		,t.status
@@ -70,13 +91,10 @@
 		,service_code
 		,position_code
 		,resume_code
-		,cooperation_content
+		,hz_content
 		,submitter
 		,submit_datetime
 		,status
-		,updater
-		,update_datetime
-		,remark
 		)
 		VALUES(
 		#{code}
@@ -87,30 +105,17 @@
 		,#{serviceCode}
 		,#{positionCode}
 		,#{resumeCode}
-		,#{cooperationContent}
+		,#{hzContent}
 		,#{submitter}
 		,#{submitDatetime}
 		,#{status}
-		,#{updater}
-		,#{updateDatetime}
-		,#{remark}
 		)
 	</insert>
 
 	<update id="update_CbIntention" parameterType="CbIntention">
 		UPDATE tcp_cb_intention
 		SET
-		type = #{type}
-		,int_name = #{intName}
-		,int_mobile = #{intMobile}
-		,company_code = #{companyCode}
-		,service_code = #{serviceCode}
-		,position_code = #{positionCode}
-		,resume_code = #{resumeCode}
-		,cooperation_content = #{cooperationContent}
-		,submitter = #{submitter}
-		,submit_datetime = #{submitDatetime}
-		,status = #{status}
+		status = #{status}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
