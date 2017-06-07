@@ -15,49 +15,67 @@ public class Position extends ABaseDO {
 
     private static final long serialVersionUID = 1L;
 
+    // 编号
     private String code;
 
+    // 名称
     private String name;
 
     // 种类
     private String kind;
 
+    // 省
     private String province;
 
+    // 市
     private String city;
 
     // 区
     private String area;
 
+    // 工作经验
     private String experience;
 
+    // 学历
     private String education;
 
     // 类型(1 全职 2兼职 3实习)
     private String type;
 
+    // 招聘人数
     private Integer jobNum;
 
+    // 月薪
     private String msalary;
 
+    // 职位描述
     private String description;
 
+    // 公司编号
     private String companyCode;
 
+    // UI位置
     private String location;
 
+    // UI顺序
     private Integer orderNo;
 
+    // 状态
     private String status;
 
+    // 发布人
     private String publisher;
 
+    // 发布时间
     private Date publishDatetime;
 
+    // 处理人
     private String dealer;
 
+    // 处理时间
     private Date dealDatetime;
 
+    // 处理备注
     private String dealNote;
 
     // ****************db properties ******************
