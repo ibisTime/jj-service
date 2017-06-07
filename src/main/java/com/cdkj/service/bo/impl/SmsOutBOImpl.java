@@ -19,7 +19,7 @@ public class SmsOutBOImpl implements ISmsOutBO {
             req.setTokenId(tokenId);
             req.setOwnerId(ownerId);
             req.setContent(content);
-            BizConnecter.getBizData("805905", JsonUtils.object2Json(req),
+            BizConnecter.getBizData("001200", JsonUtils.object2Json(req),
                 Object.class);
         } catch (Exception e) {
             logger.error("调用短信发送服务异常");

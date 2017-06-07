@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.ITrainAO;
+import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.ITrainBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
@@ -24,6 +25,9 @@ public class TrainAOImpl implements ITrainAO {
 
     @Autowired
     private ITrainBO trainBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     @Override
     public String addTrain(XN612090Req req) {
@@ -111,6 +115,10 @@ public class TrainAOImpl implements ITrainAO {
         if (EBoolean.NO.getCode().equals(train.getStatus())) {
             throw new BizException("xn0000", "该服务已做违规处理");
         }
+        String publisher = train.getPublisher();
+        smsOutBO.sentContent(publisher, publisher,
+            "尊敬的企业，您所发布的培训服务[" + train.getName() + "]已做违规处理，违规原因[" + dealNote
+                    + "]。");
         trainBO.wgclTrain(train, dealer, dealNote);
     }
 

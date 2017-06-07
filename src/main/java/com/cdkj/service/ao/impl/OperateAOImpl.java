@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IOperateAO;
 import com.cdkj.service.bo.IOperateBO;
+import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
@@ -24,6 +25,9 @@ public class OperateAOImpl implements IOperateAO {
 
     @Autowired
     private IOperateBO operateBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     @Override
     public String addOperate(XN612110Req req) {
@@ -107,6 +111,10 @@ public class OperateAOImpl implements IOperateAO {
         if (EBoolean.NO.getCode().equals(operate.getStatus())) {
             throw new BizException("xn0000", "该服务已做违规处理");
         }
+        String publisher = operate.getPublisher();
+        smsOutBO.sentContent(publisher, publisher,
+            "尊敬的企业，您所发布的培训服务[" + operate.getName() + "]已做违规处理，违规原因[" + dealNote
+                    + "]。");
         operateBO.wgclOperate(operate, dealer, dealNote);
     }
 

@@ -71,29 +71,30 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
     }
 
     @Override
-    public void refreshPositionStatus(String code, String dealer,
+    public void refreshPositionStatus(Position position, String dealer,
             String dealNote) {
-        Position data = new Position();
-        data.setCode(code);
-        data.setStatus(EBoolean.NO.getCode());
-        data.setDealer(dealer);
-        data.setDealNote(dealNote);
-        data.setDealDatetime(new Date());
-        positionDAO.updateStatus(data);
+        position.setStatus(EBoolean.NO.getCode());
+        position.setDealer(dealer);
+        position.setDealNote(dealNote);
+        position.setDealDatetime(new Date());
+        positionDAO.updateStatus(position);
     }
 
     @Override
-    public void refreshPositionHot(String code, String isHot, String orderNo,
-            String dealer) {
-        Position data = new Position();
-        data.setCode(code);
-        data.setLocation(isHot);
-        if (StringUtils.isBlank(orderNo)) {
-            orderNo = "0";
-        }
-        data.setOrderNo(StringValidater.toInteger(orderNo));
-        data.setDealer(dealer);
-        data.setDealDatetime(new Date());
-        positionDAO.updateHot(data);
+    public void refreshPositionHot(Position position, String location,
+            String orderNo, String dealer) {
+        position.setLocation(location);
+        position.setOrderNo(StringValidater.toInteger(orderNo));
+        position.setDealer(dealer);
+        position.setDealDatetime(new Date());
+        positionDAO.updateHot(position);
+    }
+
+    @Override
+    public List<Position> queryPositionList(String location, String orderNo) {
+        Position condition = new Position();
+        condition.setLocation(location);
+        condition.setOrderNo(StringValidater.toInteger(orderNo));
+        return positionDAO.selectList(condition);
     }
 }

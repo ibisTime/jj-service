@@ -3,6 +3,7 @@ package com.cdkj.service.ao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -127,16 +128,21 @@ public class PositionAOImpl implements IPositionAO {
         smsOutBO.sentContent(publisher, publisher,
             "尊敬的企业，您所发布的职位[" + position.getName() + "]已做违规处理，违规原因[" + dealNote
                     + "]。");
-        positionBO.refreshPositionStatus(code, dealer, dealNote);
+        positionBO.refreshPositionStatus(position, dealer, dealNote);
     }
 
     @Override
-    public void editPositionHot(String code, String isHot, String orderNo,
+    public void editPositionHot(String code, String location, String orderNo,
             String dealer) {
-        if (!positionBO.isPositionExist(code)) {
-            throw new BizException("xn0000", "职位不存在");
+        Position position = positionBO.getPosition(code);
+        if (!EBoolean.NO.getCode().equals(orderNo)) {
+            List<Position> positionList = positionBO.queryPositionList(
+                location, orderNo);
+            if (CollectionUtils.isNotEmpty(positionList)) {
+                throw new BizException("xn0000", "顺序重复");
+            }
         }
-        positionBO.refreshPositionHot(code, isHot, orderNo, dealer);
+        positionBO.refreshPositionHot(position, location, orderNo, dealer);
     }
 
     @Override
@@ -155,7 +161,7 @@ public class PositionAOImpl implements IPositionAO {
         } else {
             location++;
         }
-        positionBO.refreshPositionHot(data.getCode(), null,
-            String.valueOf(location), data.getDealer());
+        positionBO.refreshPositionHot(data, null, String.valueOf(location),
+            data.getDealer());
     }
 }

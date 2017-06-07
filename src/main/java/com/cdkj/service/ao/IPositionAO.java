@@ -18,7 +18,7 @@ public interface IPositionAO {
 
     public void editPositionStatus(String code, String dealer, String dealNote);
 
-    public void editPositionHot(String code, String isHot, String orderNo,
+    public void editPositionHot(String code, String location, String orderNo,
             String dealer);
 
     public void editPositionHotLocation(String code, String action);

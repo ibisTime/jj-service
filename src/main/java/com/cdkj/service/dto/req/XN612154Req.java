@@ -11,7 +11,10 @@ public class XN612154Req {
     // 职位编号(必填)
     private String code;
 
-    // 序号(选填)
+    // UI位置
+    private String location;
+
+    // 序号(必填)
     private String orderNo;
 
     // 处理人(必填)
@@ -39,5 +42,13 @@ public class XN612154Req {
 
     public void setDealer(String dealer) {
         this.dealer = dealer;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

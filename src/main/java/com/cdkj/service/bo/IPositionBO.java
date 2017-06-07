@@ -15,14 +15,16 @@ public interface IPositionBO extends IPaginableBO<Position> {
 
     public void refreshPosition(Position data);
 
-    public void refreshPositionStatus(String code, String dealer,
+    public void refreshPositionStatus(Position position, String dealer,
             String dealNote);
 
-    public void refreshPositionHot(String code, String isHot, String orderNo,
-            String dealer);
+    public void refreshPositionHot(Position position, String location,
+            String orderNo, String dealer);
 
     public List<Position> queryPositionList(Position condition);
 
     public Position getPosition(String code);
+
+    public List<Position> queryPositionList(String location, String orderNo);
 
 }

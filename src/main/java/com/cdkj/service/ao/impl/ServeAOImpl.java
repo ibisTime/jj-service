@@ -140,6 +140,9 @@ public class ServeAOImpl implements IServeAO {
     @Override
     public void editServeStatus(String code, String dealer, String dealNote) {
         Serve serve = serveBO.getServe(code);
+        if (EBoolean.NO.getCode().equals(serve.getStatus())) {
+            throw new BizException("xn0000", "该服务已做违规处理");
+        }
         String publisher = serve.getPublisher();
         smsOutBO.sentContent(publisher, publisher,
             "尊敬的企业，您所发布的服务[" + serve.getName() + "]已做违规处理，违规原因[" + dealNote
