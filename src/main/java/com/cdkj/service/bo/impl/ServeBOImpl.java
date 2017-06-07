@@ -33,38 +33,53 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
     }
 
     @Override
-    public String saveServe(Serve data) {
-        String code = null;
-        if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.FW.getCode());
-            data.setCode(code);
-            data.setStatus(EBoolean.YES.getCode());
-            data.setIsHot(EBoolean.NO.getCode());
-            data.setPublishDatetime(new Date());
-            serveDAO.insert(data);
-        }
+    public String saveServe(String name, String pic, String advPic,
+            String companyCode, Long quoteMin, Long quoteMax,
+            String qualityCode, String description, String publisher) {
+        Serve data = new Serve();
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.FW.getCode());
+        data.setCode(code);
+        data.setName(name);
+        data.setPic(pic);
+        data.setAdvPic(advPic);
+        data.setCompanyCode(companyCode);
+
+        data.setQuoteMin(quoteMin);
+        data.setQuoteMax(quoteMax);
+        data.setQualityCode(qualityCode);
+        data.setLocation(EBoolean.NO.getCode());
+        data.setDescription(description);
+
+        data.setPublisher(publisher);
+        data.setStatus(EBoolean.YES.getCode());
+        data.setPublishDatetime(new Date());
+        serveDAO.insert(data);
         return code;
     }
 
     @Override
-    public int removeServe(String code) {
-        int count = 0;
+    public void removeServe(String code) {
         if (StringUtils.isNotBlank(code)) {
             Serve data = new Serve();
             data.setCode(code);
-            count = serveDAO.delete(data);
+            serveDAO.delete(data);
         }
-        return count;
     }
 
     @Override
-    public int refreshServe(Serve data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            data.setPublishDatetime(new Date());
-            count = serveDAO.update(data);
-        }
-        return count;
+    public void refreshServe(Serve serve, String name, String pic,
+            String advPic, Long quoteMin, Long quoteMax, String description,
+            String publisher) {
+        serve.setName(name);
+        serve.setPic(pic);
+        serve.setAdvPic(advPic);
+        serve.setQuoteMin(quoteMin);
+        serve.setQuoteMax(quoteMax);
+
+        serve.setDescription(description);
+        serve.setPublisher(publisher);
+        serve.setPublishDatetime(new Date());
+        serveDAO.update(serve);
     }
 
     @Override

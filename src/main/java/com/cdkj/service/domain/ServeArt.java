@@ -30,8 +30,6 @@ public class ServeArt extends ABaseDO {
 
     private String works;
 
-    private Serve serve;
-
     public String getServeCode() {
         return serveCode;
     }
@@ -128,11 +126,4 @@ public class ServeArt extends ABaseDO {
         this.works = works;
     }
 
-    public Serve getServe() {
-        return serve;
-    }
-
-    public void setServe(Serve serve) {
-        this.serve = serve;
-    }
 }

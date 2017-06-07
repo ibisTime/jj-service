@@ -10,7 +10,11 @@ import com.cdkj.service.ao.IServeCyyAO;
 import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeCyyBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeCyy;
+import com.cdkj.service.dto.req.XN612128Req;
+import com.cdkj.service.dto.req.XN612129Req;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -24,29 +28,57 @@ public class ServeCyyAOImpl implements IServeCyyAO {
 
     @Transactional
     @Override
-    public String addServeCyy(ServeCyy data) {
-        String code = serveBO.saveServe(data.getServe());
+    public String addServeCyy(XN612128Req req) {
+        String code = serveBO.saveServe(req.getName(), req.getPic(),
+            req.getAdvPic(), req.getCompanyCode(),
+            StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
+            req.getDescription(), req.getPublisher());
+
+        ServeCyy data = new ServeCyy();
         data.setServeCode(code);
+        data.setBgArea(StringValidater.toLong(req.getBgArea()));
+        data.setAvailBgArea(StringValidater.toLong(req.getAvailBgArea()));
+        data.setCcArea(StringValidater.toLong(req.getCcArea()));
+        data.setAvailCcArea(StringValidater.toLong(req.getAvailCcArea()));
+
+        data.setZzfw(req.getZzfw());
+        data.setIntroduce(req.getIntroduce());
+        data.setYhPolicy(req.getYhPolicy());
+        data.setPic1(req.getPic1());
+        data.setPic2(req.getPic2());
         serveCyyBO.saveServeCyy(data);
         return code;
     }
 
     @Transactional
     @Override
-    public int editServeCyy(ServeCyy data) {
-        if (!serveCyyBO.isServeCyyExist(data.getServeCode())) {
-            throw new BizException("xn0000", "该编号不存在");
-        }
-        serveBO.refreshServe(data.getServe());
-        return serveCyyBO.refreshServeCyy(data);
+    public void editServeCyy(XN612129Req req) {
+        Serve serve = serveBO.getServe(req.getCode());
+        serveBO.refreshServe(serve, req.getName(), req.getPic(),
+            req.getAdvPic(), StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getDescription(),
+            req.getPublisher());
+        ServeCyy data = new ServeCyy();
+        data.setServeCode(req.getCode());
+        data.setBgArea(StringValidater.toLong(req.getBgArea()));
+        data.setAvailBgArea(StringValidater.toLong(req.getAvailBgArea()));
+        data.setCcArea(StringValidater.toLong(req.getCcArea()));
+        data.setAvailCcArea(StringValidater.toLong(req.getAvailCcArea()));
+        data.setZzfw(req.getZzfw());
+        data.setIntroduce(req.getIntroduce());
+        data.setYhPolicy(req.getYhPolicy());
+        data.setPic1(req.getPic1());
+        data.setPic2(req.getPic2());
+        serveCyyBO.refreshServeCyy(data);
     }
 
     @Override
-    public int dropServeCyy(String code) {
+    public void dropServeCyy(String code) {
         if (!serveCyyBO.isServeCyyExist(code)) {
             throw new BizException("xn0000", "该编号不存在");
         }
-        return serveCyyBO.removeServeCyy(code);
+        serveCyyBO.removeServeCyy(code);
     }
 
     @Override

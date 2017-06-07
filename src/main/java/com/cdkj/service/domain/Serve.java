@@ -5,46 +5,71 @@ import java.util.Date;
 import com.cdkj.service.dao.base.ABaseDO;
 import com.cdkj.service.dto.res.XN806010Res;
 
+/**
+ * 服务
+ * @author: asus 
+ * @since: 2017年6月7日 下午1:00:46 
+ * @history:
+ */
 public class Serve extends ABaseDO {
 
     private static final long serialVersionUID = 1L;
 
+    // 编号
     private String code;
 
+    // 名称
     private String name;
 
+    // 缩略图
     private String pic;
 
+    // 广告图
     private String advPic;
 
+    // 公司编号
     private String companyCode;
 
+    // 公司名称
     private String companyName;
 
+    // 报价最小值
     private Long quoteMin;
 
+    // 报价最大值
     private Long quoteMax;
 
+    // 资质编号
     private String qualityCode;
 
+    // 描述
     private String description;
 
-    private String isHot;
+    // UI位置
+    private String location;
 
-    private int orderNo;
+    // UI顺序
+    private Integer orderNo;
 
+    // 状态
     private String status;
 
+    // 发布人
     private String publisher;
 
+    // 发布时间
     private Date publishDatetime;
 
+    // 处理人
     private String dealer;
 
+    // 处理时间
     private Date dealDatetime;
 
+    // 处理备注
     private String dealNote;
 
+    //
     // ****************db properties ******************
     private Date publishDatetimeStart;
 
@@ -73,12 +98,6 @@ public class Serve extends ABaseDO {
     private ServeCyy serveCyy;
 
     private ServeKfwb serveKfwb;
-
-    private ServePhoto servePhoto;
-
-    private ServeShop serveShop;
-
-    private ServeTrain serveTrain;
 
     public String getCode() {
         return code;
@@ -118,14 +137,6 @@ public class Serve extends ABaseDO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getIsHot() {
-        return isHot;
-    }
-
-    public void setIsHot(String isHot) {
-        this.isHot = isHot;
     }
 
     public String getStatus() {
@@ -174,14 +185,6 @@ public class Serve extends ABaseDO {
 
     public void setQuoteMax(Long quoteMax) {
         this.quoteMax = quoteMax;
-    }
-
-    public int getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(int orderNo) {
-        this.orderNo = orderNo;
     }
 
     public Date getPublishDatetime() {
@@ -288,30 +291,6 @@ public class Serve extends ABaseDO {
         this.serveKfwb = serveKfwb;
     }
 
-    public ServePhoto getServePhoto() {
-        return servePhoto;
-    }
-
-    public void setServePhoto(ServePhoto servePhoto) {
-        this.servePhoto = servePhoto;
-    }
-
-    public ServeShop getServeShop() {
-        return serveShop;
-    }
-
-    public void setServeShop(ServeShop serveShop) {
-        this.serveShop = serveShop;
-    }
-
-    public ServeTrain getServeTrain() {
-        return serveTrain;
-    }
-
-    public void setServeTrain(ServeTrain serveTrain) {
-        this.serveTrain = serveTrain;
-    }
-
     public String getCompanyName() {
         return companyName;
     }
@@ -342,5 +321,21 @@ public class Serve extends ABaseDO {
 
     public void setAdvPic(String advPic) {
         this.advPic = advPic;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public Integer getOrderNo() {
+        return orderNo;
     }
 }

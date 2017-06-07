@@ -9,11 +9,15 @@ public interface IServeBO extends IPaginableBO<Serve> {
 
     public boolean isServeExist(String code);
 
-    public String saveServe(Serve data);
+    public String saveServe(String name, String pic, String advPic,
+            String companyCode, Long quoteMin, Long quoteMax,
+            String qualityCode, String description, String publisher);
 
-    public int removeServe(String code);
+    public void removeServe(String code);
 
-    public int refreshServe(Serve data);
+    public void refreshServe(Serve serve, String name, String pic,
+            String advPic, Long quoteMin, Long quoteMax, String description,
+            String publisher);
 
     public int refreshServeStatus(String code, String dealer, String dealNote);
 

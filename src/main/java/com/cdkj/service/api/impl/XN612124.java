@@ -2,10 +2,8 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IServeCpAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.ServeCp;
 import com.cdkj.service.dto.req.XN612124Req;
 import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
@@ -27,9 +25,7 @@ public class XN612124 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        ServeCp data = ServeConverter.converter(req);
-        String code = serveCpAO.addServeCp(data);
-        return new PKCodeRes(code);
+        return new PKCodeRes(serveCpAO.addServeCp(req));
     }
 
     @Override

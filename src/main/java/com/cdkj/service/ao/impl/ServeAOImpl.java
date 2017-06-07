@@ -15,19 +15,12 @@ import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeCpBO;
 import com.cdkj.service.bo.IServeCyyBO;
 import com.cdkj.service.bo.IServeKfwbBO;
-import com.cdkj.service.bo.IServePhotoBO;
-import com.cdkj.service.bo.IServeShopBO;
-import com.cdkj.service.bo.IServeTrainBO;
 import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Serve;
-import com.cdkj.service.domain.ServeArt;
-import com.cdkj.service.domain.ServeCp;
-import com.cdkj.service.domain.ServeCyy;
-import com.cdkj.service.domain.ServeKfwb;
-import com.cdkj.service.domain.ServePhoto;
-import com.cdkj.service.domain.ServeShop;
-import com.cdkj.service.domain.ServeTrain;
+import com.cdkj.service.dto.req.XN612126Req;
+import com.cdkj.service.dto.req.XN612127Req;
 import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
@@ -50,41 +43,35 @@ public class ServeAOImpl implements IServeAO {
     private IServeKfwbBO serveKfwbBO;
 
     @Autowired
-    private IServePhotoBO servePhotoBO;
-
-    @Autowired
-    private IServeShopBO serveShopBO;
-
-    @Autowired
-    private IServeTrainBO serveTrainBO;
-
-    @Autowired
     private ICompanyBO companyBO;
 
     @Autowired
     private ISmsOutBO smsOutBO;
 
     @Override
-    public String addServe(Serve data) {
-        return serveBO.saveServe(data);
+    public String addServe(XN612126Req req) {
+        return serveBO.saveServe(req.getName(), req.getPic(), req.getAdvPic(),
+            req.getCompanyCode(), StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
+            req.getDescription(), req.getPublisher());
     }
 
     @Override
-    public int editServe(Serve data) {
-        if (!serveBO.isServeExist(data.getCode())) {
-            throw new BizException("xn0000", "服务不存在");
-        }
-        return serveBO.refreshServe(data);
+    public void editServe(XN612127Req req) {
+        Serve serve = serveBO.getServe(req.getCode());
+        serveBO.refreshServe(serve, req.getName(), req.getPic(),
+            req.getAdvPic(), StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getDescription(),
+            req.getPublisher());
     }
 
     @Transactional
     @Override
-    public int dropServe(String code) {
-        int count = 0;
+    public void dropServe(String code) {
         if (!serveBO.isServeExist(code)) {
             throw new BizException("xn0000", "服务不存在");
         }
-        count = serveBO.removeServe(code);
+        serveBO.removeServe(code);
         // 扫描各子表，若存在该服务则删除
         if (serveArtBO.isServeArtExist(code)) {
             serveArtBO.removeServeArt(code);
@@ -94,14 +81,7 @@ public class ServeAOImpl implements IServeAO {
             serveCyyBO.removeServeCyy(code);
         } else if (serveKfwbBO.isServeKfwbExist(code)) {
             serveKfwbBO.removeServeKfwb(code);
-        } else if (servePhotoBO.isServePhotoExist(code)) {
-            servePhotoBO.removeServePhoto(code);
-        } else if (serveShopBO.isServeShopExist(code)) {
-            serveShopBO.removeServeShop(code);
-        } else if (serveTrainBO.isServeTrainExist(code)) {
-            serveTrainBO.removeServeTrain(code);
         }
-        return count;
     }
 
     @Override
@@ -116,42 +96,24 @@ public class ServeAOImpl implements IServeAO {
 
     // 添加服务详情信息
     private void addServeExt(Serve data) {
-        switch (data.getType()) {
-            case "1":
-                ServeTrain serveTrain = serveTrainBO.getServeTrain(data
-                    .getCode());
-                data.setServeTrain(serveTrain);
-                break;
-            case "2":
-                ServePhoto servePhoto = servePhotoBO.getServePhoto(data
-                    .getCode());
-                data.setServePhoto(servePhoto);
-                break;
-            case "3":
-                ServeArt serveArt = serveArtBO.getServeArt(data.getCode());
-                data.setServeArt(serveArt);
-                break;
-            case "4":
-                ServeShop serveShop = serveShopBO.getServeShop(data.getCode());
-                data.setServeShop(serveShop);
-                break;
-            case "5":
-                ServeKfwb serveKfwb = serveKfwbBO.getServeKfwb(data.getCode());
-                data.setServeKfwb(serveKfwb);
-                break;
-            case "6":
-                ServeCp serveCp = serveCpBO.getServeCp(data.getCode());
-                data.setServeCp(serveCp);
-                break;
-            case "7":
-                break;
-            case "8":
-                ServeCyy serveCyy = serveCyyBO.getServeCyy(data.getCode());
-                data.setServeCyy(serveCyy);
-                break;
-            default:
-                throw new BizException("xn0000", "服务类型填写错误");
-        }
+        /*
+         * switch (data.getType()) { case "1": ServeTrain serveTrain =
+         * serveTrainBO.getServeTrain(data .getCode());
+         * data.setServeTrain(serveTrain); break; case "2": ServePhoto
+         * servePhoto = servePhotoBO.getServePhoto(data .getCode());
+         * data.setServePhoto(servePhoto); break; case "3": ServeArt serveArt =
+         * serveArtBO.getServeArt(data.getCode()); data.setServeArt(serveArt);
+         * break; case "4": ServeShop serveShop =
+         * serveShopBO.getServeShop(data.getCode());
+         * data.setServeShop(serveShop); break; case "5": ServeKfwb serveKfwb =
+         * serveKfwbBO.getServeKfwb(data.getCode());
+         * data.setServeKfwb(serveKfwb); break; case "6": ServeCp serveCp =
+         * serveCpBO.getServeCp(data.getCode()); data.setServeCp(serveCp);
+         * break; case "7": break; case "8": ServeCyy serveCyy =
+         * serveCyyBO.getServeCyy(data.getCode()); data.setServeCyy(serveCyy);
+         * break; default: throw new BizException("xn0000", "服务类型填写错误");
+         */
+        // }
     }
 
     @Override
@@ -167,32 +129,32 @@ public class ServeAOImpl implements IServeAO {
     }
 
     @Override
-    public int editServeStatus(String code, String dealer, String dealNote) {
+    public void editServeStatus(String code, String dealer, String dealNote) {
         Serve serve = serveBO.getServe(code);
         String publisher = serve.getPublisher();
         smsOutBO.sentContent(publisher, publisher,
             "尊敬的企业，您所发布的服务[" + serve.getName() + "]已做违规处理，违规原因[" + dealNote
                     + "]。");
-        return serveBO.refreshServeStatus(code, dealer, dealNote);
+        serveBO.refreshServeStatus(code, dealer, dealNote);
     }
 
     @Override
-    public int editServeHot(String code, String isHot, String orderNo,
+    public void editServeHot(String code, String isHot, String orderNo,
             String dealer) {
         Serve data = new Serve();
         data.setCode(code);
-        data.setIsHot(isHot);
+        data.setLocation(isHot);
         if (StringUtils.isNotBlank(orderNo)) {
             data.setOrderNo(Integer.valueOf(orderNo));
         } else {
             data.setOrderNo(0);
         }
         data.setDealer(dealer);
-        return serveBO.refreshServeHot(data);
+        serveBO.refreshServeHot(data);
     }
 
     @Override
-    public int editServeHotLocation(String code, String action) {
+    public void editServeHotLocation(String code, String action) {
         Serve data = serveBO.getServe(code);
         Integer location = data.getOrderNo();
         if (null == location) {
@@ -208,6 +170,6 @@ public class ServeAOImpl implements IServeAO {
             location++;
         }
         data.setOrderNo(location);
-        return serveBO.refreshServeHot(data);
+        serveBO.refreshServeHot(data);
     }
 }

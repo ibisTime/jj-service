@@ -2,10 +2,8 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IServeCyyAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.ServeCyy;
 import com.cdkj.service.dto.req.XN612128Req;
 import com.cdkj.service.dto.res.PKCodeRes;
 import com.cdkj.service.exception.BizException;
@@ -27,17 +25,16 @@ public class XN612128 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        ServeCyy data = ServeConverter.converter(req);
-        String code = serveCyyAO.addServeCyy(data);
-        return new PKCodeRes(code);
+        return new PKCodeRes(serveCyyAO.addServeCyy(req));
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN612128Req.class);
-        StringValidater.validateBlank(req.getName(), req.getCompanyCode(),
-            req.getQuoteMin(), req.getQuoteMax(), req.getQualityCode(),
-            req.getBgArea(), req.getAvailBgArea(), req.getCcArea(),
-            req.getAvailCcArea(), req.getPublisher());
+        StringValidater.validateBlank(req.getName(), req.getPic(),
+            req.getAdvPic(), req.getCompanyCode(), req.getQuoteMin(),
+            req.getQuoteMax(), req.getQualityCode(), req.getBgArea(),
+            req.getAvailBgArea(), req.getCcArea(), req.getAvailCcArea(),
+            req.getPublisher());
     }
 }

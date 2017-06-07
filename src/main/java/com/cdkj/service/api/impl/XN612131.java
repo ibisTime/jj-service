@@ -24,9 +24,9 @@ public class XN612131 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        int count = serveAO.editServeStatus(req.getCode(), req.getDealer(),
+        serveAO.editServeStatus(req.getCode(), req.getDealer(),
             req.getDealNote());
-        return new BooleanRes(count > 0 ? true : false);
+        return new BooleanRes(true);
     }
 
     @Override

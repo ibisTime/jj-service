@@ -2,10 +2,8 @@ package com.cdkj.service.api.impl;
 
 import com.cdkj.service.ao.IServeKfwbAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.ServeConverter;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
-import com.cdkj.service.domain.ServeKfwb;
 import com.cdkj.service.dto.req.XN612123Req;
 import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
@@ -27,17 +25,16 @@ public class XN612123 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        ServeKfwb data = ServeConverter.converter(req);
-        int count = serveKfwbAO.editServeKfwb(data);
-        return new BooleanRes(count > 0 ? true : false);
+        serveKfwbAO.editServeKfwb(req);
+        return new BooleanRes(true);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN612123Req.class);
         StringValidater.validateBlank(req.getCode(), req.getName(),
-            req.getQuoteMin(), req.getQuoteMax(), req.getKfNum(),
-            req.getMtradeAmount(), req.getBusiness(), req.getFeeMode(),
-            req.getPublisher());
+            req.getPic(), req.getAdvPic(), req.getQuoteMin(),
+            req.getQuoteMax(), req.getKfNum(), req.getMtradeAmount(),
+            req.getBusiness(), req.getFeeMode(), req.getPublisher());
     }
 }

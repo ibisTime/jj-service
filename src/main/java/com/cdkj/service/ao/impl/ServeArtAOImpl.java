@@ -10,7 +10,11 @@ import com.cdkj.service.ao.IServeArtAO;
 import com.cdkj.service.bo.IServeArtBO;
 import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeArt;
+import com.cdkj.service.dto.req.XN612120Req;
+import com.cdkj.service.dto.req.XN612121Req;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -24,20 +28,53 @@ public class ServeArtAOImpl implements IServeArtAO {
 
     @Transactional
     @Override
-    public String addServeArt(ServeArt data) {
-        String code = serveBO.saveServe(data.getServe());
+    public String addServeArt(XN612120Req req) {
+        String code = serveBO.saveServe(req.getName(), req.getPic(),
+            req.getAdvPic(), req.getCompanyCode(),
+            StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
+            req.getDescription(), req.getPublisher());
+        ServeArt data = new ServeArt();
         data.setServeCode(code);
+        data.setSclm(req.getSclm());
+        data.setHomeDays(StringValidater.toInteger(req.getHomeDays()));
+        data.setHomePrice(StringValidater.toLong(req.getHomePrice()));
+        data.setDetailDays(StringValidater.toInteger(req.getDetailDays()));
+
+        data.setDetailPrice(StringValidater.toLong(req.getDetailPrice()));
+        data.setBannerDays(StringValidater.toInteger(req.getBannerDays()));
+        data.setBannerPrice(StringValidater.toLong(req.getBannerPrice()));
+        data.setAllDays(StringValidater.toInteger(req.getAllDays()));
+        data.setAllPrice(StringValidater.toLong(req.getAllPrice()));
+
+        data.setWorks(req.getWorks());
+        data.setDesignNum(StringValidater.toInteger(req.getDesignNum()));
         serveArtBO.saveServeArt(data);
         return code;
     }
 
     @Transactional
     @Override
-    public int editServeArt(ServeArt data) {
-        if (!serveArtBO.isServeArtExist(data.getServeCode())) {
-            throw new BizException("xn0000", "该编号不存在");
-        }
-        serveBO.refreshServe(data.getServe());
+    public int editServeArt(XN612121Req req) {
+        Serve serve = serveBO.getServe(req.getCode());
+        serveBO.refreshServe(serve, req.getName(), req.getPic(),
+            req.getAdvPic(), StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getDescription(),
+            req.getPublisher());
+        ServeArt data = serveArtBO.getServeArt(req.getCode());
+        data.setDesignNum(StringValidater.toInteger(req.getDesignNum()));
+        data.setSclm(req.getSclm());
+        data.setHomeDays(StringValidater.toInteger(req.getHomeDays()));
+        data.setHomePrice(StringValidater.toLong(req.getHomePrice()));
+
+        data.setDetailDays(StringValidater.toInteger(req.getDetailDays()));
+        data.setDetailPrice(StringValidater.toLong(req.getDetailPrice()));
+        data.setBannerDays(StringValidater.toInteger(req.getBannerDays()));
+        data.setBannerPrice(StringValidater.toLong(req.getBannerPrice()));
+        data.setAllDays(StringValidater.toInteger(req.getAllDays()));
+
+        data.setAllPrice(StringValidater.toLong(req.getAllPrice()));
+        data.setWorks(req.getWorks());
         return serveArtBO.refreshServeArt(data);
     }
 

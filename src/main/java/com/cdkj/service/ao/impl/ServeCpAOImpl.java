@@ -10,7 +10,11 @@ import com.cdkj.service.ao.IServeCpAO;
 import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeCpBO;
 import com.cdkj.service.bo.base.Paginable;
+import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeCp;
+import com.cdkj.service.dto.req.XN612124Req;
+import com.cdkj.service.dto.req.XN612125Req;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -24,29 +28,45 @@ public class ServeCpAOImpl implements IServeCpAO {
 
     @Transactional
     @Override
-    public String addServeCp(ServeCp data) {
-        String code = serveBO.saveServe(data.getServe());
+    public String addServeCp(XN612124Req req) {
+        String code = serveBO.saveServe(req.getName(), req.getPic(),
+            req.getAdvPic(), req.getCompanyCode(),
+            StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
+            req.getDescription(), req.getPublisher());
+
+        ServeCp data = new ServeCp();
         data.setServeCode(code);
+        data.setCkNum(StringValidater.toInteger(req.getCkNum()));
+        data.setCkArea(req.getCkArea());
+        data.setGoodsKind(req.getGoodsKind());
+        data.setDsendNum(StringValidater.toInteger(req.getDsendNum()));
         serveCpBO.saveServeCp(data);
         return code;
     }
 
     @Transactional
     @Override
-    public int editServeCp(ServeCp data) {
-        if (!serveCpBO.isServeCpExist(data.getServeCode())) {
-            throw new BizException("xn0000", "改编号不存在");
-        }
-        serveBO.refreshServe(data.getServe());
-        return serveCpBO.refreshServeCp(data);
+    public void editServeCp(XN612125Req req) {
+        Serve serve = serveBO.getServe(req.getCode());
+        serveBO.refreshServe(serve, req.getName(), req.getPic(),
+            req.getAdvPic(), StringValidater.toLong(req.getQuoteMin()),
+            StringValidater.toLong(req.getQuoteMax()), req.getDescription(),
+            req.getPublisher());
+        ServeCp data = serveCpBO.getServeCp(req.getCode());
+        data.setCkNum(StringValidater.toInteger(req.getCkNum()));
+        data.setCkArea(req.getCkArea());
+        data.setGoodsKind(req.getGoodsKind());
+        data.setDsendNum(StringValidater.toInteger(req.getDsendNum()));
+        serveCpBO.refreshServeCp(data);
     }
 
     @Override
-    public int dropServeCp(String code) {
+    public void dropServeCp(String code) {
         if (!serveCpBO.isServeCpExist(code)) {
             throw new BizException("xn0000", "该编号不存在");
         }
-        return serveCpBO.removeServeCp(code);
+        serveCpBO.removeServeCp(code);
     }
 
     @Override

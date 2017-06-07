@@ -16,8 +16,6 @@ public class ServeKfwb extends ABaseDO {
 
     private String feeMode;
 
-    private Serve serve;
-
     public String getServeCode() {
         return serveCode;
     }

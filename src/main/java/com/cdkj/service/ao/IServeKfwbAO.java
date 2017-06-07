@@ -4,15 +4,17 @@ import java.util.List;
 
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.ServeKfwb;
+import com.cdkj.service.dto.req.XN612122Req;
+import com.cdkj.service.dto.req.XN612123Req;
 
 public interface IServeKfwbAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addServeKfwb(ServeKfwb data);
+    public String addServeKfwb(XN612122Req req);
 
-    public int dropServeKfwb(String code);
+    public void dropServeKfwb(String code);
 
-    public int editServeKfwb(ServeKfwb data);
+    public void editServeKfwb(XN612123Req req);
 
     public Paginable<ServeKfwb> queryServeKfwbPage(int start, int limit,
             ServeKfwb condition);
