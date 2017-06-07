@@ -19,12 +19,15 @@ public interface IServeBO extends IPaginableBO<Serve> {
             String advPic, Long quoteMin, Long quoteMax, String description,
             String publisher);
 
-    public int refreshServeStatus(String code, String dealer, String dealNote);
+    public void refreshServeStatus(Serve serve, String dealer, String dealNote);
 
-    public int refreshServeHot(Serve data);
+    public void refreshLocation(Serve data, String location, String orderNo,
+            String dealer);
 
     public List<Serve> queryServeList(Serve condition);
 
     public Serve getServe(String code);
+
+    public List<Serve> queryServeList(String location, String orderNo);
 
 }

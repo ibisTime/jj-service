@@ -3,7 +3,6 @@ package com.cdkj.service.ao.impl;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +18,10 @@ import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Serve;
+import com.cdkj.service.domain.ServeArt;
+import com.cdkj.service.domain.ServeCp;
+import com.cdkj.service.domain.ServeCyy;
+import com.cdkj.service.domain.ServeKfwb;
 import com.cdkj.service.dto.req.XN612126Req;
 import com.cdkj.service.dto.req.XN612127Req;
 import com.cdkj.service.enums.EBoolean;
@@ -89,31 +92,37 @@ public class ServeAOImpl implements IServeAO {
         Paginable<Serve> page = serveBO.getPaginable(start, limit, condition);
         List<Serve> list = page.getList();
         if (CollectionUtils.isNotEmpty(list)) {
-
+            for (Serve serve : list) {
+                this.addServeExt(serve);
+            }
         }
         return page;
     }
 
     // 添加服务详情信息
     private void addServeExt(Serve data) {
-        /*
-         * switch (data.getType()) { case "1": ServeTrain serveTrain =
-         * serveTrainBO.getServeTrain(data .getCode());
-         * data.setServeTrain(serveTrain); break; case "2": ServePhoto
-         * servePhoto = servePhotoBO.getServePhoto(data .getCode());
-         * data.setServePhoto(servePhoto); break; case "3": ServeArt serveArt =
-         * serveArtBO.getServeArt(data.getCode()); data.setServeArt(serveArt);
-         * break; case "4": ServeShop serveShop =
-         * serveShopBO.getServeShop(data.getCode());
-         * data.setServeShop(serveShop); break; case "5": ServeKfwb serveKfwb =
-         * serveKfwbBO.getServeKfwb(data.getCode());
-         * data.setServeKfwb(serveKfwb); break; case "6": ServeCp serveCp =
-         * serveCpBO.getServeCp(data.getCode()); data.setServeCp(serveCp);
-         * break; case "7": break; case "8": ServeCyy serveCyy =
-         * serveCyyBO.getServeCyy(data.getCode()); data.setServeCyy(serveCyy);
-         * break; default: throw new BizException("xn0000", "服务类型填写错误");
-         */
-        // }
+        switch (data.getType()) {
+            case "3":
+                ServeArt serveArt = serveArtBO.getServeArt(data.getCode());
+                data.setServeArt(serveArt);
+                break;
+            case "5":
+                ServeKfwb serveKfwb = serveKfwbBO.getServeKfwb(data.getCode());
+                data.setServeKfwb(serveKfwb);
+                break;
+            case "6":
+                ServeCp serveCp = serveCpBO.getServeCp(data.getCode());
+                data.setServeCp(serveCp);
+                break;
+            case "7":
+                break;
+            case "8":
+                ServeCyy serveCyy = serveCyyBO.getServeCyy(data.getCode());
+                data.setServeCyy(serveCyy);
+                break;
+            default:
+                throw new BizException("xn0000", "服务类型填写错误");
+        }
     }
 
     @Override
@@ -124,7 +133,7 @@ public class ServeAOImpl implements IServeAO {
     @Override
     public Serve getServe(String code) {
         Serve serve = serveBO.getServe(code);
-        addServeExt(serve);
+        this.addServeExt(serve);
         return serve;
     }
 
@@ -135,41 +144,19 @@ public class ServeAOImpl implements IServeAO {
         smsOutBO.sentContent(publisher, publisher,
             "尊敬的企业，您所发布的服务[" + serve.getName() + "]已做违规处理，违规原因[" + dealNote
                     + "]。");
-        serveBO.refreshServeStatus(code, dealer, dealNote);
+        serveBO.refreshServeStatus(serve, dealer, dealNote);
     }
 
     @Override
-    public void editServeHot(String code, String isHot, String orderNo,
+    public void editLocation(String code, String location, String orderNo,
             String dealer) {
-        Serve data = new Serve();
-        data.setCode(code);
-        data.setLocation(isHot);
-        if (StringUtils.isNotBlank(orderNo)) {
-            data.setOrderNo(Integer.valueOf(orderNo));
-        } else {
-            data.setOrderNo(0);
-        }
-        data.setDealer(dealer);
-        serveBO.refreshServeHot(data);
-    }
-
-    @Override
-    public void editServeHotLocation(String code, String action) {
-        Serve data = serveBO.getServe(code);
-        Integer location = data.getOrderNo();
-        if (null == location) {
-            location = 2;
-        }
-        if (EBoolean.YES.getCode().equalsIgnoreCase(action)) {
-            if (location > 0) {
-                location--;
-            } else {
-                throw new BizException("xn0000", "次序不可小于零");
+        Serve serve = serveBO.getServe(code);
+        if (!EBoolean.NO.getCode().equals(orderNo)) {
+            List<Serve> serveList = serveBO.queryServeList(location, orderNo);
+            if (CollectionUtils.isNotEmpty(serveList)) {
+                throw new BizException("xn0000", "顺序重复");
             }
-        } else {
-            location++;
         }
-        data.setOrderNo(location);
-        serveBO.refreshServeHot(data);
+        serveBO.refreshLocation(serve, location, orderNo, dealer);
     }
 }

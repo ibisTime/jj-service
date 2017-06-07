@@ -18,10 +18,8 @@ public interface IServeAO {
 
     public void editServeStatus(String code, String dealer, String dealNote);
 
-    public void editServeHot(String code, String isHot, String orderNo,
+    public void editLocation(String code, String location, String orderNo,
             String dealer);
-
-    public void editServeHotLocation(String code, String action);
 
     public Paginable<Serve> queryServePage(int start, int limit, Serve condition);
 

@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.cdkj.service.ao.IServeAO;
 import com.cdkj.service.api.AProcessor;
-import com.cdkj.service.api.converter.ServeConverter;
+import com.cdkj.service.common.DateUtil;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Serve;
@@ -27,7 +27,21 @@ public class XN612140 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        Serve condition = ServeConverter.converter(req);
+        Serve condition = new Serve();
+        condition.setName(req.getName());
+        condition.setCompanyCode(req.getCompanyCode());
+        condition.setCompanyName(req.getCompanyName());
+        condition.setStatus(req.getStatus());
+        condition.setQualityCode(req.getQualityCode());
+        condition.setPublisher(req.getPublisher());
+        condition.setProvince(req.getProvince());
+        condition.setCity(req.getCity());
+        condition.setArea(req.getArea());
+        condition.setPublishDatetimeStart(DateUtil.strToDate(
+            req.getDateStart(), DateUtil.DATA_TIME_PATTERN_1));
+        condition.setPublishDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),
+            DateUtil.DATA_TIME_PATTERN_1));
+        condition.setDealer(req.getDealer());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = IServeAO.DEFAULT_ORDER_COLUMN;

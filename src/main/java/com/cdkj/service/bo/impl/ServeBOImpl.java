@@ -102,27 +102,29 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
     }
 
     @Override
-    public int refreshServeStatus(String code, String dealer, String dealNote) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Serve data = new Serve();
-            data.setCode(code);
-            data.setStatus(EBoolean.NO.getCode());
-            data.setDealer(dealer);
-            data.setDealNote(dealNote);
-            data.setDealDatetime(new Date());
-            count = serveDAO.updateStatus(data);
-        }
-        return count;
+    public void refreshServeStatus(Serve serve, String dealer, String dealNote) {
+        serve.setStatus(EBoolean.NO.getCode());
+        serve.setDealer(dealer);
+        serve.setDealNote(dealNote);
+        serve.setDealDatetime(new Date());
+        serveDAO.updateStatus(serve);
     }
 
     @Override
-    public int refreshServeHot(Serve data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            data.setDealDatetime(new Date());
-            count = serveDAO.updateHot(data);
-        }
-        return count;
+    public void refreshLocation(Serve data, String location, String orderNo,
+            String dealer) {
+        data.setLocation(location);
+        data.setOrderNo(Integer.valueOf(orderNo));
+        data.setDealer(dealer);
+        data.setDealDatetime(new Date());
+        serveDAO.updateHot(data);
+    }
+
+    @Override
+    public List<Serve> queryServeList(String location, String orderNo) {
+        Serve condition = new Serve();
+        condition.setLocation(location);
+        condition.setOrderNo(Integer.valueOf(orderNo));
+        return serveDAO.selectList(condition);
     }
 }

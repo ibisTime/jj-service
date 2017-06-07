@@ -11,6 +11,9 @@ public class XN612132Req {
     // 服务编号 (必填)
     private String code;
 
+    // UI位置（0普通 1热门）
+    private String location;
+
     // 序号 (选填)
     private String orderNo;
 
@@ -39,6 +42,14 @@ public class XN612132Req {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
 }

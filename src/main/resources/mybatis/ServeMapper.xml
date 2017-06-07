@@ -13,7 +13,7 @@
 		<result column="quality_name" property="qualityName" />
 		<result column="type" property="type" />
 		<result column="description" property="description" />
-		<result column="is_hot" property="isHot" />
+		<result column="location" property="location" />
 		<result column="order_no" property="orderNo" />
 		<result column="status" property="status" />
 		<result column="publisher" property="publisher" />
@@ -39,8 +39,8 @@
 			<if test="qualityCode != null and qualityCode != '' ">
 				AND t.quality_code = #{qualityCode}
 			</if>
-			<if test="isHot != null and isHot != '' ">
-				AND t.is_hot = #{isHot}
+			<if test="location != null and location != '' ">
+				AND t.location = #{location}
 			</if>
 			<if test="orderNo != null and orderNo != '' ">
 				AND t.order_no = #{orderNo}
@@ -82,7 +82,7 @@
 		,tsc.name as quality_name
 		,tsc.type
 		,t.description
-		,t.is_hot
+		,t.location
 		,t.order_no
 		,t.status
 		,t.publisher
@@ -94,7 +94,7 @@
 		,tc.city
 		,tc.area
 		FROM
-		tcp_serve t inner join ${userDB}.tstd_company tc on t.company_code = tc.code inner join ${userDB}.tstd_certificate tsc on t.quality_code = tsc.code
+		tcp_serve t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -105,7 +105,7 @@
 
 	<select id="select_serve_count" parameterType="serve"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_serve t inner join ${userDB}.tstd_company tc on t.company_code = tc.code inner join ${userDB}.tstd_certificate tsc on t.quality_code = tsc.code
+		SELECT count(1) FROM tcp_serve t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 
@@ -119,7 +119,7 @@
 		,quote_max
 		,quality_code
 		,description
-		,is_hot
+		,location
 		,order_no
 		,status
 		,publisher
@@ -136,7 +136,7 @@
 		,#{quoteMax}
 		,#{qualityCode}
 		,#{description}
-		,#{isHot}
+		,#{location}
 		,#{orderNo}
 		,#{status}
 		,#{publisher}
@@ -172,7 +172,7 @@
 	<update id="update_serve_hot" parameterType="serve">
 		UPDATE tcp_serve
 		SET
-		is_hot = #{isHot}
+		location = #{location}
 		,order_no = #{orderNo}
 		,dealer = #{dealer}
 		,deal_datetime = #{dealDatetime}

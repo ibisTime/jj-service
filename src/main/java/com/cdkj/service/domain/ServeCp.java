@@ -16,8 +16,6 @@ public class ServeCp extends ABaseDO {
 
     private int dsendNum;
 
-    private Serve serve;
-
     public String getServeCode() {
         return serveCode;
     }
@@ -58,11 +56,4 @@ public class ServeCp extends ABaseDO {
         this.dsendNum = dsendNum;
     }
 
-    public Serve getServe() {
-        return serve;
-    }
-
-    public void setServe(Serve serve) {
-        this.serve = serve;
-    }
 }
