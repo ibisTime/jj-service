@@ -29,9 +29,9 @@
 			<if test="qualityCode != null and qualityCode != '' ">
 				AND t.quality_code = #{qualityCode}
 			</if>
-			<!-- <if test="type != null and type != '' ">
+			<if test="type != null and type != '' ">
 				AND tcert.type = #{type}
-			</if> -->
+			</if>
 			<if test="urgentLevel != null and urgentLevel != '' ">
 				AND t.urgent_level = #{urgentLevel}
 			</if>
@@ -50,12 +50,12 @@
 			<if test="dealer != null and dealer != '' ">
 				AND t.dealer = #{dealer}
 			</if>
-			<!-- <if test="mobile != null and mobile != '' ">
+			<if test="mobile != null and mobile != '' ">
 				AND tu.mobile = #{mobile}
 			</if>
 			<if test="expCompany != null and expCompany != '' ">
 				AND (t.exp_company = #{expCompany} or t.exp_company = '0')
-			</if> -->
+			</if>
 		</trim>
 	</sql>
 	<select id="select_demand" parameterType="demand" resultMap="demand_DB_Result">
@@ -63,7 +63,7 @@
 		t.code
 		,t.name
 		,t.quality_code
-		<!-- ,tcert.type -->
+		,tcert.type
 		,t.exp_company
 		,t.urgent_level
 		,t.description
@@ -73,12 +73,11 @@
 		,t.dealer
 		,t.deal_datetime
 		,t.deal_note
-		<!-- ,tu.mobile -->
+		,tu.mobile
 		FROM
-		tcp_demand t 
-		<!-- inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
-		left join ${userDB}.tstd_company tc on t.exp_company = tc.code
-		inner join ${userDB}.tstd_certificate tcert on tcert.code = t.quality_code -->
+		tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
+		left join tcp_company tc on t.exp_company = tc.code
+		inner join tcp_qualify tcert on tcert.code = t.quality_code 
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -89,9 +88,9 @@
 
 	<select id="select_demand_count" parameterType="demand"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_demand t <!-- inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
-		left join ${userDB}.tstd_company tc on t.exp_company = tc.code
-		inner join ${userDB}.tstd_certificate tcert on tcert.code = t.quality_code -->
+		SELECT count(1) FROM tcp_demand t inner join ${userDB}.tstd_user tu on t.publisher = tu.user_id
+		left join tcp_company tc on t.exp_company = tc.code
+		inner join tcp_qualify tcert on tcert.code = t.quality_code 
 		<include refid="where_condition" />
 	</select>
 

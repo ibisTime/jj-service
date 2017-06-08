@@ -8,9 +8,9 @@
 		<typeAlias alias="serveCyy" type="com.cdkj.service.domain.ServeCyy" />
 		<typeAlias alias="serveKfwb" type="com.cdkj.service.domain.ServeKfwb" />
 		
-		<typeAlias alias="servePhoto" type="com.cdkj.service.domain.ServePhoto" />
-		<typeAlias alias="serveShop" type="com.cdkj.service.domain.ServeShop" />
-		<typeAlias alias="serveTrain" type="com.cdkj.service.domain.ServeTrain" />
+		<typeAlias alias="operate" type="com.cdkj.service.domain.Operate" />
+		<typeAlias alias="photo" type="com.cdkj.service.domain.Photo" />
+		<typeAlias alias="train" type="com.cdkj.service.domain.Train" />
 		<typeAlias alias="demand" type="com.cdkj.service.domain.Demand" />
 		<typeAlias alias="resume" type="com.cdkj.service.domain.Resume" />
 		
@@ -24,9 +24,5 @@
 		<typeAlias alias="cbIntention" type="com.cdkj.service.domain.CbIntention" />
 		<typeAlias alias="company" type="com.cdkj.service.domain.Company" />
 		<typeAlias alias="gsQualify" type="com.cdkj.service.domain.GsQualify" />
-		<typeAlias alias="operate" type="com.cdkj.service.domain.Operate" />
-		
-		<typeAlias alias="photo" type="com.cdkj.service.domain.Photo" />
-		<typeAlias alias="train" type="com.cdkj.service.domain.Train" />
 	</typeAliases>	
 </configuration>

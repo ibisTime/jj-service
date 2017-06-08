@@ -8,6 +8,7 @@
 		<result column="kind" property="kind" />
 		<result column="province" property="province" />
 		<result column="city" property="city" />
+		<result column="area" property="area" />
 		<result column="experience" property="experience" />
 		<result column="education" property="education" />
 		<result column="type" property="type" />
@@ -66,6 +67,7 @@
 		,t.kind
 		,t.province
 		,t.city
+		,t.area
 		,t.experience
 		,t.education
 		,t.type
@@ -109,6 +111,7 @@
 		,kind
 		,province
 		,city
+		,area
 		,experience
 		,education
 		,type
@@ -131,6 +134,7 @@
 		,#{kind}
 		,#{province}
 		,#{city}
+		,#{area}
 		,#{experience}
 		,#{education}
 		,#{type}

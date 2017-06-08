@@ -31,18 +31,6 @@
 		<property name="paginableDAO" ref="serveKfwbDAOImpl" />
 	</bean>
 	
-	<bean id="servePhotoBO" class="com.cdkj.service.bo.impl.ServePhotoBOImpl">
-		<property name="paginableDAO" ref="servePhotoDAOImpl" />
-	</bean>
-	
-	<bean id="serveShopBO" class="com.cdkj.service.bo.impl.ServeShopBOImpl">
-		<property name="paginableDAO" ref="serveShopDAOImpl" />
-	</bean>
-	
-	<bean id="serveTrainBO" class="com.cdkj.service.bo.impl.ServeTrainBOImpl">
-		<property name="paginableDAO" ref="serveTrainDAOImpl" />
-	</bean>
-	
 	<bean id="demandBO" class="com.cdkj.service.bo.impl.DemandBOImpl">
 		<property name="paginableDAO" ref="demandDAOImpl" />
 	</bean>
