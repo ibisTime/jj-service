@@ -5,6 +5,7 @@ import com.cdkj.service.api.AProcessor;
 import com.cdkj.service.common.JsonUtil;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.dto.req.XN612173Req;
+import com.cdkj.service.dto.res.BooleanRes;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
@@ -25,7 +26,7 @@ public class XN612173 extends AProcessor {
     public Object doBusiness() throws BizException {
         cbIntentionAO.editCbIntention(req.getCode(), req.getDealResult(),
             req.getUpdater(), req.getRemark());
-        return null;
+        return new BooleanRes(true);
     }
 
     @Override

@@ -15,7 +15,7 @@
 		<result column="works" property="works" />
 		<result column="quote_min" property="quoteMin" />
 		<result column="quote_max" property="quoteMax" />
-		<result column="quality_code" property="qualityCode" />
+		<result column="qualify_code" property="qualifyCode" />
 		<result column="description" property="description" />
 		<result column="location" property="location" />
 		<result column="order_no" property="orderNo" />
@@ -48,8 +48,8 @@
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
-			<if test="qualityCode != null and qualityCode != '' ">
-				AND t.quality_code = #{qualityCode}
+			<if test="qualifyCode != null and qualifyCode != '' ">
+				AND t.qualify_code = #{qualifyCode}
 			</if>
 			<if test="publisher != null and publisher != '' ">
 				AND t.publisher = #{publisher}
@@ -91,7 +91,7 @@
 		,t.works
 		,t.quote_min
 		,t.quote_max
-		,t.quality_code
+		,t.qualify_code
 		,t.description
 		,t.location
 		,t.order_no
@@ -104,10 +104,8 @@
 		,tc.province
 		,tc.city
 		,tc.area
-		,tsc.name as quality_name
-		,tsc.type
 		FROM
-		tcp_photo t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		tcp_photo t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.qualify_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -118,7 +116,7 @@
 
 	<select id="select_photo_count" parameterType="photo"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_photo t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		SELECT count(1) FROM tcp_photo t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.qualify_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 
@@ -137,7 +135,7 @@
 		,works
 		,quote_min
 		,quote_max
-		,quality_code
+		,qualify_code
 		,description
 		,location
 		,order_no
@@ -158,7 +156,7 @@
 		,#{works}
 		,#{quoteMin}
 		,#{quoteMax}
-		,#{qualityCode}
+		,#{qualifyCode}
 		,#{description}
 		,#{location}
 		,#{orderNo}

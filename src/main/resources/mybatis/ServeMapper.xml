@@ -79,8 +79,6 @@
 		,t.quote_min
 		,t.quote_max
 		,t.quality_code
-		,tsc.name as quality_name
-		,tsc.type
 		,t.description
 		,t.location
 		,t.order_no
@@ -94,7 +92,7 @@
 		,tc.city
 		,tc.area
 		FROM
-		tcp_serve t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		tcp_serve t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -105,7 +103,7 @@
 
 	<select id="select_serve_count" parameterType="serve"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_serve t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		SELECT count(1) FROM tcp_serve t join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 

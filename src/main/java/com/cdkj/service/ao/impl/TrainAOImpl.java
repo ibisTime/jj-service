@@ -127,7 +127,8 @@ public class TrainAOImpl implements ITrainAO {
             String dealer) {
         Train train = trainBO.getTrain(code);
         if (!EBoolean.NO.getCode().equals(orderNo)) {
-            List<Train> trainList = trainBO.queryTrainList(location, orderNo);
+            List<Train> trainList = trainBO.queryTrainList(
+                EBoolean.YES.getCode(), location, orderNo);
             if (CollectionUtils.isNotEmpty(trainList)) {
                 throw new BizException("xn0000", "顺序重复");
             }

@@ -42,7 +42,7 @@ public class PhotoAOImpl implements IPhotoAO {
 
         data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
         data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
-        data.setQualityCode(req.getQualityCode());
+        data.setQualifyCode(req.getQualityCode());
         data.setPyNum(StringValidater.toInteger(req.getPyNum()));
         data.setSysNum(StringValidater.toInteger(req.getSysNum()));
 
@@ -126,7 +126,8 @@ public class PhotoAOImpl implements IPhotoAO {
             String dealer) {
         Photo photo = photoBO.getPhoto(code);
         if (!EBoolean.NO.getCode().equals(orderNo)) {
-            List<Photo> photoList = photoBO.queryPhotoList(location, orderNo);
+            List<Photo> photoList = photoBO.queryPhotoList(
+                EBoolean.YES.getCode(), location, orderNo);
             if (CollectionUtils.isNotEmpty(photoList)) {
                 throw new BizException("xn0000", "顺序重复");
             }

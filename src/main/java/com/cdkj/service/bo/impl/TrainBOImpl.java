@@ -78,8 +78,10 @@ public class TrainBOImpl extends PaginableBOImpl<Train> implements ITrainBO {
     }
 
     @Override
-    public List<Train> queryTrainList(String location, String orderNo) {
+    public List<Train> queryTrainList(String status, String location,
+            String orderNo) {
         Train condition = new Train();
+        condition.setStatus(status);
         condition.setLocation(location);
         condition.setOrderNo(orderNo);
         return trainDAO.selectList(condition);

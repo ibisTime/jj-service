@@ -79,8 +79,10 @@ public class OperateBOImpl extends PaginableBOImpl<Operate> implements
     }
 
     @Override
-    public List<Operate> queryOperateList(String location, String orderNo) {
+    public List<Operate> queryOperateList(String status, String location,
+            String orderNo) {
         Operate condition = new Operate();
+        condition.setStatus(status);
         condition.setLocation(location);
         condition.setOrderNo(orderNo);
         return operateDAO.selectList(condition);

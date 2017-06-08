@@ -25,6 +25,7 @@ public interface IPositionBO extends IPaginableBO<Position> {
 
     public Position getPosition(String code);
 
-    public List<Position> queryPositionList(String location, String orderNo);
+    public List<Position> queryPositionList(String status, String location,
+            String orderNo);
 
 }

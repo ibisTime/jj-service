@@ -91,8 +91,10 @@ public class PositionBOImpl extends PaginableBOImpl<Position> implements
     }
 
     @Override
-    public List<Position> queryPositionList(String location, String orderNo) {
+    public List<Position> queryPositionList(String status, String location,
+            String orderNo) {
         Position condition = new Position();
+        condition.setStatus(status);
         condition.setLocation(location);
         condition.setOrderNo(StringValidater.toInteger(orderNo));
         return positionDAO.selectList(condition);

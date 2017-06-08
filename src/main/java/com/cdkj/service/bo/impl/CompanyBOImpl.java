@@ -63,8 +63,9 @@ public class CompanyBOImpl extends PaginableBOImpl<Company> implements
     }
 
     @Override
-    public void hotLocation(Company company, String orderNo, String updater) {
-        company.setLocation(EBoolean.YES.getCode());
+    public void hotLocation(Company company, String location, String orderNo,
+            String updater) {
+        company.setLocation(location);
         company.setOrderNo(orderNo);
         company.setUpdater(updater);
         company.setUpdateDatetime(new Date());

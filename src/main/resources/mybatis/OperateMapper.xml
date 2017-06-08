@@ -104,10 +104,8 @@
 		,tc.province
 		,tc.city
 		,tc.area
-		,tsc.name as quality_name
-		,tsc.type
 		FROM
-		tcp_operate t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		tcp_operate t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -118,7 +116,7 @@
 
 	<select id="select_operate_count" parameterType="operate"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_operate t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		SELECT count(1) FROM tcp_operate t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 
@@ -187,5 +185,30 @@
 		WHERE code = #{code}
 	</update>
 
-
+	<update id="update_wg" parameterType="operate">
+		UPDATE tcp_operate
+		SET
+		status = #{status}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		,deal_note = #{dealNote}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_location" parameterType="operate">
+		UPDATE tcp_operate
+		SET
+		location = #{location}
+		,order_no = #{orderNo}
+		,dealer = #{dealer}
+		,deal_datetime = #{dealDatetime}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_operate" parameterType="operate">
+		DELETE FROM
+		tcp_operate
+		WHERE
+		code = #{code}
+	</delete>
 </mapper>

@@ -31,6 +31,12 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="location != null and location != '' ">
+				AND t.location = #{location}
+			</if>
+			<if test="orderNo != null and orderNo != '' ">
+				AND t.order_no = #{orderNo}
+			</if>
 			<if test="name != null and name != '' ">
 				AND t.name like "%"#{name}"%"
 			</if>

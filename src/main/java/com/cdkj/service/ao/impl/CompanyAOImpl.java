@@ -78,7 +78,8 @@ public class CompanyAOImpl implements ICompanyAO {
     }
 
     @Override
-    public void hotLocation(String code, String orderNo, String updater) {
+    public void hotLocation(String code, String location, String orderNo,
+            String updater) {
         Company company = companyBO.getCompany(code);
         if (EBoolean.YES.getCode().equals(company.getLocation())) {
             throw new BizException("xn0000", "企业已经设置为热门");
@@ -90,7 +91,7 @@ public class CompanyAOImpl implements ICompanyAO {
                 throw new BizException("xn0000", "顺序重复,请重新设置");
             }
         }
-        companyBO.hotLocation(company, orderNo, updater);
+        companyBO.hotLocation(company, location, orderNo, updater);
     }
 
     @Override

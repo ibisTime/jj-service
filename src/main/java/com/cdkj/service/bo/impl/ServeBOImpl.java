@@ -48,6 +48,7 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
         data.setQuoteMax(quoteMax);
         data.setQualityCode(qualityCode);
         data.setLocation(EBoolean.NO.getCode());
+        data.setOrderNo(0);
         data.setDescription(description);
 
         data.setPublisher(publisher);
@@ -121,8 +122,10 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
     }
 
     @Override
-    public List<Serve> queryServeList(String location, String orderNo) {
+    public List<Serve> queryServeList(String status, String location,
+            String orderNo) {
         Serve condition = new Serve();
+        condition.setStatus(status);
         condition.setLocation(location);
         condition.setOrderNo(Integer.valueOf(orderNo));
         return serveDAO.selectList(condition);

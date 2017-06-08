@@ -28,6 +28,7 @@ public interface IServeBO extends IPaginableBO<Serve> {
 
     public Serve getServe(String code);
 
-    public List<Serve> queryServeList(String location, String orderNo);
+    public List<Serve> queryServeList(String status, String location,
+            String orderNo);
 
 }

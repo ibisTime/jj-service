@@ -76,8 +76,10 @@ public class PhotoBOImpl extends PaginableBOImpl<Photo> implements IPhotoBO {
     }
 
     @Override
-    public List<Photo> queryPhotoList(String location, String orderNo) {
+    public List<Photo> queryPhotoList(String status, String location,
+            String orderNo) {
         Photo condition = new Photo();
+        condition.setStatus(status);
         condition.setLocation(location);
         condition.setOrderNo(orderNo);
         return photoDAO.selectList(condition);

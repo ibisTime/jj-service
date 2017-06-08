@@ -127,14 +127,6 @@ public class XN612122Req {
         this.business = business;
     }
 
-    public String getFeeMode() {
-        return feeMode;
-    }
-
-    public void setFeeMode(String feeMode) {
-        this.feeMode = feeMode;
-    }
-
     public String getPic() {
         return pic;
     }
@@ -150,4 +142,13 @@ public class XN612122Req {
     public void setAdvPic(String advPic) {
         this.advPic = advPic;
     }
+
+    public String getFeeMode() {
+        return feeMode;
+    }
+
+    public void setFeeMode(String feeMode) {
+        this.feeMode = feeMode;
+    }
+
 }

@@ -10,6 +10,9 @@ public class XN612053Req {
     // 编号
     private String code;
 
+    // UI位置
+    private String location;
+
     // UI顺序
     private String orderNo;
 
@@ -38,5 +41,13 @@ public class XN612053Req {
 
     public void setUpdater(String updater) {
         this.updater = updater;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

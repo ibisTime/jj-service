@@ -19,7 +19,8 @@ public interface ICompanyAO {
 
     public void editCompany(XN612052Req req);
 
-    public void hotLocation(String code, String orderNo, String updater);
+    public void hotLocation(String code, String location, String orderNo,
+            String updater);
 
     public Paginable<Company> queryCompanyPage(int start, int limit,
             Company condition);

@@ -123,8 +123,8 @@ public class OperateAOImpl implements IOperateAO {
             String dealer) {
         Operate operate = operateBO.getOperate(code);
         if (!EBoolean.NO.getCode().equals(orderNo)) {
-            List<Operate> operateList = operateBO.queryOperateList(location,
-                orderNo);
+            List<Operate> operateList = operateBO.queryOperateList(
+                EBoolean.YES.getCode(), location, orderNo);
             if (CollectionUtils.isNotEmpty(operateList)) {
                 throw new BizException("xn0000", "顺序重复");
             }

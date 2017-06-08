@@ -108,10 +108,8 @@
 		,tc.province
 		,tc.city
 		,tc.area
-		,tsc.name as quality_name
-		,tsc.type
 		FROM
-		tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -122,7 +120,7 @@
 
 	<select id="select_train_count" parameterType="train"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_quality tsc on t.quality_code = tsc.code
+		SELECT count(1) FROM tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 
@@ -215,5 +213,11 @@
 		,deal_datetime = #{dealDatetime}
 		WHERE code = #{code}
 	</update>
-
+	
+	<delete id="delete_train" parameterType="train">
+		DELETE FROM
+		tcp_train
+		WHERE
+		code = #{code}
+	</delete>
 </mapper>

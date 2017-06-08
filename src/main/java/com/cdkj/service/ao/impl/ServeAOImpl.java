@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cdkj.service.ao.IServeAO;
 import com.cdkj.service.bo.ICbIntentionBO;
 import com.cdkj.service.bo.ICompanyBO;
+import com.cdkj.service.bo.IGsQualifyBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.IServeArtBO;
 import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeCpBO;
@@ -19,6 +21,8 @@ import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.CbIntention;
+import com.cdkj.service.domain.GsQualify;
+import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeArt;
 import com.cdkj.service.domain.ServeCp;
@@ -34,6 +38,12 @@ public class ServeAOImpl implements IServeAO {
 
     @Autowired
     private IServeBO serveBO;
+
+    @Autowired
+    private IGsQualifyBO gsQualifyBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
 
     @Autowired
     private IServeArtBO serveArtBO;
@@ -111,7 +121,9 @@ public class ServeAOImpl implements IServeAO {
 
     // 添加服务详情信息
     private void addServeExt(Serve data) {
-        switch (data.getType()) {
+        GsQualify gsQualify = gsQualifyBO.getGsQualify(data.getQualityCode());
+        Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
+        switch (qualify.getType()) {
             case "3":
                 ServeArt serveArt = serveArtBO.getServeArt(data.getCode());
                 data.setServeArt(serveArt);
@@ -165,7 +177,8 @@ public class ServeAOImpl implements IServeAO {
             String dealer) {
         Serve serve = serveBO.getServe(code);
         if (!EBoolean.NO.getCode().equals(orderNo)) {
-            List<Serve> serveList = serveBO.queryServeList(location, orderNo);
+            List<Serve> serveList = serveBO.queryServeList(
+                EBoolean.YES.getCode(), location, orderNo);
             if (CollectionUtils.isNotEmpty(serveList)) {
                 throw new BizException("xn0000", "顺序重复");
             }

@@ -33,7 +33,7 @@ public class XN612086 extends AProcessor {
         condition.setCompanyCode(req.getCompanyCode());
         condition.setCompanyName(req.getCompanyName());
         condition.setStatus(req.getStatus());
-        condition.setQualityCode(req.getQualityCode());
+        condition.setQualifyCode(req.getQualityCode());
         condition.setPublisher(req.getPublisher());
         condition.setProvince(req.getProvince());
         condition.setCity(req.getCity());

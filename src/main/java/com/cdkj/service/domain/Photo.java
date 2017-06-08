@@ -51,7 +51,7 @@ public class Photo extends ABaseDO {
     private Long quoteMax;
 
     // 资质编号
-    private String qualityCode;
+    private String qualifyCode;
 
     // 详细描述
     private String description;
@@ -198,14 +198,6 @@ public class Photo extends ABaseDO {
         this.quoteMax = quoteMax;
     }
 
-    public String getQualityCode() {
-        return qualityCode;
-    }
-
-    public void setQualityCode(String qualityCode) {
-        this.qualityCode = qualityCode;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -340,6 +332,14 @@ public class Photo extends ABaseDO {
 
     public void setQualityName(String qualityName) {
         this.qualityName = qualityName;
+    }
+
+    public String getQualifyCode() {
+        return qualifyCode;
+    }
+
+    public void setQualifyCode(String qualifyCode) {
+        this.qualifyCode = qualifyCode;
     }
 
 }

@@ -137,7 +137,7 @@ public class PositionAOImpl implements IPositionAO {
         Position position = positionBO.getPosition(code);
         if (!EBoolean.NO.getCode().equals(orderNo)) {
             List<Position> positionList = positionBO.queryPositionList(
-                location, orderNo);
+                EBoolean.YES.getCode(), location, orderNo);
             if (CollectionUtils.isNotEmpty(positionList)) {
                 throw new BizException("xn0000", "顺序重复");
             }

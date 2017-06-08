@@ -15,7 +15,8 @@ public interface ICompanyBO extends IPaginableBO<Company> {
 
     public void refreshCompany(Company data);
 
-    public void hotLocation(Company company, String orderNo, String updater);
+    public void hotLocation(Company company, String location, String orderNo,
+            String updater);
 
     public void priceRange(Company company, String priceRange);
 
