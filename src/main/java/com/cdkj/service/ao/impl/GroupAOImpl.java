@@ -2,6 +2,8 @@ package com.cdkj.service.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,11 +51,32 @@ public class GroupAOImpl implements IGroupAO {
 
     @Override
     public Paginable<Group> queryGroupPage(int start, int limit, Group condition) {
+        if (StringUtils.isNotBlank(condition.getUserId())) {
+            String userId = condition.getUserId();
+            this.checkIsUserId(userId);
+        }
         return groupBO.getPaginable(start, limit, condition);
+    }
+
+    public void checkIsUserId(String userId) {
+        if (StringUtils.isNotBlank(userId)) {
+            List<Group> list = groupBO.queryGroupByUserIdList(userId);
+            if (CollectionUtils.isEmpty(list)) {
+                List<Group> groupList = groupBO.queryGroupList(null);
+                List<Group> gList = groupList.subList(0, 2);
+                for (Group group : gList) {
+                    groupBO.saveGroup(group.getName(), userId);
+                }
+            }
+        }
     }
 
     @Override
     public List<Group> queryGroupList(Group condition) {
+        if (StringUtils.isNotBlank(condition.getUserId())) {
+            String userId = condition.getUserId();
+            this.checkIsUserId(userId);
+        }
         return groupBO.queryGroupList(condition);
     }
 

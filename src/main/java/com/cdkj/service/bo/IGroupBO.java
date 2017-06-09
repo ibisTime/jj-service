@@ -21,4 +21,6 @@ public interface IGroupBO extends IPaginableBO<Group> {
 
     public Group getGroup(String code);
 
+    public List<Group> queryGroupByUserIdList(String userId);
+
 }

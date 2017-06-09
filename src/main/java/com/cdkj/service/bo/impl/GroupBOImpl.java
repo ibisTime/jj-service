@@ -83,10 +83,16 @@ public class GroupBOImpl extends PaginableBOImpl<Group> implements IGroupBO {
             condition.setCode(code);
             data = groupDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn0000", "没有该分组");
             }
         }
         return data;
     }
 
+    @Override
+    public List<Group> queryGroupByUserIdList(String userId) {
+        Group condition = new Group();
+        condition.setUserId(userId);
+        return groupDAO.selectList(condition);
+    }
 }
