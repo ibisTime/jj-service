@@ -68,6 +68,9 @@
 			<if test="userId != null and userId != '' ">
 				AND t.user_id = #{userId}
 			</if>
+			<if test="gzNum != null and gzNum != '' ">
+				AND t.gz_num = #{gzNum}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_company" parameterType="company" resultMap="company_DB_Result">

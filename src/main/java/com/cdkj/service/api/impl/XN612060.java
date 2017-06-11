@@ -35,6 +35,7 @@ public class XN612060 extends AProcessor {
         condition.setCity(req.getCity());
         condition.setArea(req.getArea());
         condition.setUserId(req.getUserId());
+        condition.setGzNum(StringValidater.toInteger(req.getGzNum()));
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICompanyAO.DEFAULT_ORDER_COLUMN;

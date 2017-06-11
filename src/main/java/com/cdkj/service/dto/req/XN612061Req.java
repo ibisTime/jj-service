@@ -1,7 +1,7 @@
 package com.cdkj.service.dto.req;
 
 /**
- * 分页查询公司
+ * 列表查询公司
  * @author: asus 
  * @since: 2017年6月6日 上午10:11:43 
  * @history:
@@ -36,6 +36,9 @@ public class XN612061Req extends APageReq {
 
     // 归属用户ID
     private String userId;
+
+    // 热门度
+    private String gzNum;
 
     public String getCode() {
         return code;
@@ -99,5 +102,13 @@ public class XN612061Req extends APageReq {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getGzNum() {
+        return gzNum;
+    }
+
+    public void setGzNum(String gzNum) {
+        this.gzNum = gzNum;
     }
 }

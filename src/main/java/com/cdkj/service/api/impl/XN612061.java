@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.cdkj.service.ao.ICompanyAO;
 import com.cdkj.service.api.AProcessor;
 import com.cdkj.service.common.JsonUtil;
+import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Company;
 import com.cdkj.service.dto.req.XN612061Req;
 import com.cdkj.service.exception.BizException;
@@ -34,6 +35,7 @@ public class XN612061 extends AProcessor {
         condition.setCity(req.getCity());
         condition.setArea(req.getArea());
         condition.setUserId(req.getUserId());
+        condition.setGzNum(StringValidater.toInteger(req.getGzNum()));
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICompanyAO.DEFAULT_ORDER_COLUMN;

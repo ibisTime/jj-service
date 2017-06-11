@@ -37,6 +37,9 @@ public class XN612060Req extends APageReq {
     // 归属用户ID
     private String userId;
 
+    // 热门度
+    private String gzNum;
+
     public String getCode() {
         return code;
     }
@@ -99,5 +102,13 @@ public class XN612060Req extends APageReq {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getGzNum() {
+        return gzNum;
+    }
+
+    public void setGzNum(String gzNum) {
+        this.gzNum = gzNum;
     }
 }
