@@ -10,11 +10,16 @@ import org.springframework.stereotype.Service;
 import com.cdkj.service.ao.IDemandAO;
 import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IDemandBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.ISmsOutBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
+import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Demand;
+import com.cdkj.service.domain.Qualify;
+import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612190Req;
 import com.cdkj.service.dto.req.XN612192Req;
 import com.cdkj.service.enums.EBoolean;
@@ -36,6 +41,12 @@ public class DemandAOImpl implements IDemandAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
+
+    @Autowired
+    private IUserBO userBO;
 
     @Override
     public String addDemand(XN612190Req req) {
@@ -87,17 +98,39 @@ public class DemandAOImpl implements IDemandAO {
     @Override
     public Paginable<Demand> queryDemandPage(int start, int limit,
             Demand condition) {
-        return demandBO.getPaginable(start, limit, condition);
+        Paginable<Demand> page = demandBO.getPaginable(start, limit, condition);
+        List<Demand> list = page.getList();
+        for (Demand demand : list) {
+            if (StringUtils.isNotBlank(demand.getExpCompany())) {
+                Company company = companyBO.getCompany(demand.getExpCompany());
+                demand.setExpCompanyName(company.getName());
+            }
+            Qualify qualify = qualifyBO.getQualify(demand.getQualityCode());
+            demand.setQualifyName(qualify.getName());
+            User user = userBO.getRemoteUser(demand.getPublisher());
+            demand.setPublisherName(user.getNickname());
+        }
+        return page;
     }
 
     @Override
     public List<Demand> queryDemandList(Demand condition) {
-        return demandBO.queryDemandList(condition);
+        List<Demand> page = demandBO.queryDemandList(condition);
+        return page;
     }
 
     @Override
     public Demand getDemand(String code) {
-        return demandBO.getDemand(code);
+        Demand demand = demandBO.getDemand(code);
+        if (StringUtils.isNotBlank(demand.getExpCompany())) {
+            Company company = companyBO.getCompany(demand.getExpCompany());
+            demand.setExpCompanyName(company.getName());
+        }
+        Qualify qualify = qualifyBO.getQualify(demand.getQualityCode());
+        demand.setQualifyName(qualify.getName());
+        User user = userBO.getRemoteUser(demand.getPublisher());
+        demand.setPublisherName(user.getNickname());
+        return demand;
     }
 
     /** 

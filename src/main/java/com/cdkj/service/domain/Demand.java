@@ -69,6 +69,8 @@ public class Demand extends ABaseDO {
     // 公司联系人
     private String comContacts;
 
+    private String qualifyName;
+
     public String getCode() {
         return code;
     }
@@ -219,5 +221,13 @@ public class Demand extends ABaseDO {
 
     public void setExpCompanyName(String expCompanyName) {
         this.expCompanyName = expCompanyName;
+    }
+
+    public String getQualifyName() {
+        return qualifyName;
+    }
+
+    public void setQualifyName(String qualifyName) {
+        this.qualifyName = qualifyName;
     }
 }
