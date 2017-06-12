@@ -13,14 +13,17 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="company_code != null and company_code != '' ">
+			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
-			<if test="user_id != null and user_id != '' ">
+			<if test="userId != null and userId != '' ">
 				AND t.user_id = #{userId}
 			</if>
-			<if test="group_code != null and group_code != '' ">
+			<if test="groupCode != null and groupCode != '' ">
 				AND t.group_code = #{groupCode}
+			</if>
+			<if test="companyName != null and companyName != '' ">
+				AND tp.name like "%"#{companyName}#"%"
 			</if>
 		</trim>
 	</sql>
@@ -31,7 +34,7 @@
 		,t.user_id
 		,t.group_code
 		FROM
-		tcp_focus t
+		tcp_focus t left join tcp_company tp on t.company_code = tp.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">

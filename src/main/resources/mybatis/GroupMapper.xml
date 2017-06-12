@@ -14,7 +14,7 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="user_id != null and user_id != '' ">
+			<if test="userId != null and userId != '' ">
 				AND t.user_id = #{userId}
 			</if>
 		</trim>

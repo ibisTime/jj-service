@@ -22,6 +22,9 @@ public class XN612035Req extends APageReq {
     // 组号
     private String groupCode;
 
+    // 公司名称
+    private String companyName;
+
     public String getCompanyCode() {
         return companyCode;
     }
@@ -44,6 +47,14 @@ public class XN612035Req extends APageReq {
 
     public void setGroupCode(String groupCode) {
         this.groupCode = groupCode;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
 }

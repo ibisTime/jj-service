@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.ICompanyAO;
 import com.cdkj.service.bo.ICompanyBO;
+import com.cdkj.service.bo.IFocusBO;
 import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Company;
+import com.cdkj.service.domain.Focus;
 import com.cdkj.service.dto.req.XN612052Req;
 import com.cdkj.service.dto.res.XN612050Res;
 import com.cdkj.service.enums.EBoolean;
@@ -24,6 +26,9 @@ public class CompanyAOImpl implements ICompanyAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private IFocusBO focusBO;
 
     @Autowired
     private IUserBO userBO;
@@ -106,8 +111,17 @@ public class CompanyAOImpl implements ICompanyAO {
     }
 
     @Override
-    public Company getCompany(String code) {
-        return companyBO.getCompany(code);
+    public Company getCompany(String code, String userId) {
+        Company company = companyBO.getCompany(code);
+        company.setIsFocus(EBoolean.NO.getCode());
+        if (StringUtils.isNotBlank(userId)) {
+            List<Focus> focusList = focusBO.queryFocusList(code, userId);
+            if (CollectionUtils.isNotEmpty(focusList)) {
+                company.setIsFocus(EBoolean.YES.getCode());
+                company.setFocusCode(focusList.get(0).getCode());
+            }
+        }
+        return company;
     }
 
     @Override

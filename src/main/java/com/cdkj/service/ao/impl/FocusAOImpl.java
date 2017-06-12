@@ -68,12 +68,23 @@ public class FocusAOImpl implements IFocusAO {
 
     @Override
     public Paginable<Focus> queryFocusPage(int start, int limit, Focus condition) {
-        return focusBO.getPaginable(start, limit, condition);
+        Paginable<Focus> page = focusBO.getPaginable(start, limit, condition);
+        List<Focus> focusList = page.getList();
+        for (Focus focus : focusList) {
+            Company company = companyBO.getCompany(focus.getCompanyCode());
+            focus.setCompany(company);
+        }
+        return page;
     }
 
     @Override
     public List<Focus> queryFocusList(Focus condition) {
-        return focusBO.queryFocusList(condition);
+        List<Focus> focusList = focusBO.queryFocusList(condition);
+        for (Focus focus : focusList) {
+            Company company = companyBO.getCompany(focus.getCompanyCode());
+            focus.setCompany(company);
+        }
+        return focusList;
     }
 
     @Override

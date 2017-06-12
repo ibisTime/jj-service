@@ -119,6 +119,13 @@ public class Company extends ABaseDO {
     // 所属用户
     private String userId;
 
+    // ****************DB**************
+    // 是否关注
+    private String isFocus;
+
+    // 关注编号
+    private String focusCode;
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -397,6 +404,22 @@ public class Company extends ABaseDO {
 
     public String getUserId() {
         return userId;
+    }
+
+    public String getIsFocus() {
+        return isFocus;
+    }
+
+    public void setIsFocus(String isFocus) {
+        this.isFocus = isFocus;
+    }
+
+    public String getFocusCode() {
+        return focusCode;
+    }
+
+    public void setFocusCode(String focusCode) {
+        this.focusCode = focusCode;
     }
 
 }

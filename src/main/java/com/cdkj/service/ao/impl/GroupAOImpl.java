@@ -63,7 +63,7 @@ public class GroupAOImpl implements IGroupAO {
             List<Group> list = groupBO.queryGroupByUserIdList(userId);
             if (CollectionUtils.isEmpty(list)) {
                 List<Group> groupList = groupBO.queryGroupList(null);
-                List<Group> gList = groupList.subList(0, 2);
+                List<Group> gList = groupList.subList(0, 3);
                 for (Group group : gList) {
                     groupBO.saveGroup(group.getName(), userId);
                 }

@@ -26,6 +26,7 @@ public class XN612035 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Focus condition = new Focus();
+        condition.setCompanyName(req.getCompanyName());
         condition.setCompanyCode(req.getCompanyCode());
         condition.setUserId(req.getUserId());
         condition.setGroupCode(req.getGroupCode());

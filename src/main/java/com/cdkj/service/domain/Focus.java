@@ -10,50 +10,73 @@ import com.cdkj.service.dao.base.ABaseDO;
 */
 public class Focus extends ABaseDO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// 编号
-	private String code;
+    // 编号
+    private String code;
 
-	// 关注公司
-	private String companyCode;
+    // 关注公司
+    private String companyCode;
 
-	// 用户编号
-	private String userId;
+    // 用户编号
+    private String userId;
 
-	// 组号
-	private String groupCode;
+    // 组号
+    private String groupCode;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    // ****************DB**********************
+    // 公司名称
+    private String companyName;
 
-	public String getCode() {
-		return code;
-	}
+    // 公司
+    private Company company;
 
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getCompanyCode() {
-		return companyCode;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public String getCompanyCode() {
+        return companyCode;
+    }
 
-	public void setGroupCode(String groupCode) {
-		this.groupCode = groupCode;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public String getGroupCode() {
-		return groupCode;
-	}
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setGroupCode(String groupCode) {
+        this.groupCode = groupCode;
+    }
+
+    public String getGroupCode() {
+        return groupCode;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
 }

@@ -27,7 +27,7 @@ public interface ICompanyAO {
 
     public List<Company> queryCompanyList(Company condition);
 
-    public Company getCompany(String code);
+    public Company getCompany(String code, String userId);
 
     public Company byUserId(String userId);
 

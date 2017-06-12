@@ -21,4 +21,6 @@ public interface IFocusBO extends IPaginableBO<Focus> {
 
     public Focus getFocus(String code);
 
+    public List<Focus> queryFocusList(String code, String userId);
+
 }

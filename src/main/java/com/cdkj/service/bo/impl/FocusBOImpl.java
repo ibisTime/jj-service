@@ -76,10 +76,18 @@ public class FocusBOImpl extends PaginableBOImpl<Focus> implements IFocusBO {
             condition.setCode(code);
             data = focusDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn0000", "不存在该关注编号");
             }
         }
         return data;
+    }
+
+    @Override
+    public List<Focus> queryFocusList(String code, String userId) {
+        Focus condition = new Focus();
+        condition.setCompanyCode(code);
+        condition.setUserId(userId);
+        return focusDAO.selectList(condition);
     }
 
 }
