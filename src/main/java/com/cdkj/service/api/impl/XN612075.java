@@ -30,6 +30,7 @@ public class XN612075 extends AProcessor {
         condition.setQualifyCode(req.getQualifyCode());
         condition.setQualifyType(req.getQualifyType());
         condition.setCompanyCode(req.getCompanyCode());
+        condition.setCompanyName(req.getCompanyName());
         condition.setStatus(req.getStatus());
         condition.setApplyUser(req.getApplyUser());
         condition.setApprover(req.getApproveUser());

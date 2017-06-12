@@ -35,7 +35,8 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
     @Override
     public String saveServe(String name, String pic, String advPic,
             String companyCode, Long quoteMin, Long quoteMax,
-            String qualityCode, String description, String publisher) {
+            String qualityCode, String description, String publisher,
+            String qualifyCode) {
         Serve data = new Serve();
         String code = OrderNoGenerater.generateM(EGeneratePrefix.FW.getCode());
         data.setCode(code);
@@ -54,6 +55,7 @@ public class ServeBOImpl extends PaginableBOImpl<Serve> implements IServeBO {
         data.setPublisher(publisher);
         data.setStatus(EBoolean.YES.getCode());
         data.setPublishDatetime(new Date());
+        data.setQualifyCode(qualifyCode);
         serveDAO.insert(data);
         return code;
     }

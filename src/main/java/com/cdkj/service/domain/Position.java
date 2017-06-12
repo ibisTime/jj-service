@@ -93,6 +93,12 @@ public class Position extends ABaseDO {
 
     private XN806010Res company;
 
+    // 公司联系人
+    private String realName;
+
+    // 联系电话
+    private String mobile;
+
     public String getCode() {
         return code;
     }
@@ -299,5 +305,21 @@ public class Position extends ABaseDO {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

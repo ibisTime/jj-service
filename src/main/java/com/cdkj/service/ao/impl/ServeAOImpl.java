@@ -18,9 +18,11 @@ import com.cdkj.service.bo.IServeCpBO;
 import com.cdkj.service.bo.IServeCyyBO;
 import com.cdkj.service.bo.IServeKfwbBO;
 import com.cdkj.service.bo.ISmsOutBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.CbIntention;
+import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.GsQualify;
 import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.domain.Serve;
@@ -28,6 +30,7 @@ import com.cdkj.service.domain.ServeArt;
 import com.cdkj.service.domain.ServeCp;
 import com.cdkj.service.domain.ServeCyy;
 import com.cdkj.service.domain.ServeKfwb;
+import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612126Req;
 import com.cdkj.service.dto.req.XN612127Req;
 import com.cdkj.service.enums.EBoolean;
@@ -61,6 +64,9 @@ public class ServeAOImpl implements IServeAO {
     private ICompanyBO companyBO;
 
     @Autowired
+    private IUserBO userBO;
+
+    @Autowired
     private ICbIntentionBO cbIntentionBO;
 
     @Autowired
@@ -68,10 +74,12 @@ public class ServeAOImpl implements IServeAO {
 
     @Override
     public String addServe(XN612126Req req) {
+        GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
+        Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
         return serveBO.saveServe(req.getName(), req.getPic(), req.getAdvPic(),
             req.getCompanyCode(), StringValidater.toLong(req.getQuoteMin()),
             StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
-            req.getDescription(), req.getPublisher());
+            req.getDescription(), req.getPublisher(), qualify.getCode());
     }
 
     @Override
@@ -114,6 +122,12 @@ public class ServeAOImpl implements IServeAO {
         if (CollectionUtils.isNotEmpty(list)) {
             for (Serve serve : list) {
                 this.addServeExt(serve);
+                Company company = companyBO.getCompany(serve.getCompanyCode());
+                User user = userBO.getRemoteUser(company.getUserId());
+                company.setRealName(user.getLoginName());
+                Qualify qualify = qualifyBO.getQualify(serve.getQualifyCode());
+                serve.setQualityName(qualify.getName());
+                serve.setCompany(company);
             }
         }
         return page;
@@ -156,6 +170,10 @@ public class ServeAOImpl implements IServeAO {
     public Serve getServe(String code) {
         Serve serve = serveBO.getServe(code);
         this.addServeExt(serve);
+        Company company = companyBO.getCompany(serve.getCompanyCode());
+        User user = userBO.getRemoteUser(company.getUserId());
+        company.setRealName(user.getLoginName());
+        serve.setCompany(company);
         return serve;
     }
 

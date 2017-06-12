@@ -126,6 +126,9 @@ public class Company extends ABaseDO {
     // 关注编号
     private String focusCode;
 
+    // 联系人
+    private String realName;
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -420,6 +423,14 @@ public class Company extends ABaseDO {
 
     public void setFocusCode(String focusCode) {
         this.focusCode = focusCode;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
 }

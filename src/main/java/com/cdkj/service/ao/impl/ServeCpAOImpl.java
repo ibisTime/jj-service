@@ -7,10 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IServeCpAO;
+import com.cdkj.service.bo.IGsQualifyBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.IServeCpBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.GsQualify;
+import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeCp;
 import com.cdkj.service.dto.req.XN612124Req;
@@ -24,16 +28,24 @@ public class ServeCpAOImpl implements IServeCpAO {
     private IServeBO serveBO;
 
     @Autowired
+    private IGsQualifyBO gsQualifyBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
+
+    @Autowired
     private IServeCpBO serveCpBO;
 
     @Transactional
     @Override
     public String addServeCp(XN612124Req req) {
+        GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
+        Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
         String code = serveBO.saveServe(req.getName(), req.getPic(),
             req.getAdvPic(), req.getCompanyCode(),
             StringValidater.toLong(req.getQuoteMin()),
             StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
-            req.getDescription(), req.getPublisher());
+            req.getDescription(), req.getPublisher(), qualify.getCode());
 
         ServeCp data = new ServeCp();
         data.setServeCode(code);

@@ -40,7 +40,8 @@ public class CompanyAOImpl implements ICompanyAO {
         String userId = userBO.doRegister(mobile, password, pwdStrength,
             smsCaptcha);
         // 公司名称校验，不可相同
-        List<Company> companyList = companyBO.queryCompanyList(null, name);
+        List<Company> companyList = companyBO.queryCompanyList(null, null,
+            null, name);
         if (CollectionUtils.isNotEmpty(companyList)) {
             throw new BizException("xn0000", "企业名称不可重复");
         }
@@ -86,12 +87,14 @@ public class CompanyAOImpl implements ICompanyAO {
     public void hotLocation(String code, String location, String orderNo,
             String updater) {
         Company company = companyBO.getCompany(code);
-        if (EBoolean.YES.getCode().equals(company.getLocation())) {
+
+        if (EBoolean.YES.getCode().equals(company.getLocation())
+                && company.getOrderNo().equals(orderNo)) {
             throw new BizException("xn0000", "企业已经设置为热门");
         }
         if (!EBoolean.NO.getCode().equals(orderNo)) {
-            List<Company> companyList = companyBO.queryCompanyList(orderNo,
-                null);
+            List<Company> companyList = companyBO.queryCompanyList(
+                ECompanyStatus.PASS_YES.getCode(), location, orderNo, null);
             if (CollectionUtils.isNotEmpty(companyList)) {
                 throw new BizException("xn0000", "顺序重复,请重新设置");
             }

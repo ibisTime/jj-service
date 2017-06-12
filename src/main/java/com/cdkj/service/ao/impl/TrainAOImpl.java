@@ -8,13 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.ITrainAO;
+import com.cdkj.service.bo.ICompanyBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.ITrainBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Company;
+import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.domain.Train;
+import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612090Req;
 import com.cdkj.service.dto.req.XN612092Req;
 import com.cdkj.service.enums.EBoolean;
@@ -28,6 +34,15 @@ public class TrainAOImpl implements ITrainAO {
 
     @Autowired
     private ISmsOutBO smsOutBO;
+
+    @Autowired
+    private ICompanyBO companyBO;
+
+    @Autowired
+    private IUserBO userBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
 
     @Override
     public String addTrain(XN612090Req req) {
@@ -96,7 +111,19 @@ public class TrainAOImpl implements ITrainAO {
 
     @Override
     public Paginable<Train> queryTrainPage(int start, int limit, Train condition) {
-        return trainBO.getPaginable(start, limit, condition);
+        Paginable<Train> page = trainBO.getPaginable(start, limit, condition);
+        List<Train> list = page.getList();
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Train train : list) {
+                Company company = companyBO.getCompany(train.getCompanyCode());
+                User user = userBO.getRemoteUser(company.getUserId());
+                company.setRealName(user.getNickname());
+                Qualify qualify = qualifyBO.getQualify(train.getQualifyCode());
+                train.setQualityName(qualify.getName());
+                train.setCompany(company);
+            }
+        }
+        return page;
     }
 
     @Override

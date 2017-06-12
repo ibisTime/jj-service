@@ -50,6 +50,9 @@ public class Photo extends ABaseDO {
     // 报价最大值
     private Long quoteMax;
 
+    // 公司资质编号
+    private String qualityCode;
+
     // 资质编号
     private String qualifyCode;
 
@@ -101,6 +104,8 @@ public class Photo extends ABaseDO {
 
     // 公司名称
     private String companyName;
+
+    private Company company;
 
     public String getCode() {
         return code;
@@ -340,6 +345,22 @@ public class Photo extends ABaseDO {
 
     public void setQualifyCode(String qualifyCode) {
         this.qualifyCode = qualifyCode;
+    }
+
+    public String getQualityCode() {
+        return qualityCode;
+    }
+
+    public void setQualityCode(String qualityCode) {
+        this.qualityCode = qualityCode;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
 }

@@ -2,7 +2,6 @@ package com.cdkj.service.api.impl;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.cdkj.service.ao.IServeAO;
 import com.cdkj.service.ao.ITrainAO;
 import com.cdkj.service.api.AProcessor;
 import com.cdkj.service.common.DateUtil;
@@ -33,6 +32,7 @@ public class XN612096 extends AProcessor {
         condition.setCompanyCode(req.getCompanyCode());
         condition.setCompanyName(req.getCompanyName());
         condition.setStatus(req.getStatus());
+        condition.setQualifyCode(req.getQualifyCode());
         condition.setQualityCode(req.getQualityCode());
         condition.setPublisher(req.getPublisher());
         condition.setProvince(req.getProvince());
@@ -45,7 +45,7 @@ public class XN612096 extends AProcessor {
         condition.setDealer(req.getDealer());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
-            orderColumn = IServeAO.DEFAULT_ORDER_COLUMN;
+            orderColumn = ITrainAO.DEFAULT_ORDER_COLUMN;
         }
         condition.setOrder(orderColumn, req.getOrderDir());
         int start = StringValidater.toInteger(req.getStart());

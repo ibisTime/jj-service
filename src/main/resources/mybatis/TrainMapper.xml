@@ -29,6 +29,7 @@
 		<result column="deal_note" property="dealNote" />
 		<result column="quality_name" property="qualityName" />
 		<result column="company_name" property="companyName" />
+		<result column="qualify_code" property="qualifyCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -52,6 +53,9 @@
 			</if>
 			<if test="qualityCode != null and qualityCode != '' ">
 				AND t.quality_code = #{qualityCode}
+			</if>
+			<if test="qualifyCode != null and qualifyCode != '' ">
+				AND t.qualify_code = #{qualifyCode}
 			</if>
 			<if test="publisher != null and publisher != '' ">
 				AND t.publisher = #{publisher}
@@ -108,8 +112,9 @@
 		,tc.province
 		,tc.city
 		,tc.area
+		,t.qualify_code
 		FROM
-		tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
+		tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_qualify tsc on t.qualify_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -120,7 +125,7 @@
 
 	<select id="select_train_count" parameterType="train"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
+		SELECT count(1) FROM tcp_train t inner join tcp_company tc on t.company_code = tc.code inner join tcp_qualify tsc on t.qualify_code = tsc.code
 		<include refid="where_condition" />
 	</select>
 
@@ -148,6 +153,7 @@
 		,status
 		,publisher
 		,publish_datetime
+		,qualify_code
 		)
 		VALUES(
 		#{code}
@@ -171,6 +177,7 @@
 		,#{status}
 		,#{publisher}
 		,#{publishDatetime}
+		,#{qualifyCode}
 		)
 	</insert>
 

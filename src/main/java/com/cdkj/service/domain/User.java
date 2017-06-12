@@ -68,6 +68,15 @@ public class User extends ABaseDO {
     // 结束时间(用于按时间统计人数)
     private Date dateEnd;
 
+    // 性别(1 男 0 女)
+    private String gender;
+
+    // 生日
+    private String birthday;
+
+    // 邮箱
+    private String email;
+
     public String getUserReferee() {
         return userReferee;
     }
@@ -186,6 +195,30 @@ public class User extends ABaseDO {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

@@ -69,6 +69,9 @@ public class Serve extends ABaseDO {
     // 处理备注
     private String dealNote;
 
+    // 资质编号
+    private String qualifyCode;
+
     //
     // ****************db properties ******************
     private Date publishDatetimeStart;
@@ -89,7 +92,7 @@ public class Serve extends ABaseDO {
     // 公司-区
     private String area;
 
-    private XN806010Res company;
+    private XN806010Res res;
 
     private ServeArt serveArt;
 
@@ -98,6 +101,8 @@ public class Serve extends ABaseDO {
     private ServeCyy serveCyy;
 
     private ServeKfwb serveKfwb;
+
+    private Company company;
 
     public String getCode() {
         return code;
@@ -219,14 +224,6 @@ public class Serve extends ABaseDO {
         this.publishDatetimeEnd = publishDatetimeEnd;
     }
 
-    public XN806010Res getCompany() {
-        return company;
-    }
-
-    public void setCompany(XN806010Res company) {
-        this.company = company;
-    }
-
     public String getProvince() {
         return province;
     }
@@ -337,5 +334,29 @@ public class Serve extends ABaseDO {
 
     public Integer getOrderNo() {
         return orderNo;
+    }
+
+    public XN806010Res getRes() {
+        return res;
+    }
+
+    public void setRes(XN806010Res res) {
+        this.res = res;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public String getQualifyCode() {
+        return qualifyCode;
+    }
+
+    public void setQualifyCode(String qualifyCode) {
+        this.qualifyCode = qualifyCode;
     }
 }

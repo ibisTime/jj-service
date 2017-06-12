@@ -21,6 +21,7 @@
 		<result column="dealer" property="dealer" />
 		<result column="deal_datetime" property="dealDatetime" />
 		<result column="deal_note" property="dealNote" />
+		<result column="qualify_code" property="qualifyCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -38,6 +39,9 @@
 			</if>
 			<if test="qualityCode != null and qualityCode != '' ">
 				AND t.quality_code = #{qualityCode}
+			</if>
+			<if test="qualifyCode != null and qualifyCode != '' ">
+				AND t.qualify_code = #{qualifyCode}
 			</if>
 			<if test="location != null and location != '' ">
 				AND t.location = #{location}
@@ -91,6 +95,7 @@
 		,tc.province
 		,tc.city
 		,tc.area
+		,t.qualify_code
 		FROM
 		tcp_serve t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
@@ -125,6 +130,7 @@
 		,dealer
 		,deal_datetime
 		,deal_note
+		,qualify_code
 		)
 		VALUES(
 		#{code}
@@ -142,6 +148,7 @@
 		,#{dealer}
 		,#{dealDatetime}
 		,#{dealNote}
+		,#{qualifyCode}
 		)
 	</insert>
 

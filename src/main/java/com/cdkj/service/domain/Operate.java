@@ -50,8 +50,11 @@ public class Operate extends ABaseDO {
     // 报价最大值
     private Long quoteMax;
 
-    // 资质编号
+    // 公司资质编号
     private String qualityCode;
+
+    // 资质编号
+    private String qualifyCode;
 
     // 详细描述
     private String description;
@@ -101,6 +104,8 @@ public class Operate extends ABaseDO {
 
     // 公司名称
     private String companyName;
+
+    private Company company;
 
     public void setCode(String code) {
         this.code = code;
@@ -340,6 +345,22 @@ public class Operate extends ABaseDO {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getQualifyCode() {
+        return qualifyCode;
+    }
+
+    public void setQualifyCode(String qualifyCode) {
+        this.qualifyCode = qualifyCode;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
 }

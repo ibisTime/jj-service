@@ -11,7 +11,8 @@ public interface IServeBO extends IPaginableBO<Serve> {
 
     public String saveServe(String name, String pic, String advPic,
             String companyCode, Long quoteMin, Long quoteMax,
-            String qualityCode, String description, String publisher);
+            String qualityCode, String description, String publisher,
+            String qualifyCode);
 
     public void removeServe(String code);
 

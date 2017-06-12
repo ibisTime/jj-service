@@ -11,6 +11,7 @@ import com.cdkj.service.bo.IPhotoBO;
 import com.cdkj.service.bo.base.PaginableBOImpl;
 import com.cdkj.service.dao.IPhotoDAO;
 import com.cdkj.service.domain.Photo;
+import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.exception.BizException;
 
 @Component
@@ -69,6 +70,7 @@ public class PhotoBOImpl extends PaginableBOImpl<Photo> implements IPhotoBO {
 
     @Override
     public void wgclPhoto(Photo photo, String dealer, String dealNote) {
+        photo.setStatus(EBoolean.NO.getCode());
         photo.setDealer(dealer);
         photo.setDealDatetime(new Date());
         photo.setDealNote(dealNote);

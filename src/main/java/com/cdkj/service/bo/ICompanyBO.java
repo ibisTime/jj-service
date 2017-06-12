@@ -22,7 +22,8 @@ public interface ICompanyBO extends IPaginableBO<Company> {
 
     public List<Company> queryCompanyList(Company condition);
 
-    public List<Company> queryCompanyList(String orderNo, String name);
+    public List<Company> queryCompanyList(String status, String location,
+            String orderNo, String name);
 
     public Company getCompany(String code);
 

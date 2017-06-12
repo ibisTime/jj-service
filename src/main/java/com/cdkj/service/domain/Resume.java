@@ -109,6 +109,8 @@ public class Resume extends ABaseDO {
 
     List<String> expPositionList;
 
+    private String realName;
+
     public String getCode() {
         return code;
     }
@@ -363,6 +365,14 @@ public class Resume extends ABaseDO {
 
     public void setOrderNo(Integer orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
 }

@@ -43,6 +43,15 @@ public class XN001400Res {
     // 手機號
     private String mobile;
 
+    // 性别(1 男 0 女)
+    private String gender;
+
+    // 生日
+    private String birthday;
+
+    // 邮箱
+    private String email;
+
     // 公司编号
     private String companyCode;
 
@@ -164,5 +173,29 @@ public class XN001400Res {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

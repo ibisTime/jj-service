@@ -126,7 +126,13 @@ public class ResumeAOImpl implements IResumeAO {
             }
             condition.setExpPositionList(expPositionList);
         }
-        return resumeBO.getPaginable(start, limit, condition);
+        Paginable<Resume> page = resumeBO.getPaginable(start, limit, condition);
+        List<Resume> resumeList = page.getList();
+        for (Resume resume : resumeList) {
+            User user = userBO.getRemoteUser(resume.getPublisher());
+            resume.setRealName(user.getNickname());
+        }
+        return page;
     }
 
     @Override

@@ -22,6 +22,9 @@ public class XN612075Req extends APageReq {
     // 公司编号
     private String companyCode;
 
+    // 公司名称
+    private String companyName;
+
     // 状态
     private String status;
 
@@ -77,5 +80,13 @@ public class XN612075Req extends APageReq {
 
     public void setApproveUser(String approveUser) {
         this.approveUser = approveUser;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

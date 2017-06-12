@@ -22,8 +22,11 @@ public class XN612096Req extends APageReq {
     // 公司名称 (选填)
     private String companyName;
 
-    // 资质编号(选填)
+    // 公司资质编号(选填)
     private String qualityCode;
+
+    // 资质编号(选填)
+    private String qualifyCode;
 
     // 是否热门(选填)
     private String location;
@@ -129,5 +132,13 @@ public class XN612096Req extends APageReq {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getQualifyCode() {
+        return qualifyCode;
+    }
+
+    public void setQualifyCode(String qualifyCode) {
+        this.qualifyCode = qualifyCode;
     }
 }

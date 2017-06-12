@@ -7,10 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.service.ao.IServeArtAO;
+import com.cdkj.service.bo.IGsQualifyBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.IServeArtBO;
 import com.cdkj.service.bo.IServeBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.GsQualify;
+import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.ServeArt;
 import com.cdkj.service.dto.req.XN612120Req;
@@ -26,14 +30,22 @@ public class ServeArtAOImpl implements IServeArtAO {
     @Autowired
     private IServeArtBO serveArtBO;
 
+    @Autowired
+    private IGsQualifyBO gsQualifyBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
+
     @Transactional
     @Override
     public String addServeArt(XN612120Req req) {
+        GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
+        Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
         String code = serveBO.saveServe(req.getName(), req.getPic(),
             req.getAdvPic(), req.getCompanyCode(),
             StringValidater.toLong(req.getQuoteMin()),
             StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
-            req.getDescription(), req.getPublisher());
+            req.getDescription(), req.getPublisher(), qualify.getCode());
         ServeArt data = new ServeArt();
         data.setServeCode(code);
         data.setSclm(req.getSclm());

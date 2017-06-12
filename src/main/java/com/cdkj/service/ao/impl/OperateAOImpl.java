@@ -8,13 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IOperateAO;
+import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IOperateBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.ISmsOutBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Operate;
+import com.cdkj.service.domain.Qualify;
+import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612110Req;
 import com.cdkj.service.dto.req.XN612112Req;
 import com.cdkj.service.enums.EBoolean;
@@ -28,6 +34,15 @@ public class OperateAOImpl implements IOperateAO {
 
     @Autowired
     private ISmsOutBO smsOutBO;
+
+    @Autowired
+    private ICompanyBO companyBO;
+
+    @Autowired
+    private IUserBO userBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
 
     @Override
     public String addOperate(XN612110Req req) {
@@ -92,7 +107,22 @@ public class OperateAOImpl implements IOperateAO {
     @Override
     public Paginable<Operate> queryOperatePage(int start, int limit,
             Operate condition) {
-        return operateBO.getPaginable(start, limit, condition);
+        Paginable<Operate> page = operateBO.getPaginable(start, limit,
+            condition);
+        List<Operate> list = page.getList();
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Operate operate : list) {
+                Company company = companyBO
+                    .getCompany(operate.getCompanyCode());
+                User user = userBO.getRemoteUser(company.getUserId());
+                company.setRealName(user.getNickname());
+                Qualify qualify = qualifyBO
+                    .getQualify(operate.getQualifyCode());
+                operate.setQualityName(qualify.getName());
+                operate.setCompany(company);
+            }
+        }
+        return page;
     }
 
     @Override

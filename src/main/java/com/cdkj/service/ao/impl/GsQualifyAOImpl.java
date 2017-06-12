@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.cdkj.service.ao.IGsQualifyAO;
 import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IGsQualifyBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.GsQualify;
+import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.enums.EBoolean;
 import com.cdkj.service.enums.ECompanyStatus;
 import com.cdkj.service.exception.BizException;
@@ -23,6 +25,9 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
 
     @Override
     public String addGsQualify(String companyCode, String qualifyCode,
@@ -64,7 +69,16 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
     @Override
     public Paginable<GsQualify> queryGsQualifyPage(int start, int limit,
             GsQualify condition) {
-        return gsQualifyBO.getPaginable(start, limit, condition);
+        Paginable<GsQualify> page = gsQualifyBO.getPaginable(start, limit,
+            condition);
+        List<GsQualify> list = page.getList();
+        for (GsQualify gsQualify : list) {
+            Company company = companyBO.getCompany(gsQualify.getCompanyCode());
+            gsQualify.setCompany(company);
+            Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
+            gsQualify.setQualifyName(qualify.getName());
+        }
+        return page;
     }
 
     @Override
@@ -74,7 +88,12 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
 
     @Override
     public GsQualify getGsQualify(String code) {
-        return gsQualifyBO.getGsQualify(code);
+        GsQualify gsQualify = gsQualifyBO.getGsQualify(code);
+        Company company = companyBO.getCompany(gsQualify.getCompanyCode());
+        gsQualify.setCompany(company);
+        Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
+        gsQualify.setQualifyName(qualify.getName());
+        return gsQualify;
     }
 
 }

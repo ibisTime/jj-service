@@ -29,6 +29,9 @@
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
+			<if test="companyName != null and companyName != '' ">
+				AND jc.name like "%"#{companyName}#"%"
+			</if>
 		</trim>
 	</sql>
 	<select id="select_gsQualify" parameterType="gsQualify" resultMap="gsQualify_DB_Result">
@@ -45,7 +48,7 @@
 		,t.approve_note
 		,t.remark
 		FROM
-		tcp_gs_qualify t
+		tcp_gs_qualify t inner join tcp_company jc on t.company_code = jc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -56,7 +59,7 @@
 
 	<select id="select_gsQualify_count" parameterType="gsQualify"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_gs_qualify t
+		SELECT count(1) FROM tcp_gs_qualify t inner join tcp_company jc on t.company_code = jc.code
 		<include refid="where_condition" />
 	</select>
 

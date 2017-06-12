@@ -8,13 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.IPhotoAO;
+import com.cdkj.service.bo.ICompanyBO;
+import com.cdkj.service.bo.IGsQualifyBO;
 import com.cdkj.service.bo.IPhotoBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.ISmsOutBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Photo;
+import com.cdkj.service.domain.Qualify;
+import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612080Req;
 import com.cdkj.service.dto.req.XN612082Req;
 import com.cdkj.service.enums.EBoolean;
@@ -28,6 +35,18 @@ public class PhotoAOImpl implements IPhotoAO {
 
     @Autowired
     private ISmsOutBO smsOutBO;
+
+    @Autowired
+    private IGsQualifyBO gsQualifyBO;
+
+    @Autowired
+    private ICompanyBO companyBO;
+
+    @Autowired
+    private IUserBO userBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
 
     @Override
     public String addPhoto(XN612080Req req) {
@@ -95,7 +114,19 @@ public class PhotoAOImpl implements IPhotoAO {
 
     @Override
     public Paginable<Photo> queryPhotoPage(int start, int limit, Photo condition) {
-        return photoBO.getPaginable(start, limit, condition);
+        Paginable<Photo> page = photoBO.getPaginable(start, limit, condition);
+        List<Photo> list = page.getList();
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Photo photo : list) {
+                Company company = companyBO.getCompany(photo.getCompanyCode());
+                User user = userBO.getRemoteUser(company.getUserId());
+                company.setRealName(user.getNickname());
+                Qualify qualify = qualifyBO.getQualify(photo.getQualifyCode());
+                photo.setQualityName(qualify.getName());
+                photo.setCompany(company);
+            }
+        }
+        return page;
     }
 
     @Override

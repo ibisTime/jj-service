@@ -11,11 +11,14 @@ import com.cdkj.service.ao.IPositionAO;
 import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IPositionBO;
 import com.cdkj.service.bo.ISmsOutBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.core.StringValidater;
+import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Position;
+import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612150Req;
 import com.cdkj.service.dto.req.XN612152Req;
 import com.cdkj.service.enums.EBoolean;
@@ -29,6 +32,9 @@ public class PositionAOImpl implements IPositionAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private IUserBO userBO;
 
     @Autowired
     private ISmsOutBO smsOutBO;
@@ -97,21 +103,30 @@ public class PositionAOImpl implements IPositionAO {
             Position condition) {
         Paginable<Position> page = positionBO.getPaginable(start, limit,
             condition);
-        // List<Position> list = page.getList();
-        // if (CollectionUtils.isNotEmpty(list)) {
-        // for (Position position : list) {
-        // }
-        // }
+        List<Position> list = page.getList();
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Position position : list) {
+                Company company = companyBO.getCompany(position
+                    .getCompanyCode());
+                position.setMobile(company.getMobile());
+                position.setRealName(company.getCorporation());
+            }
+        }
         return page;
     }
 
     @Override
     public List<Position> queryPositionList(Position condition) {
         List<Position> list = positionBO.queryPositionList(condition);
-        // if (CollectionUtils.isNotEmpty(list)) {
-        // for (Position position : list) {
-        // }
-        // }
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (Position position : list) {
+                Company company = companyBO.getCompany(position
+                    .getCompanyCode());
+                position.setMobile(company.getMobile());
+                User user = userBO.getRemoteUser(company.getUserId());
+                position.setRealName(user.getNickname());
+            }
+        }
         return list;
     }
 

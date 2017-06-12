@@ -40,6 +40,9 @@ public class UserBOImpl implements IUserBO {
         user.setUserReferee(res.getUserReferee());
         user.setLevel(res.getLevel());
         user.setKind(res.getKind());
+        user.setEmail(res.getEmail());
+        user.setBirthday(res.getBirthday());
+        user.setGender(res.getGender());
         return user;
     }
 

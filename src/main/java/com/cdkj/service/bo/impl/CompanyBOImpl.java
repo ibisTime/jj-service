@@ -98,8 +98,11 @@ public class CompanyBOImpl extends PaginableBOImpl<Company> implements
     }
 
     @Override
-    public List<Company> queryCompanyList(String orderNo, String name) {
+    public List<Company> queryCompanyList(String status, String location,
+            String orderNo, String name) {
         Company condition = new Company();
+        condition.setStatus(status);
+        condition.setLocation(location);
         condition.setOrderNo(orderNo);
         condition.setName(name);
         return companyDAO.selectList(condition);
