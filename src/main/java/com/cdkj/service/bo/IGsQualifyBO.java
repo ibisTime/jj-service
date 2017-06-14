@@ -25,4 +25,6 @@ public interface IGsQualifyBO extends IPaginableBO<GsQualify> {
     public void approvel(GsQualify gsQualify, ECompanyStatus status,
             String approveUser, String approveNote);
 
+    public GsQualify queryGsQualifyList(String companyCode);
+
 }

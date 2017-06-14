@@ -83,7 +83,7 @@ public class GsQualifyBOImpl extends PaginableBOImpl<GsQualify> implements
             condition.setCode(code);
             data = gsQualifyDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn0000", "不存在该编号");
             }
         }
         return data;
@@ -97,5 +97,17 @@ public class GsQualifyBOImpl extends PaginableBOImpl<GsQualify> implements
         gsQualify.setApproveNote(approveNote);
         gsQualify.setApproveDatetime(new Date());
         gsQualifyDAO.approvel(gsQualify);
+    }
+
+    @Override
+    public GsQualify queryGsQualifyList(String companyCode) {
+        GsQualify data = null;
+        GsQualify condition = new GsQualify();
+        condition.setCompanyCode(companyCode);
+        data = gsQualifyDAO.select(condition);
+        if (data == null) {
+            throw new BizException("xn0000", "该公司还没有申请资质");
+        }
+        return data;
     }
 }

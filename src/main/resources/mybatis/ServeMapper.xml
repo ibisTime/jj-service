@@ -96,13 +96,21 @@
 		,tc.city
 		,tc.area
 		,t.qualify_code
+		,tc.name as company_name
 		FROM
 		tcp_serve t inner join tcp_company tc on t.company_code = tc.code inner join tcp_gs_qualify tsc on t.quality_code = tsc.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
-			<if test="order != null and order != '' ">
-				t.${order}
-			</if>
+			<choose>
+			<when test='order == "gz_num DESC"'>
+				tc.${order}
+			</when>
+			 <otherwise>
+				<if test="order != null and order != '' ">
+					t.${order}
+				</if>
+			</otherwise>
+	 		</choose>
 		</trim>
 	</select>
 

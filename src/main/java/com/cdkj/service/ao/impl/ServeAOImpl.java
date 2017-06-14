@@ -34,6 +34,7 @@ import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612126Req;
 import com.cdkj.service.dto.req.XN612127Req;
 import com.cdkj.service.enums.EBoolean;
+import com.cdkj.service.enums.ECompanyStatus;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -74,12 +75,20 @@ public class ServeAOImpl implements IServeAO {
 
     @Override
     public String addServe(XN612126Req req) {
+        String code = null;
         GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
         Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
-        return serveBO.saveServe(req.getName(), req.getPic(), req.getAdvPic(),
-            req.getCompanyCode(), StringValidater.toLong(req.getQuoteMin()),
-            StringValidater.toLong(req.getQuoteMax()), req.getQualityCode(),
-            req.getDescription(), req.getPublisher(), qualify.getCode());
+        if (gsQualify.getCompanyCode().equals(req.getCompanyCode())
+                && ECompanyStatus.PASS_YES.getCode().equals(
+                    gsQualify.getStatus())) {
+            code = serveBO.saveServe(req.getName(), req.getPic(),
+                req.getAdvPic(), req.getCompanyCode(),
+                StringValidater.toLong(req.getQuoteMin()),
+                StringValidater.toLong(req.getQuoteMax()),
+                req.getQualityCode(), req.getDescription(), req.getPublisher(),
+                qualify.getCode());
+        }
+        return code;
     }
 
     @Override
@@ -194,6 +203,9 @@ public class ServeAOImpl implements IServeAO {
     public void editLocation(String code, String location, String orderNo,
             String dealer) {
         Serve serve = serveBO.getServe(code);
+        if (EBoolean.NO.getCode().equals(serve.getStatus())) {
+            throw new BizException("xn0000", "服务已违规,不可设置为热门");
+        }
         if (!EBoolean.NO.getCode().equals(orderNo)) {
             List<Serve> serveList = serveBO.queryServeList(
                 EBoolean.YES.getCode(), location, orderNo);

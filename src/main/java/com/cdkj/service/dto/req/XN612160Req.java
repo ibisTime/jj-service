@@ -33,6 +33,8 @@ public class XN612160Req extends APageReq {
     // 发布人
     private String publisher;
 
+    private String companyName;
+
     public String getName() {
         return name;
     }
@@ -87,5 +89,13 @@ public class XN612160Req extends APageReq {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

@@ -11,10 +11,13 @@ import org.springframework.stereotype.Service;
 import com.cdkj.service.ao.ICompanyAO;
 import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IFocusBO;
+import com.cdkj.service.bo.IGsQualifyBO;
+import com.cdkj.service.bo.IQualifyBO;
 import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Focus;
+import com.cdkj.service.domain.GsQualify;
 import com.cdkj.service.dto.req.XN612052Req;
 import com.cdkj.service.dto.res.XN612050Res;
 import com.cdkj.service.enums.EBoolean;
@@ -29,6 +32,12 @@ public class CompanyAOImpl implements ICompanyAO {
 
     @Autowired
     private IFocusBO focusBO;
+
+    @Autowired
+    private IGsQualifyBO gsQualifyBO;
+
+    @Autowired
+    private IQualifyBO qualifyBO;
 
     @Autowired
     private IUserBO userBO;
@@ -124,6 +133,8 @@ public class CompanyAOImpl implements ICompanyAO {
                 company.setFocusCode(focusList.get(0).getCode());
             }
         }
+        GsQualify gsQualify = gsQualifyBO.queryGsQualifyList(company.getCode());
+        company.setQualifyType(gsQualify.getQualifyType());
         return company;
     }
 

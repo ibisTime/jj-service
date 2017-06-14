@@ -123,6 +123,9 @@ public class Company extends ABaseDO {
     // 是否关注
     private String isFocus;
 
+    // 资质类型
+    private String qualifyType;
+
     // 关注编号
     private String focusCode;
 
@@ -431,6 +434,14 @@ public class Company extends ABaseDO {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getQualifyType() {
+        return qualifyType;
+    }
+
+    public void setQualifyType(String qualifyType) {
+        this.qualifyType = qualifyType;
     }
 
 }

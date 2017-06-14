@@ -29,6 +29,7 @@ public class XN612160 extends AProcessor {
         Position condition = new Position();
         condition.setName(req.getName());
         condition.setCompanyCode(req.getCompanyCode());
+        condition.setCompanyName(req.getCompanyName());
         condition.setKind(req.getKind());
         condition.setType(req.getType());
         condition.setLocation(req.getLocation());

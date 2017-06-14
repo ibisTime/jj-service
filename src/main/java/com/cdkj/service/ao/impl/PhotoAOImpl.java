@@ -19,12 +19,14 @@ import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.core.StringValidater;
 import com.cdkj.service.domain.Company;
+import com.cdkj.service.domain.GsQualify;
 import com.cdkj.service.domain.Photo;
 import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612080Req;
 import com.cdkj.service.dto.req.XN612082Req;
 import com.cdkj.service.enums.EBoolean;
+import com.cdkj.service.enums.ECompanyStatus;
 import com.cdkj.service.exception.BizException;
 
 @Service
@@ -50,32 +52,40 @@ public class PhotoAOImpl implements IPhotoAO {
 
     @Override
     public String addPhoto(XN612080Req req) {
-        Photo data = new Photo();
-        String code = OrderNoGenerater.generateM(EGeneratePrefix.PHOTO
-            .getCode());
-        data.setCode(code);
-        data.setName(req.getName());
-        data.setPic(req.getPic());
-        data.setAdvPic(req.getAdvPic());
-        data.setCompanyCode(req.getCompanyCode());
+        String code = null;
+        GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
+        if (gsQualify.getCompanyCode().equals(req.getCompanyCode())
+                && ECompanyStatus.PASS_YES.getCode().equals(
+                    gsQualify.getStatus())) {
+            Photo data = new Photo();
+            code = OrderNoGenerater.generateM(EGeneratePrefix.PHOTO.getCode());
+            data.setCode(code);
+            data.setName(req.getName());
+            data.setPic(req.getPic());
+            data.setAdvPic(req.getAdvPic());
+            data.setCompanyCode(req.getCompanyCode());
 
-        data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
-        data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
-        data.setQualifyCode(req.getQualityCode());
-        data.setPyNum(StringValidater.toInteger(req.getPyNum()));
-        data.setSysNum(StringValidater.toInteger(req.getSysNum()));
+            data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
+            data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
+            data.setQualityCode(req.getQualityCode());
+            data.setPyNum(StringValidater.toInteger(req.getPyNum()));
+            data.setSysNum(StringValidater.toInteger(req.getSysNum()));
 
-        data.setIsDz(req.getIsDz());
-        data.setLocation(EBoolean.NO.getCode());
-        data.setOrderNo(EBoolean.NO.getCode());
-        data.setScpslm(req.getScpslm());
-        data.setWorks(req.getWorks());
+            data.setIsDz(req.getIsDz());
+            data.setLocation(EBoolean.NO.getCode());
+            data.setOrderNo(EBoolean.NO.getCode());
+            data.setScpslm(req.getScpslm());
+            data.setWorks(req.getWorks());
 
-        data.setDescription(req.getDescription());
-        data.setStatus(EBoolean.YES.getCode());
-        data.setPublisher(req.getPublisher());
-        data.setPublishDatetime(new Date());
-        photoBO.savePhoto(data);
+            data.setDescription(req.getDescription());
+            data.setStatus(EBoolean.YES.getCode());
+            data.setPublisher(req.getPublisher());
+            data.setPublishDatetime(new Date());
+            data.setQualifyCode(gsQualify.getQualifyCode());
+            photoBO.savePhoto(data);
+        } else {
+            throw new BizException("xn0000", "公司还未获得该资质");
+        }
         return code;
     }
 
@@ -156,6 +166,9 @@ public class PhotoAOImpl implements IPhotoAO {
     public void editLocation(String code, String location, String orderNo,
             String dealer) {
         Photo photo = photoBO.getPhoto(code);
+        if (EBoolean.NO.getCode().equals(photo.getStatus())) {
+            throw new BizException("xn0000", "服务已违规,不可设置为热门");
+        }
         if (!EBoolean.NO.getCode().equals(orderNo)) {
             List<Photo> photoList = photoBO.queryPhotoList(
                 EBoolean.YES.getCode(), location, orderNo);
