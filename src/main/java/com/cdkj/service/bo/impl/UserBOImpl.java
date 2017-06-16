@@ -55,7 +55,7 @@ public class UserBOImpl implements IUserBO {
         req.setLoginPwdStrength(loginPwdStrength);
         req.setUserReferee(null);
         req.setKind("f2");
-        req.setIsRegHx("1");
+        req.setIsRegHx("0");
         req.setSmsCaptcha(smsCaptcha);
         req.setSystemCode("CD-CJJ000010");
         XN805041Res res = BizConnecter.getBizData("805041",

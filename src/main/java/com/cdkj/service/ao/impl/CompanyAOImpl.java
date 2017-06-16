@@ -18,6 +18,7 @@ import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Focus;
 import com.cdkj.service.domain.GsQualify;
+import com.cdkj.service.domain.Qualify;
 import com.cdkj.service.dto.req.XN612052Req;
 import com.cdkj.service.dto.res.XN612050Res;
 import com.cdkj.service.enums.EBoolean;
@@ -134,13 +135,19 @@ public class CompanyAOImpl implements ICompanyAO {
             }
         }
         GsQualify gsQualify = gsQualifyBO.queryGsQualifyList(company.getCode());
-        company.setQualifyType(gsQualify.getQualifyType());
+        Qualify qualify = null;
+        if (gsQualify != null) {
+            qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
+            company.setQualifyType(qualify.getType());
+        }
         return company;
     }
 
     @Override
     public Company byUserId(String userId) {
-        return companyBO.byUserId(userId);
+        Company company = companyBO.byUserId(userId);
+        GsQualify gsQualify = gsQualifyBO.queryGsQualifyList(company.getCode());
+        company.setGsQualify(gsQualify);
+        return company;
     }
-
 }

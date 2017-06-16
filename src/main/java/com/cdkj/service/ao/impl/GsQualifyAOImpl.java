@@ -83,7 +83,12 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
 
     @Override
     public List<GsQualify> queryGsQualifyList(GsQualify condition) {
-        return gsQualifyBO.queryGsQualifyList(condition);
+        List<GsQualify> list = gsQualifyBO.queryGsQualifyList(condition);
+        for (GsQualify gsQualify : list) {
+            Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
+            gsQualify.setQualifyName(qualify.getName());
+        }
+        return list;
     }
 
     @Override
@@ -92,7 +97,7 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
         Company company = companyBO.getCompany(gsQualify.getCompanyCode());
         gsQualify.setCompany(company);
         Qualify qualify = qualifyBO.getQualify(gsQualify.getQualifyCode());
-        gsQualify.setQualifyName(qualify.getName());
+        gsQualify.setQualify(qualify);
         return gsQualify;
     }
 

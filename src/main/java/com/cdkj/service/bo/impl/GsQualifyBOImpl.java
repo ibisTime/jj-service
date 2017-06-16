@@ -106,7 +106,7 @@ public class GsQualifyBOImpl extends PaginableBOImpl<GsQualify> implements
         condition.setCompanyCode(companyCode);
         data = gsQualifyDAO.select(condition);
         if (data == null) {
-            throw new BizException("xn0000", "该公司还没有申请资质");
+            return null;
         }
         return data;
     }

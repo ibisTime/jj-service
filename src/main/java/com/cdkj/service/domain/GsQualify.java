@@ -54,6 +54,9 @@ public class GsQualify extends ABaseDO {
     // 资质类型
     private String qualifyName;
 
+    // 资质类型
+    private Qualify qualify;
+
     private Company company;
 
     private String companyName;
@@ -176,6 +179,14 @@ public class GsQualify extends ABaseDO {
 
     public void setQualifyName(String qualifyName) {
         this.qualifyName = qualifyName;
+    }
+
+    public Qualify getQualify() {
+        return qualify;
+    }
+
+    public void setQualify(Qualify qualify) {
+        this.qualify = qualify;
     }
 
 }
