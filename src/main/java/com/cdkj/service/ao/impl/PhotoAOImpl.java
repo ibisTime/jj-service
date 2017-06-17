@@ -53,8 +53,9 @@ public class PhotoAOImpl implements IPhotoAO {
     @Override
     public String addPhoto(XN612080Req req) {
         String code = null;
-        GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
-        if (gsQualify.getCompanyCode().equals(req.getCompanyCode())
+        GsQualify gsQualify = gsQualifyBO.queryGsQualifyList(req
+            .getCompanyCode());
+        if (null != gsQualify
                 && ECompanyStatus.PASS_YES.getCode().equals(
                     gsQualify.getStatus())) {
             Photo data = new Photo();
@@ -67,17 +68,16 @@ public class PhotoAOImpl implements IPhotoAO {
 
             data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
             data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
-            data.setQualityCode(req.getQualityCode());
             data.setPyNum(StringValidater.toInteger(req.getPyNum()));
             data.setSysNum(StringValidater.toInteger(req.getSysNum()));
-
             data.setIsDz(req.getIsDz());
+
             data.setLocation(EBoolean.NO.getCode());
             data.setOrderNo(EBoolean.NO.getCode());
             data.setScpslm(req.getScpslm());
             data.setWorks(req.getWorks());
-
             data.setDescription(req.getDescription());
+
             data.setStatus(EBoolean.YES.getCode());
             data.setPublisher(req.getPublisher());
             data.setPublishDatetime(new Date());

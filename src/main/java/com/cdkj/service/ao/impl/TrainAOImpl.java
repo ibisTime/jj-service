@@ -53,8 +53,9 @@ public class TrainAOImpl implements ITrainAO {
     @Override
     public String addTrain(XN612090Req req) {
         String code = null;
-        GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
-        if (gsQualify.getCompanyCode().equals(req.getCompanyCode())
+        GsQualify gsQualify = gsQualifyBO.queryGsQualifyList(req
+            .getCompanyCode());
+        if (null != gsQualify
                 && gsQualify.getStatus().equals(
                     ECompanyStatus.PASS_YES.getCode())) {
             Train data = new Train();
@@ -67,7 +68,6 @@ public class TrainAOImpl implements ITrainAO {
 
             data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
             data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
-            data.setQualityCode(req.getQualityCode());
             data.setLectorNum(StringValidater.toInteger(req.getLectorNum()));
             data.setMtrainTimes(StringValidater.toInteger(req.getMtrainTimes()));
 

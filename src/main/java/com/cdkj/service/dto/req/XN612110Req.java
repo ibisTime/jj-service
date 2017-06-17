@@ -26,9 +26,6 @@ public class XN612110Req {
     // 最大报价(必填)
     private String quoteMax;
 
-    // 资质编号(必填)
-    private String qualityCode;
-
     // 提供服务(必填)
     private String tgfw;
 
@@ -64,14 +61,6 @@ public class XN612110Req {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
-    }
-
-    public String getQualityCode() {
-        return qualityCode;
-    }
-
-    public void setQualityCode(String qualityCode) {
-        this.qualityCode = qualityCode;
     }
 
     public String getDescription() {

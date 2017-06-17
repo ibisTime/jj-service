@@ -53,8 +53,9 @@ public class OperateAOImpl implements IOperateAO {
     @Override
     public String addOperate(XN612110Req req) {
         String code = null;
-        GsQualify gsQualify = gsQualifyBO.getGsQualify(req.getQualityCode());
-        if (gsQualify.getCompanyCode().equals(req.getCompanyCode())
+        GsQualify gsQualify = gsQualifyBO.queryGsQualifyList(req
+            .getCompanyCode());
+        if (null != gsQualify
                 && ECompanyStatus.PASS_YES.getCode().equals(
                     gsQualify.getStatus())) {
             Operate data = new Operate();
@@ -68,17 +69,16 @@ public class OperateAOImpl implements IOperateAO {
 
             data.setQuoteMin(StringValidater.toLong(req.getQuoteMin()));
             data.setQuoteMax(StringValidater.toLong(req.getQuoteMax()));
-            data.setQualityCode(req.getQualityCode());
             data.setTgfw(req.getTgfw());
             data.setFeeMode(req.getFeeMode());
-
             data.setPayCycle(req.getPayCycle());
+
             data.setScyylm(req.getScyylm());
             data.setSucCase(req.getSucCase());
             data.setLocation(EBoolean.NO.getCode());
             data.setOrderNo(EBoolean.NO.getCode());
-
             data.setDescription(req.getDescription());
+
             data.setStatus(EBoolean.YES.getCode());
             data.setPublisher(req.getPublisher());
             data.setPublishDatetime(new Date());

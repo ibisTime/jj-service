@@ -26,9 +26,6 @@ public class XN612090Req {
     // 最大报价(必填)
     private String quoteMax;
 
-    // 资质编号(必填)
-    private String qualityCode;
-
     // 讲师人数(必填)
     private String lectorNum;
 
@@ -70,14 +67,6 @@ public class XN612090Req {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
-    }
-
-    public String getQualityCode() {
-        return qualityCode;
-    }
-
-    public void setQualityCode(String qualityCode) {
-        this.qualityCode = qualityCode;
     }
 
     public String getDescription() {
