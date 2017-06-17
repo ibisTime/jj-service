@@ -14,7 +14,7 @@ import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
 /**
- * 分页查询服务
+ * 分页查询拍摄服务
  * @author: asus 
  * @since: 2017年6月7日 上午10:23:54 
  * @history:
@@ -38,10 +38,10 @@ public class XN612086 extends AProcessor {
         condition.setProvince(req.getProvince());
         condition.setCity(req.getCity());
         condition.setArea(req.getArea());
-        condition.setPublishDatetimeStart(DateUtil.strToDate(
-            req.getDateStart(), DateUtil.DATA_TIME_PATTERN_1));
-        condition.setPublishDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),
-            DateUtil.DATA_TIME_PATTERN_1));
+        condition.setPublishDatetimeStart(DateUtil.getFrontDate(
+            req.getDateStart(), false));
+        condition.setPublishDatetimeEnd(DateUtil.getFrontDate(
+            req.getDateStart(), true));
         condition.setDealer(req.getDealer());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
