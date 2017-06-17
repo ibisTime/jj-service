@@ -13,6 +13,7 @@ C，程序升级/检验
 
 3. 备份原先配置(如果第一次部署，跳过此步骤)
   ssh root@121.43.101.148
+  T6dh%$%$ss1
 
   cd /home/wwwroot/jj-service/tomcat_jjservice_biz/webapps
   cp ./jj-service/WEB-INF/classes/application.properties .
