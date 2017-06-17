@@ -21,8 +21,8 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="code != null and code != '' ">
-				AND t.code = #{companyCode}
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
 			</if>
 			<if test="demandCode != null and demandCode != '' ">
 				AND t.demand_code = #{demandCode}
@@ -103,6 +103,4 @@
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
-
-
 </mapper>

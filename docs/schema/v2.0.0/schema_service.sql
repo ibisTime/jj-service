@@ -1,82 +1,83 @@
 /*Table structure for table `tcp_bc_intention` */
 DROP TABLE IF EXISTS `tcp_bc_intention`;
 CREATE TABLE `tcp_bc_intention` (
-  `code` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '编号',
-  `type` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '类型',
-  `company_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '公司编号',
-  `demand_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '需求编号',
-  `submitter` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '提交人',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `type` varchar(4) DEFAULT NULL COMMENT '类型',
+  `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
+  `demand_code` varchar(32) DEFAULT NULL COMMENT '需求编号',
+  `resume_code` varchar(32) DEFAULT NULL COMMENT '简历编号',
+  `submitter` varchar(32) DEFAULT NULL COMMENT '提交人',
   `submit_datetime` datetime DEFAULT NULL COMMENT '提交时间',
-  `status` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '状态',
-  `updater` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '更新人',
-  `update_detatime` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` text COLLATE utf8mb4_unicode_ci COMMENT '备注',
-  `gs_user_id` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '归属用户',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态',
+  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` text COMMENT '备注',
+  `gs_user_id` varchar(32) DEFAULT NULL COMMENT '归属用户',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_cb_intention` */
 DROP TABLE IF EXISTS `tcp_cb_intention`;
 CREATE TABLE `tcp_cb_intention` (
-  `code` varchar(32) CHARACTER SET utf8 NOT NULL COMMENT '编号',
-  `type` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT '类型(1 职位申请 2 对服务感兴趣 3 对需求感兴趣 4 对简历感兴趣)',
-  `int_name` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '意向人',
-  `int_mobile` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '意向人手机号',
-  `company_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '公司编号',
-  `service_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '服务编号',
-  `position_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '职位编号',
-  `resume_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '简历编号',
-  `hz_content` text COLLATE utf8mb4_unicode_ci COMMENT '意向内容',
-  `submitter` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '提交人',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `type` varchar(4) DEFAULT NULL COMMENT '类型',
+  `int_name` varchar(32) DEFAULT NULL COMMENT '意向人',
+  `int_mobile` varchar(32) DEFAULT NULL COMMENT '意向人手机号',
+  `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
+  `service_code` varchar(32) DEFAULT NULL COMMENT '服务编号',
+  `position_code` varchar(32) DEFAULT NULL COMMENT '职位编号',
+  `resume_code` varchar(32) DEFAULT NULL COMMENT '投递简历编号',
+  `hz_content` text COMMENT '意向内容',
+  `submitter` varchar(32) DEFAULT NULL COMMENT '提交人',
   `submit_datetime` datetime DEFAULT NULL COMMENT '提交时间',
-  `status` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT '状态(1 已申请 2 已完成)',
-  `updater` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态(1 已申请 2 已完成)',
+  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` text COLLATE utf8mb4_unicode_ci COMMENT '备注',
+  `remark` text COMMENT '备注',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_company` */
 DROP TABLE IF EXISTS `tcp_company`;
 CREATE TABLE `tcp_company` (
-  `code` varchar(32) CHARACTER SET utf8 NOT NULL COMMENT '编号',
-  `type` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT 'type(1 公司 2个体户)',
-  `name` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '真实姓名/公司名称',
-  `abbr_name` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '公司简称',
-  `gsyyzzh` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '工商营业执照号/身份证正反照',
-  `logo` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'logo',
-  `pic` text CHARACTER SET utf8 COMMENT '缩略图',
-  `adv_pic` text CHARACTER SET utf8 COMMENT '广告图',
-  `slogan` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '广告语',
-  `corporation` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '法人',
-  `id_no` text CHARACTER SET utf8 COMMENT '二维码',
-  `province` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '省',
-  `city` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '市',
-  `area` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '区',
-  `address` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '具体地址',
-  `longitude` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '经度',
-  `latitude` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '纬度',
-  `description` text CHARACTER SET utf8 COMMENT '描述',
-  `scale` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT '规模',
-  `registered_capital` varchar(64) CHARACTER SET utf8 DEFAULT NULL COMMENT '注册资金',
-  `regtime` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '注册年限',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `type` varchar(4) DEFAULT NULL COMMENT 'type(1 公司 2个体户)',
+  `name` varchar(64) DEFAULT NULL COMMENT '真实姓名/公司名称',
+  `abbr_name` varchar(64) DEFAULT NULL COMMENT '公司简称',
+  `gsyyzzh` varchar(255) DEFAULT NULL COMMENT '工商营业执照号/身份证正反照',
+  `logo` varchar(255) DEFAULT NULL COMMENT 'logo',
+  `pic` text COMMENT '缩略图',
+  `adv_pic` text COMMENT '广告图',
+  `slogan` varchar(255) DEFAULT NULL COMMENT '广告语',
+  `corporation` varchar(64) DEFAULT NULL COMMENT '法人',
+  `id_no` text COMMENT '二维码',
+  `province` varchar(32) DEFAULT NULL COMMENT '省',
+  `city` varchar(32) DEFAULT NULL COMMENT '市',
+  `area` varchar(32) DEFAULT NULL COMMENT '区',
+  `address` varchar(255) DEFAULT NULL COMMENT '具体地址',
+  `longitude` varchar(64) DEFAULT NULL COMMENT '经度',
+  `latitude` varchar(64) DEFAULT NULL COMMENT '纬度',
+  `description` text COMMENT '描述',
+  `scale` varchar(4) DEFAULT NULL COMMENT '规模',
+  `registered_capital` varchar(64) DEFAULT NULL COMMENT '注册资金',
+  `regtime` varchar(32) DEFAULT NULL COMMENT '注册年限',
   `gz_num` int(11) DEFAULT NULL COMMENT '关注数',
-  `mobile` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '电话',
-  `fax` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '传真',
-  `email` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '联系人邮箱',
-  `qq` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT 'qq号码',
-  `we_chat` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '微信',
-  `location` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT 'UI位置（0 禁用 1 正常）',
+  `mobile` varchar(32) DEFAULT NULL COMMENT '电话',
+  `fax` varchar(32) DEFAULT NULL COMMENT '传真',
+  `email` varchar(32) DEFAULT NULL COMMENT '联系人邮箱',
+  `qq` varchar(32) DEFAULT NULL COMMENT 'qq号码',
+  `we_chat` varchar(32) DEFAULT NULL COMMENT '微信',
+  `location` varchar(4) DEFAULT NULL COMMENT 'UI位置（0 禁用 1 正常）',
   `order_no` int(11) DEFAULT NULL COMMENT '序号',
-  `is_default` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT '是否默认',
-  `price_range` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '价格区间',
-  `status` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT '状态(0 待上架 1 已上架 2已下架)',
-  `updater` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '更新人',
+  `is_default` varchar(4) DEFAULT NULL COMMENT '是否默认',
+  `price_range` varchar(32) DEFAULT NULL COMMENT '价格区间',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态(0 待上架 1 已上架 2已下架)',
+  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注/报价区间',
-  `user_id` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户编号',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注/报价区间',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户编号',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_demand` */
 DROP TABLE IF EXISTS `tcp_demand`;
@@ -99,56 +100,56 @@ CREATE TABLE `tcp_demand` (
 /*Table structure for table `tcp_focus` */
 DROP TABLE IF EXISTS `tcp_focus`;
 CREATE TABLE `tcp_focus` (
-  `code` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '编号',
-  `company_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '公司编号',
-  `user_id` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户编号',
-  `group_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '分组编号',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户编号',
+  `group_code` varchar(32) DEFAULT NULL COMMENT '分组编号',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_group` */
 DROP TABLE IF EXISTS `tcp_group`;
 CREATE TABLE `tcp_group` (
-  `code` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '编号',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名称',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `focus_num` int(11) DEFAULT NULL COMMENT '关注数',
   `create_datetime` datetime DEFAULT NULL COMMENT '创建时间',
-  `user_id` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户编号',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户编号',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_gs_qualify` */
 DROP TABLE IF EXISTS `tcp_gs_qualify`;
 CREATE TABLE `tcp_gs_qualify` (
-  `code` varchar(32) CHARACTER SET utf8 NOT NULL COMMENT '编号',
-  `company_code` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '公司编号',
-  `qualify_code` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '资质编号',
-  `slogan` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '广告语',
-  `status` varchar(4) CHARACTER SET utf8 DEFAULT NULL COMMENT '状态',
-  `apply_user` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '申请人',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
+  `qualify_code` varchar(32) DEFAULT NULL COMMENT '资质编号',
+  `slogan` varchar(255) DEFAULT NULL COMMENT '广告语',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态',
+  `apply_user` varchar(32) DEFAULT NULL COMMENT '申请人',
   `apply_datetime` datetime DEFAULT NULL COMMENT '申请时间',
-  `approver` varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '审核人',
+  `approver` varchar(32) DEFAULT NULL COMMENT '审核人',
   `approve_datetime` datetime DEFAULT NULL COMMENT '审核时间',
-  `approve_note` text CHARACTER SET utf8 COMMENT '审核备注',
-  `remark` text CHARACTER SET utf8 COMMENT '备注',
+  `approve_note` text COMMENT '审核备注',
+  `remark` text COMMENT '备注',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_news` */
 DROP TABLE IF EXISTS `tcp_news`;
 CREATE TABLE `tcp_news` (
-  `code` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '编号',
-  `type` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '类型（新闻，广播）',
-  `title` text COLLATE utf8mb4_unicode_ci COMMENT '标题',
-  `summary` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '摘要',
-  `content` text COLLATE utf8mb4_unicode_ci COMMENT '内容',
-  `status` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '状态',
-  `send_platform` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '发送方',
-  `updater` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `type` varchar(4) DEFAULT NULL COMMENT '类型（新闻，广播）',
+  `title` text COMMENT '标题',
+  `summary` varchar(32) DEFAULT NULL COMMENT '摘要',
+  `content` text COMMENT '内容',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态',
+  `send_platform` varchar(64) DEFAULT NULL COMMENT '发送方',
+  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` text COLLATE utf8mb4_unicode_ci COMMENT '备注',
+  `remark` text COMMENT '备注',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_operate` */
 DROP TABLE IF EXISTS `tcp_operate`;
@@ -238,16 +239,16 @@ CREATE TABLE `tcp_position` (
 /*Table structure for table `tcp_qualify` */
 DROP TABLE IF EXISTS `tcp_qualify`;
 CREATE TABLE `tcp_qualify` (
-  `code` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '编号',
-  `type` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '类型',
-  `name` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名称',
-  `description` text COLLATE utf8mb4_unicode_ci COMMENT '描述',
-  `status` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '状态',
-  `updater` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `type` varchar(4) DEFAULT NULL COMMENT '类型',
+  `name` varchar(64) DEFAULT NULL COMMENT '名称',
+  `description` text COMMENT '描述',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态',
+  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '备注',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tcp_resume` */
 DROP TABLE IF EXISTS `tcp_resume`;

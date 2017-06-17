@@ -38,10 +38,10 @@ public class XN612140 extends AProcessor {
         condition.setProvince(req.getProvince());
         condition.setCity(req.getCity());
         condition.setArea(req.getArea());
-        condition.setPublishDatetimeStart(DateUtil.strToDate(
-            req.getDateStart(), DateUtil.DATA_TIME_PATTERN_1));
-        condition.setPublishDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),
-            DateUtil.DATA_TIME_PATTERN_1));
+        condition.setPublishDatetimeStart(DateUtil.getFrontDate(
+            req.getDateStart(), false));
+        condition.setPublishDatetimeEnd(DateUtil.getFrontDate(
+            req.getDateStart(), true));
         condition.setDealer(req.getDealer());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
