@@ -297,6 +297,13 @@ insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, 
 insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','1','cb_status','3','不通过','admin',now(),NULL);
 
 
-insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000011-001','2','ACCESS_KEY','UbgXIy47cQL9o1git-U31EX0ETqPwOYr6BKo1e2u',NULL,'CD-CJJ000010','CD-CJJ000010');
-insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000011-002','2','SECRET_KEY','s48WlS7yfd1tcrnGzHv8Bnj-A31KA9J2DlJJy_03',NULL,'CD-CJJ000010','CD-CJJ000010');
-insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000011-003','2','bucket','jkeg',NULL,'CD-CJJ000010','CD-CJJ000010');
+insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000010-001','2','ACCESS_KEY','UbgXIy47cQL9o1git-U31EX0ETqPwOYr6BKo1e2u',NULL,'CD-CJJ000010','CD-CJJ000010');
+insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000010-002','2','SECRET_KEY','s48WlS7yfd1tcrnGzHv8Bnj-A31KA9J2DlJJy_03',NULL,'CD-CJJ000010','CD-CJJ000010');
+insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000010-003','2','bucket','jkeg',NULL,'CD-CJJ000010','CD-CJJ000010');
+
+insert into `tsys_config` (`type`, `ckey`, `cvalue`, `note`, `updater`, `update_datetime`, `remark`, `company_code`, `system_code`) values(NULL,'sysMobile','服务热线','4001001000','admin',now(),NULL,'CD-CJJ000010','CD-CJJ000010');
+insert into `tsys_config` (`type`, `ckey`, `cvalue`, `note`, `updater`, `update_datetime`, `remark`, `company_code`, `system_code`) values(NULL,'serviceTime','服务时间','9:30-21:30','admin',now(),NULL,'CD-CJJ000010','CD-CJJ000010');
+insert into `tsys_config` (`type`, `ckey`, `cvalue`, `note`, `updater`, `update_datetime`, `remark`, `company_code`, `system_code`) values(NULL,'aboutus','关于我们','关于我们','admin',now(),NULL,'CD-CJJ000010','CD-CJJ000010');
+insert into `tsys_config` (`type`, `ckey`, `cvalue`, `note`, `updater`, `update_datetime`, `remark`, `company_code`, `system_code`) values(NULL,'guide','B端服务指南','B端服务指南',NULL,now(),NULL,'CD-CJJ000010','CD-CJJ000010');
+
+

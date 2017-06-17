@@ -24,10 +24,10 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{companyCode}
 			</if>
-			<if test="demand_code != null and demand_code != '' ">
+			<if test="demandCode != null and demandCode != '' ">
 				AND t.demand_code = #{demandCode}
 			</if>
-			<if test="resume_code != null and resume_code != '' ">
+			<if test="resumeCode != null and resumeCode != '' ">
 				AND t.resume_code = #{resumeCode}
 			</if>
 			<if test="status != null and status != '' ">

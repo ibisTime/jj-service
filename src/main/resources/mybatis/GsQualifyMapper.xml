@@ -15,6 +15,7 @@
 		<result column="approve_note" property="approveNote" />
 		<result column="remark" property="remark" />
 		<result column="qualify_name" property="qualifyName" />
+		<result column="qualify_type" property="qualifyType" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -52,6 +53,7 @@
 		,t.approve_note
 		,t.remark
 		,tq.name as qualify_name
+		,tq.type as qualify_type
 		FROM
 		tcp_gs_qualify t inner join tcp_company jc on t.company_code = jc.code inner join tcp_qualify tq on tq.code=t.qualify_code
 		<include refid="where_condition" />
