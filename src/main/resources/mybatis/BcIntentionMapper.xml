@@ -43,10 +43,8 @@
 		t.code
 		,t.type
 		,t.company_code
-		,t.int_name
 		,t.demand_code
 		,t.resume_code
-		,t.hz_content
 		,t.submitter
 		,t.submit_datetime
 		,t.status
