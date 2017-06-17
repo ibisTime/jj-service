@@ -14,6 +14,7 @@
 		<result column="approve_datetime" property="approveDatetime" />
 		<result column="approve_note" property="approveNote" />
 		<result column="remark" property="remark" />
+		<result column="qualify_name" property="qualifyName" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -25,6 +26,9 @@
 			</if>
 			<if test="qualifyCode != null and qualifyCode != '' ">
 				AND t.qualify_code = #{qualifyCode}
+			</if>
+			<if test="qualifyType != null and qualifyType != '' ">
+				AND tq.type = #{qualifyType}
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
@@ -47,8 +51,9 @@
 		,t.approve_datetime
 		,t.approve_note
 		,t.remark
+		,tq.name as qualify_name
 		FROM
-		tcp_gs_qualify t inner join tcp_company jc on t.company_code = jc.code
+		tcp_gs_qualify t inner join tcp_company jc on t.company_code = jc.code inner join tcp_qualify tq on tq.code=t.qualify_code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -59,7 +64,7 @@
 
 	<select id="select_gsQualify_count" parameterType="gsQualify"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_gs_qualify t inner join tcp_company jc on t.company_code = jc.code
+		SELECT count(1) FROM tcp_gs_qualify t inner join tcp_company jc on t.company_code = jc.code inner join tcp_qualify tq on tq.code=t.qualify_code
 		<include refid="where_condition" />
 	</select>
 

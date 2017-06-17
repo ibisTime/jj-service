@@ -2,6 +2,7 @@ package com.cdkj.service.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,9 +47,11 @@ public class FocusAOImpl implements IFocusAO {
             throw new BizException("xn0000", "您没有对该公司进行换组");
         }
         Company company = companyBO.getCompany(focus.getCompanyCode());
-        Group groupOld = groupBO.getGroup(focus.getGroupCode());
-        groupBO.refreshFocusNum(groupOld, groupOld.getFocusNum() - 1);
-        companyBO.xgGzNum(company, company.getGzNum() - 1);
+        if (StringUtils.isNotBlank(focus.getGroupCode())) {
+            Group groupOld = groupBO.getGroup(focus.getGroupCode());
+            groupBO.refreshFocusNum(groupOld, groupOld.getFocusNum() - 1);
+            companyBO.xgGzNum(company, company.getGzNum() - 1);
+        }
         Group groupNew = groupBO.getGroup(groupCode);
         groupBO.refreshFocusNum(groupNew, groupNew.getFocusNum() + 1);
         companyBO.xgGzNum(company, company.getGzNum() + 1);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cdkj.service.ao.ICbIntentionAO;
 import com.cdkj.service.bo.ICbIntentionBO;
+import com.cdkj.service.bo.ICompanyBO;
 import com.cdkj.service.bo.IOperateBO;
 import com.cdkj.service.bo.IPhotoBO;
 import com.cdkj.service.bo.IPositionBO;
@@ -19,6 +20,7 @@ import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
 import com.cdkj.service.domain.CbIntention;
+import com.cdkj.service.domain.Company;
 import com.cdkj.service.domain.Operate;
 import com.cdkj.service.domain.Photo;
 import com.cdkj.service.domain.Position;
@@ -56,6 +58,9 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
     @Autowired
     private IResumeBO resumeBO;
 
+    @Autowired
+    private ICompanyBO companyBO;
+
     @Override
     public String addCbIntention(XN612170Req req) {
         String companyCode = null;
@@ -63,7 +68,7 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
         if (ECbIntentionType.POSITION.getCode().equals(req.getType())) {
             companyCode = positionBO.getPosition(req.getPositionCode())
                 .getCompanyCode();
-        } else if (ECbIntentionType.SERVE.getCode().equals(req.getType())) {
+        } else if (ECbIntentionType.TALK.getCode().equals(req.getType())) {
             serveCode = req.getServiceCode();
             if (serveCode.startsWith(EGeneratePrefix.PHOTO.getCode())) {
                 companyCode = photoBO.getPhoto(serveCode).getCompanyCode();
@@ -84,6 +89,7 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
         data.setIntMobile(req.getIntMobile());
         data.setCompanyCode(companyCode);
 
+        data.setServiceCode(serveCode);
         data.setPositionCode(req.getPositionCode());
         data.setResumeCode(req.getResumeCode());
         data.setHzContent(req.getHzContent());
@@ -114,7 +120,17 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
     @Override
     public Paginable<CbIntention> queryCbIntentionPage(int start, int limit,
             CbIntention condition) {
-        return cbIntentionBO.getPaginable(start, limit, condition);
+        Paginable<CbIntention> page = cbIntentionBO.getPaginable(start, limit,
+            condition);
+        List<CbIntention> cbIntentionList = page.getList();
+        for (CbIntention cbIntention : cbIntentionList) {
+            if (StringUtils.isNotBlank(cbIntention.getCompanyCode())) {
+                Company company = companyBO.getCompany(cbIntention
+                    .getCompanyCode());
+                cbIntention.setCompany(company);
+            }
+        }
+        return page;
     }
 
     @Override

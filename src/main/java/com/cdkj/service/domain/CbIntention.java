@@ -59,6 +59,9 @@ public class CbIntention extends ABaseDO {
     // 备注
     private String remark;
 
+    // ***********db***************
+    private Company company;
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -177,6 +180,14 @@ public class CbIntention extends ABaseDO {
 
     public void setUpdateDatetime(Date updateDatetime) {
         this.updateDatetime = updateDatetime;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
 }

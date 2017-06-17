@@ -34,6 +34,7 @@ public class XN612060 extends AProcessor {
         condition.setProvince(req.getProvince());
         condition.setCity(req.getCity());
         condition.setArea(req.getArea());
+        condition.setStatus(req.getStatus());
         condition.setUserId(req.getUserId());
         condition.setGzNum(StringValidater.toInteger(req.getGzNum()));
         String orderColumn = req.getOrderColumn();

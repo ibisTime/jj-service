@@ -34,6 +34,9 @@ public class XN612060Req extends APageReq {
     // 区
     private String area;
 
+    // 状态
+    private String status;
+
     // 归属用户ID
     private String userId;
 
@@ -110,5 +113,13 @@ public class XN612060Req extends APageReq {
 
     public void setGzNum(String gzNum) {
         this.gzNum = gzNum;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
