@@ -291,6 +291,11 @@ insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, 
 insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','1','msg_status','0','未发布','admin',now(),NULL);
 insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','1','msg_status','1','已发布','admin',now(),NULL);
 insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','1','msg_status','2','已下架','admin',now(),NULL);
+insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','0','','cb_status','cb意向','admin',now(),NULL);
+insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','1','cb_status','1','未查看','admin',now(),NULL);
+insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','1','cb_status','2','已查看/处理通过','admin',now(),NULL);
+insert into `tsys_dict` (`system_code`, `type`, `parent_key`, `dkey`, `dvalue`, `updater`, `update_datetime`, `remark`) values('CD-CJJ000010','1','cb_status','3','不通过','admin',now(),NULL);
+
 
 insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000011-001','2','ACCESS_KEY','UbgXIy47cQL9o1git-U31EX0ETqPwOYr6BKo1e2u',NULL,'CD-CJJ000010','CD-CJJ000010');
 insert into `tstd_cpassword` (`code`, `type`, `account`, `password`, `remark`, `company_code`, `system_code`) values('CD-JJ000011-002','2','SECRET_KEY','s48WlS7yfd1tcrnGzHv8Bnj-A31KA9J2DlJJy_03',NULL,'CD-CJJ000010','CD-CJJ000010');
