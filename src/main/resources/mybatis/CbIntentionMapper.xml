@@ -28,10 +28,10 @@
 				AND t.type = #{type}
 			</if>
 			<if test="intName != null and intName != '' ">
-				AND t.int_name like "%"#{intName}#"%"
+				AND t.int_name like "%"#{intName}"%"
 			</if>
 			<if test="intMobile != null and intMobile != '' ">
-				AND t.int_mobile like "%"#{intMobile}#"%"
+				AND t.int_mobile like "%"#{intMobile}"%"
 			</if>
 			<if test="serviceCode != null and serviceCode != '' ">
 				AND t.service_code = #{serviceCode}
@@ -44,6 +44,9 @@
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
+			</if>
+			<if test="submitter != null and submitter != '' ">
+				AND t.submitter = #{submitter}
 			</if>
 		</trim>
 	</sql>

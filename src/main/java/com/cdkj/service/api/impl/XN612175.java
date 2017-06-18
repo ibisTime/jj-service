@@ -35,6 +35,7 @@ public class XN612175 extends AProcessor {
         condition.setPositionCode(req.getPositionCode());
         condition.setResumeCode(req.getResumeCode());
         condition.setStatus(req.getStatus());
+        condition.setSubmitter(req.getSubmitter());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICbIntentionAO.DEFAULT_ORDER_COLUMN;

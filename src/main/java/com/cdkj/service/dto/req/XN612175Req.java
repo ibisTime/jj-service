@@ -36,6 +36,17 @@ public class XN612175Req extends APageReq {
     // 状态
     private String status;
 
+    // 提交人
+    private String submitter;
+
+    public String getSubmitter() {
+        return submitter;
+    }
+
+    public void setSubmitter(String submitter) {
+        this.submitter = submitter;
+    }
+
     public String getType() {
         return type;
     }
