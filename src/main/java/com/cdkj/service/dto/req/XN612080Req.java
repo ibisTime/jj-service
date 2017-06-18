@@ -25,9 +25,6 @@ public class XN612080Req {
     // 最大报价(必填)
     private String quoteMax;
 
-    // 资质编号(必填)
-    private String qualityCode;
-
     // 棚影数量(必填)
     private String pyNum;
 
@@ -63,14 +60,6 @@ public class XN612080Req {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
-    }
-
-    public String getQualityCode() {
-        return qualityCode;
-    }
-
-    public void setQualityCode(String qualityCode) {
-        this.qualityCode = qualityCode;
     }
 
     public String getIsDz() {

@@ -32,8 +32,7 @@ public class XN612080 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN612080Req.class);
         StringValidater.validateBlank(req.getName(), req.getPic(),
             req.getAdvPic(), req.getCompanyCode(), req.getQuoteMin(),
-            req.getQuoteMax(), req.getQualityCode(), req.getPyNum(),
-            req.getSysNum(), req.getIsDz(), req.getScpslm(), req.getWorks(),
-            req.getPublisher());
+            req.getQuoteMax(), req.getPyNum(), req.getSysNum(), req.getIsDz(),
+            req.getScpslm(), req.getWorks(), req.getPublisher());
     }
 }
