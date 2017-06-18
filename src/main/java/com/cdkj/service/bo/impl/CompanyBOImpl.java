@@ -53,6 +53,7 @@ public class CompanyBOImpl extends PaginableBOImpl<Company> implements
         data.setUpdateDatetime(new Date());
         data.setStatus(ECompanyStatus.APPLY.getCode());
         data.setUserId(userId);
+        data.setGzNum(0);
         companyDAO.insert(data);
         return code;
     }

@@ -135,6 +135,7 @@
 		code
 		,type
 		,name
+		,abbr_name
 		,gsyyzzh
 		,corporation
 		,id_no
@@ -145,11 +146,13 @@
 		,updater
 		,update_datetime
 		,user_id
+		,gz_num
 		)
 		VALUES(
 		#{code}
 		,#{type}
 		,#{name}
+		,#{abbrName}
 		,#{gsyyzzh}
 		,#{corporation}
 		,#{idNo}
@@ -160,6 +163,7 @@
 		,#{updater}
 		,#{updateDatetime}
 		,#{userId}
+		,#{gzNum}
 		)
 	</insert>
 
