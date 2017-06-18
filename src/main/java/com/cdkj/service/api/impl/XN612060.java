@@ -1,5 +1,8 @@
 package com.cdkj.service.api.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.cdkj.service.ao.ICompanyAO;
@@ -37,6 +40,14 @@ public class XN612060 extends AProcessor {
         condition.setStatus(req.getStatus());
         condition.setUserId(req.getUserId());
         condition.setGzNum(StringValidater.toInteger(req.getGzNum()));
+        if (StringUtils.isNotBlank(req.getGsQuantitys())) {
+            String[] gsQuantitys = req.getGsQuantitys().split(",");
+            List<String> gsQuantitysList = new ArrayList<String>();
+            for (int i = 0; i < gsQuantitys.length; i++) {
+                gsQuantitysList.add(gsQuantitys[i]);
+            }
+            condition.setQualifyCodeList(gsQuantitysList);
+        }
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICompanyAO.DEFAULT_ORDER_COLUMN;

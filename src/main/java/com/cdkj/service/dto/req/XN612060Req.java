@@ -43,6 +43,17 @@ public class XN612060Req extends APageReq {
     // 热门度
     private String gzNum;
 
+    // ************db properties************
+    private String gsQuantitys;// 1，2，3逗号隔开
+
+    public String getGsQuantitys() {
+        return gsQuantitys;
+    }
+
+    public void setGsQuantitys(String gsQuantitys) {
+        this.gsQuantitys = gsQuantitys;
+    }
+
     public String getCode() {
         return code;
     }

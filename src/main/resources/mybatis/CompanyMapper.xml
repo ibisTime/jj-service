@@ -74,6 +74,12 @@
 			<if test="gzNum != null and gzNum != '' ">
 				AND t.gz_num = #{gzNum}
 			</if>
+			<if test="qualifyCodeList != null and qualifyCodeList != '' ">
+				AND tgq.qualify_code  in 
+                <foreach item="item" index="index" collection="qualifyCodeList" open="(" separator="," close=")">
+	            	#{item}
+                </foreach> 
+			</if>
 		</trim>
 	</sql>
 	<select id="select_company" parameterType="company" resultMap="company_DB_Result">
@@ -114,7 +120,7 @@
 		,t.remark
 		,t.user_id
 		FROM
-		tcp_company t
+		tcp_company t left join tcp_gs_qualify tgq on t.code = tgq.company_code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -125,7 +131,7 @@
 
 	<select id="select_company_count" parameterType="company"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tcp_company t
+		SELECT count(1) FROM tcp_company t left join tcp_gs_qualify tgq on t.code = tgq.company_code
 		<include refid="where_condition" />
 	</select>
 

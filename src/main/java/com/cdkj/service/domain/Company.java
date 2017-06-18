@@ -1,6 +1,7 @@
 package com.cdkj.service.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.cdkj.service.dao.base.ABaseDO;
 
@@ -137,6 +138,17 @@ public class Company extends ABaseDO {
 
     // 资质
     private String qualifyName;
+
+    // 资质编号列表
+    private List<String> qualifyCodeList;
+
+    public List<String> getQualifyCodeList() {
+        return qualifyCodeList;
+    }
+
+    public void setQualifyCodeList(List<String> qualifyCodeList) {
+        this.qualifyCodeList = qualifyCodeList;
+    }
 
     public void setCode(String code) {
         this.code = code;
