@@ -148,7 +148,6 @@
 		,works
 		,quote_min
 		,quote_max
-		,qualify_code
 		,description
 		,location
 		,order_no
@@ -170,7 +169,6 @@
 		,#{works}
 		,#{quoteMin}
 		,#{quoteMax}
-		,#{qualifyCode}
 		,#{description}
 		,#{location}
 		,#{orderNo}
