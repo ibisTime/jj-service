@@ -97,11 +97,6 @@ public class CompanyAOImpl implements ICompanyAO {
     public void hotLocation(String code, String location, String orderNo,
             String updater) {
         Company company = companyBO.getCompany(code);
-
-        if (EBoolean.YES.getCode().equals(company.getLocation())
-                && company.getOrderNo().equals(orderNo)) {
-            throw new BizException("xn0000", "企业已经设置为热门");
-        }
         if (!EBoolean.NO.getCode().equals(orderNo)) {
             List<Company> companyList = companyBO.queryCompanyList(
                 ECompanyStatus.PASS_YES.getCode(), location, orderNo, null);

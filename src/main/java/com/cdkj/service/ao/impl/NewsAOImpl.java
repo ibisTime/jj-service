@@ -28,9 +28,9 @@ public class NewsAOImpl implements INewsAO {
             String remark) {
         String status = null;
         if (EBoolean.NO.getCode().equals(isPublish)) {
-            status = EBoolean.NO.getCode();
+            status = ENewsStatus.DRAFT.getCode();
         } else {
-            status = EBoolean.YES.getCode();
+            status = ENewsStatus.SHELVES.getCode();
         }
         News data = new News();
         String code = OrderNoGenerater
@@ -54,20 +54,27 @@ public class NewsAOImpl implements INewsAO {
             String sendPlatform, String summary, String content,
             String isPublish, String updater, String remark) {
         News news = newsBO.getNews(code);
-        if (news.getStatus().equals(EBoolean.NO.getCode())) {
-            News data = new News();
-            data.setCode(code);
-            data.setTitle(title);
-            data.setType(type);
-            data.setSendPlatform(sendPlatform);
-            data.setSummary(summary);
-            data.setContent(content);
-            data.setStatus(EBoolean.YES.getCode());
-            data.setUpdater(updater);
-            data.setUpdateDatetime(new Date());
-            data.setRemark(remark);
-            newsBO.refreshNews(data);
+        if (news.getStatus().equals(ENewsStatus.SHELVES.getCode())) {
+            throw new BizException("xn0000", " 资讯已上架，不可修改");
         }
+        News data = new News();
+        data.setCode(code);
+        data.setTitle(title);
+        data.setType(type);
+        data.setSendPlatform(sendPlatform);
+        data.setSummary(summary);
+        data.setContent(content);
+        String status = null;
+        if (EBoolean.NO.getCode().equals(isPublish)) {
+            status = ENewsStatus.DRAFT.getCode();
+        } else {
+            status = ENewsStatus.SHELVES.getCode();
+        }
+        data.setStatus(status);
+        data.setUpdater(updater);
+        data.setUpdateDatetime(new Date());
+        data.setRemark(remark);
+        newsBO.refreshNews(data);
     }
 
     @Override
