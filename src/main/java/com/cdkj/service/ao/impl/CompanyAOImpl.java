@@ -83,7 +83,7 @@ public class CompanyAOImpl implements ICompanyAO {
         company.setMobile(req.getMobile());
         company.setScale(req.getScale());
         company.setPic(req.getPic());
-        company.setAdvPic(req.getPic());
+        company.setAdvPic(req.getAdvPic());
         company.setSlogan(req.getSlogan());
         company.setDescription(req.getDescription());
         company.setRegisteredCapital(req.getRegisteredCapital());
