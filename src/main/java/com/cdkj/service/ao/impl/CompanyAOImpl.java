@@ -47,14 +47,14 @@ public class CompanyAOImpl implements ICompanyAO {
     public XN612050Res addCompany(String type, String name, String gsyyzzh,
             String corporation, String idNo, String mobile, String smsCaptcha,
             String password, String pwdStrength) {
-        String userId = userBO.doRegister(mobile, password, pwdStrength,
-            smsCaptcha);
         // 公司名称校验，不可相同
         List<Company> companyList = companyBO.queryCompanyList(null, null,
             null, name);
         if (CollectionUtils.isNotEmpty(companyList)) {
-            throw new BizException("xn0000", "企业名称不可重复");
+            throw new BizException("xn0000", "企业名称已经存在");
         }
+        String userId = userBO.doRegister(mobile, password, pwdStrength,
+            smsCaptcha);
         String companyCode = companyBO.saveCompany(type, name, gsyyzzh,
             corporation, idNo, mobile, userId);
         XN612050Res res = new XN612050Res();

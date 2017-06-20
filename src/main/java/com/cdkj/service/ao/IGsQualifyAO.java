@@ -11,13 +11,13 @@ import com.cdkj.service.domain.GsQualify;
 public interface IGsQualifyAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addGsQualify(String companyCode, String qualifyCode,
+    public String applyGsQualify(String companyCode, String qualifyCode,
             String slogan, String priceRange, String applyUser);
 
-    public void editGsQualify(String code, String qualifyCode, String slogan,
+    public void reApplyGsQualify(String code, String qualifyCode, String slogan,
             String priceRange, String applyUser);
 
-    public void approvel(String code, String approveUser, String approveResult,
+    public void approveGsQualify(String code, String approveUser, String approveResult,
             String approveNote);
 
     public Paginable<GsQualify> queryGsQualifyPage(int start, int limit,

@@ -23,7 +23,7 @@ public class XN612070 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        return gsQualifyAO.addGsQualify(req.getCompanyCode(),
+        return gsQualifyAO.applyGsQualify(req.getCompanyCode(),
             req.getQualifyCode(), req.getSlogan(), req.getPriceRange(),
             req.getApplyUser());
     }

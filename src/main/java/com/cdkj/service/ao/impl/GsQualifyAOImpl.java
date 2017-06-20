@@ -30,7 +30,7 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
     private IQualifyBO qualifyBO;
 
     @Override
-    public String addGsQualify(String companyCode, String qualifyCode,
+    public String applyGsQualify(String companyCode, String qualifyCode,
             String slogan, String priceRange, String applyUser) {
         Company company = companyBO.getCompany(companyCode);
         companyBO.priceRange(company, priceRange);
@@ -39,7 +39,7 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
     }
 
     @Override
-    public void editGsQualify(String code, String qualifyCode, String slogan,
+    public void reApplyGsQualify(String code, String qualifyCode, String slogan,
             String priceRange, String applyUser) {
         GsQualify gsQualify = gsQualifyBO.getGsQualify(code);
         if (!ECompanyStatus.PASS_NO.getCode().equals(gsQualify.getStatus())) {
@@ -51,7 +51,7 @@ public class GsQualifyAOImpl implements IGsQualifyAO {
     }
 
     @Override
-    public void approvel(String code, String approveUser, String approveResult,
+    public void approveGsQualify(String code, String approveUser, String approveResult,
             String approveNote) {
         GsQualify gsQualify = gsQualifyBO.getGsQualify(code);
         ECompanyStatus status = ECompanyStatus.PASS_YES;
