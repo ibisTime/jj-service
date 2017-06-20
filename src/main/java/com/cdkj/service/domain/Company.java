@@ -137,7 +137,7 @@ public class Company extends ABaseDO {
     private GsQualify gsQualify;
 
     // 资质
-    private String qualifyName;
+    private String qualifyCode;
 
     // 资质编号列表
     private List<String> qualifyCodeList;
@@ -470,12 +470,11 @@ public class Company extends ABaseDO {
         this.gsQualify = gsQualify;
     }
 
-    public String getQualifyName() {
-        return qualifyName;
+    public String getQualifyCode() {
+        return qualifyCode;
     }
 
-    public void setQualifyName(String qualifyName) {
-        this.qualifyName = qualifyName;
+    public void setQualifyCode(String qualifyCode) {
+        this.qualifyCode = qualifyCode;
     }
-
 }

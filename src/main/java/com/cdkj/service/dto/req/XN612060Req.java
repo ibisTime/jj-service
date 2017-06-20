@@ -44,14 +44,14 @@ public class XN612060Req extends APageReq {
     private String gzNum;
 
     // ************db properties************
-    private String quantityCode;
+    private String qualifyCode;
 
-    public String getQuantityCode() {
-        return quantityCode;
+    public String getQualifyCode() {
+        return qualifyCode;
     }
 
-    public void setQuantityCode(String quantityCode) {
-        this.quantityCode = quantityCode;
+    public void setQualifyCode(String qualifyCode) {
+        this.qualifyCode = qualifyCode;
     }
 
     public String getCode() {

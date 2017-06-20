@@ -40,11 +40,11 @@ public class XN612060 extends AProcessor {
         condition.setStatus(req.getStatus());
         condition.setUserId(req.getUserId());
         condition.setGzNum(StringValidater.toInteger(req.getGzNum()));
-        if (StringUtils.isNotBlank(req.getQuantityCode())) {
-            String[] quantityCodes = req.getQuantityCode().split(",");
+        if (StringUtils.isNotBlank(req.getQualifyCode())) {
+            String[] qualifyCodes = req.getQualifyCode().split(",");
             List<String> gsQuantitysList = new ArrayList<String>();
-            for (int i = 0; i < quantityCodes.length; i++) {
-                gsQuantitysList.add(quantityCodes[i]);
+            for (int i = 0; i < qualifyCodes.length; i++) {
+                gsQuantitysList.add(qualifyCodes[i]);
             }
             condition.setQualifyCodeList(gsQuantitysList);
         }
