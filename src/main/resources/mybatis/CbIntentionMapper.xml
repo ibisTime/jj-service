@@ -33,6 +33,9 @@
 			<if test="intMobile != null and intMobile != '' ">
 				AND t.int_mobile like "%"#{intMobile}"%"
 			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
 			<if test="serviceCode != null and serviceCode != '' ">
 				AND t.service_code = #{serviceCode}
 			</if>

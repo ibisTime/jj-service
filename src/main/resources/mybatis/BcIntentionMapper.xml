@@ -21,6 +21,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
@@ -35,6 +38,9 @@
 			</if>
 			<if test="submitter != null and submitter != '' ">
 				AND t.submitter = #{submitter}
+			</if>
+			<if test="gsUserId != null and gsUserId != '' ">
+				AND t.gs_user_id = #{gsUserId}
 			</if>
 		</trim>
 	</sql>
