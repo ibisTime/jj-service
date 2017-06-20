@@ -141,7 +141,7 @@ CREATE TABLE `tcp_news` (
   `code` varchar(32) NOT NULL COMMENT '编号',
   `type` varchar(4) DEFAULT NULL COMMENT '类型（新闻，广播）',
   `title` text COMMENT '标题',
-  `summary` varchar(32) DEFAULT NULL COMMENT '摘要',
+  `summary` text COMMENT COMMENT '摘要',
   `content` text COMMENT '内容',
   `status` varchar(4) DEFAULT NULL COMMENT '状态',
   `send_platform` varchar(64) DEFAULT NULL COMMENT '发送方',
