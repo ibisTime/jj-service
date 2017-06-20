@@ -38,6 +38,7 @@
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
 		<result column="user_id" property="userId" />
+		<result column="qualify_code" property="qualifyCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -119,6 +120,7 @@
 		,t.update_datetime
 		,t.remark
 		,t.user_id
+		,tgq.qualify_code
 		FROM
 		tcp_company t left join tcp_gs_qualify tgq on t.code = tgq.company_code
 		<include refid="where_condition" />

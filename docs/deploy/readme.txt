@@ -29,7 +29,7 @@ C，程序升级/检验
   ../bin/startup.sh
   
 6. 验证程序
-  http://118.178.124.16:5502/jj-service/api
+  http://121.43.101.148:5502/jj-service/api
   
 D,运营测试
   D1索取运营测试权限

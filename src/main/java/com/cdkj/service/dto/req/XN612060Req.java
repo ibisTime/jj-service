@@ -44,14 +44,14 @@ public class XN612060Req extends APageReq {
     private String gzNum;
 
     // ************db properties************
-    private String gsQuantitys;// 1，2，3逗号隔开
+    private String quantityCode;
 
-    public String getGsQuantitys() {
-        return gsQuantitys;
+    public String getQuantityCode() {
+        return quantityCode;
     }
 
-    public void setGsQuantitys(String gsQuantitys) {
-        this.gsQuantitys = gsQuantitys;
+    public void setQuantityCode(String quantityCode) {
+        this.quantityCode = quantityCode;
     }
 
     public String getCode() {
