@@ -1,13 +1,12 @@
 package com.cdkj.service.dto.req;
 
-public class XN805905Req {
-    // tokenId(必填)
+public class XN001200Req {
+    // 应用用户的唯一编号（目前暂用UserId,后期改进）
     private String tokenId;
 
-    // 拥有者(必填)
-    private String ownerId;
+    private String userId;
 
-    // 发送短信内容(必填)
+    // 发送短信的内容（必填）
     private String content;
 
     public String getTokenId() {
@@ -18,12 +17,12 @@ public class XN805905Req {
         this.tokenId = tokenId;
     }
 
-    public String getOwnerId() {
-        return ownerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getContent() {

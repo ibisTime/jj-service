@@ -10,6 +10,8 @@ package com.cdkj.service.http;
 
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import com.cdkj.service.common.PropertiesUtil;
 import com.cdkj.service.core.RegexUtils;
 import com.cdkj.service.exception.BizException;
@@ -20,9 +22,9 @@ import com.cdkj.service.exception.BizException;
  * @history:
  */
 public class BizConnecter {
-    public static final String YES = "0";
+    private static Logger logger = Logger.getLogger(BizConnecter.class);
 
-    public static final String SMS_URL = PropertiesUtil.Config.SMS_URL;
+    public static final String YES = "0";
 
     public static final String USER_URL = PropertiesUtil.Config.USER_URL;
 
@@ -32,7 +34,6 @@ public class BizConnecter {
 
     public static <T> T getBizData(String code, String json, Class<T> clazz) {
         String data = getBizData(code, json);
-        System.out.println(data);
         return JsonUtils.json2Bean(data, clazz);
     }
 
@@ -51,6 +52,9 @@ public class BizConnecter {
         // 开始解析响应json
         String errorCode = RegexUtils.find(resJson, "errorCode\":\"(.+?)\"", 1);
         String errorInfo = RegexUtils.find(resJson, "errorInfo\":\"(.+?)\"", 1);
+        logger.info("request:code<" + code + ">  json<" + json
+                + ">\nresponse:errorCode<" + errorCode + ">  errorInfo<"
+                + errorInfo + ">");
         if (YES.equalsIgnoreCase(errorCode)) {
             data = RegexUtils.find(resJson, "data\":(.*)\\}", 1);
         } else {
@@ -61,12 +65,10 @@ public class BizConnecter {
 
     private static String getPostUrl(String code) {
         String postUrl = POST_URL;
-        if (code.contains("799") || code.contains("0012")) {
-            postUrl = SMS_URL;
-        } else if (code.contains("805") || code.contains("806")
-                || code.contains("001")) {
+        if (code.startsWith("805") || code.startsWith("806")
+                || code.startsWith("807") || code.startsWith("001")) {
             postUrl = USER_URL;
-        } else if (code.startsWith("802")) {
+        } else if (code.startsWith("802") || code.startsWith("002")) {
             postUrl = ACCOUNT_URL;
         } else {
             postUrl = POST_URL;

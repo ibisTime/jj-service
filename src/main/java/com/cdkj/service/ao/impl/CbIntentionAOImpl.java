@@ -109,8 +109,7 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
         Company company = companyBO.getCompany(companyCode);
         User user = userBO.getRemoteUser(req.getSubmitter());
         String smsContent = "用户<" + user.getNickname() + ">提交了意向,请及时处理。";
-        smsOutBO.sentContent(company.getUserId(), company.getUserId(),
-            smsContent);
+        smsOutBO.sentContent(company.getUserId(), smsContent);
         return code;
     }
 
