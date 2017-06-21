@@ -1,13 +1,17 @@
 package com.cdkj.service.proxy;
 
+import org.apache.log4j.Logger;
+
 import com.cdkj.service.api.IProcessor;
 import com.cdkj.service.exception.BizException;
 import com.cdkj.service.exception.ParaException;
 
 public class DispatcherImpl implements IDispatcher {
+    private static Logger logger = Logger.getLogger(DispatcherImpl.class);
 
     @Override
     public String doDispatcher(String transcode, String inputParams) {
+
         String result = null;
         ReturnMessage rm = new ReturnMessage();
         try {
@@ -29,6 +33,7 @@ public class DispatcherImpl implements IDispatcher {
             rm.setErrorInfo(EErrorCode.SUCCESS.getValue());
             rm.setData(data);
         } catch (Exception e) {
+            logger.error("系统异常：" + e.getMessage());
             if (e instanceof BizException) {
                 rm.setErrorCode(EErrorCode.BIZ_ERR.getCode());
                 rm.setErrorInfo(((BizException) e).getErrorMessage());
@@ -39,13 +44,13 @@ public class DispatcherImpl implements IDispatcher {
                 rm.setData("");
             } else if (e instanceof NullPointerException) {
                 rm.setErrorCode(EErrorCode.OTHER_ERR.getCode());
-                rm.setErrorInfo("NPE");
-                // rm.setErrorInfo("系统错误，请联系管理员");
+                // rm.setErrorInfo("NPE");
+                rm.setErrorInfo("系统错误，请联系管理员");
                 rm.setData("");
             } else {
                 rm.setErrorCode(EErrorCode.OTHER_ERR.getCode());
-                rm.setErrorInfo(e.getMessage());
-                // rm.setErrorInfo("系统错误，请联系管理员");
+                // rm.setErrorInfo(e.getMessage());
+                rm.setErrorInfo("系统错误，请联系管理员");
                 rm.setData("");
             }
         } finally {
