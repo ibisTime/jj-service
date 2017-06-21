@@ -15,7 +15,9 @@ import com.cdkj.service.bo.IPhotoBO;
 import com.cdkj.service.bo.IPositionBO;
 import com.cdkj.service.bo.IResumeBO;
 import com.cdkj.service.bo.IServeBO;
+import com.cdkj.service.bo.ISmsOutBO;
 import com.cdkj.service.bo.ITrainBO;
+import com.cdkj.service.bo.IUserBO;
 import com.cdkj.service.bo.base.Paginable;
 import com.cdkj.service.core.EGeneratePrefix;
 import com.cdkj.service.core.OrderNoGenerater;
@@ -27,6 +29,7 @@ import com.cdkj.service.domain.Position;
 import com.cdkj.service.domain.Resume;
 import com.cdkj.service.domain.Serve;
 import com.cdkj.service.domain.Train;
+import com.cdkj.service.domain.User;
 import com.cdkj.service.dto.req.XN612170Req;
 import com.cdkj.service.dto.res.XN612176Res;
 import com.cdkj.service.enums.EBoolean;
@@ -60,6 +63,12 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
 
     @Autowired
     private ICompanyBO companyBO;
+
+    @Autowired
+    private IUserBO userBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     @Override
     public String addCbIntention(XN612170Req req) {
@@ -97,6 +106,11 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
         data.setSubmitter(req.getSubmitter());
         data.setSubmitDatetime(new Date());
         cbIntentionBO.saveCbIntention(data);
+        Company company = companyBO.getCompany(companyCode);
+        User user = userBO.getRemoteUser(req.getSubmitter());
+        String smsContent = "用户<" + user.getNickname() + ">提交了意向,请及时处理。";
+        smsOutBO.sentContent(company.getUserId(), company.getUserId(),
+            smsContent);
         return code;
     }
 
