@@ -66,7 +66,8 @@ public class CompanyAOImpl implements ICompanyAO {
     @Override
     public void editPassCompany(XN612052Req req) {
         Company company = companyBO.getCompany(req.getCode());
-        if (!ECompanyStatus.PASS_YES.getCode().equals(company.getStatus())) {
+        GsQualify gsQualify = gsQualifyBO.queryGsQualifyList(company.getCode());
+        if (!ECompanyStatus.PASS_YES.getCode().equals(gsQualify.getStatus())) {
             throw new BizException("xn0000", "企业资质还未审核通过，不能修改");
         }
         company.setLogo(req.getLogo());
