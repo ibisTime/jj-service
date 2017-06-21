@@ -36,5 +36,6 @@ public class XN612112 extends AProcessor {
             req.getQuoteMin(), req.getQuoteMax(), req.getTgfw(),
             req.getFeeMode(), req.getPayCycle(), req.getScyylm(),
             req.getSucCase(), req.getPublisher());
+        StringValidater.validateEmoji(req.getDescription());
     }
 }

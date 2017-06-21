@@ -1,7 +1,7 @@
 package com.cdkj.service.enums;
 
 public enum ECbIntentionStatus {
-    APPLY("1", "未查看"), PASS_YES("2", "已查看/处理通过"), PASS_NO("3", "不通过");
+    APPLY("1", "待处理"), PASS_YES("2", "处理成功"), PASS_NO("3", "处理失败");
 
     ECbIntentionStatus(String code, String value) {
         this.code = code;

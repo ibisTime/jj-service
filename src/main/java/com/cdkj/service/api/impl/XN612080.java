@@ -34,5 +34,6 @@ public class XN612080 extends AProcessor {
             req.getAdvPic(), req.getCompanyCode(), req.getQuoteMin(),
             req.getQuoteMax(), req.getPyNum(), req.getSysNum(), req.getIsDz(),
             req.getScpslm(), req.getWorks(), req.getPublisher());
+        StringValidater.validateEmoji(req.getDescription());
     }
 }
