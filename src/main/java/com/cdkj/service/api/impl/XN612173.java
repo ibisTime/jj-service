@@ -24,7 +24,7 @@ public class XN612173 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        cbIntentionAO.editCbIntention(req.getCode(), req.getDealResult(),
+        cbIntentionAO.dealCbIntention(req.getCode(), req.getDealResult(),
             req.getUpdater(), req.getRemark());
         return new BooleanRes(true);
     }

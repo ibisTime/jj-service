@@ -52,6 +52,7 @@ public class XN612060 extends AProcessor {
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICompanyAO.DEFAULT_ORDER_COLUMN;
         }
+        condition.setOrder(orderColumn, req.getOrderDir());
         int start = StringValidater.toInteger(req.getStart());
         int limit = StringValidater.toInteger(req.getLimit());
         return companyAO.queryCompanyPage(start, limit, condition);

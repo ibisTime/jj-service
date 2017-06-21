@@ -14,8 +14,6 @@ public interface IBcIntentionAO {
     public String addBcIntention(String type, String companyCode,
             String demandCode, String resumeCode, String submitter);
 
-    public void editBcIntention(BcIntention data);
-
     public Paginable<BcIntention> queryBcIntentionPage(int start, int limit,
             BcIntention condition);
 

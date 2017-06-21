@@ -101,13 +101,13 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
     }
 
     @Override
-    public void editCbIntention(String code, String dealResult, String updater,
+    public void dealCbIntention(String code, String dealResult, String updater,
             String remark) {
         CbIntention cbIntention = cbIntentionBO.getCbIntention(code);
         if (ECbIntentionType.TALK.getCode().equals(cbIntention.getType())) {
             if (!ECbIntentionStatus.APPLY.getCode().equals(
                 cbIntention.getStatus())) {
-                throw new BizException("xn0000", "您已经处理过改意向了");
+                throw new BizException("xn0000", "您已经处理过该意向");
             }
         }
         ECbIntentionStatus status = ECbIntentionStatus.PASS_YES;
@@ -131,11 +131,6 @@ public class CbIntentionAOImpl implements ICbIntentionAO {
             }
         }
         return page;
-    }
-
-    @Override
-    public List<CbIntention> queryCbIntentionList(CbIntention condition) {
-        return null;// cbIntentionBO.queryCbIntentionList(condition);
     }
 
     @Override

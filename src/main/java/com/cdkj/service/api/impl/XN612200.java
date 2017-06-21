@@ -11,7 +11,7 @@ import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
 /**
- * 
+ * 企业对用户需求/简历感兴趣
  * @author: asus 
  * @since: 2017年6月5日 下午5:44:12 
  * @history:

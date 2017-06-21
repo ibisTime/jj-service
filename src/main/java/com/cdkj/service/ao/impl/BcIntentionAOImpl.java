@@ -17,7 +17,6 @@ import com.cdkj.service.domain.BcIntention;
 import com.cdkj.service.domain.Demand;
 import com.cdkj.service.domain.Resume;
 import com.cdkj.service.enums.EBoolean;
-import com.cdkj.service.exception.BizException;
 
 @Service
 public class BcIntentionAOImpl implements IBcIntentionAO {
@@ -57,14 +56,6 @@ public class BcIntentionAOImpl implements IBcIntentionAO {
         data.setGsUserId(gsUserId);
         bcIntentionBO.saveBcIntention(data);
         return code;
-    }
-
-    @Override
-    public void editBcIntention(BcIntention data) {
-        if (!bcIntentionBO.isBcIntentionExist(data.getCode())) {
-            throw new BizException("xn0000", "记录编号不存在");
-        }
-        bcIntentionBO.refreshBcIntention(data);
     }
 
     @Override
