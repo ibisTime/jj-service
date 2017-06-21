@@ -140,9 +140,8 @@ public class PositionAOImpl implements IPositionAO {
     public void editPositionStatus(String code, String dealer, String dealNote) {
         Position position = positionBO.getPosition(code);
         String publisher = position.getPublisher();
-        smsOutBO.sentContent(publisher, publisher,
-            "尊敬的企业，您所发布的职位[" + position.getName() + "]已做违规处理，违规原因[" + dealNote
-                    + "]。");
+        smsOutBO.sentContent(publisher, "尊敬的企业，您所发布的职位[" + position.getName()
+                + "]已做违规处理，违规原因[" + dealNote + "]。");
         positionBO.refreshPositionStatus(position, dealer, dealNote);
     }
 

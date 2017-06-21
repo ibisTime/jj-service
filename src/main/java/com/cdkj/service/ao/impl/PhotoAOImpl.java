@@ -156,9 +156,8 @@ public class PhotoAOImpl implements IPhotoAO {
             throw new BizException("xn0000", "该服务已做违规处理");
         }
         String publisher = photo.getPublisher();
-        smsOutBO.sentContent(publisher, publisher,
-            "尊敬的企业，您所发布的拍摄服务[" + photo.getName() + "]已做违规处理，违规原因[" + dealNote
-                    + "]。");
+        smsOutBO.sentContent(publisher, "尊敬的企业，您所发布的拍摄服务[" + photo.getName()
+                + "]已做违规处理，违规原因[" + dealNote + "]。");
         photoBO.wgclPhoto(photo, dealer, dealNote);
     }
 

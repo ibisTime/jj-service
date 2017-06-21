@@ -141,9 +141,8 @@ public class DemandAOImpl implements IDemandAO {
         Demand demand = demandBO.getDemand(code);
         String publisher = demand.getPublisher();
         // 发送短信
-        smsOutBO.sentContent(publisher, publisher,
-            "尊敬的用户，您所发布的需求[" + demand.getName() + "]已做违规处理，违规原因[" + dealNote
-                    + "]。");
+        smsOutBO.sentContent(publisher, "尊敬的用户，您所发布的需求[" + demand.getName()
+                + "]已做违规处理，违规原因[" + dealNote + "]。");
         demandBO.refreshDemandStatus(demand, dealer, dealNote);
     }
 }

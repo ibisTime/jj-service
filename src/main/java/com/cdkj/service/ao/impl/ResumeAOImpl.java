@@ -154,9 +154,8 @@ public class ResumeAOImpl implements IResumeAO {
     public void editResumeStatus(String code, String dealer, String dealNote) {
         Resume resume = resumeBO.getResume(code);
         String publisher = resume.getPublisher();
-        smsOutBO.sentContent(publisher, publisher,
-            "尊敬的用户，您所发布的简历[" + resume.getName() + "]已做违规处理，违规原因[" + dealNote
-                    + "]。");
+        smsOutBO.sentContent(publisher, "尊敬的用户，您所发布的简历[" + resume.getName()
+                + "]已做违规处理，违规原因[" + dealNote + "]。");
         resumeBO.refreshResumeStatus(code, dealer, dealNote);
     }
 }

@@ -193,9 +193,8 @@ public class ServeAOImpl implements IServeAO {
             throw new BizException("xn0000", "该服务已做违规处理");
         }
         String publisher = serve.getPublisher();
-        smsOutBO.sentContent(publisher, publisher,
-            "尊敬的企业，您所发布的服务[" + serve.getName() + "]已做违规处理，违规原因[" + dealNote
-                    + "]。");
+        smsOutBO.sentContent(publisher, "尊敬的企业，您所发布的服务[" + serve.getName()
+                + "]已做违规处理，违规原因[" + dealNote + "]。");
         serveBO.refreshServeStatus(serve, dealer, dealNote);
     }
 

@@ -157,9 +157,8 @@ public class OperateAOImpl implements IOperateAO {
             throw new BizException("xn0000", "该服务已做违规处理");
         }
         String publisher = operate.getPublisher();
-        smsOutBO.sentContent(publisher, publisher,
-            "尊敬的企业，您所发布的培训服务[" + operate.getName() + "]已做违规处理，违规原因[" + dealNote
-                    + "]。");
+        smsOutBO.sentContent(publisher, "尊敬的企业，您所发布的培训服务[" + operate.getName()
+                + "]已做违规处理，违规原因[" + dealNote + "]。");
         operateBO.wgclOperate(operate, dealer, dealNote);
     }
 
