@@ -64,13 +64,11 @@ public class CompanyAOImpl implements ICompanyAO {
     }
 
     @Override
-    public void editCompany(XN612052Req req) {
+    public void editPassCompany(XN612052Req req) {
         Company company = companyBO.getCompany(req.getCode());
-        if (ECompanyStatus.PASS_YES.getCode().equals(company.getStatus())
-                && !req.getName().equals(company.getName())) {// 公司审核通过，名称不能修改
-            throw new BizException("xn0000", "公司资质审核已通过，名称不能修改");
+        if (!ECompanyStatus.PASS_YES.getCode().equals(company.getStatus())) {
+            throw new BizException("xn0000", "企业资质还未审核通过，不能修改");
         }
-        company.setName(req.getName());
         company.setLogo(req.getLogo());
         company.setProvince(req.getProvince());
         company.setCity(req.getCity());
@@ -88,7 +86,7 @@ public class CompanyAOImpl implements ICompanyAO {
         company.setRegtime(req.getRegtime());
         company.setUpdater(req.getUpdater());
         company.setUpdateDatetime(new Date());
-        companyBO.refreshCompany(company);
+        companyBO.editPassCompany(company);
     }
 
     @Override

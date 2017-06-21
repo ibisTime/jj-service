@@ -59,8 +59,8 @@ public class CompanyBOImpl extends PaginableBOImpl<Company> implements
     }
 
     @Override
-    public void refreshCompany(Company data) {
-        companyDAO.update(data);
+    public void editPassCompany(Company data) {
+        companyDAO.editPassCompany(data);
     }
 
     @Override

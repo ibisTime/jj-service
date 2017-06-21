@@ -13,7 +13,7 @@ public interface ICompanyBO extends IPaginableBO<Company> {
     public String saveCompany(String type, String name, String gsyyzzh,
             String corporation, String idNo, String mobile, String userId);
 
-    public void refreshCompany(Company data);
+    public void editPassCompany(Company data);
 
     public void hotLocation(Company company, String location, String orderNo,
             String updater);

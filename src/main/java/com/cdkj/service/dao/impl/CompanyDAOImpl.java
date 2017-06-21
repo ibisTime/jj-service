@@ -47,7 +47,12 @@ public class CompanyDAOImpl extends AMybatisTemplate implements ICompanyDAO {
 
     @Override
     public int update(Company data) {
-        return super.update(NAMESPACE.concat("update_company"), data);
+        return 0;
+    }
+
+    @Override
+    public int editPassCompany(Company data) {
+        return super.update(NAMESPACE.concat("update_pass_company"), data);
     }
 
     @Override
@@ -69,4 +74,5 @@ public class CompanyDAOImpl extends AMybatisTemplate implements ICompanyDAO {
     public int updateGzNum(Company data) {
         return super.update(NAMESPACE.concat("update_gzNum"), data);
     }
+
 }

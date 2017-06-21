@@ -11,7 +11,7 @@ import com.cdkj.service.exception.ParaException;
 import com.cdkj.service.spring.SpringContextHolder;
 
 /**
- * 修改公司
+ * 修改资质审核通过
  * @author: asus 
  * @since: 2017年6月6日 下午2:22:43 
  * @history:
@@ -24,19 +24,19 @@ public class XN612052 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        companyAO.editCompany(req);
+        companyAO.editPassCompany(req);
         return new BooleanRes(true);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN612052Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getName(),
-            req.getLogo(), req.getProvince(), req.getCity(), req.getArea(),
-            req.getAddress(), req.getLongitude(), req.getLatitude(),
-            req.getMobile(), req.getScale(), req.getPic(), req.getAdvPic(),
-            req.getSlogan(), req.getDescription(), req.getRegisteredCapital(),
-            req.getRegtime(), req.getUpdater());
+        StringValidater.validateBlank(req.getCode(), req.getLogo(),
+            req.getProvince(), req.getCity(), req.getArea(), req.getAddress(),
+            req.getLongitude(), req.getLatitude(), req.getMobile(),
+            req.getScale(), req.getPic(), req.getAdvPic(), req.getSlogan(),
+            req.getDescription(), req.getRegisteredCapital(), req.getRegtime(),
+            req.getUpdater());
     }
 
 }

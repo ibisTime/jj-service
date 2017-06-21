@@ -175,11 +175,10 @@
 		)
 	</insert>
 
-	<update id="update_company" parameterType="company">
+	<update id="update_pass_company" parameterType="company">
 		UPDATE tcp_company
 		SET
-		name = #{name}
-		,logo = #{logo}
+		logo = #{logo}
 		,pic = #{pic}
 		,adv_pic = #{advPic}
 		,slogan = #{slogan}

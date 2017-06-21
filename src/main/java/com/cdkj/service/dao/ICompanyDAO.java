@@ -7,6 +7,8 @@ import com.cdkj.service.domain.Company;
 public interface ICompanyDAO extends IBaseDAO<Company> {
     String NAMESPACE = ICompanyDAO.class.getName().concat(".");
 
+    public int editPassCompany(Company data);
+
     public int hotLocation(Company data);
 
     public int priceRange(Company data);

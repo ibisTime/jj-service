@@ -17,7 +17,7 @@ public interface ICompanyAO {
             String corporation, String idNo, String mobile, String smsCaptcha,
             String password, String pwdStrength);
 
-    public void editCompany(XN612052Req req);
+    public void editPassCompany(XN612052Req req);
 
     public void hotLocation(String code, String location, String orderNo,
             String updater);
