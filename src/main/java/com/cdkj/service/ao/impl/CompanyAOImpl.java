@@ -67,12 +67,10 @@ public class CompanyAOImpl implements ICompanyAO {
     public void editCompany(XN612052Req req) {
         Company company = companyBO.getCompany(req.getCode());
         if (ECompanyStatus.PASS_YES.getCode().equals(company.getStatus())
-                && StringUtils.isNotBlank(req.getName())) {
-            throw new BizException("xn0000", "审核已通过,名称不可修改");
+                && !req.getName().equals(company.getName())) {// 公司审核通过，名称不能修改
+            throw new BizException("xn0000", "公司资质审核已通过，名称不能修改");
         }
-        if (!ECompanyStatus.PASS_YES.getCode().equals(company.getStatus())) {
-            company.setName(req.getName());
-        }
+        company.setName(req.getName());
         company.setLogo(req.getLogo());
         company.setProvince(req.getProvince());
         company.setCity(req.getCity());

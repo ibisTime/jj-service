@@ -31,12 +31,12 @@ public class XN612052 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN612052Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getLogo(),
-            req.getProvince(), req.getCity(), req.getArea(), req.getAddress(),
-            req.getLongitude(), req.getLatitude(), req.getMobile(),
-            req.getScale(), req.getPic(), req.getAdvPic(), req.getSlogan(),
-            req.getDescription(), req.getRegisteredCapital(), req.getRegtime(),
-            req.getUpdater());
+        StringValidater.validateBlank(req.getCode(), req.getName(),
+            req.getLogo(), req.getProvince(), req.getCity(), req.getArea(),
+            req.getAddress(), req.getLongitude(), req.getLatitude(),
+            req.getMobile(), req.getScale(), req.getPic(), req.getAdvPic(),
+            req.getSlogan(), req.getDescription(), req.getRegisteredCapital(),
+            req.getRegtime(), req.getUpdater());
     }
 
 }

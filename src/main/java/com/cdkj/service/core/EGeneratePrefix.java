@@ -11,7 +11,7 @@ import java.util.Map;
 public enum EGeneratePrefix {
     NEWS("N", "资讯"), QUALIFY("ZZ", "资质"), GROUP("Z", "组"), FOCUS("F", "关注"), FW(
             "FW", "服务"), XQ("XQ", "需求"), BCYX("BC", "BC意向"), JL("JL", "简历"), ZW(
-            "ZW", "职位"), COMPANY("CO", "公司"), GSQUALIFY("GQ", "公司资质"), TRAIN(
+            "ZW", "职位"), COMPANY("C", "公司"), GSQUALIFY("GQ", "公司资质"), TRAIN(
             "TR", "培训"), PHOTO("SY", "照片"), OPERATE("YY", "运营"), CBYX("CB",
             "CB意向");
 

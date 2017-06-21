@@ -13,4 +13,4 @@ insert into `tcp_qualify` (`code`, `type`, `name`, `description`, `status`, `upd
 insert into `tcp_qualify` (`code`, `type`, `name`, `description`, `status`, `updater`, `update_datetime`, `remark`) values('6','6','仓配服务','仓配服务','1','admin',now(),NULL);
 insert into `tcp_qualify` (`code`, `type`, `name`, `description`, `status`, `updater`, `update_datetime`, `remark`) values('7','7','软件开发','软件开发','1','admin',now(),NULL);
 insert into `tcp_qualify` (`code`, `type`, `name`, `description`, `status`, `updater`, `update_datetime`, `remark`) values('8','8','产业园','产业园','1','admin',now(),NULL);
-insert into `tcp_qualify` (`code`, `type`, `name`, `description`, `status`, `updater`, `update_datetime`, `remark`) values('9','9','人才招聘','人才招聘大方',NULL,'admin',now(),NULL);
+insert into `tcp_qualify` (`code`, `type`, `name`, `description`, `status`, `updater`, `update_datetime`, `remark`) values('9','9','人才招聘','人才招聘',NULL,'admin',now(),NULL);
