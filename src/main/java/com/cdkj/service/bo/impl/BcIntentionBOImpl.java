@@ -46,9 +46,8 @@ public class BcIntentionBOImpl extends PaginableBOImpl<BcIntention> implements
 
     @Override
     public void refreshBcIntention(BcIntention data) {
-        int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            count = bcIntentionDAO.update(data);
+            bcIntentionDAO.update(data);
         }
     }
 
@@ -65,7 +64,7 @@ public class BcIntentionBOImpl extends PaginableBOImpl<BcIntention> implements
             condition.setCode(code);
             data = bcIntentionDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn0000", "记录不存在");
             }
         }
         return data;

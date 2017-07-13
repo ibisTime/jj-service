@@ -57,7 +57,7 @@ public class QualifyBOImpl extends PaginableBOImpl<Qualify> implements
             condition.setCode(code);
             data = qualifyDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "�� ��Ų�����");
+                throw new BizException("xn0000", "记录不存在");
             }
         }
         return data;
